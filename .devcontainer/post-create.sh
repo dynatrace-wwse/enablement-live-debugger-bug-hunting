@@ -26,7 +26,6 @@ dynatraceDeployOperator
 
 waitForAllPods dynatrace
 
-
 deployTodoApp
 
 
@@ -55,6 +54,7 @@ else
 
     # Your content here
     printWarn "TODO: Uncomment postCodespaceTracker before goLive - Sending BizEvent to track usage of enablement-live-debugger-bug-hunting"
+    # Uncomment below
     #postCodespaceTracker enablement-live-debugger-bug-hunting
     printInfo "Finished creating"
 fi

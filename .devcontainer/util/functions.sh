@@ -435,14 +435,14 @@ deployOperatorViaHelm(){
 
 
 deployTodoApp(){
-  printInfo "Deploying Todo App"
+  printInfoSection "Deploying Todo App"
 
   kubectl create ns todoapp
 
-  # Create deployment of tictactoe
+  # Create deployment of todoApp
   kubectl -n todoapp create deploy todoapp --image=shinojosa/todoapp:1.0.0
 
-  # Expose deployment of tictactoe with a Service
+  # Expose deployment of todoApp with a Service
   kubectl -n todoapp expose deployment todoapp --type=NodePort --port=8080 --name todoapp 
 
 }

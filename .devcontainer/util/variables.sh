@@ -47,7 +47,7 @@ thinline="______________________________________________________________________
 LOGNAME="dynatrace.enablement"
 
 # LabGuidePort
-LABGUIDEPORT=3000
+LABGUIDEPORT=8000
 WEBAPPPORT=8080
 if [[ $CODESPACES == true ]]; then
   LAB_GUIDE_URL="https://${CODESPACE_NAME}-$LABGUIDEPORT.app.github.dev"

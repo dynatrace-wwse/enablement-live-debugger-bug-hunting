@@ -2,9 +2,8 @@
 
 source /workspaces/enablement-live-debugger-bug-hunting/.devcontainer/util/functions.sh
 
-#exposeAstroshop
 exposeMkdocs
 
 exposeTodoApp
 
-showMessage
+printInfoSection "Your dev.container finished creating"

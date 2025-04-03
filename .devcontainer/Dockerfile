@@ -18,9 +18,6 @@ RUN apt-get update && \
     apt-get autoremove -y && \
     apt-get clean -y
 
-    # Set message of the day MOTD file
-COPY ./etc/update-motd.d/00-header /etc/update-motd.d/
-
 # Install Python
 RUN apt install python3 python3-pip -y
 

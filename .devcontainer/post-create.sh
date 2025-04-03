@@ -3,7 +3,7 @@
 # Install RunMe
 # RunMe makes markdown files runnable
 # Used during end2end testing to execute the code snippets
-source /workspaces/enablement-live-debugger-todo-app/.devcontainer/util/functions.sh
+source /workspaces/enablement-live-debugger-bug-hunting/.devcontainer/util/functions.sh
 
 bindFunctionsInShell
 
@@ -18,12 +18,16 @@ createKindCluster
 
 installK9s
 
-#certmanagerInstall
-#certmanagerEnable
+installMkdocs
 
-#dynatraceEvalReadSaveCredentials
-#dynatraceDeployOperator
-waitForAllPods
+dynatraceEvalReadSaveCredentials
+
+dynatraceDeployOperator
+
+waitForAllPods dynatrace
+
+
+deployTodoApp
 
 
 # e2e testing
@@ -50,8 +54,7 @@ if [[ "$CODESPACE_NAME" == dttest-* ]]; then
 else
 
     # Your content here
-    printInfo "Sending BizEvent to track usage of enablement-live-debugger-todo-app"
-    postCodespaceTracker enablement-live-debugger-todo-app
-
+    printWarn "TODO: Uncomment postCodespaceTracker before goLive - Sending BizEvent to track usage of enablement-live-debugger-bug-hunting"
+    #postCodespaceTracker enablement-live-debugger-bug-hunting
     printInfo "Finished creating"
 fi

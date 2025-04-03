@@ -11,7 +11,7 @@
 # ======================================================================
 
 # VARIABLES DECLARATION
-source /workspaces/enablement-live-debugger-todo-app/.devcontainer/util/variables.sh
+source /workspaces/enablement-live-debugger-bug-hunting/.devcontainer/util/variables.sh
 
 # FUNCTIONS DECLARATIONS
 timestamp() {
@@ -433,10 +433,43 @@ deployOperatorViaHelm(){
 
 }
 
+
+deployTodoApp(){
+  printInfo "Deploying Todo App"
+
+  kubectl create ns todoapp
+
+  # Create deployment of tictactoe
+  kubectl -n todoapp create deploy todoapp --image=shinojosa/todoapp:1.0.0
+
+  # Expose deployment of tictactoe with a Service
+  kubectl -n todoapp expose deployment todoapp --type=NodePort --port=8080 --name todoapp 
+
+}
+
+exposeTodoApp(){
+  printInfo "Exposing Todo App in your dev.container"
+  nohup kubectl port-forward service/todoapp 8080:8080  -n todoapp --address="0.0.0.0" > /tmp/kubectl-port-forward.log 2>&1 &
+}
+
+
 exposeAstroshop(){
   printInfo "Exposing Astroshop in your dev.container"
   nohup kubectl port-forward service/astroshop-frontendproxy 8080:8080  -n astroshop --address="0.0.0.0" > /tmp/kubectl-port-forward.log 2>&1 &
 }
+
+
+installMkdocs(){
+  printInfo "Installing Mkdocs"
+  pip install --break-system-packages -r requirements-docs.txt
+}
+
+
+exposeMkdocs(){
+  printInfo "Exposing Astroshop in your dev.container"
+  nohup mkdocs serve -a localhost:8000 > /dev/null 2>&1 &
+}
+
 
 exposeLabguide(){
   printInfo "Exposing Lab Guide in your dev.container"

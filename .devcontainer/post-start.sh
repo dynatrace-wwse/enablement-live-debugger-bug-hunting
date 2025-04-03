@@ -1,8 +1,10 @@
 #!/bin/bash
 
-source /workspaces/enablement-live-debugger-todo-app/.devcontainer/util/functions.sh
+source /workspaces/enablement-live-debugger-bug-hunting/.devcontainer/util/functions.sh
 
 #exposeAstroshop
-#exposeLabguide
+exposeMkdocs
+
+exposeTodoApp
 
 showMessage

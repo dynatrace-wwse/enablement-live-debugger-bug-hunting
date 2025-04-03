@@ -298,6 +298,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    2. Getting Started
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -307,6 +318,97 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-dynatrace-tenant-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Dynatrace Tenant Setup
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-getting-the-permissions-for-monitoring-the-kubernetes-cluster-with-dynatrace" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Getting the permissions for monitoring the Kubernetes Cluster with Dynatrace
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-get-the-operator-token-and-the-ingest-token-from-the-kubernetes-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1. Get the Operator Token and the Ingest Token from the Kubernetes App
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-launch-codespace" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Launch Codespace
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31-machine-type-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Machine Type &amp; Variables
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-grab-a-coffee" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Grab a Coffee
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-explore-what-has-been-deployed" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Explore What Has Been Deployed
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Troubleshooting
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -412,6 +514,86 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-dynatrace-tenant-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Dynatrace Tenant Setup
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-getting-the-permissions-for-monitoring-the-kubernetes-cluster-with-dynatrace" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Getting the permissions for monitoring the Kubernetes Cluster with Dynatrace
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-get-the-operator-token-and-the-ingest-token-from-the-kubernetes-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1. Get the Operator Token and the Ingest Token from the Kubernetes App
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-launch-codespace" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Launch Codespace
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31-machine-type-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Machine Type &amp; Variables
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-grab-a-coffee" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Grab a Coffee
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-explore-what-has-been-deployed" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Explore What Has Been Deployed
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Troubleshooting
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -429,16 +611,89 @@
 
 
 <h1 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">#</a></h1>
+<!-- 
+TODO: verify the js payload on all pages and setup a tenant for monitoring enablement.
+
+ -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   dynatrace.sendBizEvent('page_load', {"page": "2. getting-started"});
 });
 </script>
+<div class="admonition info">
+<p class="admonition-title">Requirements</p>
+<ul>
+<li>A <strong>Grail enabled Dynatrace SaaS Tenant</strong> (<a href="https://dt-url.net/trial" target="_blank">sign up here</a>).</li>
+<li>A <strong>GitHub account</strong> to interact with the demo repository.</li>
+</ul>
+</div>
+<h2 id="1-dynatrace-tenant-setup">1. Dynatrace Tenant Setup<a class="headerlink" href="#1-dynatrace-tenant-setup" title="Permanent link">#</a></h2>
+<p>You will need a Dynatrace SaaS tenant with a DPS pricing model and the 'Code Monitoring' rate card should be associated with it. In addition the application needs to be monitored with Dynatrace FullStack mode. The application runtime: Java, NodeJS.</p>
+<h2 id="2-getting-the-permissions-for-monitoring-the-kubernetes-cluster-with-dynatrace">2. Getting the permissions for monitoring the Kubernetes Cluster with Dynatrace<a class="headerlink" href="#2-getting-the-permissions-for-monitoring-the-kubernetes-cluster-with-dynatrace" title="Permanent link">#</a></h2>
+<p>This codespace has everything automated for you so you can focus on what matters which in this enablement is to learn about the Live Debugging capabilities of the Dynatrace Platform.  You'll need two tokens:</p>
+<ol>
+<li>Operator Token</li>
+<li>Ingest Token </li>
+</ol>
+<p>We will get this two very easy from the Kubernetes App. </p>
+<h2 id="21-get-the-operator-token-and-the-ingest-token-from-the-kubernetes-app">2.1. Get the Operator Token and the Ingest Token from the Kubernetes App<a class="headerlink" href="#21-get-the-operator-token-and-the-ingest-token-from-the-kubernetes-app" title="Permanent link">#</a></h2>
+<ol>
+<li>Open the Kubernetes App</li>
+<li>Select the + Add cluster button</li>
+<li>Scroll down to the section Install Dynatrace Operator </li>
+<li>Click on generate Token for the 'Dynatrace Operator' and save it to your Notepad</li>
+<li>Click on generate Token for the 'Data Ingest Token' and save it to your Notepad</li>
+<li>You can close the Kubernetes App, we don't need it, we just needed the tokens.</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Add img K8s App</p>
+<p>TODO:add image of K8s App</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Let's launch the Codespace</p>
+<p>Now we are ready to launch the Codespace! You'll need your tenant and the two tokens previuosly gathered from above. When you enter the tenant please enter it without the 'apps' part, for production tenants eg. abc123 for live -&gt; https://abc123.live.dynatrace.com and for sprint -&gt; https://abc123.sprint.dynatracelabs.com no apps in the URL.</p>
+</div>
+<h2 id="3-launch-codespace">3. Launch Codespace<a class="headerlink" href="#3-launch-codespace" title="Permanent link">#</a></h2>
+<p><a href="https://codespaces.new/dynatrace-wwse/enablement-live-debugger-bug-hunting" target="_blank"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
+<h2 id="31-machine-type-variables">3.1 Machine Type &amp; Variables<a class="headerlink" href="#31-machine-type-variables" title="Permanent link">#</a></h2>
+<p>As a machine type select 4-core and enter your credentials within the following variables:</p>
+<ul>
+<li>DT_TENANT</li>
+<li>DT_OPERATOR_TOKEN</li>
+<li>DT_INGEST_TOKEN</li>
+</ul>
+<h2 id="4-grab-a-coffee">4. Grab a Coffee<a class="headerlink" href="#4-grab-a-coffee" title="Permanent link">#</a></h2>
+<p>We know your time is very valuable. This codespace takes around 6 minutes to be fully operational. A local Kubernetes (<a href="https://kind.sigs.k8s.io/" target="_blank">kind</a>) cluster monitored by Dynatrace will be configured and in it a sample application, the TODO app will be deployed. To make your experience best, we are also installing and configuring tools like:</p>
+<p><strong>k9s kubectl helm node jq python3 gh</strong></p>
+<h2 id="3-explore-what-has-been-deployed">3. Explore What Has Been Deployed<a class="headerlink" href="#3-explore-what-has-been-deployed" title="Permanent link">#</a></h2>
+<p>Your Codespace has now deployed the following resources:</p>
+<ul>
+<li>A local Kubernetes (<a href="https://kind.sigs.k8s.io/" target="_blank">kind</a>) cluster monitored by Dynatrace, with some pre-deployed apps
+  that will be used later in the demo.</li>
+</ul>
+<!-- 
+- Three [Dynatrace workflows](https://www.dynatrace.com/platform/workflows/){target="_blank"}:
+    - **Predict Kubernetes Resource Usage**: This workflow predicts the future resource usage of Kubernetes workloads
+      using Davis predictive AI. If a workload is likely to exceed its resource quotas, the workflow creates a custom
+      Davis event with all necessary information.
+    - **Commit Davis Suggestions**: Triggered by the predictive workflow's events, this workflow uses Davis CoPilot and
+      the GitHub for Workflows app to create pull requests for remediation suggestions.
+    - **React to Resource Saturation**: If the prediction actually misses some resource spikes, this workflow will get
+      alerted via the automatically created Davis problem and will trigger the prediction workflow to immediately react
+      and create a pull request. This workflow is disabled by default to avoid unwanted triggers of the prediction
+      workflow.
+- A [Dynatrace notebook](https://www.dynatrace.com/platform/notebooks/){target="_blank"} that provides a more in-depth overview of how
+  the deployed workflows work.
+- A [Dynatrace dashboard](https://www.dynatrace.com/platform/dashboards/){target="_blank"} that shows a summary of all predictions and 
+  their accuracy.
+  -->
 
-<p>TODO</p>
+<p>TODO: Create some context on Bugs, Some Breaking Points stuff, elevate the talk for Developers.</p>
+<h2 id="7-troubleshooting">7. Troubleshooting<a class="headerlink" href="#7-troubleshooting" title="Permanent link">#</a></h2>
+<p>TODO: Troubleshooting steps on the codespace, also add tips and tricks, show that the functions are loaded in the shell.</p>
 <div class="grid cards">
 <ul>
-<li><a href="PLACEHOLDER.md">Click Here to Continue <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>
+<li><a href="../bughunt/">Click Here to Continue <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>
 </ul>
 </div>
 

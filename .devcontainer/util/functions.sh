@@ -539,3 +539,7 @@ showOpenPorts(){
   # another alternative is 
   # sudo ss -tulnp
 }
+
+deployGhdocs(){
+  mkdocs gh-deploy
+}

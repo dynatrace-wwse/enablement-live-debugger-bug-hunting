@@ -25,11 +25,11 @@
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
-		8080, 3000
+		8080, 8000
 	],
 	// add labels
 	"portsAttributes": {
-		"3000": { "label": "Lab Guide" },
+		"8000": { "label": "Lab Guide" },
 		"8080": { "label": "Todo App Web UI" }
 	},
 

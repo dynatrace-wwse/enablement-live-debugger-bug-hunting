@@ -11,9 +11,6 @@ setupAliases
 
 installRunme
 
-#buildLabGuide
-#exposeLabguide
-
 createKindCluster
 
 installK9s

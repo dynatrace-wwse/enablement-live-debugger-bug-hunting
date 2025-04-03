@@ -1,4 +1,4 @@
-# PLACEHOLDER TITLE HERE
+# Live Debugger Tutorial - Bug Hunting the TODO App
 
 --8<-- "snippets/disclaimer.md"
 --8<-- "snippets/view-code.md"

@@ -35,6 +35,10 @@ TODO: This is the intro, add what we will do.
 
 Are you ready to start the Bug hunting journey and ready to learn how to improve and empower the Developers Productivity? 
 
+!!! tip "What will we do"
+    In this tutorial we will learn how easy it is to live debug an application in a Kubernetes Cluster. 
+
+
 <div class="grid cards" markdown>
 - [Yes! let's begin :octicons-arrow-right-24:](getting-started.md)
 </div>

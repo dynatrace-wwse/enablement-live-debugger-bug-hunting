@@ -2,17 +2,62 @@
 # The Bug "Clear Completed"
 
 
+!!! note "The Bug 'Clear Completed'"
+        Level: Beginner
 
-## Open the TODO App
+## Open the TODO App and add a couple of tasks
+
+
+In VSCode open a new terminal and in the Welcome Message you should see a link to the Todo App UI. Click on it. Now add a couple of tasks.
+It should look something like this:
 ![TODO App](../img/todo_app.png)
 
-**Level: Beginner**
 
 - Add a couple of tasks. 
+- Complete some of them (or all, depending how productive you are ;) . 
+- Now click on: ``Clear Completed`` 
 
-- The bug: ``Clear Completed`` button does not work. When clicked - completed todos are not cleared.
+![TODO App](../img/todo_completed.png)
+
+- Are the tasks cleared?
+
+Apparently the button does not work. When clicked - completed todos are not cleared. 
+
+We embark our Bug hunting journey! 
+
+There are multiple ways how dive deep into the issue because Dynatrace is monitoring your Kubernetes cluster, all workloads in it, all it's traces with code level insights and all real users accessing the exposed application.
+
+## Hunting via the Kubernetes Road
+
+- Open the Kubernetes App > You'll see a cluster with the name "codespace-xxxx". That's your Kind cluster being FullStack monitored.
+
+![Kind Cluster](../img/kubernetes_cluster.png)
+
+- On the right hand side, click on Workloads, the Workloads Page will open. 
+
+- Select the `todoapp`workload. 
+
+![Todo Workload](../img/todo_workload.png)
 
 
+- On the Overview in the right hand side, scroll down and open the Services App. (this are the traces grouped withing Dynatrace Services)
+
+![Todo Services](../img/todo_services.png)
+
+- Click on the Spring Boot one and then on the right corner "View Traces"
+
+![Todo Services](../img/todo_services_traces.png)
+
+- This will open all the traces that went through your application... wow!
+
+As you can see, there are traces with the name "clearCompletedTodos" that just took  a couple ms. In this span it was just 2.98ms. On the right hand side, you can see the Tracing details, look how much data was captured automatically 🤩.
+
+![Trace Clear Completed](../img/trace_clearcompleted.png)
+
+
+As you can see, in the second node of the span, in the **Code Attributes** section, we can see the ``Code function: clearCompletedTodos`` and the ``Code Namespace: com.dynatrace.todoapp.TodoController`` 
+
+Now we know which method and which package! Let's put our Developer Hat 🎩 and open the Live Debugger.
 
 
 

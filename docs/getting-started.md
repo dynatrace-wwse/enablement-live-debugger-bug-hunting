@@ -138,7 +138,6 @@ Your Codespace has now deployed the following resources:
     TODO: Troubleshooting steps on the codespace, also add tips and tricks, show that the functions are loaded in the shell.
 
 
-
 <div class="grid cards" markdown>
-- [Click Here to Continue :octicons-arrow-right-24:](bughunt.md)
+- [Click Here to Continue :octicons-arrow-right-24:](bug-clear-completed.md)
 </div>

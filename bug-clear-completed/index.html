@@ -9,23 +9,25 @@
       
       
       
+        <link rel="prev" href="../getting-started/">
       
-        <link rel="next" href="getting-started/">
+      
+        <link rel="next" href="../bughunt/">
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
     
     
       
-        <title>Dynatrace Enablement Lab: Live Debugger Tutorial</title>
+        <title>3. Bug - Clear completed - Dynatrace Enablement Lab: Live Debugger Tutorial</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.0253249f.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.0253249f.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -52,7 +54,7 @@
       
     
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -78,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#live-debugger-tutorial-bug-hunting-the-todo-app" class="md-skip">
+        <a href="#the-bug-clear-completed" class="md-skip">
           Skip to content
         </a>
       
@@ -94,7 +96,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="Dynatrace Enablement Lab: Live Debugger Tutorial" class="md-header__button md-logo" aria-label="Dynatrace Enablement Lab: Live Debugger Tutorial" data-md-component="logo">
+    <a href=".." title="Dynatrace Enablement Lab: Live Debugger Tutorial" class="md-header__button md-logo" aria-label="Dynatrace Enablement Lab: Live Debugger Tutorial" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -114,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              1. About
+              3. Bug - Clear completed
             
           </span>
         </div>
@@ -237,7 +239,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Dynatrace Enablement Lab: Live Debugger Tutorial" class="md-nav__button md-logo" aria-label="Dynatrace Enablement Lab: Live Debugger Tutorial" data-md-component="logo">
+    <a href=".." title="Dynatrace Enablement Lab: Live Debugger Tutorial" class="md-nav__button md-logo" aria-label="Dynatrace Enablement Lab: Live Debugger Tutorial" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -264,6 +266,46 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. About
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Getting Started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -280,18 +322,18 @@
           
   
   <span class="md-ellipsis">
-    1. About
+    3. Bug - Clear completed
   </span>
   
 
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <a href="." class="md-nav__link md-nav__link--active">
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    1. About
+    3. Bug - Clear completed
   </span>
   
 
@@ -313,9 +355,45 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#whats-this-tutorial-all-about" class="md-nav__link">
+  <a href="#open-the-todo-app-and-add-a-couple-of-tasks" class="md-nav__link">
     <span class="md-ellipsis">
-      What's this tutorial all about
+      Open the TODO App and add a couple of tasks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hunting-via-the-kubernetes-road" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hunting via the Kubernetes Road
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#open-live-debugger" class="md-nav__link">
+    <span class="md-ellipsis">
+      Open Live Debugger
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connect-the-github-repository-manually" class="md-nav__link">
+    <span class="md-ellipsis">
+      Connect the Github repository (manually)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#navigate-to-the-todocontrollerjava" class="md-nav__link">
+    <span class="md-ellipsis">
+      Navigate to the TodoController.java
     </span>
   </a>
   
@@ -336,47 +414,7 @@
   
   
     <li class="md-nav__item">
-      <a href="getting-started/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    2. Getting Started
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="bug-clear-completed/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    3. Bug - Clear completed
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="bughunt/" class="md-nav__link">
+      <a href="../bughunt/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -396,7 +434,7 @@
   
   
     <li class="md-nav__item">
-      <a href="cleanup/" class="md-nav__link">
+      <a href="../cleanup/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -416,7 +454,7 @@
   
   
     <li class="md-nav__item">
-      <a href="resources/" class="md-nav__link">
+      <a href="../resources/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -436,7 +474,7 @@
   
   
     <li class="md-nav__item">
-      <a href="whats-next/" class="md-nav__link">
+      <a href="../whats-next/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -476,9 +514,45 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#whats-this-tutorial-all-about" class="md-nav__link">
+  <a href="#open-the-todo-app-and-add-a-couple-of-tasks" class="md-nav__link">
     <span class="md-ellipsis">
-      What's this tutorial all about
+      Open the TODO App and add a couple of tasks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hunting-via-the-kubernetes-road" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hunting via the Kubernetes Road
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#open-live-debugger" class="md-nav__link">
+    <span class="md-ellipsis">
+      Open Live Debugger
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connect-the-github-repository-manually" class="md-nav__link">
+    <span class="md-ellipsis">
+      Connect the Github repository (manually)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#navigate-to-the-todocontrollerjava" class="md-nav__link">
+    <span class="md-ellipsis">
+      Navigate to the TodoController.java
     </span>
   </a>
   
@@ -502,53 +576,99 @@
   
 
 
-<h1 id="live-debugger-tutorial-bug-hunting-the-todo-app">Live Debugger Tutorial - Bug Hunting the TODO App<a class="headerlink" href="#live-debugger-tutorial-bug-hunting-the-todo-app" title="Permanent link">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Support Policy</p>
-<p>This is an enablement project created by the Center of Excellence - Enablement Team at Dynatrace.</p>
-<p><strong>Support is provided via <a href="https://github.com/dynatrace-wwse/enablement-live-debugger-bug-hunting/issues" target="_blank">GitHub issues</a> only</strong>. The materials provided in this repository are offered "as-is" without any warranties, express or implied. Use them at your own risk.</p>
+<h1 id="the-bug-clear-completed">The Bug "Clear Completed"<a class="headerlink" href="#the-bug-clear-completed" title="Permanent link">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">The Bug 'Clear Completed'</p>
+<pre><code>Level: Beginner
+</code></pre>
 </div>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  dynatrace.sendBizEvent('page_load', {"page": "1. homepage"});
-});
-</script>
-
-<h2 id="whats-this-tutorial-all-about">What's this tutorial all about<a class="headerlink" href="#whats-this-tutorial-all-about" title="Permanent link">#</a></h2>
-<p>In this tutorial we will embark a Bug Hunting journey learning the different features of the Live Debbuging Capabilities of the Dynatrace Plattform.</p>
-<p>The Live Debugger is a solution within the package of <a href="https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability" target="_blank">Observability for Developers</a> of the Dynatrace Platform which provides developers with instant access to code-level debug data needed to troubleshoot and understand complex, modern applications with no extra coding, redeployments, or restarts.</p>
+<h2 id="open-the-todo-app-and-add-a-couple-of-tasks">Open the TODO App and add a couple of tasks<a class="headerlink" href="#open-the-todo-app-and-add-a-couple-of-tasks" title="Permanent link">#</a></h2>
+<p>In VSCode open a new terminal and in the Welcome Message you should see a link to the Todo App UI. Click on it. Now add a couple of tasks.
+It should look something like this:
+<img alt="TODO App" src="../img/todo_app.png" /></p>
 <ul>
-<li>Debug in any environment or application and run with any architecture</li>
-<li>Instant insights and data from any issue</li>
-<li>Full visibility into code</li>
-<li>Instantly debug complex workflows</li>
-<li>Built for hybrid cloud architectures and large-scale deployments</li>
-<li>Robust security and data privacy controls</li>
-<li>Increase developer satisfaction &amp; happiness (remove frustrations)</li>
+<li>Add a couple of tasks. </li>
+<li>Complete some of them (or all, depending how productive you are ;) . </li>
+<li>Now click on: <code>Clear Completed</code> </li>
 </ul>
-<!-- This is a comment 
-<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Hello world 1&quot;</span>
-ls<span class="w"> </span>-al
-</code></pre></div>
-
-## Say Second Hello (without Shebang)
-
-<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Hello world 2&quot;</span>
-</code></pre></div>
-
---8<-- "snippets/view-code.md" 
-TODO: This is the intro, add what we will do.
--->
-
-<p>Are you ready to start the Bug hunting journey and ready to learn how to improve and empower the Developers Productivity? </p>
-<div class="admonition tip">
-<p class="admonition-title">What will we do</p>
-<p>In this tutorial we will learn how easy it is to live debug an application in a Kubernetes Cluster. This is a TODO application which should help us be more effective but unfortunately it has bugs. So let' find them so we can be more productive and effective!</p>
-</div>
+<p><img alt="TODO App" src="../img/todo_completed.png" /></p>
+<ul>
+<li>Are the tasks cleared?</li>
+</ul>
+<p>Apparently the button does not work. When clicked - completed todos are not cleared. </p>
+<p>We embark our Bug hunting journey! </p>
+<p>There are multiple ways how dive deep into the issue because Dynatrace is monitoring your Kubernetes cluster, all workloads in it, all it's traces with code level insights and all real users accessing the exposed application.</p>
+<h2 id="hunting-via-the-kubernetes-road">Hunting via the Kubernetes Road<a class="headerlink" href="#hunting-via-the-kubernetes-road" title="Permanent link">#</a></h2>
+<ul>
+<li>Open the Kubernetes App &gt; You'll see a cluster with the name "codespace-xxxx". That's your Kind cluster being FullStack monitored.</li>
+</ul>
+<p><img alt="Kind Cluster" src="../img/kubernetes_cluster.png" /></p>
+<ul>
+<li>
+<p>On the right hand side, click on Workloads, the Workloads Page will open. </p>
+</li>
+<li>
+<p>Select the <code>todoapp</code>workload. </p>
+</li>
+</ul>
+<p><img alt="Todo Workload" src="../img/todo_workload.png" /></p>
+<ul>
+<li>On the Overview in the right hand side, scroll down and open the Services App. (this are the traces grouped withing Dynatrace Services)</li>
+</ul>
+<p><img alt="Todo Services" src="../img/todo_services.png" /></p>
+<ul>
+<li>Click on the Spring Boot one and then on the right corner "View Traces"</li>
+</ul>
+<p><img alt="Todo Services" src="../img/todo_services_traces.png" /></p>
+<ul>
+<li>This will open all the traces that went through your application... wow!</li>
+</ul>
+<p>As you can see, there are traces with the name "clearCompletedTodos" that just took a couple ms and are not throwing any errors. The response code is 200, but since this is a bug it does not mean the application is working as expected.</p>
+<p>This specific span it was just 2.98ms. On the right hand side, you can see the Tracing details, look how much data was captured automatically 🤩.</p>
+<p><img alt="Trace Clear Completed" src="../img/trace_clearcompleted.png" /></p>
+<p>In the second node of the span, in the <strong>Code Attributes</strong> section, we can see the <code>Code function: clearCompletedTodos</code> and the <code>Code Namespace: com.dynatrace.todoapp.TodoController</code> </p>
+<p>Now we know which method and which package! Let's put our Developer Hat 🎩 and open the Live Debugger.</p>
+<h2 id="open-live-debugger">Open Live Debugger<a class="headerlink" href="#open-live-debugger" title="Permanent link">#</a></h2>
+<p>Type CTRL + K &gt; Live Debugger for super fast access to the Live Debugger application. </p>
+<p>In "Customize your debug session" we add the filters <code>namespace:todoapp</code> <code>k8s.workload.name:todoapp</code>. This information was also available in the trace that we just took a look at. There are multiple filters you can add, important here is to have a filter that can be reused and is not specifc to an instance in case the pods a recycled and you want to make sure you are always setting breakpoints to a specific workload in a specific cluster (or multiple)</p>
+<p><img alt="Live Debugger App" src="../img/ld_customize.png" /></p>
+<h2 id="connect-the-github-repository-manually">Connect the Github repository (manually)<a class="headerlink" href="#connect-the-github-repository-manually" title="Permanent link">#</a></h2>
+<p>Once you click next, no repository was found for this application (this is because no repo was configured). Let's add it manually.</p>
+<ul>
+<li>
+<p>Click on the + sign to add a new one
+<img alt="Live Debugger App" src="../img/ld_repo_add.png" /></p>
+</li>
+<li>
+<p>Click on authenticate. It'll open a window where you'll authenticate with your GitHub personal account.</p>
+</li>
+</ul>
+<p>Why? we take security very seriously, meaning the source code will never leave the browser, the client. </p>
+<ul>
+<li>In organisation you enter: <code>dynatrace-wwse</code></li>
+<li>In Repository you enter this repo: <code>enablement-live-debugger-bug-hunting</code></li>
+</ul>
+<p><img alt="Live Debugger App" src="../img/ld_repo.png" /></p>
+<ul>
+<li>Click on Done!</li>
+</ul>
+<p>Now you are all set! you should see an  image like this:</p>
+<p><img alt="Live Debugger App" src="../img/ld_setup_ok.png" /></p>
+<h2 id="navigate-to-the-todocontrollerjava">Navigate to the TodoController.java<a class="headerlink" href="#navigate-to-the-todocontrollerjava" title="Permanent link">#</a></h2>
+<p>You have multiple ways to open the TodoController.java. Let's say you know the code, then easily you'll navigate to it by opening the Source Code menu on the left pane, navigate to: <code>src &gt; main &gt; java &gt; com &gt; dynatrace &gt; todoapp &gt; TodoController.java</code></p>
+<p>if you don't know the structure, use the search and type <code>TodoController</code>it'll search for all matches, you'll see the Class file so you can open it.</p>
+<p><img alt="Live Debugger App" src="../img/todocontroller.png" /></p>
+<p>Now let's search for the Method <code>clearCompletedTodos</code>. You'll find it around line 72.
+Set up a non-breaking-breakpoint on the return code.</p>
+<p>Go back to the TODO app and clear again on "Clear completed"</p>
+<p>Return to the Live Debugger and see the Snaphot captured, open it and see all the variables that were captured with their values.</p>
+<p>Do you see the bug? can you understand what happened and why the completed todos are not deleted? We can see two variables, the <code>todos</code> with a lenght of 3 and <code>todoStore</code> with a lenght of 0.</p>
+<p>In line 84 <code>todoStore.remove(todoRecord)</code> the variable todoStore is a newly instantiated variable. This is a mistake, it should be replaced by the variable <code>todos</code> so the function can succesfully remove all cleared tasks!</p>
+<p>Yay! we found the first bug!!!</p>
+<p><img alt="Clear Completed BP" src="../img/clearcompleted_breakpoint.png" /></p>
 <div class="grid cards">
 <ul>
-<li><a href="getting-started/">Yes! let's begin <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>
+<li><a href="./">Click Here to Continue <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>
 </ul>
 </div>
 
@@ -597,10 +717,10 @@ TODO: This is the intro, add what we will do.
     </div>
     
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy"], "search": "assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.83f73b43.min.js"></script>
+      <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
       
     
   </body>

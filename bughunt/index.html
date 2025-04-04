@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../getting-started/">
+        <link rel="prev" href="../bug-clear-completed/">
       
       
         <link rel="next" href="../cleanup/">
@@ -20,7 +20,7 @@
     
     
       
-        <title>3. Bug Hunting - Dynatrace Enablement Lab: Live Debugger Tutorial</title>
+        <title>4. Bug Hunting - Dynatrace Enablement Lab: Live Debugger Tutorial</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#what-is-this" class="md-skip">
+        <a href="#the-bug-clear-completed" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              3. Bug Hunting
+              4. Bug Hunting
             
           </span>
         </div>
@@ -306,6 +306,26 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../bug-clear-completed/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. Bug - Clear completed
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -315,12 +335,14 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
   <span class="md-ellipsis">
-    3. Bug Hunting
+    4. Bug Hunting
   </span>
   
 
@@ -331,7 +353,7 @@
         
   
   <span class="md-ellipsis">
-    3. Bug Hunting
+    4. Bug Hunting
   </span>
   
 
@@ -343,12 +365,32 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#open-the-todo-app-and-add-a-couple-of-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Open the TODO App and add a couple of tasks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hunting-via-the-kubernetes-road" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hunting via the Kubernetes Road
+    </span>
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#what-is-this" class="md-nav__link">
@@ -462,12 +504,32 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#open-the-todo-app-and-add-a-couple-of-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Open the TODO App and add a couple of tasks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hunting-via-the-kubernetes-road" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hunting via the Kubernetes Road
+    </span>
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#what-is-this" class="md-nav__link">
@@ -514,8 +576,57 @@
   
 
 
-  <h1>3. Bug Hunting</h1>
-
+<h1 id="the-bug-clear-completed">The Bug "Clear Completed"<a class="headerlink" href="#the-bug-clear-completed" title="Permanent link">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">The Bug 'Clear Completed'</p>
+<pre><code>Level: Beginner
+</code></pre>
+</div>
+<h2 id="open-the-todo-app-and-add-a-couple-of-tasks">Open the TODO App and add a couple of tasks<a class="headerlink" href="#open-the-todo-app-and-add-a-couple-of-tasks" title="Permanent link">#</a></h2>
+<p>In VSCode open a new terminal and in the Welcome Message you should see a link to the Todo App UI. Click on it. Now add a couple of tasks.
+It should look something like this:
+<img alt="TODO App" src="../img/todo_app.png" /></p>
+<ul>
+<li>Add a couple of tasks. </li>
+<li>Complete some of them (or all, depending how productive you are ;) . </li>
+<li>Now click on: <code>Clear Completed</code> </li>
+</ul>
+<p><img alt="TODO App" src="../img/todo_completed.png" /></p>
+<ul>
+<li>Are the tasks cleared?</li>
+</ul>
+<p>Apparently the button does not work. When clicked - completed todos are not cleared. </p>
+<p>We embark our Bug hunting journey! </p>
+<p>There are multiple ways how dive deep into the issue because Dynatrace is monitoring your Kubernetes cluster, all workloads in it, all it's traces with code level insights and all real users accessing the exposed application.</p>
+<h2 id="hunting-via-the-kubernetes-road">Hunting via the Kubernetes Road<a class="headerlink" href="#hunting-via-the-kubernetes-road" title="Permanent link">#</a></h2>
+<ul>
+<li>Open the Kubernetes App &gt; You'll see a cluster with the name "codespace-xxxx". That's your Kind cluster being FullStack monitored.</li>
+</ul>
+<p><img alt="Kind Cluster" src="../img/kubernetes_cluster.png" /></p>
+<ul>
+<li>
+<p>On the right hand side, click on Workloads, the Workloads Page will open. </p>
+</li>
+<li>
+<p>Select the <code>todoapp</code>workload. </p>
+</li>
+</ul>
+<p><img alt="Todo Workload" src="../img/todo_workload.png" /></p>
+<ul>
+<li>On the Overview in the right hand side, scroll down and open the Services App. (this are the traces grouped withing Dynatrace Services)</li>
+</ul>
+<p><img alt="Todo Services" src="../img/todo_services.png" /></p>
+<ul>
+<li>Click on the Spring Boot one and then on the right corner "View Traces"</li>
+</ul>
+<p><img alt="Todo Services" src="../img/todo_services_traces.png" /></p>
+<ul>
+<li>This will open all the traces that went through your application... wow!</li>
+</ul>
+<p>As you can see, there are traces with the name "clearCompletedTodos" that just took  a couple ms. In this span it was just 2.98ms. On the right hand side, you can see the Tracing details, look how much data was captured automatically 🤩.</p>
+<p><img alt="Trace Clear Completed" src="../img/trace_clearcompleted.png" /></p>
+<p>As you can see, in the second node of the span, in the <strong>Code Attributes</strong> section, we can see the <code>Code function: clearCompletedTodos</code> and the <code>Code Namespace: com.dynatrace.todoapp.TodoController</code> </p>
+<p>Now we know which method and which package! Let's put our Developer Hat 🎩 and open the Live Debugger.</p>
 <h2 id="what-is-this">What is this?<a class="headerlink" href="#what-is-this" title="Permanent link">#</a></h2>
 <p>We prepared for you a few manually introduced bugs in order to learn how to use Rookout.<br />
 The first two will make sure you understand how to create and analyze our default rule - Dump Frame.<br />

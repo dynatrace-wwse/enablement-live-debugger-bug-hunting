@@ -1,3 +1,21 @@
+
+# The Bug "Clear Completed"
+
+
+
+## Open the TODO App
+![TODO App](../img/todo_app.png)
+
+**Level: Beginner**
+
+- Add a couple of tasks. 
+
+- The bug: ``Clear Completed`` button does not work. When clicked - completed todos are not cleared.
+
+
+
+
+
 ## What is this?
 
 We prepared for you a few manually introduced bugs in order to learn how to use Rookout.  

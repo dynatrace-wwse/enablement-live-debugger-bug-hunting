@@ -36,7 +36,7 @@ TODO: This is the intro, add what we will do.
 Are you ready to start the Bug hunting journey and ready to learn how to improve and empower the Developers Productivity? 
 
 !!! tip "What will we do"
-    In this tutorial we will learn how easy it is to live debug an application in a Kubernetes Cluster. 
+    In this tutorial we will learn how easy it is to live debug an application in a Kubernetes Cluster. This is a TODO application which should help us be more effective but unfortunately it has bugs. So let' find them so we can be more productive and effective!
 
 
 <div class="grid cards" markdown>

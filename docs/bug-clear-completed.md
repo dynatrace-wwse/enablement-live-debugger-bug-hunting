@@ -125,10 +125,13 @@ Yay! we found the first bug!!!
 
 
 
+
+
 ![Clear Completed BP](../img/clearcompleted_breakpoint.png)
 
 
-
+!!! tip "Seeing is believing 🤩"
+    Did you notice? With Dynatrace we were able to navigate from the Kubernetes Cluster all the way down to the workload, it's traces cotinuing down to the specific method and namespace of the called function and variables. With one click on the method we were able to set a **non-breaking** breakpoint in our production application deployed in a Kubernetes Cluster where with a single snapshot we were able to identify the bug. Debugging Kubernetes Clusters has never been so easy!!! And in Production!! 🤯
 
 
 <div class="grid cards" markdown>

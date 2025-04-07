@@ -466,7 +466,7 @@ installMkdocs(){
 
 
 exposeMkdocs(){
-  printInfo "Exposing Astroshop in your dev.container"
+  printInfo "Exposing Mkdocs in your dev.container"
   nohup mkdocs serve -a localhost:8000 > /dev/null 2>&1 &
 }
 

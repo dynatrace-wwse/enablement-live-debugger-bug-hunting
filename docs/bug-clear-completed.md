@@ -3,7 +3,7 @@
 
 
 !!! note "The Bug 'Clear Completed'"
-        Level: Beginner
+    Level: Beginner
 
 ## Open the TODO App and add a couple of tasks
 
@@ -130,5 +130,5 @@ Yay! we found the first bug!!!
 
 
 <div class="grid cards" markdown>
-- [Click Here to Continue :octicons-arrow-right-24:](bug-special-characters.md)
+- [Click Here to Continue the quest with the next Bug:octicons-arrow-right-24:](bug-special-characters.md)
 </div>

@@ -1,7 +1,6 @@
 # Getting Started
 <!-- 
 TODO: verify the js payload on all pages and setup a tenant for monitoring enablement.
-
  -->
 --8<-- "snippets/bizevent-getting-started.js"
 --8<-- "snippets/grail-requirements.md"
@@ -139,5 +138,5 @@ Your Codespace has now deployed the following resources:
 
 
 <div class="grid cards" markdown>
-- [Click Here to Continue :octicons-arrow-right-24:](bug-clear-completed.md)
+- [Let's start our Bug hunting quest:octicons-arrow-right-24:](bug-clear-completed.md)
 </div>

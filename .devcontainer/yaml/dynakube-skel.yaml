@@ -225,13 +225,13 @@ spec:
     # Consumption of the ActiveGate heavily depends on the workload to monitor
     # The values should be adjusted according to the workload
     #
-    resources:
-      requests:
-        cpu: 100m
-        memory: 512Mi
-      limits:
-        cpu: 1000m
-        memory: 1Gi
+    #resources:
+    #  requests:
+    #    cpu: 100m
+    #    memory: 512Mi
+    #  limits:
+    #    cpu: 1000m
+    #    memory: 1Gi
 
     # Optional: Sets a node selector to control on which nodes the ActiveGate will be deployed.
     # For more information on node selectors, see https://kubernetes.io/docs/tasks/configure-pod-container/assign-pods-nodes/

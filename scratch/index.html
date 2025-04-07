@@ -525,7 +525,17 @@ activegate Queue length: server Id: 3; OneWay: 54; Request: 0server Id: 4; OneWa
 * TLSv1.3 (OUT), TLS alert, [no content] (0):
 * TLSv1.3 (OUT), TLS alert, close notify (256):</p>
 <ul>
-<li>On LD says 3 active instances... why?</li>
+<li>
+<p>On LD says 3 active instances... why?</p>
+</li>
+<li>
+<p>change path to 'app'</p>
+</li>
+<li>change image of IAM policies</li>
+<li>modify the Makefile of the app, make it cleaner</li>
+<li>Do build and push to own repo</li>
+<li>Expose port 8080 always</li>
+<li>map ingress to all * on app to port 8080 for having nigx RUM instrumentation</li>
 </ul>
 
 

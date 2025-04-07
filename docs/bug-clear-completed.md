@@ -7,7 +7,6 @@
 
 ## Open the TODO App and add a couple of tasks
 
-
 In VSCode open a new terminal and in the Welcome Message you should see a link to the Todo App UI. Click on it. Now add a couple of tasks.
 It should look something like this:
 ![TODO App](../img/todo_app.png)
@@ -98,7 +97,7 @@ Now you are all set! you should see an  image like this:
 
 ## Navigate to the TodoController.java
 
-You have multiple ways to open the TodoController.java. Let's say you know the code, then easily you'll navigate to it by opening the Source Code menu on the left pane, navigate to: ``src > main > java > com > dynatrace > todoapp > TodoController.java``
+You have multiple ways to open the TodoController.java. Let's say you know the code, then easily you'll navigate to it by opening the Source Code menu on the left pane, navigate to: ``todoapp > src > main > java > com > dynatrace > todoapp > TodoController.java``
 
 
 if you don't know the structure, use the search and type ``TodoController``it'll search for all matches, you'll see the Class file so you can open it.
@@ -131,5 +130,5 @@ Yay! we found the first bug!!!
 
 
 <div class="grid cards" markdown>
-- [Click Here to Continue :octicons-arrow-right-24:](bug-clear-completed.md)
+- [Click Here to Continue :octicons-arrow-right-24:](bug-special-characters.md)
 </div>

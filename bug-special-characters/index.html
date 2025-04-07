@@ -9,6 +9,10 @@
       
       
       
+        <link rel="prev" href="../bug-clear-completed/">
+      
+      
+        <link rel="next" href="../bug-duplicate-task/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -16,7 +20,7 @@
     
     
       
-        <title>Bughunt - Dynatrace Enablement Lab: Live Debugger Tutorial</title>
+        <title>4. Bug - Special characters - Dynatrace Enablement Lab: Live Debugger Tutorial</title>
       
     
     
@@ -76,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#bug-scenarios" class="md-skip">
+        <a href="#the-bug-special-characters" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Bughunt
+              4. Bug - Special characters
             
           </span>
         </div>
@@ -322,10 +326,30 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../bug-special-characters/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    4. Bug - Special characters
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -334,6 +358,62 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#open-the-todo-app-and-add-a-task-with-an-exclamation-mark" class="md-nav__link">
+    <span class="md-ellipsis">
+      Open the TODO App and add a Task with an exclamation mark!
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#open-the-distributed-tracing-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      Open the Distributed Tracing App
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#open-live-debugger" class="md-nav__link">
+    <span class="md-ellipsis">
+      Open Live Debugger
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#watching-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Watching variables
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -435,6 +515,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -443,18 +525,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#bug-scenarios" class="md-nav__link">
+  <a href="#open-the-todo-app-and-add-a-task-with-an-exclamation-mark" class="md-nav__link">
     <span class="md-ellipsis">
-      Bug scenarios
+      Open the TODO App and add a Task with an exclamation mark!
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#next-steps" class="md-nav__link">
+  <a href="#open-the-distributed-tracing-app" class="md-nav__link">
     <span class="md-ellipsis">
-      Next steps
+      Open the Distributed Tracing App
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#open-live-debugger" class="md-nav__link">
+    <span class="md-ellipsis">
+      Open Live Debugger
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#watching-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Watching variables
     </span>
   </a>
   
@@ -478,48 +578,65 @@
   
 
 
-  <h1>Bughunt</h1>
-
-<h2 id="bug-scenarios">Bug scenarios<a class="headerlink" href="#bug-scenarios" title="Permanent link">#</a></h2>
-<div class="admonition tip">
-<p class="admonition-title">WIP</p>
-<p>Bug Scenarios, 1 checked!</p>
+<h1 id="the-bug-special-characters">The Bug "Special Characters"<a class="headerlink" href="#the-bug-special-characters" title="Permanent link">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">The Bug 'Clear Completed'</p>
+<p>Level: Beginner</p>
 </div>
-<p><strong>Level: Beginner</strong>
-- __The bug: Special characters (&lt;,&gt;,;,<code>,&amp;,/,\\) are not being accepted as part of the title when Adding or Updating a Todo.__
-    - **Reproduce:** Add a todo with special characters. All of these characters should disappear.
-    - **Debug:**
-        1. In the Rookout app, open the file</code>src/main/java/com/rookout/tutorial/TodoController.java<code>2. In the addTodo function you will we see that the todo title is being filtered by</code>replaceAll<code>with a regex - Let's add a</code>Dump Frame<code>to the line after it
-        ![newTodoRecord](/img/screenshots/java_bughunt_3.png)
-        3. Try to add a todo with some special characters (e.g:</code>do &lt;&gt; this<code>)
-        4. We can clearly see both</code>newTodoRecord.title<code>and</code>todoTitle` - which is the cleaned title.
-        <img alt="newTodoRecord" src="/img/screenshots/java_bughunt_4.png" /></p>
-<p><strong>Level: Intermediate</strong>
-- <strong>The bug: Duplicate Todo adds an invalid todo instead of an exact copy of an existing one.</strong>
-    - <strong>Reproduce:</strong> Add a task and when hovering on the text, on the right side you have the <strong>&amp;</strong> symbol. Click on it to duplicate the task.
-    - <strong>Debug:</strong>
-        1. In the Rookout app, open the file <code>src/main/java/com/rookout/tutorial/TodoController.java</code>
-        2. Using the <strong>Rules</strong> pane on the right, select the <em>Rule Type</em> "Log"
-        3. Add the rule in the duplicateTodo function on the line with <code>todos.add(newTodoRecord);</code>
-        4. Before triggering the rule, let's edit it so it returns what we want
-        5. In the <strong>Rules</strong> pane on the right, click the <em>Edit Rule</em> (pen) icon next to the rule you just added. It will open up the Rule configuration as a JSON file
-        6. On line 37 in the <code>paths</code> object let's add a property <code>"store.rookout.locals.dup": "frame.newTodoRecord"</code>
-        7. On line 51 we have <code>processing.operations</code> object, let's add a new operation in the array :
-        <strong>name: send_rookout - means we are sending the information to the rookout web application</strong>
-        <strong>path: store.rookout.locals.dup - we tell the rule what information to send</strong></p>
-<pre><code>    ```
-    {
-        "name": "send_rookout",
-        "path": "store.rookout.locals.dup"
-    }
-    ```
-    8. Click the save button on the upper pane.
-    9. Add and duplicate a todo in order to see the output, now we can see what is being given to the object and match if we have an error in the function (parameters missing or in bad order).
-    ![Invalid Duplicate Todo Record](/img/screenshots/java_bughunt_5.png)
-</code></pre>
-<h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Permanent link">#</a></h2>
-<p>Head over to <a href="reference-home.md">our reference</a> to understand all the Rookout components. <br />
-See <a href="installation-overview.md">our installation guides</a> for platform-specific installation examples.</p>
+<h2 id="open-the-todo-app-and-add-a-task-with-an-exclamation-mark">Open the TODO App and add a Task with an exclamation mark!<a class="headerlink" href="#open-the-todo-app-and-add-a-task-with-an-exclamation-mark" title="Permanent link">#</a></h2>
+<ul>
+<li>Add a task with an exclamation mark! or a special character for that matter, like this:</li>
+</ul>
+<p><img alt="TODO App" src="../img/todo_app_exclamation.png" /></p>
+<ul>
+<li>What happened? As you can see the signs are being removed. Why?</li>
+</ul>
+<p><img alt="TODO App" src="../img/todo_app_exclamation2.png" /></p>
+<p>Let's continue with the bug hunting again! Now, let's assume we are new developers in the TODO app company. How difficult would it be to find the bug? To know where is the app running? which pod is delivering the requests? which namespace and line of code? Well, not with Dynatrace! We already learned how easy it was to find the TODO app within the Kubernetes App and from there we opened the traces in the Distributed Tracing app, so let's go there.</p>
+<div class="admonition tipp">
+<p class="admonition-title">Want to learn more about the Tracing App?</p>
+<p>If you want to learn more about the <a href="https://www.youtube.com/watch?v=O4zWlwJ4hsA" target="_blank">new Distributed Tracing App, watch this amazing 12 min recording of Dynatrace App Spotlights</a></p>
+</div>
+<h2 id="open-the-distributed-tracing-app">Open the Distributed Tracing App<a class="headerlink" href="#open-the-distributed-tracing-app" title="Permanent link">#</a></h2>
+<div class="admonition tipp">
+<p class="admonition-title">Protip: Open the Tracing App anywhere in Dynatrace</p>
+<p>type CTRL + K and then Tracing, the tracing app should appear in the super search.
+<img alt="TODO App" src="../img/open_tracing_app.png" /></p>
+</div>
+<ul>
+<li>In the filter add <code>"Kubernetes namespace" = todoapp AND "Kubernetes workload" = todoapp</code></li>
+</ul>
+<p>You can also let the autocomplete help you or use the facets on the left-hand side to filter for all requests of the POD <code>todoapp</code> that is deployed in the namespace <code>todoapp</code>.</p>
+<p><img alt="TODO App" src="../img/tracing_app_filter.png" /></p>
+<p>If we take a look at the traces, we can see there is a trace named <code>addTodo</code>. By opening this trace, on the details on the right hand side, we can see in the <code>Code Attributes</code> that the <code>Code function = addTodo</code> and the <code>Code Namespace = com.dynatrace.todoapp.TodoController</code></p>
+<p>Now we know where in all the applications code we should be looking for the bug!</p>
+<h2 id="open-live-debugger">Open Live Debugger<a class="headerlink" href="#open-live-debugger" title="Permanent link">#</a></h2>
+<ul>
+<li>Let's search for the <code>Code function = addTodo</code> under the <code>Code Namespace = com.dynatrace.todoapp.TodoController</code>, in the search by typping <code>TodoController</code> the class file appears, open it.</li>
+<li>Now let's search for the AddTodo function, the declaration is in line 24.</li>
+</ul>
+<p>Do you see something weird? The deveoloper left a String function on line 28 with <code>getTitle().replaceAll("[^a-zA-Z0-9\\s]+", "");</code></p>
+<ul>
+<li>Let's add two breakpoints around that line, one before, let's say on line 25 and another on line 32.</li>
+<li>Go to the TodoApp and add a Task with a special character. </li>
+<li>Go back to the Live Debugger and watch the two snapshots get gathered on real time.</li>
+<li>If you open the first Hit, the one on line 25, you'll notice the Object <code>newTodoRecord.title = This is exciting!!!</code> that contains the exclamation mark. Meaning the data is being correctly passed on to the function ToDo, but then something happens and the <code>!!!</code> are removed.</li>
+<li>If you then look for the same attribute in the same method on the second HIT you'll see that the <code>!!!</code> are gone.</li>
+</ul>
+<h2 id="watching-variables">Watching variables<a class="headerlink" href="#watching-variables" title="Permanent link">#</a></h2>
+<ul>
+<li>We want to make your life as a developer easier. With the Live Debugger you can watch varibles, right click on the  <code>newTodoRecord.title</code> and select <code>Watch</code></li>
+</ul>
+<p><img alt="watching variables" src="../img/ld_watch.png" /></p>
+<ul>
+<li>You'll see that in the snapshots, the title of both snapshots are added for ease of debugging complex applications. This is a very simple app, but imagine you have hundreds or thousend of lines of code, and are not even yours, using this strategy you can understand how specific variables change through the code.</li>
+</ul>
+<p><img alt="watching variables" src="../img/ld_watch2.png" /></p>
+<div class="grid cards">
+<ul>
+<li><a href="./">Click Here to Continue the quest with the next Bug<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>
+</ul>
+</div>
 
 
 

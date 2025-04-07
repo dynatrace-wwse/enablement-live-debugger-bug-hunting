@@ -86,6 +86,7 @@ bash-4.4$ curl -k -v https://10.96.0.1:443
 - On LD says 3 active instances... why?
 
 - change path to 'app'
+- change image of IAM policies
 - modify the Makefile of the app, make it cleaner
 - Do build and push to own repo
 - Expose port 8080 always

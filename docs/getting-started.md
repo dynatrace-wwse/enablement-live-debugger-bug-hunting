@@ -31,6 +31,7 @@ ALLOW storage.application.snapshots:read;
 Read Snapshopts
 ```bash
 ALLOW storage.application.snapshots:read;
+ALLOW storage:buckets:read WHERE storage:table-name = "application.snapshots";
 ```
 
 The policy should look like this:

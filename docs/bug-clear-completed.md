@@ -61,8 +61,6 @@ In the second node of the span, in the **Code Attributes** section, we can see t
 
 Now we know which method and which package! Let's put our Developer Hat 🎩 and open the Live Debugger.
 
-
-
 ## Open Live Debugger
 
 Type CTRL + K > Live Debugger for super fast access to the Live Debugger application. 
@@ -122,8 +120,6 @@ Do you see the bug? can you understand what happened and why the completed todos
 In line 84 ``todoStore.remove(todoRecord)`` the variable todoStore is a newly instantiated variable. This is a mistake, it should be replaced by the variable ``todos`` so the function can succesfully remove all cleared tasks!
 
 Yay! we found the first bug!!!
-
-
 
 
 

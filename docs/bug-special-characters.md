@@ -11,11 +11,11 @@
 
 ![TODO App](../img/todo_app_exclamation.png)
 
-
-- What happened? As you can see the signs are being removed. Why?
+- Now type ENTER to add the task
 
 ![TODO App](../img/todo_app_exclamation2.png)
 
+- What happened? As you can see the signs are being removed. Why?
 
 Let's continue with the bug hunting again! Now, let's assume we are new developers in the TODO app company. How difficult would it be to find the bug? To know where is the app running? which pod is delivering the requests? which namespace and line of code? Well, not with Dynatrace! We already learned how easy it was to find the TODO app within the Kubernetes App and from there we opened the traces in the Distributed Tracing app, so let's go there.
 

@@ -84,3 +84,10 @@ bash-4.4$ curl -k -v https://10.96.0.1:443
 
 
 - On LD says 3 active instances... why?
+
+- change path to 'app'
+- modify the Makefile of the app, make it cleaner
+- Do build and push to own repo
+- Expose port 8080 always
+- map ingress to all * on app to port 8080 for having nigx RUM instrumentation
+

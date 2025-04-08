@@ -50,8 +50,9 @@ if [[ "$CODESPACE_NAME" == dttest-* ]]; then
 else
 
     # Your content here
-    printWarn "TODO: Uncomment postCodespaceTracker before goLive - Sending BizEvent to track usage of enablement-live-debugger-bug-hunting"
-    # Uncomment below
-    #postCodespaceTracker enablement-live-debugger-bug-hunting
-    printInfo "Finished creating"
+    printInfo "Sending BizEvent to track usage of enablement-live-debugger-bug-hunting"
+    
+    postCodespaceTracker enablement-live-debugger-bug-hunting
+    
+    printInfo "Finished creating devcontainer"
 fi

@@ -19,6 +19,8 @@
 .idea/**/uiDesigner.xml
 .idea/checkstyle-idea.xml
 
+# VSCode stuff
+.vscode/**
 # Gradle:
 .idea/**/gradle.xml
 .idea/**/libraries

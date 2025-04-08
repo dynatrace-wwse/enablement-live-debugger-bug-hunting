@@ -88,7 +88,7 @@ Go back to the TODO app and clear again on "Clear completed"
 
 Return to the Live Debugger and see the Snaphot captured, open it and see all the variables that were captured with their values.
 
-Do you see the bug? can you understand what happened and why the completed todos are not deleted? We can see two variables, the ``todos`` with a lenght of 3 and ``todoStore`` with a lenght of 0.
+Do you see the bug? can you understand what happened and why the completed todos are not deleted? We can see two variables, the ``todos`` with a length of 3 and ``todoStore`` with a length of 0.
 
 In line 84 ``todoStore.remove(todoRecord)`` the variable todoStore is a newly instantiated variable. This is a mistake, it should be replaced by the variable ``todos`` so the function can succesfully remove all cleared tasks!
 

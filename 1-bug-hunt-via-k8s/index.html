@@ -20,7 +20,7 @@
     
     
       
-        <title>4. 1. Bug - hunt via Kubernetes - Dynatrace Enablement Lab: Live Debugger Tutorial</title>
+        <title>5. 1st Bug - hunt via kubernetes - Dynatrace Enablement Lab: Live Debugger Tutorial</title>
       
     
     
@@ -39,10 +39,7 @@
       
     
   <!-- Add scripts that need to run afterwards here -->
-   TODO
-   1. Create an agentless application in Dynatrace
-   2. Replace this snippet with your RUM Snippet
-  <script type="text/javascript" src="https://js-cdn.dynatrace.com/jstag/PLACEHOLDEr/REPLACE_WITH_YOUR_SNIPPET/1234abcd1234abcd_complete.js" crossorigin="anonymous"></script>
+   <script type="text/javascript" src="https://js-cdn.dynatrace.com/jstag/145e12d594f/bf64904yne/8d355b8e439527e1_complete.js" crossorigin="anonymous"></script>
 
     
       
@@ -80,7 +77,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#the-bug-clear-completed-the-quest" class="md-skip">
+        <a href="#hunting-via-the-kubernetes-road" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              4. 1. Bug - hunt via Kubernetes
+              5. 1st Bug - hunt via kubernetes
             
           </span>
         </div>
@@ -293,7 +290,27 @@
         
   
   <span class="md-ellipsis">
-    2. Getting Started
+    2. Getting started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../codespaces/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. Codespaces
   </span>
   
 
@@ -313,7 +330,7 @@
         
   
   <span class="md-ellipsis">
-    3. 1. Bug - Clear completed
+    4. 1st Bug - clear completed
   </span>
   
 
@@ -335,14 +352,12 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
   <span class="md-ellipsis">
-    4. 1. Bug - hunt via Kubernetes
+    5. 1st Bug - hunt via kubernetes
   </span>
   
 
@@ -353,7 +368,7 @@
         
   
   <span class="md-ellipsis">
-    4. 1. Bug - hunt via Kubernetes
+    5. 1st Bug - hunt via kubernetes
   </span>
   
 
@@ -365,8 +380,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -377,7 +390,7 @@
         <li class="md-nav__item">
   <a href="#hunting-via-the-kubernetes-road" class="md-nav__link">
     <span class="md-ellipsis">
-      Hunting via the Kubernetes Road
+      Hunting via the kubernetes road
     </span>
   </a>
   
@@ -429,7 +442,7 @@
         
   
   <span class="md-ellipsis">
-    5. 2. Bug - Special characters
+    6. 2nd Bug - special characters
   </span>
   
 
@@ -449,7 +462,7 @@
         
   
   <span class="md-ellipsis">
-    6. 2. Bug - hunt via Traces
+    7. 2nd Bug - hunt via traces
   </span>
   
 
@@ -469,7 +482,7 @@
         
   
   <span class="md-ellipsis">
-    7. 3. Bug - Duplicate task
+    8. 3rd Bug - duplicate task
   </span>
   
 
@@ -489,7 +502,7 @@
         
   
   <span class="md-ellipsis">
-    8. 3. Bug - hunt via Logs
+    9. 3rd Bug - hunt via logs
   </span>
   
 
@@ -509,7 +522,7 @@
         
   
   <span class="md-ellipsis">
-    8. Cleanup
+    10. Cleanup
   </span>
   
 
@@ -529,7 +542,7 @@
         
   
   <span class="md-ellipsis">
-    9. Resources
+    11. Resources
   </span>
   
 
@@ -549,7 +562,7 @@
         
   
   <span class="md-ellipsis">
-    10. What's Next?
+    12. What's next?
   </span>
   
 
@@ -575,8 +588,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -587,7 +598,7 @@
         <li class="md-nav__item">
   <a href="#hunting-via-the-kubernetes-road" class="md-nav__link">
     <span class="md-ellipsis">
-      Hunting via the Kubernetes Road
+      Hunting via the kubernetes road
     </span>
   </a>
   
@@ -638,8 +649,15 @@
   
 
 
-<h1 id="the-bug-clear-completed-the-quest">The Bug "Clear Completed" - the Quest<a class="headerlink" href="#the-bug-clear-completed-the-quest" title="Permanent link">#</a></h1>
-<h2 id="hunting-via-the-kubernetes-road">Hunting via the Kubernetes Road<a class="headerlink" href="#hunting-via-the-kubernetes-road" title="Permanent link">#</a></h2>
+  <h1>5. 1st Bug - hunt via kubernetes</h1>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  dynatrace.sendBizEvent('page_load', {"page": "1st Bug - hunt via kubernetes"});
+});
+</script>
+
+<h2 id="hunting-via-the-kubernetes-road">Hunting via the kubernetes road<a class="headerlink" href="#hunting-via-the-kubernetes-road" title="Permanent link">#</a></h2>
 <ul>
 <li>Open the Kubernetes App &gt; You'll see a cluster with the name "codespace-xxxx". That's your Kind cluster being FullStack monitored.</li>
 </ul>
@@ -654,7 +672,7 @@
 </ul>
 <p><img alt="Todo Workload" src="../img/todo_workload.png" /></p>
 <ul>
-<li>On the Overview in the right hand side, scroll down and open the Services App. (this are the traces grouped withing Dynatrace Services)</li>
+<li>On the Overview in the right hand side, scroll down and open the Services app. (this are the traces grouped withing Dynatrace Services)</li>
 </ul>
 <p><img alt="Todo Services" src="../img/todo_services.png" /></p>
 <ul>
@@ -664,7 +682,7 @@
 <ul>
 <li>This will open all the traces that went through your application... wow!</li>
 </ul>
-<p>As you can see, there are traces with the name "clearCompletedTodos" that just took a couple ms and are not throwing any errors. The response code is 200, but since this is a bug it does not mean the application is working as expected.</p>
+<p>As you can see, there are traces with the name <code>clearCompletedTodos</code> that just took a couple ms and are not throwing any errors. The response code is 200, but since this is a bug it does not mean the application is working as expected.</p>
 <p>This specific span it was just 2.98ms. On the right hand side, you can see the Tracing details, look how much data was captured automatically 🤩.</p>
 <p><img alt="Trace Clear Completed" src="../img/trace_clearcompleted.png" /></p>
 <p>In the second node of the span, in the <strong>Code Attributes</strong> section, we can see the <code>Code function: clearCompletedTodos</code> and the <code>Code Namespace: com.dynatrace.todoapp.TodoController</code> </p>
@@ -713,7 +731,7 @@ Set up a non-breaking-breakpoint on the return code.</p>
 </div>
 <div class="grid cards">
 <ul>
-<li><a href="../2-bug-special-characters/">Click Here to Continue the quest with the next Bug<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>
+<li><a href="../2-bug-special-characters/">Click here to continue the quest with the next Bug<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>
 </ul>
 </div>
 

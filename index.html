@@ -37,10 +37,7 @@
       
     
   <!-- Add scripts that need to run afterwards here -->
-   TODO
-   1. Create an agentless application in Dynatrace
-   2. Replace this snippet with your RUM Snippet
-  <script type="text/javascript" src="https://js-cdn.dynatrace.com/jstag/PLACEHOLDEr/REPLACE_WITH_YOUR_SNIPPET/1234abcd1234abcd_complete.js" crossorigin="anonymous"></script>
+   <script type="text/javascript" src="https://js-cdn.dynatrace.com/jstag/145e12d594f/bf64904yne/8d355b8e439527e1_complete.js" crossorigin="anonymous"></script>
 
     
       
@@ -78,7 +75,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#live-debugger-tutorial-bug-hunting-the-todo-app" class="md-skip">
+        <a href="#live-debugger-tutorial-bug-hunting-the-todo-apps" class="md-skip">
           Skip to content
         </a>
       
@@ -273,8 +270,6 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -303,14 +298,21 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#live-debugger-tutorial-bug-hunting-the-todo-apps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Live Debugger Tutorial - Bug Hunting the TODO Apps
+    </span>
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#whats-this-tutorial-all-about" class="md-nav__link">
@@ -340,7 +342,27 @@
         
   
   <span class="md-ellipsis">
-    2. Getting Started
+    2. Getting started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="codespaces/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. Codespaces
   </span>
   
 
@@ -360,7 +382,7 @@
         
   
   <span class="md-ellipsis">
-    3. 1. Bug - Clear completed
+    4. 1st Bug - clear completed
   </span>
   
 
@@ -380,7 +402,7 @@
         
   
   <span class="md-ellipsis">
-    4. 1. Bug - hunt via Kubernetes
+    5. 1st Bug - hunt via kubernetes
   </span>
   
 
@@ -400,7 +422,7 @@
         
   
   <span class="md-ellipsis">
-    5. 2. Bug - Special characters
+    6. 2nd Bug - special characters
   </span>
   
 
@@ -420,7 +442,7 @@
         
   
   <span class="md-ellipsis">
-    6. 2. Bug - hunt via Traces
+    7. 2nd Bug - hunt via traces
   </span>
   
 
@@ -440,7 +462,7 @@
         
   
   <span class="md-ellipsis">
-    7. 3. Bug - Duplicate task
+    8. 3rd Bug - duplicate task
   </span>
   
 
@@ -460,7 +482,7 @@
         
   
   <span class="md-ellipsis">
-    8. 3. Bug - hunt via Logs
+    9. 3rd Bug - hunt via logs
   </span>
   
 
@@ -480,7 +502,7 @@
         
   
   <span class="md-ellipsis">
-    8. Cleanup
+    10. Cleanup
   </span>
   
 
@@ -500,7 +522,7 @@
         
   
   <span class="md-ellipsis">
-    9. Resources
+    11. Resources
   </span>
   
 
@@ -520,7 +542,7 @@
         
   
   <span class="md-ellipsis">
-    10. What's Next?
+    12. What's next?
   </span>
   
 
@@ -546,14 +568,21 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#live-debugger-tutorial-bug-hunting-the-todo-apps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Live Debugger Tutorial - Bug Hunting the TODO Apps
+    </span>
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#whats-this-tutorial-all-about" class="md-nav__link">
@@ -582,18 +611,19 @@
   
 
 
-<h1 id="live-debugger-tutorial-bug-hunting-the-todo-app">Live Debugger Tutorial - Bug Hunting the TODO App<a class="headerlink" href="#live-debugger-tutorial-bug-hunting-the-todo-app" title="Permanent link">#</a></h1>
+  <h1>1. About</h1>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  dynatrace.sendBizEvent('page_load', {"page": "1. About"});
+});
+</script>
 <div class="admonition warning">
 <p class="admonition-title">Support Policy</p>
 <p>This is an enablement project created by the Center of Excellence - Enablement Team at Dynatrace.</p>
 <p><strong>Support is provided via <a href="https://github.com/dynatrace-wwse/enablement-live-debugger-bug-hunting/issues" target="_blank">GitHub issues</a> only</strong>. The materials provided in this repository are offered "as-is" without any warranties, express or implied. Use them at your own risk.</p>
 </div>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  dynatrace.sendBizEvent('page_load', {"page": "1. homepage"});
-});
-</script>
-
+<h2 id="live-debugger-tutorial-bug-hunting-the-todo-apps">Live Debugger Tutorial - Bug Hunting the TODO Apps<a class="headerlink" href="#live-debugger-tutorial-bug-hunting-the-todo-apps" title="Permanent link">#</a></h2>
 <h2 id="whats-this-tutorial-all-about">What's this tutorial all about<a class="headerlink" href="#whats-this-tutorial-all-about" title="Permanent link">#</a></h2>
 <p>In this tutorial we will embark a Bug Hunting journey learning the different features of the Live Debbuging Capabilities of the Dynatrace Plattform.</p>
 <p>The Live Debugger is a solution within the package of <a href="https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability" target="_blank">Observability for Developers</a> of the Dynatrace Platform which provides developers with instant access to code-level debug data needed to troubleshoot and understand complex, modern applications with no extra coding, redeployments, or restarts.</p>
@@ -609,29 +639,6 @@ document.addEventListener('DOMContentLoaded', function() {
 <p align="center">
   <img src="img/bugbusters.jpeg" alt="Bugbusters" width="400">
 </p>
-
-<!-- This is a comment 
-    ![Bugbusters](../img/bugbusters.jpeg)
-<div class="highlight"><pre><span></span><code>--8&lt;--<span class="w"> </span><span class="s2">&quot;snippets/e2e-sample.sh:shebang&quot;</span><span class="w"> </span>had<span class="w"> </span>some<span class="w"> </span>insights<span class="w"> </span>mostly<span class="w"> </span>on<span class="w"> </span>usage,<span class="w"> </span>as<span class="w"> </span>most<span class="w"> </span>of<span class="w"> </span>usable<span class="w"> </span>data<span class="w"> </span><span class="k">in</span><span class="w"> </span>Grail<span class="w"> </span>is<span class="w"> </span>the<span class="w"> </span>metadata<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>breakpoints<span class="w"> </span>and<span class="w"> </span>the<span class="w"> </span>snapshot<span class="w"> </span>rather<span class="w"> </span>the<span class="w"> </span>snapshot<span class="w"> </span>itself.
-
-
-
-
-
-
-
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Hello world 1&quot;</span>
-ls<span class="w"> </span>-al
-</code></pre></div>
-
-## Say Second Hello (without Shebang)
-
-<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Hello world 2&quot;</span>
-</code></pre></div>
-
---8<-- "snippets/view-code.md" 
-TODO: This is the intro, add what we will do.
--->
 
 <p>Are you ready to start the Bug hunting journey and ready to learn how to improve and empower the Developers Productivity? </p>
 <div class="admonition tip">

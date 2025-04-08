@@ -20,7 +20,7 @@
     
     
       
-        <title>8. 3. Bug - hunt via Logs - Dynatrace Enablement Lab: Live Debugger Tutorial</title>
+        <title>9. 3rd Bug - hunt via logs - Dynatrace Enablement Lab: Live Debugger Tutorial</title>
       
     
     
@@ -39,10 +39,7 @@
       
     
   <!-- Add scripts that need to run afterwards here -->
-   TODO
-   1. Create an agentless application in Dynatrace
-   2. Replace this snippet with your RUM Snippet
-  <script type="text/javascript" src="https://js-cdn.dynatrace.com/jstag/PLACEHOLDEr/REPLACE_WITH_YOUR_SNIPPET/1234abcd1234abcd_complete.js" crossorigin="anonymous"></script>
+   <script type="text/javascript" src="https://js-cdn.dynatrace.com/jstag/145e12d594f/bf64904yne/8d355b8e439527e1_complete.js" crossorigin="anonymous"></script>
 
     
       
@@ -80,7 +77,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#the-bug-duplicate-task-the-quest" class="md-skip">
+        <a href="#hunting-road-logs-app" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              8. 3. Bug - hunt via Logs
+              9. 3rd Bug - hunt via logs
             
           </span>
         </div>
@@ -293,7 +290,27 @@
         
   
   <span class="md-ellipsis">
-    2. Getting Started
+    2. Getting started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../codespaces/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. Codespaces
   </span>
   
 
@@ -313,7 +330,7 @@
         
   
   <span class="md-ellipsis">
-    3. 1. Bug - Clear completed
+    4. 1st Bug - clear completed
   </span>
   
 
@@ -333,7 +350,7 @@
         
   
   <span class="md-ellipsis">
-    4. 1. Bug - hunt via Kubernetes
+    5. 1st Bug - hunt via kubernetes
   </span>
   
 
@@ -353,7 +370,7 @@
         
   
   <span class="md-ellipsis">
-    5. 2. Bug - Special characters
+    6. 2nd Bug - special characters
   </span>
   
 
@@ -373,7 +390,7 @@
         
   
   <span class="md-ellipsis">
-    6. 2. Bug - hunt via Traces
+    7. 2nd Bug - hunt via traces
   </span>
   
 
@@ -393,7 +410,7 @@
         
   
   <span class="md-ellipsis">
-    7. 3. Bug - Duplicate task
+    8. 3rd Bug - duplicate task
   </span>
   
 
@@ -415,14 +432,12 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
   <span class="md-ellipsis">
-    8. 3. Bug - hunt via Logs
+    9. 3rd Bug - hunt via logs
   </span>
   
 
@@ -433,7 +448,7 @@
         
   
   <span class="md-ellipsis">
-    8. 3. Bug - hunt via Logs
+    9. 3rd Bug - hunt via logs
   </span>
   
 
@@ -444,8 +459,6 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
-  
-    
   
   
     <label class="md-nav__title" for="__toc">
@@ -500,7 +513,7 @@
         
   
   <span class="md-ellipsis">
-    8. Cleanup
+    10. Cleanup
   </span>
   
 
@@ -520,7 +533,7 @@
         
   
   <span class="md-ellipsis">
-    9. Resources
+    11. Resources
   </span>
   
 
@@ -540,7 +553,7 @@
         
   
   <span class="md-ellipsis">
-    10. What's Next?
+    12. What's next?
   </span>
   
 
@@ -565,8 +578,6 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
-  
-    
   
   
     <label class="md-nav__title" for="__toc">
@@ -620,7 +631,14 @@
   
 
 
-<h1 id="the-bug-duplicate-task-the-quest">The Bug "Duplicate Task" - the Quest<a class="headerlink" href="#the-bug-duplicate-task-the-quest" title="Permanent link">#</a></h1>
+  <h1>9. 3rd Bug - hunt via logs</h1>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  dynatrace.sendBizEvent('page_load', {"page": "3rd Bug - hunt via logs"});
+});
+</script>
+
 <h2 id="hunting-road-logs-app">Hunting road - Logs App<a class="headerlink" href="#hunting-road-logs-app" title="Permanent link">#</a></h2>
 <p>Now let's try a different approach, we have seen how easy it is to find the traces via the Distributed Tracing App. Let's find the trace and it's method and codespace via the Logs App. The Dynatrace Plattform is context aware, it knows which traces write which logs, from which pod they are coming from and even which user generated the transaction. </p>
 <ul>
@@ -666,7 +684,7 @@ Wow, that was fast, we see two log entries with that match and are coming from t
 </ul>
 <div class="grid cards">
 <ul>
-<li><a href="../cleanup/">Click Here to Continue <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>
+<li><a href="../cleanup/">Click here to continue <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>
 </ul>
 </div>
 

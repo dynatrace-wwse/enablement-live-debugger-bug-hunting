@@ -59,6 +59,8 @@ The apps MKdocs and TODO app are being exposed in the devcontainer to your local
 
 
 ## 5. Troubleshooting
+
+
 ### Exposing the App
 The todo app is being exposed via `kubectl port-forward ...` if the container is stopped and started again or if you delete/recicle the pod the port-forwarding process might crash. You can easily see what is being exposed by typing the function `showOpenPorts` 
 

@@ -7,7 +7,6 @@ Now let's try a different approach, we have seen how easy it is to find the trac
 - In the filter type the content or part of the content of the Task, in my case I wrote `A task we want to duplicate`, so I'm searching for `content=*duplicate*`.
 - Since I'm monitoring multiple Kubernetes Clusters, I'm adding an extra filter for the `k8s.namespace.name = todoapp`. You can verify this by clicking on a log entry, and on the right hand side, the topology of the log entry will open, you'll notice is the same pod.
 
-
 ![Logs app](../img/logs_app.png)
 Wow, that was fast, we see two log entries with that match and are coming from the same pod. 
 
@@ -39,19 +38,7 @@ Wow, that was fast, we see two log entries with that match and are coming from t
 
 Did you notice how the Map has in the items [0] and [1] the title and UUIDs are swapped?
 
-- This is also noticeable in the sourcecode, lines 102 and 103 are being swapped.
-
-<!-- 
-TODO: Things to add/fix
-
-- IAM policies image
-- IAM policies text
-- Integrate with Version Control / https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability/offering-capabilities/additional-settings#integrate-with-your-version-control
-    Patch Kubernetes Yaml UseCase
-- IDE Integration
-    (Change to Sprint/DEV)
-- Push images to own repository
--->
+- This is also noticeable in the sourcecode, lines 102 and 103 are being swapped. 
 
 <div class="grid cards" markdown>
 - [Click here to continue :octicons-arrow-right-24:](cleanup.md)

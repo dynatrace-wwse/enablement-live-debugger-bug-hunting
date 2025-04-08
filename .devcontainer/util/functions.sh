@@ -342,15 +342,37 @@ dynatraceEvalReadSaveCredentials() {
 }
 
 deployCloudNative() {
-
+  printInfoSection "Deploying Dynatrace in CloudNativeFullStack mode for $DT_TENANT"
+  if [ -n "${DT_TENANT}" ]; then
     # Check if the Webhook has been created and is ready
     kubectl -n dynatrace wait pod --for=condition=ready --selector=app.kubernetes.io/name=dynatrace-operator,app.kubernetes.io/component=webhook --timeout=300s
 
     kubectl -n dynatrace apply -f $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-cloudnative.yaml
+
+    printInfo "Log capturing will be handled by the Host agent."
+
+    waitForAllPods dynatrace
+  else
+    printInfo "Not deploying the Dynatrace Operator, no credentials found"
+  fi
+}
+
+deployApplicationMonitoring() { 
+  printInfoSection "Deploying Dynatrace in ApplicationMonitoring mode for $DT_TENANT"
+  if [ -n "${DT_TENANT}" ]; then
+    # Check if the Webhook has been created and is ready
+    kubectl -n dynatrace wait pod --for=condition=ready --selector=app.kubernetes.io/name=dynatrace-operator,app.kubernetes.io/component=webhook --timeout=300s
+
+    kubectl -n dynatrace apply -f $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-applicationmonitoring.yaml
+    #TODO: When deploying in AppOnly we need to capture the logs, either with log module or FluentBit
+    waitForAllPods dynatrace
+  else
+    printInfo "Not deploying the Dynatrace Operator, no credentials found"
+  fi
 }
 
 undeployDynakubes() {
-    echo "Undeploying Dynakubes, OneAgent installation from Workernode if installed"
+    printInfoSection "Undeploying Dynakubes, OneAgent installation from Workernode if installed"
 
     kubectl -n dynatrace delete dynakube --all
     #TODO: fix this
@@ -359,7 +381,6 @@ undeployDynakubes() {
 }
 
 uninstallDynatrace() {
-
     echo "Uninstalling Dynatrace"
     undeployDynakubes
 
@@ -368,25 +389,21 @@ uninstallDynatrace() {
 
     kubectl delete namespace dynatrace
 }
+
 # shellcheck disable=SC2120
 dynatraceDeployOperator() {
 
+  printInfoSection "Deploying Dynatrace Operator via Helm."
   # posssibility to load functions.sh and call dynatraceDeployOperator A B C to save credentials and override
   # or just run in normal deployment
   saveReadCredentials $@
   # new lines, needed for workflow-k8s-playground, cluster in dt needs to have the name k8s-playground-{requestuser} to be able to spin up multiple instances per tenant
 
   if [ -n "${DT_TENANT}" ]; then
-    printInfoSection "Deploying Dynatrace Operator"
     # Deploy Operator
 
     deployOperatorViaHelm
     waitForAllPods dynatrace
-
-    printInfoSection "Deploying Dynakube with CloudNative FullStack Monitoring for $DT_TENANT"
-
-    deployCloudNative
-    waitForAllPods
 
     #TODO: Fix this 
     #printInfoSection "Instrumenting NGINX Ingress"
@@ -396,6 +413,9 @@ dynatraceDeployOperator() {
     printInfo "Not deploying the Dynatrace Operator, no credentials found"
   fi
 }
+
+
+
 
 generateDynakube(){
     # Generate DynaKubeSkel with API URL
@@ -412,6 +432,9 @@ generateDynakube(){
 
     # Create Dynakube for CloudNative 
     sed -e 's~MONITORINGMODE:~cloudNativeFullStack:~' $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-skel.yaml > $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-cloudnative.yaml
+    
+    # Create Dynakube for ApplicationMonitoring
+    sed -e 's~MONITORINGMODE:~applicationMonitoring: {}:~' $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-skel.yaml > $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-applicationmonitoring.yaml
 
 }
 

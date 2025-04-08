@@ -79,7 +79,8 @@ spec:
       env:
         - name: ONEAGENT_ENABLE_VOLUME_STORAGE
           value: "true"
-
+      # applicationMonitoring: {}
+      # 
       # Optional: Sets a node selector to control on which nodes the OneAgent will be deployed.
       # For more information on node selectors, see https://kubernetes.io/docs/tasks/configure-pod-container/assign-pods-nodes/
       #
@@ -194,7 +195,7 @@ spec:
     capabilities:
       - routing
       - kubernetes-monitoring
-      - dynatrace-api
+    #  - dynatrace-api
 
     # Optional: Sets how many ActiveGate pods are spawned by the StatefulSet
     # Defaults to "1"
@@ -225,13 +226,13 @@ spec:
     # Consumption of the ActiveGate heavily depends on the workload to monitor
     # The values should be adjusted according to the workload
     #
-    #resources:
-    #  requests:
-    #    cpu: 100m
-    #    memory: 512Mi
-    #  limits:
-    #    cpu: 1000m
-    #    memory: 1Gi
+    resources:
+      requests:
+        cpu: 200m
+        memory: 512Mi
+      limits:
+        cpu: 1000m
+        memory: 1Gi
 
     # Optional: Sets a node selector to control on which nodes the ActiveGate will be deployed.
     # For more information on node selectors, see https://kubernetes.io/docs/tasks/configure-pod-container/assign-pods-nodes/

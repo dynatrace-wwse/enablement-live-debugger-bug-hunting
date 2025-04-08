@@ -21,7 +21,7 @@ dynatraceEvalReadSaveCredentials
 
 dynatraceDeployOperator
 
-waitForAllPods dynatrace
+deployCloudNative
 
 deployTodoApp
 

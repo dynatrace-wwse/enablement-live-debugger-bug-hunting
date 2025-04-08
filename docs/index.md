@@ -15,8 +15,12 @@ The Live Debugger is a solution within the package of [Observability for Develop
 - Robust security and data privacy controls
 - Increase developer satisfaction & happiness (remove frustrations)
 
+<p align="center">
+  <img src="../img/bugbusters.jpeg" alt="Bugbusters" width="400">
+</p>
 
 <!-- This is a comment 
+    ![Bugbusters](../img/bugbusters.jpeg)
 ```shell
 --8<-- "snippets/e2e-sample.sh:shebang"
 --8<-- "snippets/e2e-sample.sh:SayFirstHello"

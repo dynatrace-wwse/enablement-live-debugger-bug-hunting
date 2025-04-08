@@ -10,7 +10,12 @@ A Cloud-Native debugging and live data collection solution, Live Debugger is a s
 - Robust security and data privacy controls
 - Increase developer satisfaction & happiness (remove frustrations)
 
-In this tutorial we will embark a Bug Hunting journey learning the different features of the Live Debbuging Capabilities of the Dynatrace Plattform.
+<p align="center">
+    <img src="docs/img/bugbusters.jpeg" alt="BugBusters" width="400"/>
+</p>
+
+Do you want to become a Bugbuster? Is not only easy with Dynatrace, but also a lot of fun! 
+In this tutorial we will embark a Bug Hunting journey learning the different features of the Live Debbuging Capabilities of the Dynatrace Plattform. We will live debug an application in Kubernetes setting non-breaking breakpoints. Join us in the bug hunting quest and become a Bugbuster! 
 
 Ready to start the journey? 
 ## [🧳🐞 Start the hands-on training here!](https://dynatrace-wwse.github.io/enablement-live-debugger-bug-hunting)

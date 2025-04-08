@@ -552,11 +552,6 @@ deleteCodespace(){
   gh codespace delete --codespace "$CODESPACE_NAME" --force
 }
 
-showMessage(){
-  printInfo "Lab guide exposed in $LAB_GUIDE_URL"
-  printInfo "Astroshop exposed in $ASTROSHOP_URL"
-}
-
 showOpenPorts(){
   sudo netstat -tulnp
   # another alternative is 

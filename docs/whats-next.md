@@ -1,4 +1,4 @@
---8<-- "snippets/bizevent-whats-next.js"
+--8<-- "snippets/whats-next.js"
 
 
 !!! tip "More to come"

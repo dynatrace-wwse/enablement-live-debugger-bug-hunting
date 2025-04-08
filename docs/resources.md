@@ -1,10 +1,9 @@
---8<-- "snippets/bizevent-resources.js"
+--8<-- "snippets/resources.js"
 
 
 ## Get your Dynatrace environment
 
 - [Create a Free Trial in Dynatrace](https://www.dynatrace.com/signup/){target="_blank"}
-
 
 ## Documentation
 
@@ -29,3 +28,7 @@
 - [VSCode Plugin](https://marketplace.visualstudio.com/items?itemName=dynatrace.dynatrace-debugging-extension){target="_blank"}
 
 - [Jetbrains Plugin](https://plugins.jetbrains.com/plugin/25186-observability-for-developers){target="_blank"}
+
+<div class="grid cards" markdown>
+- [What's Next? :octicons-arrow-right-24:](whats-next.md)
+</div>

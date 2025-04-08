@@ -1,5 +1,4 @@
-
-# The Bug "Special characters" - the Quest
+--8<-- "snippets/2-bug-hunt-via-tracing.js"
 
 ## Open the Distributed Tracing App
 !!! Tipp "Protip: Open the Tracing App anywhere in Dynatrace"

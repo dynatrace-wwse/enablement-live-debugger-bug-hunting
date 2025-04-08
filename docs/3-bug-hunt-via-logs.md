@@ -1,5 +1,4 @@
-
-# The Bug "Duplicate task" - the Quest
+--8<-- "snippets/3-bug-hunt-via-logs.js"
 
 ## Hunting road - Logs App
 Now let's try a different approach, we have seen how easy it is to find the traces via the Distributed Tracing App. Let's find the trace and it's method and codespace via the Logs App. The Dynatrace Plattform is context aware, it knows which traces write which logs, from which pod they are coming from and even which user generated the transaction. 

@@ -1,6 +1,4 @@
-
-# The Bug "Clear completed"
-
+--8<-- "snippets/1-bug-clear-completed.js"
 
 !!! note "The Bug 'Clear completed'"
     Level: Beginner

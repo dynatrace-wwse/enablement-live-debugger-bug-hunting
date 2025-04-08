@@ -1,4 +1,3 @@
-# Getting Started
 --8<-- "snippets/getting-started.js"
 --8<-- "snippets/grail-requirements.md"
 

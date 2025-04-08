@@ -5,12 +5,12 @@ nav:
   - '1. About': index.md
   - '2. Getting started': getting-started.md
   - '3. Codespaces': codespaces.md
-  - '4. 1. Bug - clear completed': 1-bug-clear-completed.md
-  - '5. 1. Bug - hunt via kubernetes': 1-bug-hunt-via-k8s.md
-  - '6. 2. Bug - special characters': 2-bug-special-characters.md
-  - '7. 2. Bug - hunt via traces': 2-bug-hunt-via-tracing.md
-  - '8. 3. Bug - duplicate task': 3-bug-duplicate-task.md
-  - '9. 3. Bug - hunt via logs': 3-bug-hunt-via-logs.md
+  - '4. 1st Bug - clear completed': 1-bug-clear-completed.md
+  - '5. 1st Bug - hunt via kubernetes': 1-bug-hunt-via-k8s.md
+  - '6. 2nd Bug - special characters': 2-bug-special-characters.md
+  - '7. 2nd Bug - hunt via traces': 2-bug-hunt-via-tracing.md
+  - '8. 3rd Bug - duplicate task': 3-bug-duplicate-task.md
+  - '9. 3rd Bug - hunt via logs': 3-bug-hunt-via-logs.md
   - '10. Cleanup': cleanup.md
   - '11. Resources': resources.md
   - "12. What's next?": whats-next.md

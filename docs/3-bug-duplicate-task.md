@@ -1,5 +1,4 @@
-
-# The Bug "Duplicate task"
+--8<-- "snippets/3-bug-duplicate-task.js"
 
 !!! note "The Bug 'Duplicate task'"
     Level: Intermediate

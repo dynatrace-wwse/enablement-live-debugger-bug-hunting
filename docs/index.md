@@ -3,6 +3,7 @@
 
 ## Live Debugger Tutorial - Bug Hunting the TODO Apps
 
+
 ## What's this tutorial all about
 In this tutorial we will embark a Bug Hunting journey learning the different features of the Live Debbuging Capabilities of the Dynatrace Plattform.
 

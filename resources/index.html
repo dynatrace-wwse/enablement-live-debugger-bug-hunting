@@ -79,6 +79,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#get-your-dynatrace-environment" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -304,11 +309,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../bug-clear-completed/" class="md-nav__link">
+      <a href="../1-bug-clear-completed/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    3. Bug - Clear completed
+    3. 1. Bug - Clear completed
   </span>
   
 
@@ -324,11 +329,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../bug-special-characters/" class="md-nav__link">
+      <a href="../1-bug-hunt-via-k8s/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    4. Bug - Special characters
+    4. 1. Bug - hunt via Kubernetes
   </span>
   
 
@@ -344,11 +349,71 @@
   
   
     <li class="md-nav__item">
-      <a href="../bug-duplicate-task/" class="md-nav__link">
+      <a href="../2-bug-special-characters/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    5. Bug - Duplicate task
+    5. 2. Bug - Special characters
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-bug-hunt-via-tracing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6. 2. Bug - hunt via Traces
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-bug-duplicate-task/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    7. 3. Bug - Duplicate task
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-bug-hunt-via-logs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    8. 3. Bug - hunt via Logs
   </span>
   
 
@@ -391,6 +456,17 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    9. Resources
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -400,6 +476,59 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#get-your-dynatrace-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get your Dynatrace environment
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documentation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blog-posts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Blog posts
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-debugger-plugins-dont-leave-your-ide-to-hunt-production-bugs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Live Debugger Plugins, don't leave your IDE to Hunt production bugs
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -443,6 +572,50 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#get-your-dynatrace-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get your Dynatrace environment
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documentation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blog-posts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Blog posts
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-debugger-plugins-dont-leave-your-ide-to-hunt-production-bugs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Live Debugger Plugins, don't leave your IDE to Hunt production bugs
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -467,7 +640,38 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<p>TODO</p>
+<h2 id="get-your-dynatrace-environment">Get your Dynatrace environment<a class="headerlink" href="#get-your-dynatrace-environment" title="Permanent link">#</a></h2>
+<ul>
+<li><a href="https://www.dynatrace.com/signup/" target="_blank">Create a Free Trial in Dynatrace</a></li>
+</ul>
+<h2 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permanent link">#</a></h2>
+<ul>
+<li><a href="https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability" target="_blank">Dynatrace documentation - Developer Observability</a></li>
+</ul>
+<h2 id="blog-posts">Blog posts<a class="headerlink" href="#blog-posts" title="Permanent link">#</a></h2>
+<ul>
+<li>
+<p><a href="https://www.dynatrace.com/news/blog/5-powerful-use-cases-beyond-debugging-for-dynatrace-live-debugger/" target="_blank">5 Powerful Usecases beyond debugging for Dynatrace Live Debugger</a></p>
+</li>
+<li>
+<p><a href="https://www.dynatrace.com/news/blog/dare-to-debug-production-with-dynatrace-live-debugger/" target="_blank">Dare to debug production with Dynatrace live debugger</a></p>
+</li>
+<li>
+<p><a href="https://www.dynatrace.com/news/blog/debug-complex-performance-issues-in-production/" target="_blank">Debug complex performance issues in production</a></p>
+</li>
+<li>
+<p><a href="https://www.dynatrace.com/news/blog/dynatrace-observability-for-developers-saves-time-with-real-time-data/" target="_blank">Dynatrace Observability for Developers saves time with real-time data</a></p>
+</li>
+</ul>
+<h2 id="live-debugger-plugins-dont-leave-your-ide-to-hunt-production-bugs">Live Debugger Plugins, don't leave your IDE to Hunt production bugs<a class="headerlink" href="#live-debugger-plugins-dont-leave-your-ide-to-hunt-production-bugs" title="Permanent link">#</a></h2>
+<ul>
+<li>
+<p><a href="https://marketplace.visualstudio.com/items?itemName=dynatrace.dynatrace-debugging-extension" target="_blank">VSCode Plugin</a></p>
+</li>
+<li>
+<p><a href="https://plugins.jetbrains.com/plugin/25186-observability-for-developers" target="_blank">Jetbrains Plugin</a></p>
+</li>
+</ul>
 
 
 

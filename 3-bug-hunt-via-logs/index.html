@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../bug-special-characters/">
+        <link rel="prev" href="../3-bug-duplicate-task/">
       
       
         <link rel="next" href="../cleanup/">
@@ -20,7 +20,7 @@
     
     
       
-        <title>5. Bug - Duplicate task - Dynatrace Enablement Lab: Live Debugger Tutorial</title>
+        <title>8. 3. Bug - hunt via Logs - Dynatrace Enablement Lab: Live Debugger Tutorial</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#the-bug-duplicate-task" class="md-skip">
+        <a href="#the-bug-duplicate-task-the-quest" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              5. Bug - Duplicate task
+              8. 3. Bug - hunt via Logs
             
           </span>
         </div>
@@ -309,11 +309,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../bug-clear-completed/" class="md-nav__link">
+      <a href="../1-bug-clear-completed/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    3. Bug - Clear completed
+    3. 1. Bug - Clear completed
   </span>
   
 
@@ -329,11 +329,71 @@
   
   
     <li class="md-nav__item">
-      <a href="../bug-special-characters/" class="md-nav__link">
+      <a href="../1-bug-hunt-via-k8s/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    4. Bug - Special characters
+    4. 1. Bug - hunt via Kubernetes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-bug-special-characters/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. 2. Bug - Special characters
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-bug-hunt-via-tracing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6. 2. Bug - hunt via Traces
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-bug-duplicate-task/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    7. 3. Bug - Duplicate task
   </span>
   
 
@@ -362,7 +422,7 @@
           
   
   <span class="md-ellipsis">
-    5. Bug - Duplicate task
+    8. 3. Bug - hunt via Logs
   </span>
   
 
@@ -373,7 +433,7 @@
         
   
   <span class="md-ellipsis">
-    5. Bug - Duplicate task
+    8. 3. Bug - hunt via Logs
   </span>
   
 
@@ -393,15 +453,6 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#open-the-todo-app-and-add-a-task" class="md-nav__link">
-    <span class="md-ellipsis">
-      Open the TODO App and add a Task
-    </span>
-  </a>
-  
-</li>
       
         <li class="md-nav__item">
   <a href="#hunting-road-logs-app" class="md-nav__link">
@@ -525,15 +576,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#open-the-todo-app-and-add-a-task" class="md-nav__link">
-    <span class="md-ellipsis">
-      Open the TODO App and add a Task
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#hunting-road-logs-app" class="md-nav__link">
     <span class="md-ellipsis">
       Hunting road - Logs App
@@ -578,21 +620,7 @@
   
 
 
-<h1 id="the-bug-duplicate-task">The Bug "Duplicate Task"<a class="headerlink" href="#the-bug-duplicate-task" title="Permanent link">#</a></h1>
-<div class="admonition note">
-<p class="admonition-title">The Bug 'Duplicate Task'</p>
-<p>Level: Intermediate</p>
-</div>
-<h2 id="open-the-todo-app-and-add-a-task">Open the TODO App and add a Task<a class="headerlink" href="#open-the-todo-app-and-add-a-task" title="Permanent link">#</a></h2>
-<p>The TODO app has a duplicate function, let's give it a try.</p>
-<ul>
-<li>Add a Task that we want to duplicate.</li>
-<li>Hover over the added Task and on the right you'll notice a <strong>&amp;</strong> symbol. This should duplicate the task.</li>
-</ul>
-<p><img alt="Duplicate" src="../img/todo_app_duplicate.png" /></p>
-<p>What happened? 
-We notice a new task was created, but instead of a duplicate we see a weird string, looks like an ID. </p>
-<p>Let's continue our Bug Hunting Quest!</p>
+<h1 id="the-bug-duplicate-task-the-quest">The Bug "Duplicate Task" - the Quest<a class="headerlink" href="#the-bug-duplicate-task-the-quest" title="Permanent link">#</a></h1>
 <h2 id="hunting-road-logs-app">Hunting road - Logs App<a class="headerlink" href="#hunting-road-logs-app" title="Permanent link">#</a></h2>
 <p>Now let's try a different approach, we have seen how easy it is to find the traces via the Distributed Tracing App. Let's find the trace and it's method and codespace via the Logs App. The Dynatrace Plattform is context aware, it knows which traces write which logs, from which pod they are coming from and even which user generated the transaction. </p>
 <ul>
@@ -636,39 +664,6 @@ Wow, that was fast, we see two log entries with that match and are coming from t
 <ul>
 <li>This is also noticeable in the sourcecode, lines 102 and 103 are being swapped.</li>
 </ul>
-<!-- 
-__Level: Intermediate__
-- __The bug: Duplicate Todo adds an invalid todo instead of an exact copy of an existing one.__
-    - **Reproduce:** Add a task and when hovering on the text, on the right side you have the **&** symbol. Click on it to duplicate the task.
-    - **Debug:**
-        1. In the Rookout app, open the file `src/main/java/com/rookout/tutorial/TodoController.java`
-        2. Using the **Rules** pane on the right, select the *Rule Type* "Log"
-        3. Add the rule in the duplicateTodo function on the line with `todos.add(newTodoRecord);`
-        4. Before triggering the rule, let's edit it so it returns what we want
-        5. In the **Rules** pane on the right, click the *Edit Rule* (pen) icon next to the rule you just added. It will open up the Rule configuration as a JSON file
-        6. On line 37 in the `paths` object let's add a property `"store.rookout.locals.dup": "frame.newTodoRecord"`
-        7. On line 51 we have `processing.operations` object, let's add a new operation in the array :
-        __name: send_rookout - means we are sending the information to the rookout web application__
-        __path: store.rookout.locals.dup - we tell the rule what information to send__
-
-        <div class="highlight"><pre><span></span><code>{
-    &quot;name&quot;: &quot;send_rookout&quot;,
-    &quot;path&quot;: &quot;store.rookout.locals.dup&quot;
-}
-</code></pre></div>
-        8. Click the save button on the upper pane.
-        9. Add and duplicate a todo in order to see the output, now we can see what is being given to the object and match if we have an error in the function (parameters missing or in bad order).
-        ![Invalid Duplicate Todo Record](/img/screenshots/java_bughunt_5.png)
-
-
-
-## Next steps
-
-Head over to [our reference](reference-home.md) to understand all the Rookout components.   
-See [our installation guides](installation-overview.md) for platform-specific installation examples.
-
--->
-
 <div class="grid cards">
 <ul>
 <li><a href="../cleanup/">Click Here to Continue <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>

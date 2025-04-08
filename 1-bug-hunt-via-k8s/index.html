@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../getting-started/">
+        <link rel="prev" href="../1-bug-clear-completed/">
       
       
-        <link rel="next" href="../bug-special-characters/">
+        <link rel="next" href="../2-bug-special-characters/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>3. Bug - Clear completed - Dynatrace Enablement Lab: Live Debugger Tutorial</title>
+        <title>4. 1. Bug - hunt via Kubernetes - Dynatrace Enablement Lab: Live Debugger Tutorial</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#the-bug-clear-completed" class="md-skip">
+        <a href="#the-bug-clear-completed-the-quest" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              3. Bug - Clear completed
+              4. 1. Bug - hunt via Kubernetes
             
           </span>
         </div>
@@ -306,6 +306,26 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../1-bug-clear-completed/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. 1. Bug - Clear completed
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -322,7 +342,7 @@
           
   
   <span class="md-ellipsis">
-    3. Bug - Clear completed
+    4. 1. Bug - hunt via Kubernetes
   </span>
   
 
@@ -333,7 +353,7 @@
         
   
   <span class="md-ellipsis">
-    3. Bug - Clear completed
+    4. 1. Bug - hunt via Kubernetes
   </span>
   
 
@@ -353,15 +373,6 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#open-the-todo-app-and-add-a-couple-of-tasks" class="md-nav__link">
-    <span class="md-ellipsis">
-      Open the TODO App and add a couple of tasks
-    </span>
-  </a>
-  
-</li>
       
         <li class="md-nav__item">
   <a href="#hunting-via-the-kubernetes-road" class="md-nav__link">
@@ -414,11 +425,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../bug-special-characters/" class="md-nav__link">
+      <a href="../2-bug-special-characters/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    4. Bug - Special characters
+    5. 2. Bug - Special characters
   </span>
   
 
@@ -434,11 +445,51 @@
   
   
     <li class="md-nav__item">
-      <a href="../bug-duplicate-task/" class="md-nav__link">
+      <a href="../2-bug-hunt-via-tracing/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    5. Bug - Duplicate task
+    6. 2. Bug - hunt via Traces
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-bug-duplicate-task/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    7. 3. Bug - Duplicate task
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-bug-hunt-via-logs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    8. 3. Bug - hunt via Logs
   </span>
   
 
@@ -534,15 +585,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#open-the-todo-app-and-add-a-couple-of-tasks" class="md-nav__link">
-    <span class="md-ellipsis">
-      Open the TODO App and add a couple of tasks
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#hunting-via-the-kubernetes-road" class="md-nav__link">
     <span class="md-ellipsis">
       Hunting via the Kubernetes Road
@@ -596,27 +638,7 @@
   
 
 
-<h1 id="the-bug-clear-completed">The Bug "Clear Completed"<a class="headerlink" href="#the-bug-clear-completed" title="Permanent link">#</a></h1>
-<div class="admonition note">
-<p class="admonition-title">The Bug 'Clear Completed'</p>
-<p>Level: Beginner</p>
-</div>
-<h2 id="open-the-todo-app-and-add-a-couple-of-tasks">Open the TODO App and add a couple of tasks<a class="headerlink" href="#open-the-todo-app-and-add-a-couple-of-tasks" title="Permanent link">#</a></h2>
-<p>In VSCode open a new terminal and in the Welcome Message you should see a link to the Todo App UI. Click on it. Now add a couple of tasks.
-It should look something like this:
-<img alt="TODO App" src="../img/todo_app.png" /></p>
-<ul>
-<li>Add a couple of tasks. </li>
-<li>Complete some of them (or all, depending how productive you are ;) . </li>
-<li>Now click on: <code>Clear Completed</code> </li>
-</ul>
-<p><img alt="TODO App" src="../img/todo_completed.png" /></p>
-<ul>
-<li>Are the tasks cleared?</li>
-</ul>
-<p>Apparently the button does not work. When clicked - completed todos are not cleared. </p>
-<p>We embark our Bug hunting journey! </p>
-<p>There are multiple ways how dive deep into the issue because Dynatrace is monitoring your Kubernetes cluster, all workloads in it, all it's traces with code level insights and all real users accessing the exposed application.</p>
+<h1 id="the-bug-clear-completed-the-quest">The Bug "Clear Completed" - the Quest<a class="headerlink" href="#the-bug-clear-completed-the-quest" title="Permanent link">#</a></h1>
 <h2 id="hunting-via-the-kubernetes-road">Hunting via the Kubernetes Road<a class="headerlink" href="#hunting-via-the-kubernetes-road" title="Permanent link">#</a></h2>
 <ul>
 <li>Open the Kubernetes App &gt; You'll see a cluster with the name "codespace-xxxx". That's your Kind cluster being FullStack monitored.</li>
@@ -691,7 +713,7 @@ Set up a non-breaking-breakpoint on the return code.</p>
 </div>
 <div class="grid cards">
 <ul>
-<li><a href="../bug-special-characters/">Click Here to Continue the quest with the next Bug<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>
+<li><a href="../2-bug-special-characters/">Click Here to Continue the quest with the next Bug<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>
 </ul>
 </div>
 

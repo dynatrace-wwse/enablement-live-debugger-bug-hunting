@@ -721,7 +721,7 @@ document.addEventListener('DOMContentLoaded', function() {
 Set up a non-breaking-breakpoint on the return code.</p>
 <p>Go back to the TODO app and clear again on "Clear completed"</p>
 <p>Return to the Live Debugger and see the Snaphot captured, open it and see all the variables that were captured with their values.</p>
-<p>Do you see the bug? can you understand what happened and why the completed todos are not deleted? We can see two variables, the <code>todos</code> with a lenght of 3 and <code>todoStore</code> with a lenght of 0.</p>
+<p>Do you see the bug? can you understand what happened and why the completed todos are not deleted? We can see two variables, the <code>todos</code> with a length of 3 and <code>todoStore</code> with a length of 0.</p>
 <p>In line 84 <code>todoStore.remove(todoRecord)</code> the variable todoStore is a newly instantiated variable. This is a mistake, it should be replaced by the variable <code>todos</code> so the function can succesfully remove all cleared tasks!</p>
 <p>Yay! we found the first bug!!!</p>
 <p><img alt="Clear Completed BP" src="../img/clearcompleted_breakpoint.png" /></p>

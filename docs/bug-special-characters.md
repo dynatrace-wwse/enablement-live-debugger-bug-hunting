@@ -66,5 +66,5 @@ Do you see something weird? The deveoloper left a String function on line 28 wit
 
 
 <div class="grid cards" markdown>
-- [Click Here to Continue the quest with the next Bug:octicons-arrow-right-24:](bug-special-characters.md)
+- [Click Here to Continue the quest with the next Bug:octicons-arrow-right-24:](bug-duplicate-task.md)
 </div>

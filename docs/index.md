@@ -16,10 +16,14 @@ The Live Debugger is a solution within the package of [Observability for Develop
 - Increase developer satisfaction & happiness (remove frustrations)
 
 <p align="center">
-  <img src="../img/bugbusters.jpeg" alt="Bugbusters" width="400">
+  <img src="/img/bugbusters.jpeg" alt="Bugbusters" width="400">
 </p>
 
-![Bugbusters](../img/bugbusters.jpeg)
+one with /
+![Bugbusters](/img/bugbusters.jpeg)
+
+second no / 
+![Bugbusters](img/bugbusters.jpeg)
 
 <!-- This is a comment 
     ![Bugbusters](../img/bugbusters.jpeg)

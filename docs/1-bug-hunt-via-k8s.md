@@ -95,7 +95,6 @@ In line 84 ``todoStore.remove(todoRecord)`` the variable todoStore is a newly in
 Yay! we found the first bug!!!
 
 
-
 ![Clear Completed BP](../img/clearcompleted_breakpoint.png)
 
 

@@ -17,7 +17,7 @@ You will need a Dynatrace SaaS tenant with a DPS pricing model and the 'Code Mon
 We take security very seriously. So let's create a policy to set user-level Live Debugging breakpoints. 
 
 We need two policies for your user to be able to set breakpoints and to read snapshots. 
-For this we go to Account Management > Identity & Access management > + Policy
+For this we go to **Account Management > Identity & Access management > + Policy **
 
 Set breakpoints
 ```bash
@@ -35,7 +35,9 @@ The policy should look like this:
 <img src="../img/devops_policy.png" alt="DevOps Policy" height="50%"/>
 
 
-Then we bind it to a user group. In this case since we are admins, let's bind the policy to the Admin group. 
+Then we bind it to a user group. In this case since we are admins, let's bind the policy to the Admin group. Notice that the created policy is for an Admin and also for a Developer. Since we allow to `read` and `set` breakpoints but also to `manage` breakpoints [which is explained here](https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability/offering-capabilities/additional-settings#manage-breakpoints).
+
+
 
 Go to Group Management > Select Admin Group > + Permission  (and bind the policy)
 

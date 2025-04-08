@@ -88,56 +88,6 @@ We will get this two very easy from the Kubernetes App.
     Now we are ready to launch the Codespace! You'll need your tenant and the two tokens previuosly gathered from above. When you enter the tenant please enter it without the 'apps' part, for production tenants eg. abc123 for live -> https://abc123.live.dynatrace.com and for sprint -> https://abc123.sprint.dynatracelabs.com no apps in the URL.
 
 
-
-
-## 3. Launch Codespace
-
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/dynatrace-wwse/enablement-live-debugger-bug-hunting){target="_blank"}
-
-
-## 3.1 Machine Type & Variables
-
-As a machine type select 4-core and enter your credentials within the following variables:
-
-- DT_TENANT
-- DT_OPERATOR_TOKEN
-- DT_INGEST_TOKEN
-
-
-## 4. While the Codespace is set-up for you, learn powerful usecases for Live Debugging
-We know your time is very valuable. This codespace takes around 6 minutes to be fully operational. A local Kubernetes ([kind](https://kind.sigs.k8s.io/){target="_blank"}) cluster monitored by Dynatrace will be configured and in it a sample application, the TODO app will be deployed. To make your experience best, we are also installing and configuring tools like:
-
-**k9s kubectl helm node jq python3 gh**
-
-While the Codespace is being set up for you, [here is a 6 minute read about powerful use cases beyond live debugging](https://www.dynatrace.com/news/blog/5-powerful-use-cases-beyond-debugging-for-dynatrace-live-debugger/){target="_blank"}
-in our Dynatrace blog.
-
-
-
-![Codespaces installing](../img/codespaces_installing.png)
-
-## 5. Explore What Has Been Deployed
-
-Your Codespace has now deployed the following resources:
-
-- A local Kubernetes ([kind](https://kind.sigs.k8s.io/){target="_blank"}) cluster monitored by Dynatrace, with some pre-deployed apps
-  that will be used later in the demo.
-
-- After a couple of minutes, you'll see this screen in your codespaces terminal. It contains the links to the local expose labguide and the UI of the TODO application which we will Live Debug.
-![Codespaces finish](../img/codespaces_finish.png)
-
-
-
-
-!!! Warning "TODO"
-    TODO: Create some context on Bugs, Some Breaking Points stuff, elevate the talk for Developers.
-
-
-## 6. Troubleshooting
-!!! Warning "TODO"
-    TODO: Troubleshooting steps on the codespace, also add tips and tricks, show that the functions are loaded in the shell.
-
-
 <div class="grid cards" markdown>
-- [Let's start our Bug hunting quest:octicons-arrow-right-24:](1-bug-clear-completed.md)
+- [Let's launch Codespaces:octicons-arrow-right-24:](launch-codespaces.md)
 </div>

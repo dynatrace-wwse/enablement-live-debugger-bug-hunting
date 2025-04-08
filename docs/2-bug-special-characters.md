@@ -1,7 +1,7 @@
 
-# The Bug "Special Characters"
+# The Bug "Special characters"
 
-!!! note "The Bug 'Clear Completed'"
+!!! note "The Bug 'Special characters'"
     Level: Beginner
 
 ## Open the TODO App and add a Task with an exclamation mark!
@@ -21,5 +21,5 @@ Let's continue with the bug hunting again! Now, let's assume we are new develope
 
 
 <div class="grid cards" markdown>
-- [Click Here to Continue the quest:octicons-arrow-right-24:](2-bug-hunt-via-tracing.md)
+- [Click here to Continue the quest:octicons-arrow-right-24:](2-bug-hunt-via-tracing.md)
 </div>

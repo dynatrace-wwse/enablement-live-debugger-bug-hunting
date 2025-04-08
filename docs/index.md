@@ -19,30 +19,6 @@ The Live Debugger is a solution within the package of [Observability for Develop
   <img src="img/bugbusters.jpeg" alt="Bugbusters" width="400">
 </p>
 
-<!-- This is a comment 
-    ![Bugbusters](../img/bugbusters.jpeg)
-```shell
---8<-- "snippets/e2e-sample.sh:shebang" had some insights mostly on usage, as most of usable data in Grail is the metadata of the breakpoints and the snapshot rather the snapshot itself.
-
-
-
-
-
-
-
---8<-- "snippets/e2e-sample.sh:SayFirstHello"
-```
-
-## Say Second Hello (without Shebang)
-
-```shell
-
---8<-- "snippets/e2e-sample.sh:SaySecondHello"
-```
-
---8<-- "snippets/view-code.md" 
-TODO: This is the intro, add what we will do.
--->
 
 Are you ready to start the Bug hunting journey and ready to learn how to improve and empower the Developers Productivity? 
 

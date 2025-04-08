@@ -3,17 +3,17 @@ repo_name: "View Code on GitHub"
 repo_url: "https://github.com/dynatrace-wwse/enablement-live-debugger-bug-hunting"
 nav:
   - '1. About': index.md
-  - '2. Getting Started': getting-started.md
+  - '2. Getting started': getting-started.md
   - '3. Launch Codespaces': launch-codespaces.md
-  - '4. 1. Bug - Clear completed': 1-bug-clear-completed.md
-  - '5. 1. Bug - hunt via Kubernetes': 1-bug-hunt-via-k8s.md
-  - '6. 2. Bug - Special characters': 2-bug-special-characters.md
-  - '7. 2. Bug - hunt via Traces': 2-bug-hunt-via-tracing.md
-  - '8. 3. Bug - Duplicate task': 3-bug-duplicate-task.md
-  - '9. 3. Bug - hunt via Logs': 3-bug-hunt-via-logs.md
+  - '4. 1. Bug - clear completed': 1-bug-clear-completed.md
+  - '5. 1. Bug - hunt via kubernetes': 1-bug-hunt-via-k8s.md
+  - '6. 2. Bug - special characters': 2-bug-special-characters.md
+  - '7. 2. Bug - hunt via traces': 2-bug-hunt-via-tracing.md
+  - '8. 3. Bug - duplicate task': 3-bug-duplicate-task.md
+  - '9. 3. Bug - hunt via logs': 3-bug-hunt-via-logs.md
   - '10. Cleanup': cleanup.md
   - '11. Resources': resources.md
-  - "12. What's Next?": whats-next.md
+  - "12. What's next?": whats-next.md
 theme:
   name: material
   custom_dir: docs/overrides

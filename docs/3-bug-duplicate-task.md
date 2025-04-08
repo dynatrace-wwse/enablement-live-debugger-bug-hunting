@@ -1,7 +1,7 @@
 
-# The Bug "Duplicate Task"
+# The Bug "Duplicate task"
 
-!!! note "The Bug 'Duplicate Task'"
+!!! note "The Bug 'Duplicate task'"
     Level: Intermediate
 
 ## Open the TODO App and add a Task
@@ -19,5 +19,5 @@ We notice a new task was created, but instead of a duplicate we see a weird stri
 Let's continue our Bug Hunting Quest!
 
 <div class="grid cards" markdown>
-- [Click Here to Continue the quest:octicons-arrow-right-24:](3-bug-hunt-via-logs.md)
+- [Click here to continue the quest:octicons-arrow-right-24:](3-bug-hunt-via-logs.md)
 </div>

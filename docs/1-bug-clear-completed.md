@@ -1,8 +1,8 @@
 
-# The Bug "Clear Completed"
+# The Bug "Clear completed"
 
 
-!!! note "The Bug 'Clear Completed'"
+!!! note "The Bug 'Clear completed'"
     Level: Beginner
 
 ## Open the TODO App and add a couple of tasks
@@ -14,7 +14,7 @@ It should look something like this:
 
 - Add a couple of tasks. 
 - Complete some of them (or all, depending how productive you are ;) . 
-- Now click on: ``Clear Completed`` 
+- Now click on: ``Clear completed`` 
 
 ![TODO App](../img/todo_completed.png)
 
@@ -28,5 +28,5 @@ There are multiple ways how dive deep into the issue because Dynatrace is monito
 
 
 <div class="grid cards" markdown>
-- [Click Here to Continue the quest:octicons-arrow-right-24:](1-bug-hunt-via-k8s.md)
+- [Click Here to continue the quest:octicons-arrow-right-24:](1-bug-hunt-via-k8s.md)
 </div>

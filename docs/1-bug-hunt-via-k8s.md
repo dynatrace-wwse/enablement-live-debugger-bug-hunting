@@ -1,7 +1,7 @@
 
-# The Bug "Clear Completed" - the Quest
+# The Bug "Clear completed" - the Quest
 
-## Hunting via the Kubernetes Road
+## Hunting via the kubernetes road
 
 - Open the Kubernetes App > You'll see a cluster with the name "codespace-xxxx". That's your Kind cluster being FullStack monitored.
 
@@ -14,7 +14,7 @@
 ![Todo Workload](../img/todo_workload.png)
 
 
-- On the Overview in the right hand side, scroll down and open the Services App. (this are the traces grouped withing Dynatrace Services)
+- On the Overview in the right hand side, scroll down and open the Services app. (this are the traces grouped withing Dynatrace Services)
 
 ![Todo Services](../img/todo_services.png)
 
@@ -24,7 +24,7 @@
 
 - This will open all the traces that went through your application... wow!
 
-As you can see, there are traces with the name "clearCompletedTodos" that just took a couple ms and are not throwing any errors. The response code is 200, but since this is a bug it does not mean the application is working as expected.
+As you can see, there are traces with the name `clearCompletedTodos` that just took a couple ms and are not throwing any errors. The response code is 200, but since this is a bug it does not mean the application is working as expected.
 
 This specific span it was just 2.98ms. On the right hand side, you can see the Tracing details, look how much data was captured automatically 🤩.
 
@@ -105,5 +105,5 @@ Yay! we found the first bug!!!
 
 
 <div class="grid cards" markdown>
-- [Click Here to Continue the quest with the next Bug:octicons-arrow-right-24:](2-bug-special-characters.md)
+- [Click here to continue the quest with the next Bug:octicons-arrow-right-24:](2-bug-special-characters.md)
 </div>

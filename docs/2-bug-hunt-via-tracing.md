@@ -1,5 +1,5 @@
 
-# The Bug "Special Characters" - the Quest
+# The Bug "Special characters" - the Quest
 
 ## Open the Distributed Tracing App
 !!! Tipp "Protip: Open the Tracing App anywhere in Dynatrace"
@@ -21,7 +21,7 @@ If we take a look at the traces, we can see there is a trace named `addTodo`. By
 Now we know where in all the applications code we should be looking for the bug!
 
 
-## Open Live Debugger
+## Open the Live Debugger
 
 - Let's search for the `Code function = addTodo` under the `Code Namespace = com.dynatrace.todoapp.TodoController`, in the search by typping `TodoController` the class file appears, open it.
 - Now let's search for the AddTodo function, the declaration is in line 24.
@@ -47,5 +47,5 @@ Do you see something weird? The deveoloper left a String function on line 28 wit
 
 
 <div class="grid cards" markdown>
-- [Click Here to Continue the quest with the next Bug:octicons-arrow-right-24:](3-bug-duplicate-task.md)
+- [Click here to continue the quest with the next Bug:octicons-arrow-right-24:](3-bug-duplicate-task.md)
 </div>

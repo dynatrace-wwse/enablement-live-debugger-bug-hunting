@@ -1,6 +1,7 @@
-# Live Debugger Tutorial - Bug Hunting the TODO App
+--8<-- "snippets/index.js"
 --8<-- "snippets/disclaimer.md"
---8<-- "snippets/bizevent-homepage.js"
+
+## Live Debugger Tutorial - Bug Hunting the TODO Apps
 
 ## What's this tutorial all about
 In this tutorial we will embark a Bug Hunting journey learning the different features of the Live Debbuging Capabilities of the Dynatrace Plattform.

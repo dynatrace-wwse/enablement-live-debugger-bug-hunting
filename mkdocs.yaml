@@ -4,7 +4,7 @@ repo_url: "https://github.com/dynatrace-wwse/enablement-live-debugger-bug-huntin
 nav:
   - '1. About': index.md
   - '2. Getting started': getting-started.md
-  - '3. Launch Codespaces': launch-codespaces.md
+  - '3. Codespaces': codespaces.md
   - '4. 1. Bug - clear completed': 1-bug-clear-completed.md
   - '5. 1. Bug - hunt via kubernetes': 1-bug-hunt-via-k8s.md
   - '6. 2. Bug - special characters': 2-bug-special-characters.md

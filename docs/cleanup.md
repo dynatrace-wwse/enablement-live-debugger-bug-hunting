@@ -1,4 +1,4 @@
---8<-- "snippets/bizevent-cleanup.js"
+--8<-- "snippets/cleanup.js"
 
 
 !!! tip "Deleting the codespace from inside the container"

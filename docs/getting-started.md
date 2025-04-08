@@ -1,8 +1,5 @@
 # Getting Started
-<!-- 
-TODO: verify the js payload on all pages and setup a tenant for monitoring enablement.
- -->
---8<-- "snippets/bizevent-getting-started.js"
+--8<-- "snippets/getting-started.js"
 --8<-- "snippets/grail-requirements.md"
 
 ## 1. Dynatrace Tenant Setup
@@ -89,5 +86,5 @@ We will get this two very easy from the Kubernetes App.
 
 
 <div class="grid cards" markdown>
-- [Let's launch Codespaces:octicons-arrow-right-24:](launch-codespaces.md)
+- [Let's launch Codespaces:octicons-arrow-right-24:](codespaces.md)
 </div>

@@ -1,7 +1,5 @@
-# Getting Started
-<!-- 
-TODO: verify the js payload on all pages and setup a tenant for monitoring enablement.
- -->
+# Codespaces
+--8<-- "snippets/codespaces.js"
 
 ## 1. Launch Codespace
 

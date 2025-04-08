@@ -1,32 +1,13 @@
 
-# The Bug "Special Characters"
-
-!!! note "The Bug 'Clear Completed'"
-    Level: Beginner
-
-## Open the TODO App and add a Task with an exclamation mark!
-
-- Add a task with an exclamation mark! or a special character for that matter, like this:
-
-
-![TODO App](../img/todo_app_exclamation.png)
-
-- Now type ENTER to add the task
-
-![TODO App](../img/todo_app_exclamation2.png)
-
-- What happened? As you can see the signs are being removed. Why?
-
-Let's continue with the bug hunting again! Now, let's assume we are new developers in the TODO app company. How difficult would it be to find the bug? To know where is the app running? which pod is delivering the requests? which namespace and line of code? Well, not with Dynatrace! We already learned how easy it was to find the TODO app within the Kubernetes App and from there we opened the traces in the Distributed Tracing app, so let's go there.
-
-!!! Tipp "Want to learn more about the Tracing App?"
-    If you want to learn more about the [new Distributed Tracing App, watch this amazing 12 min recording of Dynatrace App Spotlights](https://www.youtube.com/watch?v=O4zWlwJ4hsA){target="_blank"}
-
+# The Bug "Special Characters" - the Quest
 
 ## Open the Distributed Tracing App
 !!! Tipp "Protip: Open the Tracing App anywhere in Dynatrace"
     type CTRL + K and then Tracing, the tracing app should appear in the super search.
     ![TODO App](../img/open_tracing_app.png)
+
+!!! Tipp "Want to learn more about the Tracing App?"
+    If you want to learn more about the [new Distributed Tracing App, watch this amazing 12 min recording of Dynatrace App Spotlights](https://www.youtube.com/watch?v=O4zWlwJ4hsA){target="_blank"}
 
 
 - In the filter add `"Kubernetes namespace" = todoapp AND "Kubernetes workload" = todoapp`
@@ -66,5 +47,5 @@ Do you see something weird? The deveoloper left a String function on line 28 wit
 
 
 <div class="grid cards" markdown>
-- [Click Here to Continue the quest with the next Bug:octicons-arrow-right-24:](bug-duplicate-task.md)
+- [Click Here to Continue the quest with the next Bug:octicons-arrow-right-24:](3-bug-duplicate-task.md)
 </div>

@@ -139,5 +139,5 @@ Your Codespace has now deployed the following resources:
 
 
 <div class="grid cards" markdown>
-- [Let's start our Bug hunting quest:octicons-arrow-right-24:](bug-clear-completed.md)
+- [Let's start our Bug hunting quest:octicons-arrow-right-24:](1-bug-clear-completed.md)
 </div>

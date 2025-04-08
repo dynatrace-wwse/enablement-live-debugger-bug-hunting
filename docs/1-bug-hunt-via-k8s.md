@@ -1,30 +1,5 @@
 
-# The Bug "Clear Completed"
-
-
-!!! note "The Bug 'Clear Completed'"
-    Level: Beginner
-
-## Open the TODO App and add a couple of tasks
-
-In VSCode open a new terminal and in the Welcome Message you should see a link to the Todo App UI. Click on it. Now add a couple of tasks.
-It should look something like this:
-![TODO App](../img/todo_app.png)
-
-
-- Add a couple of tasks. 
-- Complete some of them (or all, depending how productive you are ;) . 
-- Now click on: ``Clear Completed`` 
-
-![TODO App](../img/todo_completed.png)
-
-- Are the tasks cleared?
-
-Apparently the button does not work. When clicked - completed todos are not cleared. 
-
-We embark our Bug hunting journey! 
-
-There are multiple ways how dive deep into the issue because Dynatrace is monitoring your Kubernetes cluster, all workloads in it, all it's traces with code level insights and all real users accessing the exposed application.
+# The Bug "Clear Completed" - the Quest
 
 ## Hunting via the Kubernetes Road
 
@@ -130,5 +105,5 @@ Yay! we found the first bug!!!
 
 
 <div class="grid cards" markdown>
-- [Click Here to Continue the quest with the next Bug:octicons-arrow-right-24:](bug-special-characters.md)
+- [Click Here to Continue the quest with the next Bug:octicons-arrow-right-24:](2-bug-special-characters.md)
 </div>

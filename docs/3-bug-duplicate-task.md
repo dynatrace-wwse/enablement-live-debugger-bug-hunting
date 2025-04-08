@@ -1,0 +1,23 @@
+
+# The Bug "Duplicate Task"
+
+!!! note "The Bug 'Duplicate Task'"
+    Level: Intermediate
+
+## Open the TODO App and add a Task
+
+The TODO app has a duplicate function, let's give it a try.
+
+- Add a Task that we want to duplicate.
+- Hover over the added Task and on the right you'll notice a **&** symbol. This should duplicate the task.
+
+![Duplicate](../img/todo_app_duplicate.png)
+
+What happened? 
+We notice a new task was created, but instead of a duplicate we see a weird string, looks like an ID. 
+
+Let's continue our Bug Hunting Quest!
+
+<div class="grid cards" markdown>
+- [Click Here to Continue the quest:octicons-arrow-right-24:](3-bug-hunt-via-logs.md)
+</div>

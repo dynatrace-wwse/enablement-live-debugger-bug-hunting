@@ -4,9 +4,12 @@ repo_url: "https://github.com/dynatrace-wwse/enablement-live-debugger-bug-huntin
 nav:
   - '1. About': index.md
   - '2. Getting Started': getting-started.md
-  - '3. Bug - Clear completed': bug-clear-completed.md
-  - '4. Bug - Special characters': bug-special-characters.md
-  - '5. Bug - Duplicate task': bug-duplicate-task.md
+  - '3. 1. Bug - Clear completed': 1-bug-clear-completed.md
+  - '4. 1. Bug - hunt via Kubernetes': 1-bug-hunt-via-k8s.md
+  - '5. 2. Bug - Special characters': 2-bug-special-characters.md
+  - '6. 2. Bug - hunt via Traces': 2-bug-hunt-via-tracing.md
+  - '7. 3. Bug - Duplicate task': 3-bug-duplicate-task.md
+  - '8. 3. Bug - hunt via Logs': 3-bug-hunt-via-logs.md
   - '8. Cleanup': cleanup.md
   - '9. Resources': resources.md
   - "10. What's Next?": whats-next.md

@@ -41,6 +41,17 @@ Did you notice how the Map has in the items [0] and [1] the title and UUIDs are 
 
 - This is also noticeable in the sourcecode, lines 102 and 103 are being swapped.
 
+<!-- 
+TODO: Things to add/fix
+
+- IAM policies image
+- IAM policies text
+- Integrate with Version Control / https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability/offering-capabilities/additional-settings#integrate-with-your-version-control
+    Patch Kubernetes Yaml UseCase
+- IDE Integration
+    (Change to Sprint/DEV)
+- Push images to own repository
+-->
 
 <div class="grid cards" markdown>
 - [Click here to continue :octicons-arrow-right-24:](cleanup.md)

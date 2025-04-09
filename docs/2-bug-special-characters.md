@@ -8,11 +8,11 @@
 - Add a task with an exclamation mark! or a special character for that matter, like this:
 
 
-![TODO App](../img/todo_app_exclamation.png)
+![TODO App](img/todo_app_exclamation.png)
 
 - Now type ENTER to add the task
 
-![TODO App](../img/todo_app_exclamation2.png)
+![TODO App](img/todo_app_exclamation2.png)
 
 - What happened? As you can see the signs are being removed. Why?
 

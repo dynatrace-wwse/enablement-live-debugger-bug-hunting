@@ -29,7 +29,7 @@ in our Dynatrace blog.
 
 
 
-![Codespaces installing](../img/codespaces_installing.png)
+![Codespaces installing](img/codespaces_installing.png)
 
 ## 3. Explore what has been deployed
 
@@ -39,7 +39,7 @@ Your Codespace has now deployed the following resources:
   that will be used later in the demo.
 
 - After a couple of minutes, you'll see this screen in your codespaces terminal. It contains the links to the local expose labguide and the UI of the TODO application which we will Live Debug.
-![Codespaces finish](../img/codespaces_finish.png)
+![Codespaces finish](img/codespaces_finish.png)
 
 
 
@@ -54,7 +54,7 @@ You can create a new Terminal directly in VSCode, type `zsh` or call the functio
 
 ### Navigating in your local Kubernetes
 The client `kubectl` and `k9s`are configured so you can navigate in your local Kubernetes like butter. 
-![k9s](../img/k9s.png)
+![k9s](img/k9s.png)
 
 ### Exposing the apps to the public
 The apps MKdocs and TODO app are being exposed in the devcontainer to your localhost. If you want to make the endpoints public accesible, just go to the ports section in VsCode, right click on them and change the visibility to public.

@@ -7,14 +7,14 @@
 
 In VSCode open a new terminal and in the Welcome Message you should see a link to the Todo App UI. Click on it. Now add a couple of tasks.
 It should look something like this:
-![TODO App](../img/todo_app.png)
+![TODO App](img/todo_app.png)
 
 
 - Add a couple of tasks. 
 - Complete some of them (or all, depending how productive you are ;) . 
 - Now click on: ``Clear completed`` 
 
-![TODO App](../img/todo_completed.png)
+![TODO App](img/todo_completed.png)
 
 - Are the tasks cleared?
 

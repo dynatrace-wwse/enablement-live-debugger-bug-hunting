@@ -32,7 +32,7 @@ ALLOW storage:buckets:read WHERE storage:table-name = "application.snapshots";
 
 The policy should look like this:
 
-<img src="../img/devops_policy.png" alt="DevOps Policy" height="50%"/>
+<img src="img/devops_policy.png" alt="DevOps Policy" height="50%"/>
 
 
 Then we bind it to a user group. In this case since we are admins, let's bind the policy to the Admin group. Notice that the created policy is for an Admin and also for a Developer. Since we allow to `read` and `set` breakpoints but also to `manage` breakpoints [which is explained here](https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability/offering-capabilities/additional-settings#manage-breakpoints).
@@ -41,7 +41,7 @@ Then we bind it to a user group. In this case since we are admins, let's bind th
 
 Go to Group Management > Select Admin Group > + Permission  (and bind the policy)
 
-<img src="../img/bind_group.png" alt="DevOps Policy binding" height="50%"/>
+<img src="img/bind_group.png" alt="DevOps Policy binding" height="50%"/>
 
 Like this you have the fine control to give your developers, SRE teams and whoever you want to set breakpoints and read the snapshots. For more granular access [please continue reading here](https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability/offering-capabilities/setup) 
 
@@ -78,7 +78,7 @@ We will get this two very easy from the Kubernetes App.
 6. You can close the Kubernetes App, we don't need it, we just needed the tokens.
 
 
-![Kubernetes Tokens](../img/k8s_tokens.png)
+![Kubernetes Tokens](img/k8s_tokens.png)
 
 
 

@@ -21,7 +21,7 @@ For this we go to **Account Management > Identity & Access management > + Policy
 
 Set breakpoints
 ```bash
-ALLOW storage.application.snapshots:read;
+ALLOW storage.application.snapshots:set;
 ```
 
 Read Snapshopts
@@ -32,16 +32,14 @@ ALLOW storage:buckets:read WHERE storage:table-name = "application.snapshots";
 
 The policy should look like this:
 
-<img src="img/devops_policy.png" alt="DevOps Policy" height="50%"/>
-
+![DevOps Policy](img/devops_policy.png)
 
 Then we bind it to a user group. In this case since we are admins, let's bind the policy to the Admin group. Notice that the created policy is for an Admin and also for a Developer. Since we allow to `read` and `set` breakpoints but also to `manage` breakpoints [which is explained here](https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability/offering-capabilities/additional-settings#manage-breakpoints).
 
 
 
 Go to Group Management > Select Admin Group > + Permission  (and bind the policy)
-
-<img src="img/bind_group.png" alt="DevOps Policy binding" height="50%"/>
+![Bind Group](img/bind_group.png)
 
 Like this you have the fine control to give your developers, SRE teams and whoever you want to set breakpoints and read the snapshots. For more granular access [please continue reading here](https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability/offering-capabilities/setup) 
 

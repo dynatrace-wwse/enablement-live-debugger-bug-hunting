@@ -15,7 +15,7 @@ Wow, that was fast, we see two log entries with that match and are coming from t
 - Either way will open the Distributed Tracing app
 
 From the content if you look carefully, you can see that the duplicate has the ID and title swapped.
-![Logs app](../img/logs_app3.png)
+![Logs app](img/logs_app3.png)
 
 
 

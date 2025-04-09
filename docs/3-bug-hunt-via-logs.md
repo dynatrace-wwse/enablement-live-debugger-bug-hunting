@@ -4,14 +4,19 @@
 Now let's try a different approach, we have seen how easy it is to find the traces via the Distributed Tracing App. Let's find the trace and it's method and codespace via the Logs App. The Dynatrace Plattform is context aware, it knows which traces write which logs, from which pod they are coming from and even which user generated the transaction. 
 
 - Open the Logs App. Again let's be a pro and type CTRL + K and then Logs, the Logs App should appear in the super search.
-- In the filter type the content or part of the content of the Task, in my case I wrote `A task we want to duplicate`, so I'm searching for `content=*duplicate*`.
-- Since I'm monitoring multiple Kubernetes Clusters, I'm adding an extra filter for the `k8s.namespace.name = todoapp`. You can verify this by clicking on a log entry, and on the right hand side, the topology of the log entry will open, you'll notice is the same pod.
+- In the filter type the content or part of the content of the Task, in my case I wrote `Call the Bugbusters`, so I'm searching for `content=*bugbusters*`. I'm assuming the developers is logging the content I'm writing in the app since "we don't know the code" and in our quests we are searching via logs. Let's see if we are lucky.
 
 ![Logs app](../img/logs_app.png)
-Wow, that was fast, we see two log entries with that match and are coming from the same pod. 
+Wow, that was fast, we see two log entries with that match and are coming from the same pod. One was adding the task, the other duplicating it. 
 
 - We can either right click on the Log line and **open record with** and you select the **Distributed Tracing** app or on the right pane, above the Topology of the Log entry, there is a button for your convenience that says **Open trace**
+![Logs app](../img/logs_app2.png)
+
 - Either way will open the Distributed Tracing app
+
+From the content if you look carefully, you can see that the duplicate has the ID and title swapped.
+![Logs app](../img/logs_app3.png)
+
 
 
 ## Hunting road - Distributed Tracing App 
@@ -39,6 +44,8 @@ Wow, that was fast, we see two log entries with that match and are coming from t
 Did you notice how the Map has in the items [0] and [1] the title and UUIDs are swapped?
 
 - This is also noticeable in the sourcecode, lines 102 and 103 are being swapped. 
+
+![Duplicate](../img/duplicate_record2.png)
 
 <div class="grid cards" markdown>
 - [Click here to continue :octicons-arrow-right-24:](cleanup.md)

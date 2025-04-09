@@ -381,6 +381,7 @@ deployCloudNative() {
 
     printInfo "Log capturing will be handled by the Host agent."
     #TODO: Verify dependency of AG and OS being ready.
+    waitForAllPods dynatrace
     waitForAllReadyPods dynatrace
   else
     printInfo "Not deploying the Dynatrace Operator, no credentials found"

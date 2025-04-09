@@ -6,12 +6,14 @@
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/dynatrace-wwse/enablement-live-debugger-bug-hunting){target="_blank"}
 
 
-## 1.1 Machine Type & Variables
+## 1.1 Codespaces configuration
 
-!!! tip "Machine sizing & variables"
+!!! tip "Branch, Machine sizing & secrets"
+    - Branch
+        - select the **main** branch
     - Machine sizing
         - As a machine type select **4-core**
-    - Variables (enter your credentials within the following variables)
+    - Secrets (enter your credentials within the following variables)
         - DT_TENANT
         - DT_OPERATOR_TOKEN
         - DT_INGEST_TOKEN

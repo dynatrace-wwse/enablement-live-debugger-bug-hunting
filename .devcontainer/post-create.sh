@@ -1,7 +1,6 @@
 #!/bin/bash
 
 #loading functions to script
-echo "Repository name: $RepositoryName"
 source /workspaces/$RepositoryName/.devcontainer/util/functions.sh
 
 bindFunctionsInShell

@@ -643,15 +643,21 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>Now let's try a different approach, we have seen how easy it is to find the traces via the Distributed Tracing App. Let's find the trace and it's method and codespace via the Logs App. The Dynatrace Plattform is context aware, it knows which traces write which logs, from which pod they are coming from and even which user generated the transaction. </p>
 <ul>
 <li>Open the Logs App. Again let's be a pro and type CTRL + K and then Logs, the Logs App should appear in the super search.</li>
-<li>In the filter type the content or part of the content of the Task, in my case I wrote <code>A task we want to duplicate</code>, so I'm searching for <code>content=*duplicate*</code>.</li>
-<li>Since I'm monitoring multiple Kubernetes Clusters, I'm adding an extra filter for the <code>k8s.namespace.name = todoapp</code>. You can verify this by clicking on a log entry, and on the right hand side, the topology of the log entry will open, you'll notice is the same pod.</li>
+<li>In the filter type the content or part of the content of the Task, in my case I wrote <code>Call the Bugbusters</code>, so I'm searching for <code>content=*bugbusters*</code>. I'm assuming the developers is logging the content I'm writing in the app since "we don't know the code" and in our quests we are searching via logs. Let's see if we are lucky.</li>
 </ul>
 <p><img alt="Logs app" src="../img/logs_app.png" />
-Wow, that was fast, we see two log entries with that match and are coming from the same pod. </p>
+Wow, that was fast, we see two log entries with that match and are coming from the same pod. One was adding the task, the other duplicating it. </p>
 <ul>
-<li>We can either right click on the Log line and <strong>open record with</strong> and you select the <strong>Distributed Tracing</strong> app or on the right pane, above the Topology of the Log entry, there is a button for your convenience that says <strong>Open trace</strong></li>
-<li>Either way will open the Distributed Tracing app</li>
+<li>
+<p>We can either right click on the Log line and <strong>open record with</strong> and you select the <strong>Distributed Tracing</strong> app or on the right pane, above the Topology of the Log entry, there is a button for your convenience that says <strong>Open trace</strong>
+<img alt="Logs app" src="../img/logs_app2.png" /></p>
+</li>
+<li>
+<p>Either way will open the Distributed Tracing app</p>
+</li>
 </ul>
+<p>From the content if you look carefully, you can see that the duplicate has the ID and title swapped.
+<img alt="Logs app" src="../img/logs_app3.png" /></p>
 <h2 id="hunting-road-distributed-tracing-app">Hunting road - Distributed Tracing App<a class="headerlink" href="#hunting-road-distributed-tracing-app" title="Permanent link">#</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Via the Distributed Tracing app</p>
@@ -682,6 +688,7 @@ Wow, that was fast, we see two log entries with that match and are coming from t
 <ul>
 <li>This is also noticeable in the sourcecode, lines 102 and 103 are being swapped. </li>
 </ul>
+<p><img alt="Duplicate" src="../img/duplicate_record2.png" /></p>
 <div class="grid cards">
 <ul>
 <li><a href="../cleanup/">Click here to continue <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>

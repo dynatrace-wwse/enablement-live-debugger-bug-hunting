@@ -725,7 +725,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <h3 id="12-set-iam-polocies">1.2 Set IAM Polocies<a class="headerlink" href="#12-set-iam-polocies" title="Permanent link">#</a></h3>
 <p>We take security very seriously. So let's create a policy to set user-level Live Debugging breakpoints. </p>
 <p>We need two policies for your user to be able to set breakpoints and to read snapshots. 
-For this we go to Account Management &gt; Identity &amp; Access management &gt; + Policy</p>
+For this we go to **Account Management &gt; Identity &amp; Access management &gt; + Policy **</p>
 <p>Set breakpoints
 <div class="highlight"><pre><span></span><code>ALLOW<span class="w"> </span>storage.application.snapshots:read<span class="p">;</span>
 </code></pre></div></p>
@@ -735,7 +735,7 @@ ALLOW<span class="w"> </span>storage:buckets:read<span class="w"> </span>WHERE<s
 </code></pre></div></p>
 <p>The policy should look like this:</p>
 <p><img src="../img/devops_policy.png" alt="DevOps Policy" height="50%"/></p>
-<p>Then we bind it to a user group. In this case since we are admins, let's bind the policy to the Admin group. </p>
+<p>Then we bind it to a user group. In this case since we are admins, let's bind the policy to the Admin group. Notice that the created policy is for an Admin and also for a Developer. Since we allow to <code>read</code> and <code>set</code> breakpoints but also to <code>manage</code> breakpoints <a href="https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability/offering-capabilities/additional-settings#manage-breakpoints">which is explained here</a>.</p>
 <p>Go to Group Management &gt; Select Admin Group &gt; + Permission  (and bind the policy)</p>
 <p><img src="../img/bind_group.png" alt="DevOps Policy binding" height="50%"/></p>
 <p>Like this you have the fine control to give your developers, SRE teams and whoever you want to set breakpoints and read the snapshots. For more granular access <a href="https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability/offering-capabilities/setup">please continue reading here</a> </p>

@@ -1,7 +1,8 @@
 #!/bin/bash
 
-source /workspaces/enablement-live-debugger-bug-hunting/.devcontainer/util/functions.sh
+source /workspacese/$RepositoryName/.devcontainer/util/functions.sh
 
+#This is for professors
 #exposeMkdocs
 
 # Wait for todo to be available

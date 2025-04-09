@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # VARIABLES DECLARATION
-source /workspaces/enablement-live-debugger-bug-hunting/.devcontainer/util/variables.sh
+source /workspaces/$RepositoryName/.devcontainer/util/variables.sh
 
 echo -e "${thickline}"
 echo -e ""

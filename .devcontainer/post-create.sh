@@ -1,9 +1,7 @@
 #!/bin/bash
 
-# Install RunMe
-# RunMe makes markdown files runnable
-# Used during end2end testing to execute the code snippets
-source /workspaces/enablement-live-debugger-bug-hunting/.devcontainer/util/functions.sh
+#loading functions to script
+source /workspaces/$RepositoryName/.devcontainer/util/functions.sh
 
 bindFunctionsInShell
 
@@ -22,7 +20,6 @@ dynatraceDeployOperator
 deployCloudNative
 
 deployTodoApp
-
 
 # e2e testing
 # If the codespace is created (eg. via a Dynatrace workflow)
@@ -48,9 +45,9 @@ if [[ "$CODESPACE_NAME" == dttest-* ]]; then
 else
 
     # Your content here
-    printInfo "Sending BizEvent to track usage of enablement-live-debugger-bug-hunting"
+    printInfo "Sending BizEvent to track usage of $RepositoryName"
     
-    postCodespaceTracker enablement-live-debugger-bug-hunting
+    postCodespaceTracker $RepositoryName
     
     printInfo "Finished creating devcontainer"
 fi

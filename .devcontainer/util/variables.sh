@@ -14,7 +14,7 @@ CERTMANAGER_VERSION=1.15.3
 RUNME_CLI_VERSION=3.10.2
 
 # Setting up the variable since its not set when instantiating the vscode folder.
-CODESPACE_VSCODE_FOLDER="/workspaces/enablement-live-debugger-bug-hunting"
+CODESPACE_VSCODE_FOLDER="/workspaces/$RepositoryName"
 
 # ColorCoding
 GREEN="\e[32m"

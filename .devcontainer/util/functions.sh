@@ -212,7 +212,6 @@ alias pg='ps -aux | grep'
 }
 
 installRunme() {
-  
   printInfoSection "Installing Runme Version $RUNME_CLI_VERSION"
   mkdir runme_binary
   wget -O runme_binary/runme_linux_x86_64.tar.gz https://download.stateful.com/runme/${RUNME_CLI_VERSION}/runme_linux_x86_64.tar.gz
@@ -516,8 +515,9 @@ exposeAstroshop(){
 
 
 installMkdocs(){
+  installRunme
   printInfo "Installing Mkdocs"
-  pip install --break-system-packages -r requirements-docs.txt
+  pip install --break-system-packages -r docs/requirements/requirements-mkdocs.txt
 }
 
 

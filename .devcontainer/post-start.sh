@@ -2,7 +2,7 @@
 
 source /workspaces/enablement-live-debugger-bug-hunting/.devcontainer/util/functions.sh
 
-exposeMkdocs
+#exposeMkdocs
 
 # Wait for todo to be available
 waitForAllPods todoapp

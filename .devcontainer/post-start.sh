@@ -1,6 +1,7 @@
 #!/bin/bash
 
-source /workspacese/$RepositoryName/.devcontainer/util/functions.sh
+#load the functions into the shell
+source /workspaces/$RepositoryName/.devcontainer/util/functions.sh
 
 #This is for professors
 #exposeMkdocs

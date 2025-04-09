@@ -734,10 +734,10 @@ For this we go to **Account Management &gt; Identity &amp; Access management &gt
 ALLOW<span class="w"> </span>storage:buckets:read<span class="w"> </span>WHERE<span class="w"> </span>storage:table-name<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;application.snapshots&quot;</span><span class="p">;</span>
 </code></pre></div></p>
 <p>The policy should look like this:</p>
-<p><img src="../img/devops_policy.png" alt="DevOps Policy" height="50%"/></p>
+<p><img src="img/devops_policy.png" alt="DevOps Policy" height="50%"/></p>
 <p>Then we bind it to a user group. In this case since we are admins, let's bind the policy to the Admin group. Notice that the created policy is for an Admin and also for a Developer. Since we allow to <code>read</code> and <code>set</code> breakpoints but also to <code>manage</code> breakpoints <a href="https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability/offering-capabilities/additional-settings#manage-breakpoints">which is explained here</a>.</p>
 <p>Go to Group Management &gt; Select Admin Group &gt; + Permission  (and bind the policy)</p>
-<p><img src="../img/bind_group.png" alt="DevOps Policy binding" height="50%"/></p>
+<p><img src="img/bind_group.png" alt="DevOps Policy binding" height="50%"/></p>
 <p>Like this you have the fine control to give your developers, SRE teams and whoever you want to set breakpoints and read the snapshots. For more granular access <a href="https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability/offering-capabilities/setup">please continue reading here</a> </p>
 <h3 id="13-enable-live-debugger-activegate-module">1.3 Enable Live Debugger ActiveGate module<a class="headerlink" href="#13-enable-live-debugger-activegate-module" title="Permanent link">#</a></h3>
 <p>Now we need to enable the <a href="https://docs.dynatrace.com/docs/shortlink/do-setup#enable-live-debugging-in-environment-activegate-module">Live Debugger ActiveGate module</a>:</p>

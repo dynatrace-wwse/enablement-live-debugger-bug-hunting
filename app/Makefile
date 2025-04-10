@@ -4,7 +4,7 @@ GIT_COMMIT=$(shell git rev-parse HEAD)
 GIT_ORIGIN=$(shell git config --get remote.origin.url)
 
 build-jar-with-docker:
-	#TODO:PUBLISH_VERSION is empty
+	#FIXME:PUBLISH_VERSION is empty
 	#echo this is the GIT_COMMIT ${GIT_COMMIT}
 	rm -rf build
 	# Build the build/libs/tutorial-V.V.V - which already includes the project sources in the jar

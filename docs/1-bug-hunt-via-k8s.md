@@ -17,7 +17,7 @@
 
 ![Todo Services](img/todo_services.png)
 
-- Click on the Spring Boot one and then on the right corner "View Traces"
+- Click on the TodoController service and then on the right corner "View Traces"
 
 ![Todo Services](img/todo_services_traces.png)
 
@@ -38,7 +38,7 @@ Now we know which method and which package! Let's put our Developer Hat 🎩 and
 
 Type CTRL + K > Live Debugger for super fast access to the Live Debugger application. 
 
-In "Customize your debug session" we add the filters ``namespace:todoapp`` ``k8s.workload.name:todoapp``. This information was also available in the trace that we just took a look at. There are multiple filters you can add, important here is to have a filter that can be reused and is not specifc to an instance in case the pods a recycled and you want to make sure you are always setting breakpoints to a specific workload in a specific cluster (or multiple)
+First we want to cuztomize our debuggin session to match the workloads where we want to set a non-breaking breakpoint. Click on the pencil icon to "Customize your debug session" so we can add the filters ``namespace:todoapp`` ``k8s.workload.name:todoapp``. This information was also available in the trace that we just took a look at. There are multiple filters you can add, important here is to have a filter that can be reused and is not specifc to an instance in case the pods a recycled and you want to make sure you are always setting breakpoints to a specific workload in a specific cluster (or multiple).
 
 ![Live Debugger App](img/ld_customize.png)
 
@@ -79,8 +79,7 @@ if you don't know the structure, use the search and type ``TodoController``it'll
 ![Live Debugger App](img/todocontroller.png)
 
 
-Now let's search for the Method ``clearCompletedTodos``. You'll find it around line 72.
-Set up a non-breaking-breakpoint on the return code.
+Now let's search for the Method ``clearCompletedTodos``. You'll find the Method definition around line 72. We need to set a non-breaking breakpoint on running code inside the method, for this I recommend to start setting it on the ``return`` code which is at line 92. This way we gather the values of the variables before they are sent back to the client.
 
 
 Go back to the TODO app and clear again on "Clear completed"

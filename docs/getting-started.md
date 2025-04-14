@@ -13,7 +13,7 @@ You will need a Dynatrace SaaS tenant with a DPS pricing model and the 'Code Mon
 [More information can be found here](https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability/do-enable)
 
 
-### 1.2 Set IAM Polocies 
+### 1.2 Set IAM Policies 
 We take security very seriously. So let's create a policy to set user-level Live Debugging breakpoints. 
 
 We need two policies for your user to be able to set breakpoints and to read snapshots. 
@@ -23,14 +23,18 @@ Set breakpoints
 ```bash
 ALLOW storage.application.snapshots:set;
 ```
-
 Read Snapshopts
 ```bash
-ALLOW storage.application.snapshots:read;
+ALLOW storage:application:snapshots:read;
 ALLOW storage:buckets:read WHERE storage:table-name = "application.snapshots";
 ```
 
-The policy should look like this:
+For managing snapshots, setting for Admins.
+```bash
+ALLOW storage.application.snapshots:manage;
+```
+
+The policy should look something like this:
 
 ![DevOps Policy](img/devops_policy.png)
 

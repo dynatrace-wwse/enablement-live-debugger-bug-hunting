@@ -347,9 +347,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-set-iam-polocies" class="md-nav__link">
+  <a href="#12-set-iam-policies" class="md-nav__link">
     <span class="md-ellipsis">
-      1.2 Set IAM Polocies
+      1.2 Set IAM Policies
     </span>
   </a>
   
@@ -639,9 +639,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-set-iam-polocies" class="md-nav__link">
+  <a href="#12-set-iam-policies" class="md-nav__link">
     <span class="md-ellipsis">
-      1.2 Set IAM Polocies
+      1.2 Set IAM Policies
     </span>
   </a>
   
@@ -722,18 +722,21 @@ document.addEventListener('DOMContentLoaded', function() {
 <li>Go to Settings &gt; Observability for Developers &gt; Enable Observability for Developers</li>
 </ul>
 <p><a href="https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability/do-enable">More information can be found here</a></p>
-<h3 id="12-set-iam-polocies">1.2 Set IAM Polocies<a class="headerlink" href="#12-set-iam-polocies" title="Permanent link">#</a></h3>
+<h3 id="12-set-iam-policies">1.2 Set IAM Policies<a class="headerlink" href="#12-set-iam-policies" title="Permanent link">#</a></h3>
 <p>We take security very seriously. So let's create a policy to set user-level Live Debugging breakpoints. </p>
 <p>We need two policies for your user to be able to set breakpoints and to read snapshots. 
 For this we go to **Account Management &gt; Identity &amp; Access management &gt; + Policy **</p>
 <p>Set breakpoints
 <div class="highlight"><pre><span></span><code>ALLOW<span class="w"> </span>storage.application.snapshots:set<span class="p">;</span>
-</code></pre></div></p>
-<p>Read Snapshopts
-<div class="highlight"><pre><span></span><code>ALLOW<span class="w"> </span>storage.application.snapshots:read<span class="p">;</span>
+</code></pre></div>
+Read Snapshopts
+<div class="highlight"><pre><span></span><code>ALLOW<span class="w"> </span>storage:application:snapshots:read<span class="p">;</span>
 ALLOW<span class="w"> </span>storage:buckets:read<span class="w"> </span>WHERE<span class="w"> </span>storage:table-name<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;application.snapshots&quot;</span><span class="p">;</span>
 </code></pre></div></p>
-<p>The policy should look like this:</p>
+<p>For managing snapshots, setting for Admins.
+<div class="highlight"><pre><span></span><code>ALLOW<span class="w"> </span>storage.application.snapshots:manage<span class="p">;</span>
+</code></pre></div></p>
+<p>The policy should look something like this:</p>
 <p><img alt="DevOps Policy" src="../img/devops_policy.png" /></p>
 <p>Then we bind it to a user group. In this case since we are admins, let's bind the policy to the Admin group. Notice that the created policy is for an Admin and also for a Developer. Since we allow to <code>read</code> and <code>set</code> breakpoints but also to <code>manage</code> breakpoints <a href="https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability/offering-capabilities/additional-settings#manage-breakpoints">which is explained here</a>.</p>
 <p>Go to Group Management &gt; Select Admin Group &gt; + Permission  (and bind the policy)

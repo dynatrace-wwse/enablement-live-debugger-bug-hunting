@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </ul>
 <p><img alt="Todo Services" src="../img/todo_services.png" /></p>
 <ul>
-<li>Click on the Spring Boot one and then on the right corner "View Traces"</li>
+<li>Click on the TodoController service and then on the right corner "View Traces"</li>
 </ul>
 <p><img alt="Todo Services" src="../img/todo_services_traces.png" /></p>
 <ul>
@@ -689,7 +689,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>Now we know which method and which package! Let's put our Developer Hat 🎩 and open the Live Debugger.</p>
 <h2 id="open-live-debugger">Open Live Debugger<a class="headerlink" href="#open-live-debugger" title="Permanent link">#</a></h2>
 <p>Type CTRL + K &gt; Live Debugger for super fast access to the Live Debugger application. </p>
-<p>In "Customize your debug session" we add the filters <code>namespace:todoapp</code> <code>k8s.workload.name:todoapp</code>. This information was also available in the trace that we just took a look at. There are multiple filters you can add, important here is to have a filter that can be reused and is not specifc to an instance in case the pods a recycled and you want to make sure you are always setting breakpoints to a specific workload in a specific cluster (or multiple)</p>
+<p>First we want to cuztomize our debuggin session to match the workloads where we want to set a non-breaking breakpoint. Click on the pencil icon to "Customize your debug session" so we can add the filters <code>namespace:todoapp</code> <code>k8s.workload.name:todoapp</code>. This information was also available in the trace that we just took a look at. There are multiple filters you can add, important here is to have a filter that can be reused and is not specifc to an instance in case the pods a recycled and you want to make sure you are always setting breakpoints to a specific workload in a specific cluster (or multiple).</p>
 <p><img alt="Live Debugger App" src="../img/ld_customize.png" /></p>
 <h2 id="connect-the-github-repository-manually">Connect the Github repository (manually)<a class="headerlink" href="#connect-the-github-repository-manually" title="Permanent link">#</a></h2>
 <p>Once you click next, no repository was found for this application (this is because no repo was configured). Let's add it manually.</p>
@@ -717,8 +717,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>You have multiple ways to open the TodoController.java. Let's say you know the code, then easily you'll navigate to it by opening the Source Code menu on the left pane, navigate to: <code>todoapp &gt; src &gt; main &gt; java &gt; com &gt; dynatrace &gt; todoapp &gt; TodoController.java</code></p>
 <p>if you don't know the structure, use the search and type <code>TodoController</code>it'll search for all matches, you'll see the Class file so you can open it.</p>
 <p><img alt="Live Debugger App" src="../img/todocontroller.png" /></p>
-<p>Now let's search for the Method <code>clearCompletedTodos</code>. You'll find it around line 72.
-Set up a non-breaking-breakpoint on the return code.</p>
+<p>Now let's search for the Method <code>clearCompletedTodos</code>. You'll find the Method definition around line 72. We need to set a non-breaking breakpoint on running code inside the method, for this I recommend to start setting it on the <code>return</code> code which is at line 92. This way we gather the values of the variables before they are sent back to the client.</p>
 <p>Go back to the TODO app and clear again on "Clear completed"</p>
 <p>Return to the Live Debugger and see the Snaphot captured, open it and see all the variables that were captured with their values.</p>
 <p>Do you see the bug? can you understand what happened and why the completed todos are not deleted? We can see two variables, the <code>todos</code> with a length of 3 and <code>todoStore</code> with a length of 0.</p>

@@ -7,7 +7,7 @@ source /workspaces/$RepositoryName/.devcontainer/util/functions.sh
 #exposeMkdocs
 
 # Wait for todo to be available
-waitForAllPods todoapp
+waitForAllReadyPods todoapp
 
 exposeTodoApp
 

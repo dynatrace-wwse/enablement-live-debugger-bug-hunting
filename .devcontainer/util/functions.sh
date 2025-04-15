@@ -498,8 +498,12 @@ deployTodoApp(){
   kubectl -n todoapp create deploy todoapp --image=shinojosa/todoapp:1.0.0
 
   # Expose deployment of todoApp with a Service
-  kubectl -n todoapp expose deployment todoapp --type=NodePort --port=8080 --name todoapp 
+  kubectl -n todoapp expose deployment todoapp --type=NodePort --name=todoapp --port=8080 --target-port=8080
 
+  # Define the NodePort to expose the app from the Cluster
+  kubectl patch service todoapp --namespace=todoapp --type='json' --patch='[{"op": "replace", "path": "/spec/ports/0/nodePort", "value":30080}]'
+
+  printInfoSection "TodoApp is available via NodePort=30080"
 }
 
 exposeTodoApp(){

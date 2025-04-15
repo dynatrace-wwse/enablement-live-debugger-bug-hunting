@@ -29,7 +29,7 @@
 	],
 	// add labels
 	"portsAttributes": {
-		"8080": { "label": "Todo App Web UI" }
+		"30080": { "label": "Todo App Web UI" }
 	},
 
 	"hostRequirements": {

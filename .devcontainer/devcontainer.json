@@ -25,7 +25,7 @@
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
-		8080
+		30080
 	],
 	// add labels
 	"portsAttributes": {

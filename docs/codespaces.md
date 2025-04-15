@@ -57,23 +57,31 @@ The client `kubectl` and `k9s`are configured so you can navigate in your local K
 ![k9s](img/k9s.png)
 
 ### Exposing the apps to the public
-The apps MKdocs and TODO app are being exposed in the devcontainer to your localhost. If you want to make the endpoints public accesible, just go to the ports section in VsCode, right click on them and change the visibility to public.
+The app TODO app is being exposed from the devcontainer to your localhost or the github dns domain. If you want to make the endpoints public accesible, just go to the ports section in VsCode, right click on them and change the visibility to public.
 
 
 ## 5. Troubleshooting
 
 
-### Exposing the App
-The todo app is being exposed via `kubectl port-forward ...` if the container is stopped and started again or if you delete/recicle the pod the port-forwarding process might crash. You can easily see what is being exposed by typing the function `showOpenPorts` 
+If there is an issue with the application, we recommend you verify the health of the Kind cluster. 
 
+```bash
+kubectl cluster-info
+```
+The CLI Tool `k9s` is installed in your dev.container, this will help you navigate in your cluster, just type:
+
+```bash
+k9s
+```
+
+There is a helper function loaded in the shell to see the open ports in the dev.container.
 ```bash
 showOpenPorts(){
   sudo netstat -tulnp
 }
 ```
 
-and to expose the TODO app, type `exposeTodoApp`, 
-
+The todoApp is already exposed via NodePort in the port 30080, if you want to expose it in another port like the one defined 8080 in the service, then type and to expose the TODO app, type `exposeTodoApp`, 
 ```bash
 exposeTodoApp(){
   printInfo "Exposing Todo App in your dev.container"

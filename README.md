@@ -1,4 +1,4 @@
-# Live Debugger Tutorial - Bug Hunting the 📋 Todo App
+# Live Debugger Tutorial - Bug Hunting the Todo App 📋
 
 A Cloud-Native debugging and live data collection solution, Live Debugger is a solution within the package of [Observability for Developers](https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability) of the Dynatrace Platform which provides developers with instant access to code-level debug data needed to troubleshoot and understand complex, modern applications with no extra coding, redeployments, or restarts.
 

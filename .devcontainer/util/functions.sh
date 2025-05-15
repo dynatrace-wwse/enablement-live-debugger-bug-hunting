@@ -381,7 +381,9 @@ deployCloudNative() {
     printInfo "Log capturing will be handled by the Host agent."
     # We wait for 5 seconds for the pods to be scheduled, otherwise it will mark it as passed since the pods have not been scheduled
     sleep 5
+
     waitForAllPods dynatrace
+    sleep 5
     #TODO: Verify dependency of AG and OS being ready.
     waitForAllReadyPods dynatrace
   else

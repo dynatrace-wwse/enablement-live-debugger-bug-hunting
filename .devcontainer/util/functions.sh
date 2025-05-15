@@ -89,6 +89,34 @@ waitForAllPods() {
   fi
 }
 
+waitForPod() {
+  # Function to filter by Namespace and POD string, default is ALL namespaces
+  # If 2 parameters then the first is Namespace the second is Pod-String
+  # If 1 parameters then Namespace == all-namespaces the first is Pod-String
+  if [[ $# -eq 2 ]]; then
+    namespace_filter="-n $1"
+    pod_filter="$2"
+  elif [[ $# -eq 1 ]]; then
+    namespace_filter="--all-namespaces"
+    pod_filter="$1"
+  fi
+  RETRY=0
+  RETRY_MAX=60
+  # Get all pods, count and invert the search for not running nor completed. Status is for deleting the last line of the output
+  CMD="kubectl get pods $namespace_filter 2>&1 | grep -c -E '$pod_filter'"
+  printInfo "Verifying that pods in \"$namespace_filter\" with name \"$pod_filter\" is scheduled in a workernode "
+  while [[ $RETRY -lt $RETRY_MAX ]]; do
+    pods_running=$(eval "$CMD")
+    if [[ "$pods_running" != '0' ]]; then
+      printInfo "\"$pods_running\" pods are running on \"$namespace_filter\" with name \"$pod_filter\" exiting loop."
+      break
+    fi
+    RETRY=$(($RETRY + 1))
+    printWarn "Retry: ${RETRY}/${RETRY_MAX} - No pods are running on  \"$namespace_filter\" with name \"$pod_filter\". Wait 10s for $pod_filter PoDs to be scheduled..."
+    sleep 10
+  done
+}
+
 waitForAllReadyPods() {
   # Function to filter by Namespace, default is ALL
   if [[ $# -eq 1 ]]; then
@@ -380,10 +408,9 @@ deployCloudNative() {
 
     printInfo "Log capturing will be handled by the Host agent."
     # We wait for 5 seconds for the pods to be scheduled, otherwise it will mark it as passed since the pods have not been scheduled
-    sleep 5
-
-    waitForAllPods dynatrace
-    sleep 5
+    
+    waitForPod dynatrace activegate
+    
     #TODO: Verify dependency of AG and OS being ready.
     waitForAllReadyPods dynatrace
   else

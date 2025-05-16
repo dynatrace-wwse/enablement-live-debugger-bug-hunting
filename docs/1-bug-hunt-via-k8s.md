@@ -78,24 +78,30 @@ if you don't know the structure, use the search and type ``TodoController``it'll
 
 ![Live Debugger App](img/todocontroller.png)
 
+Now let's search for the Method ``clearCompletedTodos``. You'll find the Method definition at line 72. 
 
-Now let's search for the Method ``clearCompletedTodos``. You'll find the Method definition around line 72. We need to set a non-breaking breakpoint on running code inside the method, for this I recommend to start setting it on the ``return`` code which is at line 92. This way we gather the values of the variables before they are sent back to the client.
+> `72` @RequestMapping(value = "/todos/clear_completed", method = RequestMethod.DELETE)
+> `73` public ResponseEntity<?> clearCompletedTodos() throws InterruptedException {
 
+We need to set a non-breaking breakpoint on running code inside the method, for this I recommend to start setting it on the ``return`` code which is at line 92. This way we gather the values of the variables before they are sent back to the client.
+
+> `92` return new ResponseEntity<>(entities, HttpStatus.OK);
+
+You can set a non-breaking breakpoint by clicking just to the left of the line number.  Set it and wait for the status to change to **Active**.
+
+![Clear Completed New Active Breakpoint](img/clearcompleted_new_active_breakpoint.png)
 
 Go back to the TODO app and clear again on "Clear completed"
 
-
 Return to the Live Debugger and see the Snaphot captured, open it and see all the variables that were captured with their values.
+
+![Clear Completed BP](img/clearcompleted_breakpoint.png)
 
 Do you see the bug? can you understand what happened and why the completed todos are not deleted? We can see two variables, the ``todos`` with a length of 3 and ``todoStore`` with a length of 0.
 
 In line 84 ``todoStore.remove(todoRecord)`` the variable todoStore is a newly instantiated variable. This is a mistake, it should be replaced by the variable ``todos`` so the function can succesfully remove all cleared tasks!
 
 Yay! we found the first bug!!!
-
-
-![Clear Completed BP](img/clearcompleted_breakpoint.png)
-
 
 !!! tip "Seeing is believing 🤩"
     Did you notice? With Dynatrace we were able to navigate from the Kubernetes Cluster all the way down to the workload, it's traces cotinuing down to the specific method and namespace of the called function and variables. With one click on the method we were able to set a **non-breaking** breakpoint in our production application deployed in a Kubernetes Cluster where with a single snapshot we were able to identify the bug. Debugging Kubernetes Clusters has never been so easy!!! And in Production!! 🤯

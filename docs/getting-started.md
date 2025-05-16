@@ -40,8 +40,6 @@ The policy should look something like this:
 
 Then we bind it to a user group. In this case since we are admins, let's bind the policy to the Admin group. Notice that the created policy is for an Admin and also for a Developer. Since we allow to `read` and `set` breakpoints but also to `manage` breakpoints [which is explained here](https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability/offering-capabilities/additional-settings#manage-breakpoints).
 
-
-
 Go to Group Management > Select Admin Group > + Permission  (and bind the policy)
 ![Bind Group](img/bind_group.png)
 
@@ -62,6 +60,42 @@ activeGate:
 ```
 This is already set up for you in the codespaces automatically in the [Dynakube.yaml](https://github.com/dynatrace-wwse/enablement-live-debugger-bug-hunting/blob/main/.devcontainer/yaml/dynakube-skel.yaml) file so no need to restart the ActiveGate.
 
+### 1.4 Enable Log Ingest
+
+You have (2) options:
+- Enable built-in log ingest rule to ingest all logs discovered by Dynatrace
+- Configure log ingest rule to ingest relevant logs for this lab
+
+In your Dynatrace tenant, open the `Settings` App.  Navigate in the menus to `Collect and capture` > `Log monitoring` > `Log ingest rules`.  This will open the `Settings Classic` App and show you the **Log ingest rules**
+
+![Settings Log Ingest Rules](img/settings_log_ingest_rules.png)
+
+**Ingest all logs**
+
+Locate the rule `[Built-in] Ingest all logs` and enable it.  Click `Save changes`.
+
+**Ingest relevant logs**
+
+![Settings Log Ingest Todoapp](img/settings_log_ingest_todoapp.png)
+
+Click on `Add rule` to create a new Rule.  Configure the Rule:
+
+Rule name:
+```text
+TODO App Logs
+```
+
+Rule type:
+```text
+Include in storage
+```
+
+Conditions:
+```text
+Kubernetes namespace name = todoapp
+```
+
+Click on `Save changes`.
 
 ## 2. Getting the permissions for monitoring the Kubernetes Cluster with Dynatrace
 This codespace has everything automated for you so you can focus on what matters which in this enablement is to learn about the Live Debugging capabilities of the Dynatrace Platform.  You'll need two tokens:
@@ -78,7 +112,6 @@ We will get this two very easy from the Kubernetes App.
 4. Click on generate Token for the 'Dynatrace Operator' and save it to your Notepad
 5. Click on generate Token for the 'Data Ingest Token' and save it to your Notepad
 6. You can close the Kubernetes App, we don't need it, we just needed the tokens.
-
 
 ![Kubernetes Tokens](img/k8s_tokens.png)
 

@@ -20,9 +20,9 @@ It should look something like this:
 
 Apparently the button does not work. When clicked - completed todos are not cleared. 
 
-We embark our Bug hunting journey! 
+We embark on our Bug hunting journey! 
 
-There are multiple ways how dive deep into the issue because Dynatrace is monitoring your Kubernetes cluster, all workloads in it, all it's traces with code level insights and all real users accessing the exposed application.
+There are multiple ways to dive deep into the issue because Dynatrace is monitoring your Kubernetes cluster, all workloads in it, all it's traces with code level insights and all real users accessing the exposed application.
 
 
 <div class="grid cards" markdown>

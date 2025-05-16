@@ -27,8 +27,6 @@ We know your time is very valuable. This codespace takes around 6 minutes to be 
 While the Codespace is being set up for you, [here is a 6 minute read about powerful use cases beyond live debugging](https://www.dynatrace.com/news/blog/5-powerful-use-cases-beyond-debugging-for-dynatrace-live-debugger/){target="_blank"}
 in our Dynatrace blog.
 
-
-
 ![Codespaces installing](img/codespaces_installing.png)
 
 ## 3. Explore what has been deployed
@@ -40,8 +38,6 @@ Your Codespace has now deployed the following resources:
 
 - After a couple of minutes, you'll see this screen in your codespaces terminal. It contains the links to the local expose labguide and the UI of the TODO application which we will Live Debug.
 ![Codespaces finish](img/codespaces_finish.png)
-
-
 
 ## 4. Tips & Tricks
 

@@ -63,6 +63,7 @@ This is already set up for you in the codespaces automatically in the [Dynakube.
 ### 1.4 Enable Log Ingest
 
 You have (2) options:
+
 - Enable built-in log ingest rule to ingest all logs discovered by Dynatrace
 - Configure log ingest rule to ingest relevant logs for this lab
 
@@ -97,7 +98,7 @@ Kubernetes namespace name = todoapp
 
 Click on `Save changes`.
 
-## 2. Getting the permissions for monitoring the Kubernetes Cluster with Dynatrace
+## 2. Create Dynatrace API Tokens for Kubernetes Observability
 This codespace has everything automated for you so you can focus on what matters which in this enablement is to learn about the Live Debugging capabilities of the Dynatrace Platform.  You'll need two tokens:
 
 1. Operator Token
@@ -105,7 +106,8 @@ This codespace has everything automated for you so you can focus on what matters
 
 We will get this two very easy from the Kubernetes App. 
 
-## 2.1. Get the Operator Token and the Ingest Token from the Kubernetes App
+### 2.1. Get the Operator Token and the Ingest Token from the Kubernetes App
+
 1. Open the Kubernetes App (CTRL + K then type Kubernetes for fast access)
 2. Select the + Add cluster button
 3. Scroll down to the section Install Dynatrace Operator 

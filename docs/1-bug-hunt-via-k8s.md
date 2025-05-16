@@ -2,7 +2,7 @@
 
 ## Hunting via the kubernetes road
 
-- Open the Kubernetes App > You'll see a cluster with the name "codespace-xxxx". That's your Kind cluster being FullStack monitored.
+- Open the Kubernetes App > You'll see a cluster with the name "codespace-xxxx". That's your Kind cluster being fully observed.
 
 ![Kind Cluster](img/kubernetes_cluster.png)
 
@@ -12,12 +12,11 @@
 
 ![Todo Workload](img/todo_workload.png)
 
-
-- On the Overview in the right hand side, scroll down and open the Services app. (this are the traces grouped withing Dynatrace Services)
+- On the Overview in the right hand side, scroll down and open the `Services` app.  Dynatrace groups telemetry from distributed traces and spans into "Services" for you!
 
 ![Todo Services](img/todo_services.png)
 
-- Click on the TodoController service and then on the right corner "View Traces"
+- Click on the TodoController service and then on the right corner `View Traces`
 
 ![Todo Services](img/todo_services_traces.png)
 

@@ -3,10 +3,11 @@
 !!! note "The Bug 'Special characters'"
     Level: Beginner
 
-## Open the TODO App and add a Task with an exclamation mark!
+## Add a new Task
+
+Open the TODO App and add a Task with an exclamation mark `!`
 
 - Add a task with an exclamation mark! or a special character for that matter, like this:
-
 
 ![TODO App](img/todo_app_exclamation.png)
 

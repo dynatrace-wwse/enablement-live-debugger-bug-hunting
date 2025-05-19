@@ -8,6 +8,12 @@
 The TODO app has a duplicate function, let's give it a try.
 
 - Add a Task that we want to duplicate, we add **Call the Bugbusters**
+
+Task:
+```text
+Call the Bugbusters
+```
+
 ![Duplicate](img/todo_app_duplicate.png)
 
 - Hover over the added Task and on the right you'll notice a **&** symbol. This should duplicate the task.

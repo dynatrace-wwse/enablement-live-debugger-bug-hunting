@@ -642,40 +642,55 @@ document.addEventListener('DOMContentLoaded', function() {
 <h2 id="open-the-distributed-tracing-app">Open the Distributed Tracing App<a class="headerlink" href="#open-the-distributed-tracing-app" title="Permanent link">#</a></h2>
 <div class="admonition tipp">
 <p class="admonition-title">Protip: Open the Tracing App anywhere in Dynatrace</p>
-<p>type CTRL + K and then Tracing, the tracing app should appear in the super search.
+<p>Type CTRL + K, then search for 'Tracing'. The Tracing App should appear in the Super Search.
 <img alt="TODO App" src="../img/open_tracing_app.png" /></p>
 </div>
 <div class="admonition tipp">
 <p class="admonition-title">Want to learn more about the Tracing App?</p>
 <p>If you want to learn more about the <a href="https://www.youtube.com/watch?v=O4zWlwJ4hsA" target="_blank">new Distributed Tracing App, watch this amazing 12 min recording of Dynatrace App Spotlights</a></p>
 </div>
-<ul>
-<li>In the filter add <code>"Kubernetes namespace" = todoapp AND "Kubernetes workload" = todoapp</code></li>
-</ul>
-<p>You can also let the autocomplete help you or use the facets on the left-hand side to filter for all requests of the POD <code>todoapp</code> that is deployed in the namespace <code>todoapp</code>.</p>
+<p>In the filter add:</p>
+<div class="highlight"><pre><span></span><code>&quot;Kubernetes namespace&quot; = todoapp AND &quot;Kubernetes workload&quot; = todoapp
+</code></pre></div>
+<p>You can also let the autocomplete help you or use the facets on the left-hand side to filter for all requests of the Pod <code>todoapp</code> that is deployed in the namespace <code>todoapp</code>.</p>
 <p><img alt="TODO App" src="../img/tracing_app_filter.png" /></p>
-<p>If we take a look at the traces, we can see there is a trace named <code>addTodo</code>. By opening this trace, on the details on the right hand side, we can see in the <code>Code Attributes</code> that the <code>Code function = addTodo</code> and the <code>Code Namespace = com.dynatrace.todoapp.TodoController</code></p>
-<p>Now we know where in all the applications code we should be looking for the bug!</p>
+<p>If we take a look at the traces, we can see there is a trace named <code>addTodo</code>. By opening this trace, in the details pane on the right-hand side, we can see in the <code>Code Attributes</code> that the <code>Code function = addTodo</code> and the <code>Code Namespace = com.dynatrace.todoapp.TodoController</code></p>
+<p>Now we know where in the application code we should be looking for the bug!</p>
 <h2 id="open-the-live-debugger">Open the Live Debugger<a class="headerlink" href="#open-the-live-debugger" title="Permanent link">#</a></h2>
 <ul>
-<li>Let's search for the <code>Code function = addTodo</code> under the <code>Code Namespace = com.dynatrace.todoapp.TodoController</code>, in the search by typping <code>TodoController</code> the class file appears, open it.</li>
-<li>Now let's search for the AddTodo function, the declaration is in line 24.</li>
+<li>Let's search for the <code>Code function = addTodo</code> under the <code>Code Namespace = com.dynatrace.todoapp.TodoController</code>. In the search,  type <code>TodoController</code> the class file appears, open it.</li>
+<li>Now let's search for the <code>AddTodo</code> function, the declaration is in line 24.</li>
 </ul>
-<p>Do you see something weird? The deveoloper left a String function on line 28 with <code>getTitle().replaceAll("[^a-zA-Z0-9\\s]+", "");</code></p>
+<p><img alt="AddToDo Method Source" src="../img/todo_addtodo_method_source.png" /></p>
+<p>Notice anything unusual? The developer left a String function on line 28:</p>
+<blockquote>
+<p><code>28</code> String todoTitle = newTodoRecord.getTitle().replaceAll("[^a-zA-Z0-9\s]+", "");</p>
+</blockquote>
 <ul>
 <li>Let's add two breakpoints around that line, one before, let's say on line 25 and another on line 32.</li>
-<li>Go to the TodoApp and add a Task with a special character. </li>
-<li>Go back to the Live Debugger and watch the two snapshots get gathered on real time.</li>
-<li>If you open the first Hit, the one on line 25, you'll notice the Object <code>newTodoRecord.title = This is exciting!!!</code> that contains the exclamation mark. Meaning the data is being correctly passed on to the function ToDo, but then something happens and the <code>!!!</code> are removed.</li>
-<li>If you then look for the same attribute in the same method on the second HIT you'll see that the <code>!!!</code> are gone.</li>
+</ul>
+<p><img alt="AddToDo New Active Breakpoints" src="../img/todo_addtodo_new_active_breakpoints.png" /></p>
+<ul>
+<li>Go to the TodoApp in your browser and add a Task with a special character.</li>
+</ul>
+<p>Task:
+<div class="highlight"><pre><span></span><code>This is exciting!!!
+</code></pre></div></p>
+<ul>
+<li>Go back to the Live Debugger and watch the two snapshots, snapshots get gathered in real time.</li>
+</ul>
+<p><img alt="AddToDo Snapshots" src="../img/todo_addtodo_snapshots.png" /></p>
+<ul>
+<li>If you open the first snapshot, the one on line 25, you'll notice the Object <code>newTodoRecord.title = This is exciting!!!</code> that contains the exclamation mark. Meaning the data is being correctly passed on to the function <code>addTodo</code>, but then something happens and the <code>!!!</code> are removed.</li>
+<li>If you then look for the same attribute in the same method on the second snapshot you'll see that the <code>!!!</code> are gone.</li>
 </ul>
 <h2 id="watching-variables">Watching variables<a class="headerlink" href="#watching-variables" title="Permanent link">#</a></h2>
 <ul>
-<li>We want to make your life as a developer easier. With the Live Debugger you can watch varibles, right click on the  <code>newTodoRecord.title</code> and select <code>Watch</code></li>
+<li>We want to make your life as a developer easier. With the Live Debugger you can watch variables, right click on the  <code>newTodoRecord.title</code> and select <code>Watch</code></li>
 </ul>
 <p><img alt="watching variables" src="../img/ld_watch.png" /></p>
 <ul>
-<li>You'll see that in the snapshots, the title of both snapshots are added for ease of debugging complex applications. This is a very simple app, but imagine you have hundreds or thousend of lines of code, and are not even yours, using this strategy you can understand how specific variables change through the code.</li>
+<li>You'll see that in the snapshots, the title variable captured in both snapshots are added for ease of debugging complex applications. This is a very simple app, but imagine you have hundreds or thousands of lines of code, not all of them written by you, using this strategy you can understand how specific variables change through the code.</li>
 </ul>
 <p><img alt="watching variables" src="../img/ld_watch2.png" /></p>
 <div class="grid cards">

@@ -364,26 +364,41 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#14-enable-log-ingest" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 Enable Log Ingest
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-getting-the-permissions-for-monitoring-the-kubernetes-cluster-with-dynatrace" class="md-nav__link">
+  <a href="#2-create-dynatrace-api-tokens-for-kubernetes-observability" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Getting the permissions for monitoring the Kubernetes Cluster with Dynatrace
+      2. Create Dynatrace API Tokens for Kubernetes Observability
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
+    <nav class="md-nav" aria-label="2. Create Dynatrace API Tokens for Kubernetes Observability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#21-get-the-operator-token-and-the-ingest-token-from-the-kubernetes-app" class="md-nav__link">
     <span class="md-ellipsis">
       2.1. Get the Operator Token and the Ingest Token from the Kubernetes App
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -656,26 +671,41 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#14-enable-log-ingest" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 Enable Log Ingest
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-getting-the-permissions-for-monitoring-the-kubernetes-cluster-with-dynatrace" class="md-nav__link">
+  <a href="#2-create-dynatrace-api-tokens-for-kubernetes-observability" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Getting the permissions for monitoring the Kubernetes Cluster with Dynatrace
+      2. Create Dynatrace API Tokens for Kubernetes Observability
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
+    <nav class="md-nav" aria-label="2. Create Dynatrace API Tokens for Kubernetes Observability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#21-get-the-operator-token-and-the-ingest-token-from-the-kubernetes-app" class="md-nav__link">
     <span class="md-ellipsis">
       2.1. Get the Operator Token and the Ingest Token from the Kubernetes App
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -752,14 +782,37 @@ ALLOW<span class="w"> </span>storage:buckets:read<span class="w"> </span>WHERE<s
 <span class="w">        </span><span class="no">debugging_enabled = true</span>
 </code></pre></div>
 This is already set up for you in the codespaces automatically in the <a href="https://github.com/dynatrace-wwse/enablement-live-debugger-bug-hunting/blob/main/.devcontainer/yaml/dynakube-skel.yaml">Dynakube.yaml</a> file so no need to restart the ActiveGate.</p>
-<h2 id="2-getting-the-permissions-for-monitoring-the-kubernetes-cluster-with-dynatrace">2. Getting the permissions for monitoring the Kubernetes Cluster with Dynatrace<a class="headerlink" href="#2-getting-the-permissions-for-monitoring-the-kubernetes-cluster-with-dynatrace" title="Permanent link">#</a></h2>
+<h3 id="14-enable-log-ingest">1.4 Enable Log Ingest<a class="headerlink" href="#14-enable-log-ingest" title="Permanent link">#</a></h3>
+<p>You have (2) options:</p>
+<ul>
+<li>Enable built-in log ingest rule to ingest all logs discovered by Dynatrace</li>
+<li>Configure log ingest rule to ingest relevant logs for this lab</li>
+</ul>
+<p>In your Dynatrace tenant, open the <code>Settings</code> App.  Navigate in the menus to <code>Collect and capture</code> &gt; <code>Log monitoring</code> &gt; <code>Log ingest rules</code>.  This will open the <code>Settings Classic</code> App and show you the <strong>Log ingest rules</strong></p>
+<p><img alt="Settings Log Ingest Rules" src="../img/settings_log_ingest_rules.png" /></p>
+<p><strong>Ingest all logs</strong></p>
+<p>Locate the rule <code>[Built-in] Ingest all logs</code> and enable it.  Click <code>Save changes</code>.</p>
+<p><strong>Ingest relevant logs</strong></p>
+<p><img alt="Settings Log Ingest Todoapp" src="../img/settings_log_ingest_todoapp.png" /></p>
+<p>Click on <code>Add rule</code> to create a new Rule.  Configure the Rule:</p>
+<p>Rule name:
+<div class="highlight"><pre><span></span><code>TODO App Logs
+</code></pre></div></p>
+<p>Rule type:
+<div class="highlight"><pre><span></span><code>Include in storage
+</code></pre></div></p>
+<p>Conditions:
+<div class="highlight"><pre><span></span><code>Kubernetes namespace name = todoapp
+</code></pre></div></p>
+<p>Click on <code>Save changes</code>.</p>
+<h2 id="2-create-dynatrace-api-tokens-for-kubernetes-observability">2. Create Dynatrace API Tokens for Kubernetes Observability<a class="headerlink" href="#2-create-dynatrace-api-tokens-for-kubernetes-observability" title="Permanent link">#</a></h2>
 <p>This codespace has everything automated for you so you can focus on what matters which in this enablement is to learn about the Live Debugging capabilities of the Dynatrace Platform.  You'll need two tokens:</p>
 <ol>
 <li>Operator Token</li>
 <li>Ingest Token </li>
 </ol>
 <p>We will get this two very easy from the Kubernetes App. </p>
-<h2 id="21-get-the-operator-token-and-the-ingest-token-from-the-kubernetes-app">2.1. Get the Operator Token and the Ingest Token from the Kubernetes App<a class="headerlink" href="#21-get-the-operator-token-and-the-ingest-token-from-the-kubernetes-app" title="Permanent link">#</a></h2>
+<h3 id="21-get-the-operator-token-and-the-ingest-token-from-the-kubernetes-app">2.1. Get the Operator Token and the Ingest Token from the Kubernetes App<a class="headerlink" href="#21-get-the-operator-token-and-the-ingest-token-from-the-kubernetes-app" title="Permanent link">#</a></h3>
 <ol>
 <li>Open the Kubernetes App (CTRL + K then type Kubernetes for fast access)</li>
 <li>Select the + Add cluster button</li>

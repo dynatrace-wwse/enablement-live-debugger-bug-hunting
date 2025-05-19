@@ -659,7 +659,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <h2 id="hunting-via-the-kubernetes-road">Hunting via the kubernetes road<a class="headerlink" href="#hunting-via-the-kubernetes-road" title="Permanent link">#</a></h2>
 <ul>
-<li>Open the Kubernetes App &gt; You'll see a cluster with the name "codespace-xxxx". That's your Kind cluster being FullStack monitored.</li>
+<li>Open the Kubernetes App &gt; You'll see a cluster with the name "codespace-xxxx". That's your Kind cluster being fully observed.</li>
 </ul>
 <p><img alt="Kind Cluster" src="../img/kubernetes_cluster.png" /></p>
 <ul>
@@ -672,11 +672,11 @@ document.addEventListener('DOMContentLoaded', function() {
 </ul>
 <p><img alt="Todo Workload" src="../img/todo_workload.png" /></p>
 <ul>
-<li>On the Overview in the right hand side, scroll down and open the Services app. (this are the traces grouped withing Dynatrace Services)</li>
+<li>On the Overview in the right hand side, scroll down and open the <code>Services</code> app.  Dynatrace groups telemetry from distributed traces and spans into "Services" for you!</li>
 </ul>
 <p><img alt="Todo Services" src="../img/todo_services.png" /></p>
 <ul>
-<li>Click on the TodoController service and then on the right corner "View Traces"</li>
+<li>Click on the TodoController service and then on the right corner <code>View Traces</code></li>
 </ul>
 <p><img alt="Todo Services" src="../img/todo_services_traces.png" /></p>
 <ul>
@@ -717,13 +717,23 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>You have multiple ways to open the TodoController.java. Let's say you know the code, then easily you'll navigate to it by opening the Source Code menu on the left pane, navigate to: <code>todoapp &gt; src &gt; main &gt; java &gt; com &gt; dynatrace &gt; todoapp &gt; TodoController.java</code></p>
 <p>if you don't know the structure, use the search and type <code>TodoController</code>it'll search for all matches, you'll see the Class file so you can open it.</p>
 <p><img alt="Live Debugger App" src="../img/todocontroller.png" /></p>
-<p>Now let's search for the Method <code>clearCompletedTodos</code>. You'll find the Method definition around line 72. We need to set a non-breaking breakpoint on running code inside the method, for this I recommend to start setting it on the <code>return</code> code which is at line 92. This way we gather the values of the variables before they are sent back to the client.</p>
+<p>Now let's search for the Method <code>clearCompletedTodos</code>. You'll find the Method definition at line 72. </p>
+<blockquote>
+<p><code>72</code> @RequestMapping(value = "/todos/clear_completed", method = RequestMethod.DELETE)
+<code>73</code> public ResponseEntity&lt;?&gt; clearCompletedTodos() throws InterruptedException {</p>
+</blockquote>
+<p>We need to set a non-breaking breakpoint on running code inside the method, for this I recommend to start setting it on the <code>return</code> code which is at line 92. This way we gather the values of the variables before they are sent back to the client.</p>
+<blockquote>
+<p><code>92</code> return new ResponseEntity&lt;&gt;(entities, HttpStatus.OK);</p>
+</blockquote>
+<p>You can set a non-breaking breakpoint by clicking just to the left of the line number.  Set it and wait for the status to change to <strong>Active</strong>.</p>
+<p><img alt="Clear Completed New Active Breakpoint" src="../img/clearcompleted_new_active_breakpoint.png" /></p>
 <p>Go back to the TODO app and clear again on "Clear completed"</p>
 <p>Return to the Live Debugger and see the Snaphot captured, open it and see all the variables that were captured with their values.</p>
+<p><img alt="Clear Completed BP" src="../img/clearcompleted_breakpoint.png" /></p>
 <p>Do you see the bug? can you understand what happened and why the completed todos are not deleted? We can see two variables, the <code>todos</code> with a length of 3 and <code>todoStore</code> with a length of 0.</p>
 <p>In line 84 <code>todoStore.remove(todoRecord)</code> the variable todoStore is a newly instantiated variable. This is a mistake, it should be replaced by the variable <code>todos</code> so the function can succesfully remove all cleared tasks!</p>
 <p>Yay! we found the first bug!!!</p>
-<p><img alt="Clear Completed BP" src="../img/clearcompleted_breakpoint.png" /></p>
 <div class="admonition tip">
 <p class="admonition-title">Seeing is believing 🤩</p>
 <p>Did you notice? With Dynatrace we were able to navigate from the Kubernetes Cluster all the way down to the workload, it's traces cotinuing down to the specific method and namespace of the called function and variables. With one click on the method we were able to set a <strong>non-breaking</strong> breakpoint in our production application deployed in a Kubernetes Cluster where with a single snapshot we were able to identify the bug. Debugging Kubernetes Clusters has never been so easy!!! And in Production!! 🤯</p>

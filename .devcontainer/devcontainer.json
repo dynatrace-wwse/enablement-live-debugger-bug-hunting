@@ -25,11 +25,11 @@
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
-		30080
+		30100
 	],
 	// add labels
 	"portsAttributes": {
-		"30080": { "label": "Todo App Web UI" }
+		"30100": { "label": "Todo App Web UI" }
 	},
 
 	"hostRequirements": {

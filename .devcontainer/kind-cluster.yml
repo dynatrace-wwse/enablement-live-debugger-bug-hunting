@@ -15,8 +15,8 @@ nodes:
     containerPath: /mnt/root
   # Ports are forwarded on demand using a container.
   extraPortMappings:
-  - hostPort: 30080
-    containerPort: 30080
+  - hostPort: 30100
+    containerPort: 30100
   #  protocol: TCP
   #- hostPort: 4317
   #  containerPort: 4317

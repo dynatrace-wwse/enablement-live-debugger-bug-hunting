@@ -58,6 +58,34 @@ printGreeting(){
   bash $CODESPACE_VSCODE_FOLDER/.devcontainer/util/greeting.sh
 }
 
+waitForPod() {
+  # Function to filter by Namespace and POD string, default is ALL namespaces
+  # If 2 parameters then the first is Namespace the second is Pod-String
+  # If 1 parameters then Namespace == all-namespaces the first is Pod-String
+  if [[ $# -eq 2 ]]; then
+    namespace_filter="-n $1"
+    pod_filter="$2"
+  elif [[ $# -eq 1 ]]; then
+    namespace_filter="--all-namespaces"
+    pod_filter="$1"
+  fi
+  RETRY=0
+  RETRY_MAX=60
+  # Get all pods, count and invert the search for not running nor completed. Status is for deleting the last line of the output
+  CMD="kubectl get pods $namespace_filter 2>&1 | grep -c -E '$pod_filter'"
+  printInfo "Verifying that pods in \"$namespace_filter\" with name \"$pod_filter\" is scheduled in a workernode "
+  while [[ $RETRY -lt $RETRY_MAX ]]; do
+    pods_running=$(eval "$CMD")
+    if [[ "$pods_running" != '0' ]]; then
+      printInfo "\"$pods_running\" pods are running on \"$namespace_filter\" with name \"$pod_filter\" exiting loop."
+      break
+    fi
+    RETRY=$(($RETRY + 1))
+    printWarn "Retry: ${RETRY}/${RETRY_MAX} - No pods are running on  \"$namespace_filter\" with name \"$pod_filter\". Wait 10s for $pod_filter PoDs to be scheduled..."
+    sleep 10
+  done
+}
+
 # shellcheck disable=SC2120
 waitForAllPods() {
   # Function to filter by Namespace, default is ALL
@@ -87,34 +115,6 @@ waitForAllPods() {
     kubectl get pods --field-selector=status.phase!=Running -A
     exit 1
   fi
-}
-
-waitForPod() {
-  # Function to filter by Namespace and POD string, default is ALL namespaces
-  # If 2 parameters then the first is Namespace the second is Pod-String
-  # If 1 parameters then Namespace == all-namespaces the first is Pod-String
-  if [[ $# -eq 2 ]]; then
-    namespace_filter="-n $1"
-    pod_filter="$2"
-  elif [[ $# -eq 1 ]]; then
-    namespace_filter="--all-namespaces"
-    pod_filter="$1"
-  fi
-  RETRY=0
-  RETRY_MAX=60
-  # Get all pods, count and invert the search for not running nor completed. Status is for deleting the last line of the output
-  CMD="kubectl get pods $namespace_filter 2>&1 | grep -c -E '$pod_filter'"
-  printInfo "Verifying that pods in \"$namespace_filter\" with name \"$pod_filter\" is scheduled in a workernode "
-  while [[ $RETRY -lt $RETRY_MAX ]]; do
-    pods_running=$(eval "$CMD")
-    if [[ "$pods_running" != '0' ]]; then
-      printInfo "\"$pods_running\" pods are running on \"$namespace_filter\" with name \"$pod_filter\" exiting loop."
-      break
-    fi
-    RETRY=$(($RETRY + 1))
-    printWarn "Retry: ${RETRY}/${RETRY_MAX} - No pods are running on  \"$namespace_filter\" with name \"$pod_filter\". Wait 10s for $pod_filter PoDs to be scheduled..."
-    sleep 10
-  done
 }
 
 waitForAllReadyPods() {
@@ -356,7 +356,7 @@ saveReadCredentials() {
 
 }
 
-# TODO: Clean up this mess
+# FIXME: Clean up this mess
 dynatraceEvalReadSaveCredentials() {
   printInfoSection "Dynatrace evaluating and reading/saving Credentials"
   if [[ -n "${DT_TENANT}" && -n "${DT_INGEST_TOKEN}" ]]; then
@@ -408,10 +408,9 @@ deployCloudNative() {
 
     printInfo "Log capturing will be handled by the Host agent."
     # We wait for 5 seconds for the pods to be scheduled, otherwise it will mark it as passed since the pods have not been scheduled
-    
     waitForPod dynatrace activegate
     
-    #TODO: Verify dependency of AG and OS being ready.
+    #FIXME: Verify dependency of AG and OS being ready.
     waitForAllReadyPods dynatrace
   else
     printInfo "Not deploying the Dynatrace Operator, no credentials found"
@@ -425,7 +424,7 @@ deployApplicationMonitoring() {
     kubectl -n dynatrace wait pod --for=condition=ready --selector=app.kubernetes.io/name=dynatrace-operator,app.kubernetes.io/component=webhook --timeout=300s
 
     kubectl -n dynatrace apply -f $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-applicationmonitoring.yaml
-    #TODO: When deploying in AppOnly we need to capture the logs, either with log module or FluentBit
+    #FIXME: When deploying in AppOnly we need to capture the logs, either with log module or FluentBit
     waitForAllPods dynatrace
   else
     printInfo "Not deploying the Dynatrace Operator, no credentials found"
@@ -436,7 +435,7 @@ undeployDynakubes() {
     printInfoSection "Undeploying Dynakubes, OneAgent installation from Workernode if installed"
 
     kubectl -n dynatrace delete dynakube --all
-    #TODO: fix this
+    #FIXME: Test uninstalling Dynatracem good when changing monitoring modes. 
     #kubectl -n dynatrace wait pod --for=condition=delete --selector=app.kubernetes.io/name=oneagent,app.kubernetes.io/managed-by=dynatrace-operator --timeout=300s
     sudo bash /opt/dynatrace/oneagent/agent/uninstall.sh 2>/dev/null
 }
@@ -463,10 +462,14 @@ dynatraceDeployOperator() {
   if [ -n "${DT_TENANT}" ]; then
     # Deploy Operator
 
-    deployOperatorViaHelm
+    FIXME: HELM Deployment fails
+    deployOperatorViaKubectl
+
+    waitForPod dynatrace activegate
+
     waitForAllPods dynatrace
 
-    #TODO: Fix this 
+    #FIXME: Add Ingress Nginx instrumentation and always expose in a port so all apps have RUM regardless of technology
     #printInfoSection "Instrumenting NGINX Ingress"
     #bashas "cd $K8S_PLAY_DIR/apps/nginx && bash instrument-nginx.sh"
 
@@ -496,6 +499,26 @@ generateDynakube(){
     
     # Create Dynakube for ApplicationMonitoring
     sed -e 's~MONITORINGMODE:~applicationMonitoring: {}:~' $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-skel.yaml > $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-applicationmonitoring.yaml
+
+}
+
+deployOperatorViaKubectl(){
+
+  saveReadCredentials
+  API="/api"
+  DT_API_URL=$DT_TENANT$API
+  
+  # Read the actual hostname in case changed during instalation
+  CLUSTERNAME=$(hostname)
+
+  kubectl create namespace dynatrace
+
+  kubectl apply -f https://github.com/Dynatrace/dynatrace-operator/releases/download/v1.5.1/kubernetes-csi.yaml
+
+  # Save Dynatrace Secret
+  kubectl -n dynatrace create secret generic dev-container --from-literal="apiToken=$DT_OPERATOR_TOKEN" --from-literal="dataIngestToken=$DT_INGEST_TOKEN"
+
+  generateDynakube
 
 }
 
@@ -530,9 +553,9 @@ deployTodoApp(){
   kubectl -n todoapp expose deployment todoapp --type=NodePort --name=todoapp --port=8080 --target-port=8080
 
   # Define the NodePort to expose the app from the Cluster
-  kubectl patch service todoapp --namespace=todoapp --type='json' --patch='[{"op": "replace", "path": "/spec/ports/0/nodePort", "value":30080}]'
+  kubectl patch service todoapp --namespace=todoapp --type='json' --patch='[{"op": "replace", "path": "/spec/ports/0/nodePort", "value":30100}]'
 
-  printInfoSection "TodoApp is available via NodePort=30080"
+  printInfoSection "TodoApp is available via NodePort=30100"
 }
 
 exposeTodoApp(){
@@ -560,21 +583,21 @@ exposeMkdocs(){
 }
 
 
-exposeLabguide(){
+_exposeLabguide(){
   printInfo "Exposing Lab Guide in your dev.container"
   cd $CODESPACE_VSCODE_FOLDER/lab-guide/
   nohup node bin/server.js --host 0.0.0.0 --port 3000 > /dev/null 2>&1 &
   cd -
 }
 
-buildLabGuide(){
+_buildLabGuide(){
   printInfoSection "Building the Lab-guide in port 3000"
   cd $CODESPACE_VSCODE_FOLDER/lab-guide/
   node bin/generator.js
   cd -
 }
 
-deployAstroshop(){
+_deployAstroshop(){
   printInfoSection "Deploying Astroshop"
 
   # read the credentials and variables
@@ -617,6 +640,7 @@ deleteCodespace(){
   printWarn "Warning! Codespace $CODESPACE_NAME will be deleted, the connection will be lost in a sec... " 
   gh codespace delete --codespace "$CODESPACE_NAME" --force
 }
+
 
 showOpenPorts(){
   sudo netstat -tulnp

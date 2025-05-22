@@ -453,7 +453,7 @@ uninstallDynatrace() {
 # shellcheck disable=SC2120
 dynatraceDeployOperator() {
 
-  printInfoSection "Deploying Dynatrace Operator via Helm."
+  printInfoSection "Deploying Dynatrace Operator"
   # posssibility to load functions.sh and call dynatraceDeployOperator A B C to save credentials and override
   # or just run in normal deployment
   saveReadCredentials $@
@@ -464,8 +464,6 @@ dynatraceDeployOperator() {
 
     FIXME: HELM Deployment fails
     deployOperatorViaKubectl
-
-    waitForPod dynatrace activegate
 
     waitForAllPods dynatrace
 
@@ -503,6 +501,8 @@ generateDynakube(){
 }
 
 deployOperatorViaKubectl(){
+
+  printInfoSection "Deploying Operator via kubectl"
 
   saveReadCredentials
   API="/api"

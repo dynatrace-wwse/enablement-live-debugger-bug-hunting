@@ -216,6 +216,11 @@ spec:
     # Optional: Defines a custom properties file providing either as a value or as a reference to a secret
     # If a reference to a secret is used, the key to the data must be 'customProperties'
     #
+    #Set debugging_enabled to true in the custom.properties file.
+    customProperties:
+      value: |
+        [debugging]
+        debugging_enabled = true
     # customProperties:
     #   value: |
     #     [connectivity]

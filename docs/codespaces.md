@@ -77,7 +77,7 @@ showOpenPorts(){
 }
 ```
 
-The todoApp is already exposed via NodePort in the port 30080, if you want to expose it in another port like the one defined 8080 in the service, then type and to expose the TODO app, type `exposeTodoApp`, 
+The todoApp is already exposed via NodePort in the port 30100, if you want to expose it in another port like the one defined 8080 in the service, then type and to expose the TODO app, type `exposeTodoApp`, 
 ```bash
 exposeTodoApp(){
   printInfo "Exposing Todo App in your dev.container"

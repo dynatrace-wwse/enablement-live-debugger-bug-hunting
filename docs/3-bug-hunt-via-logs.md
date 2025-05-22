@@ -61,5 +61,5 @@ Now the developer can easily fix this code and resolve the issue!
 We've now successfully hunted down and taken care of another bug 🤩
 
 <div class="grid cards" markdown>
-- [Click here to continue :octicons-arrow-right-24:](cleanup.md)
+- [Click here to continue :octicons-arrow-right-24:](ide-integration.md)
 </div>

@@ -462,8 +462,7 @@ dynatraceDeployOperator() {
   if [ -n "${DT_TENANT}" ]; then
     # Deploy Operator
 
-    FIXME: HELM Deployment fails
-    deployOperatorViaKubectl
+    deployOperatorViaHelm
 
     waitForAllPods dynatrace
 

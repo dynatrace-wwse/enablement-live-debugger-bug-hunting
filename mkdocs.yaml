@@ -11,9 +11,12 @@ nav:
   - '7. 2nd Bug - hunt via traces': 2-bug-hunt-via-tracing.md
   - '8. 3rd Bug - duplicate task': 3-bug-duplicate-task.md
   - '9. 3rd Bug - hunt via logs': 3-bug-hunt-via-logs.md
-  - '10. Cleanup': cleanup.md
-  - '11. Resources': resources.md
-  - "12. What's next?": whats-next.md
+  - '10. IDE Integration': ide-integration.md
+  - '11. Mask sensitive data': mask-data.md
+  - '12. Version Control': version-control.md
+  - '13. Cleanup': cleanup.md
+  - '14. Resources': resources.md
+  - "15. What's next?": whats-next.md
 theme:
   name: material
   custom_dir: docs/overrides

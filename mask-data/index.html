@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../codespaces/">
+        <link rel="prev" href="../ide-integration/">
       
       
-        <link rel="next" href="../1-bug-hunt-via-k8s/">
+        <link rel="next" href="../version-control/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>4. 1st Bug - clear completed - Dynatrace Enablement Lab: Live Debugger Tutorial</title>
+        <title>11. Mask sensitive data - Dynatrace Enablement Lab: Live Debugger Tutorial</title>
       
     
     
@@ -76,11 +76,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#open-the-todo-app-and-add-a-couple-of-tasks" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -113,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              4. 1st Bug - clear completed
+              11. Mask sensitive data
             
           </span>
         </div>
@@ -323,28 +318,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    4. 1st Bug - clear completed
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../1-bug-clear-completed/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -353,33 +330,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#open-the-todo-app-and-add-a-couple-of-tasks" class="md-nav__link">
-    <span class="md-ellipsis">
-      Open the TODO App and add a couple of tasks
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -508,10 +458,17 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../mask-data/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -520,6 +477,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -642,23 +600,6 @@
   
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#open-the-todo-app-and-add-a-couple-of-tasks" class="md-nav__link">
-    <span class="md-ellipsis">
-      Open the TODO App and add a couple of tasks
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -675,37 +616,21 @@
   
 
 
-  <h1>4. 1st Bug - clear completed</h1>
+  <h1>11. Mask sensitive data</h1>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  dynatrace.sendBizEvent('page_load', {"page": "4. 1st Bug - clear completed"});
+  dynatrace.sendBizEvent('page_load', {"page": "11. Mask sensitive data"});
 });
 </script>
 
-<div class="admonition note">
-<p class="admonition-title">The Bug 'Clear completed'</p>
-<p>Level: Beginner</p>
-</div>
-<h2 id="open-the-todo-app-and-add-a-couple-of-tasks">Open the TODO App and add a couple of tasks<a class="headerlink" href="#open-the-todo-app-and-add-a-couple-of-tasks" title="Permanent link">#</a></h2>
-<p>In VSCode open a new terminal and in the Welcome Message you should see a link to the Todo App UI. Click on it. Now add a couple of tasks.
-It should look something like this:
-<img alt="TODO App" src="../img/todo_app.png" /></p>
-<ul>
-<li>Add a couple of tasks. </li>
-<li>Complete some of them (or all, depending how productive you are ;) . </li>
-<li>Now click on: <code>Clear completed</code> </li>
-</ul>
-<p><img alt="TODO App" src="../img/todo_completed.png" /></p>
-<ul>
-<li>Are the tasks cleared?</li>
-</ul>
-<p>Apparently the button does not work. When clicked - completed todos are not cleared. </p>
-<p>We embark on our Bug hunting journey! </p>
-<p>There are multiple ways to dive deep into the issue because Dynatrace is monitoring your Kubernetes cluster, all workloads in it, all it's traces with code level insights and all real users accessing the exposed application.</p>
+<details class="info">
+<summary>WIP Masking sensitive data</summary>
+<p>This section is under construction</p>
+</details>
 <div class="grid cards">
 <ul>
-<li><a href="../1-bug-hunt-via-k8s/">Click Here to continue the quest<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>
+<li><a href="../version-control/">Click here to continue <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>
 </ul>
 </div>
 

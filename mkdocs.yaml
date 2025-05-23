@@ -13,10 +13,11 @@ nav:
   - '9. 3rd Bug - hunt via logs': 3-bug-hunt-via-logs.md
   - '10. IDE Integration': ide-integration.md
   - '11. Mask sensitive data': mask-data.md
-  - '12. Version Control': version-control.md
-  - '13. Cleanup': cleanup.md
-  - '14. Resources': resources.md
-  - "15. What's next?": whats-next.md
+  - '12. Version control': version-control.md
+  - '13. Grail and DQL': grail-and-dql.md
+  - '14. Cleanup': cleanup.md
+  - '15. Resources': resources.md
+  - "16. What's next?": whats-next.md
 theme:
   name: material
   custom_dir: docs/overrides

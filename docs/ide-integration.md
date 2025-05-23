@@ -12,9 +12,9 @@ On the top left, click on the VS Code menu (the 3 lines), and then click on "Ope
 
 [Download VS Code](https://code.visualstudio.com){ :target="_blank" .md-button }
 
-## Codespaces experience in your full IDE
+## Codespaces experience in your IDE
 
-Now your Codespace is open inside your VS Code IDE. You'll notice that you have now the full IDE experience, you can drag and drop files inside and outside the IDE from your OS and VSCode will automatically add them in the Container that is being managed by your codespace. 
+Now your Codespace is open inside your VS Code IDE. You'll notice that you have now the full IDE experience, you can drag and drop files inside and outside the IDE from your OS and VSCode will automatically add them in the container that is being managed by your codespace. 
 
 The application is now being exposed and mapped to your localhost. In this case the TODO app is being mapped to port 30100, so you will be able to access it like this: [http://127.0.0.1:30100](http://127.0.0.1:30100){:target="_blank"}
 
@@ -27,32 +27,47 @@ On the left pane, click on "Extensions", then search for "Dynatrace" > Select "O
 
 ## Select the stage you want to connect
 
-Great! now that you have the Dynatrace extension installed in your IDE, let's configure it. In the extension, click on the "settings wheel" > select "Settings" and click on it.
-
+Great! now that you have the Dynatrace extension installed in your IDE. Unless you are using a DEV or Hardening (sprint) tenant, this configuration is not needed since th default is "production". All our Free Trials and customers run in production environments. 
+If you are using a DEV or sprint tenant, here is how to configure it. Inside the extension, click on the "settings wheel" > select "Settings" and click on it.
 
 ![vscode menu](img/ide_extension_settings.jpg)
 
-The extension settings will open. You can select the environment you want to connect. 
+The extension settings will open. You can select the environment you want to connect. As options you'll get:
 
-Dynatrace.....
-SSO... support mutliple tenants...
+1. development  
+2. sprint       
+3. production (default)
 
+Select the desired environment and that's it. You can select it for the User, Remote CS instance and for the Workspace.
 
 ![vscode menu](img/ide_select_environment.png)
 
+## Login to Dynatrace SSO
 
-## Login Dynatrace SSO
+Now let's login to the environment using SSO. On the bottom pane, there is a tab called "Dynatrace Snapshots", open it.  Click on the button "Log in".
 
-Select tenant you want to connect.
+![vscode menu](img/bottom_dt_bar.png)
 
-
-
-## Set a breakpoint
+This will open a browser and will pass on the SSO credentials to your IDE via http://localhost:3232. When the browser tab opens, enter your credentials, login and accept the pop up to connect back to VS Code. 
 
 
+## Select the tenant 
+
+Since we are using the comfort of SSO, you can select any tenant you have permission on the logged in production or whatever environment you previously selected. For selecting a specific tenant click on the cloud icon in the Dynatrace Snapshots tab, and the tenants you have permissions will appear.
+
+
+## Select a running container
+
+...
+
+
+## Set a non-breaking breakpoint
+
+
+... live breakpoints, breakpoint status & editor
 
 
 
 <div class="grid cards" markdown>
-- [Ressources:octicons-arrow-right-24:](resources.md)
+- [Click here to continue :octicons-arrow-right-24:](mask-data.md)
 </div>

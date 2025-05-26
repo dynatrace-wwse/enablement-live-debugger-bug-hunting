@@ -46,26 +46,39 @@ Select the desired environment and that's it. You can select it for the User, Re
 
 Now let's login to the environment using SSO. On the bottom pane, there is a tab called "Dynatrace Snapshots", open it.  Click on the button "Log in".
 
-![vscode menu](img/bottom_dt_bar.png)
-
 This will open a browser and will pass on the SSO credentials to your IDE via http://localhost:3232. When the browser tab opens, enter your credentials, login and accept the pop up to connect back to VS Code. 
 
+??? Warning "Loggin in keeps loading... and how to fix it"
+    If after you enter your login credentials in the browser, the extensions keeps on loading, just restart the extension so it can authenticate properly. Passing in the credentials from the Browser to the Dynatrace Extension that is running in VS Code inside a container, might fail and needs a refresh so it loads properly. 
+    
+    Just type ***[Ctrl]+[Shift] + P : Developer: Restart Extension Host***
+    ![vscode menu](img/restart_extension.png){width: 200}
 
-## Select the tenant 
-
-Since we are using the comfort of SSO, you can select any tenant you have permission on the logged in production or whatever environment you previously selected. For selecting a specific tenant click on the cloud icon in the Dynatrace Snapshots tab, and the tenants you have permissions will appear.
 
 
-## Select a running container
+## Select the tenant ☁️
 
-...
+Since we are using the comfort of SSO, you can select any tenant you have permission on the logged in production or whatever environment you previously selected. For selecting a specific tenant click on the ☁️ cloud icon in the Dynatrace Snapshots tab, and the tenants you have permissions will appear in a drop down.
+
+
+## Select a running container ✏️
+
+You'll need to specify the instances you want to capture non-breaking break points, for this click on the ✏️ pencil icon in the Dynatrace Snapshots tab and the ``Dynatrace: Instance selection`` tab will open. Select the pod ``todoapp-deploymentHashId-podHashID`` > in th properties filter by ``k8s.workload.name:todoapp``. THis way when the pod gets restarted or in a new deployment, the filter will still apply to it. You can add more filters like ``k8s.namespace.name`` or alike for filtering by namespace or cluster in big environments.
 
 
 ## Set a non-breaking breakpoint
 
+Now open the ``TodoController.java`` Class. Once opened, on the left side of the Class, where the line numbers appear, click on the Line you would like to set a breakpoint. For example let's put a breakpoint inside the method ``addTodo``in the line 25. Right click on the line number, and select **Add Live Debugging breakpoint**. You'll notice after you set the breakpoint, on the left pane (when the extension is selected) you'll have three sections: 
 
-... live breakpoints, breakpoint status & editor
 
+![vscode menu](img/ide_breakpoint.png)
+
+
+| Method      | Description                          |
+| :---------- | :----------------------------------- |
+| `LIVE DEBUGGING BREAKPOINTS`       | All active breakpoints for your session with Class and line number  |
+| `BREAKPOINT STATUS`       | the status of the breakpoints and the instances that match the breakpoint |
+| `BREAKPOINT EDITOR`    | By selecting the Breakpoint in `LIVE DEBUGGING BREAKPOINTS` you'll be able to set the settings for the breakpoint, such as `Log message`, `Conditions` and `Limits`  |
 
 
 <div class="grid cards" markdown>

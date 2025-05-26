@@ -535,7 +535,7 @@
         <li class="md-nav__item">
   <a href="#select-the-tenant" class="md-nav__link">
     <span class="md-ellipsis">
-      Select the tenant
+      Select the tenant ☁️
     </span>
   </a>
   
@@ -544,7 +544,7 @@
         <li class="md-nav__item">
   <a href="#select-a-running-container" class="md-nav__link">
     <span class="md-ellipsis">
-      Select a running container
+      Select a running container ✏️
     </span>
   </a>
   
@@ -759,7 +759,7 @@
         <li class="md-nav__item">
   <a href="#select-the-tenant" class="md-nav__link">
     <span class="md-ellipsis">
-      Select the tenant
+      Select the tenant ☁️
     </span>
   </a>
   
@@ -768,7 +768,7 @@
         <li class="md-nav__item">
   <a href="#select-a-running-container" class="md-nav__link">
     <span class="md-ellipsis">
-      Select a running container
+      Select a running container ✏️
     </span>
   </a>
   
@@ -837,14 +837,42 @@ If you are using a DEV or sprint tenant, here is how to configure it. Inside the
 <p><img alt="vscode menu" src="../img/ide_select_environment.png" /></p>
 <h2 id="login-to-dynatrace-sso">Login to Dynatrace SSO<a class="headerlink" href="#login-to-dynatrace-sso" title="Permanent link">#</a></h2>
 <p>Now let's login to the environment using SSO. On the bottom pane, there is a tab called "Dynatrace Snapshots", open it.  Click on the button "Log in".</p>
-<p><img alt="vscode menu" src="../img/bottom_dt_bar.png" /></p>
 <p>This will open a browser and will pass on the SSO credentials to your IDE via http://localhost:3232. When the browser tab opens, enter your credentials, login and accept the pop up to connect back to VS Code. </p>
-<h2 id="select-the-tenant">Select the tenant<a class="headerlink" href="#select-the-tenant" title="Permanent link">#</a></h2>
-<p>Since we are using the comfort of SSO, you can select any tenant you have permission on the logged in production or whatever environment you previously selected. For selecting a specific tenant click on the cloud icon in the Dynatrace Snapshots tab, and the tenants you have permissions will appear.</p>
-<h2 id="select-a-running-container">Select a running container<a class="headerlink" href="#select-a-running-container" title="Permanent link">#</a></h2>
-<p>...</p>
+<details class="warning">
+<summary>Loggin in keeps loading... and how to fix it</summary>
+<p>If after you enter your login credentials in the browser, the extensions keeps on loading, just restart the extension so it can authenticate properly. Passing in the credentials from the Browser to the Dynatrace Extension that is running in VS Code inside a container, might fail and needs a refresh so it loads properly. </p>
+<p>Just type <strong><em>[Ctrl]+[Shift] + P : Developer: Restart Extension Host</em></strong>
+<img 200="200" alt="vscode menu" src="../img/restart_extension.png" width:="width:" /></p>
+</details>
+<h2 id="select-the-tenant">Select the tenant ☁️<a class="headerlink" href="#select-the-tenant" title="Permanent link">#</a></h2>
+<p>Since we are using the comfort of SSO, you can select any tenant you have permission on the logged in production or whatever environment you previously selected. For selecting a specific tenant click on the ☁️ cloud icon in the Dynatrace Snapshots tab, and the tenants you have permissions will appear in a drop down.</p>
+<h2 id="select-a-running-container">Select a running container ✏️<a class="headerlink" href="#select-a-running-container" title="Permanent link">#</a></h2>
+<p>You'll need to specify the instances you want to capture non-breaking break points, for this click on the ✏️ pencil icon in the Dynatrace Snapshots tab and the <code>Dynatrace: Instance selection</code> tab will open. Select the pod <code>todoapp-deploymentHashId-podHashID</code> &gt; in th properties filter by <code>k8s.workload.name:todoapp</code>. THis way when the pod gets restarted or in a new deployment, the filter will still apply to it. You can add more filters like <code>k8s.namespace.name</code> or alike for filtering by namespace or cluster in big environments.</p>
 <h2 id="set-a-non-breaking-breakpoint">Set a non-breaking breakpoint<a class="headerlink" href="#set-a-non-breaking-breakpoint" title="Permanent link">#</a></h2>
-<p>... live breakpoints, breakpoint status &amp; editor</p>
+<p>Now open the <code>TodoController.java</code> Class. Once opened, on the left side of the Class, where the line numbers appear, click on the Line you would like to set a breakpoint. For example let's put a breakpoint inside the method <code>addTodo</code>in the line 25. Right click on the line number, and select <strong>Add Live Debugging breakpoint</strong>. You'll notice after you set the breakpoint, on the left pane (when the extension is selected) you'll have three sections: </p>
+<p><img alt="vscode menu" src="../img/ide_breakpoint.png" /></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Method</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>LIVE DEBUGGING BREAKPOINTS</code></td>
+<td style="text-align: left;">All active breakpoints for your session with Class and line number</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>BREAKPOINT STATUS</code></td>
+<td style="text-align: left;">the status of the breakpoints and the instances that match the breakpoint</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>BREAKPOINT EDITOR</code></td>
+<td style="text-align: left;">By selecting the Breakpoint in <code>LIVE DEBUGGING BREAKPOINTS</code> you'll be able to set the settings for the breakpoint, such as <code>Log message</code>, <code>Conditions</code> and <code>Limits</code></td>
+</tr>
+</tbody>
+</table>
 <div class="grid cards">
 <ul>
 <li><a href="../mask-data/">Click here to continue <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>

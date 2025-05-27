@@ -25,12 +25,13 @@
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
-		30100, 3232
+		30100
+		//,3232
 	],
 	// add labels
 	"portsAttributes": {
-		"30100": { "label": "Todo App Web UI" },
-		"3232": { "label": "Dynatrace Extension" }
+		"30100": { "label": "Todo App Web UI" }
+		//,"3232": { "label": "Dynatrace Extension" }
 	},
 
 	"hostRequirements": {

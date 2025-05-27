@@ -42,7 +42,20 @@ The rule should look something like this:
 
 ## Verify that the "title" is being masked
 
-Once you have applied the masking rule, open the "Todo app" and add a new task, or remove it, depending the Method where you have the Live Debbugging break
+Once you have applied the masking rule, open the "Todo app" and add a new task, or remove it, depending the Method where you have the Live Debbugging breakpoint.
+
+
+In the following example we have the Live Breakpoint in the line 32 of the `TodoController.java` class. This corresponds the method `addTodo`. The Class `TodoRecord` contains a private variable called `title`. This variable will be masked with the simple rule we have active. 
+
+![title vars are masked](img/title_mask_code.png)
+
+But if you can see there is another variable, a temporary variable called `todoTitle`. Since this variable does not match the rule with the exact variable name `title` then it won't be masked. 
+
+In the snapshot you can see, that all variables that match the rule will be masked, not the `todoTitle`.
+![title vars are masked](img/title_masking_variables.png)
+
+
+Dynatrace gives Developers the flexibility to mask and capture variables with simple rules as well with complex rules using regex. Give it a try!
 
 
 <div class="grid cards" markdown>

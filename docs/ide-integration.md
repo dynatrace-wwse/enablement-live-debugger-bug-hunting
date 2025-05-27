@@ -74,7 +74,7 @@ Now open the ``TodoController.java`` Class. Once opened, on the left side of the
 ![vscode menu](img/ide_breakpoint.png)
 
 
-| Method      | Description                          |
+| Pane      | Description                          |
 | :---------- | :----------------------------------- |
 | `LIVE DEBUGGING BREAKPOINTS`       | All active breakpoints for your session with Class and line number  |
 | `BREAKPOINT STATUS`       | the status of the breakpoints and the instances that match the breakpoint |

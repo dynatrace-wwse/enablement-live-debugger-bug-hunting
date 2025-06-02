@@ -125,6 +125,9 @@ The DT_LIVEDEBUGGER_COMMIT and DT_LIVEDEBUGGER_REMOTE_ORIGIN environment variabl
 ![versioncontrol](img/session_version_control.png)
 
 
+And that's it! as easy as adding those environment variables you can automate the version control integration of the deployed applications in any environment. 
+
+
 <div class="grid cards" markdown>
 - [Click here to continue :octicons-arrow-right-24:](grail-and-dql.md)
 </div>

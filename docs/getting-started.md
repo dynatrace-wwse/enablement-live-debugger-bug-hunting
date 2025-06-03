@@ -21,7 +21,7 @@ For this we go to **Account Management > Identity & Access management > + Policy
 
 Set breakpoints
 ```bash
-ALLOW storage.application.snapshots:set;
+ALLOW dev-obs:breakpoints:set;
 ```
 Read Snapshopts
 ```bash
@@ -31,7 +31,7 @@ ALLOW storage:buckets:read WHERE storage:table-name = "application.snapshots";
 
 For managing snapshots, setting for Admins.
 ```bash
-ALLOW storage.application.snapshots:manage;
+ALLOW storage:application.snapshots:manage;
 ```
 
 The policy should look something like this:

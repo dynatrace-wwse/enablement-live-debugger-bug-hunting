@@ -825,7 +825,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>You will need a Dynatrace SaaS tenant with a DPS pricing model and the 'Code Monitoring' rate card should be associated with it. In addition the application needs to be monitored with Dynatrace FullStack mode. The application runtime: Java, NodeJS.</p>
 <h3 id="11-enable-observability-for-developers">1.1 Enable Observability for Developers<a class="headerlink" href="#11-enable-observability-for-developers" title="Permanent link">#</a></h3>
 <ul>
-<li>Go to Settings &gt; Preferences &gt; OneAgent features.<ul>
+<li>Go to Settings &gt; General monitoring settings &gt; OneAgent features.<ul>
 <li>Enable the Java Live-Debugger, Node.js Live-Debugger, or both, depending on your needs.</li>
 </ul>
 </li>
@@ -837,14 +837,14 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>We need two policies for your user to be able to set breakpoints and to read snapshots. 
 For this we go to **Account Management &gt; Identity &amp; Access management &gt; + Policy **</p>
 <p>Set breakpoints
-<div class="highlight"><pre><span></span><code>ALLOW<span class="w"> </span>storage.application.snapshots:set<span class="p">;</span>
+<div class="highlight"><pre><span></span><code>ALLOW<span class="w"> </span>dev-obs:breakpoints:set<span class="p">;</span>
 </code></pre></div>
 Read Snapshopts
 <div class="highlight"><pre><span></span><code>ALLOW<span class="w"> </span>storage:application:snapshots:read<span class="p">;</span>
 ALLOW<span class="w"> </span>storage:buckets:read<span class="w"> </span>WHERE<span class="w"> </span>storage:table-name<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;application.snapshots&quot;</span><span class="p">;</span>
 </code></pre></div></p>
 <p>For managing snapshots, setting for Admins.
-<div class="highlight"><pre><span></span><code>ALLOW<span class="w"> </span>storage.application.snapshots:manage<span class="p">;</span>
+<div class="highlight"><pre><span></span><code>ALLOW<span class="w"> </span>storage:application.snapshots:manage<span class="p">;</span>
 </code></pre></div></p>
 <p>The policy should look something like this:</p>
 <p><img alt="DevOps Policy" src="../img/devops_policy.png" /></p>

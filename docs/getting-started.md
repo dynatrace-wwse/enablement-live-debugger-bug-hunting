@@ -6,7 +6,7 @@ You will need a Dynatrace SaaS tenant with a DPS pricing model and the 'Code Mon
 
 ### 1.1 Enable Observability for Developers
 
-- Go to Settings > Preferences > OneAgent features.
+- Go to Settings > General monitoring settings > OneAgent features.
      - Enable the Java Live-Debugger, Node.js Live-Debugger, or both, depending on your needs.
 - Go to Settings > Observability for Developers > Enable Observability for Developers
 

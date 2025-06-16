@@ -17,7 +17,7 @@ You will need a Dynatrace SaaS tenant with a DPS pricing model and the 'Code Mon
 We take security very seriously. So let's create a policy to set user-level Live Debugging breakpoints. 
 
 We need two policies for your user to be able to set breakpoints and to read snapshots. 
-For this we go to **Account Management > Identity & Access management > + Policy **
+For this we go to **Account Management > Identity & Access management > + Policy**
 
 Set breakpoints
 ```bash
@@ -25,22 +25,23 @@ ALLOW dev-obs:breakpoints:set;
 ```
 Read Snapshopts
 ```bash
-ALLOW storage:application:snapshots:read;
+ALLOW storage:application.snapshots:read;
 ALLOW storage:buckets:read WHERE storage:table-name = "application.snapshots";
 ```
 
 For managing snapshots, setting for Admins.
 ```bash
-ALLOW storage:application.snapshots:manage;
+ALLOW dev-obs:breakpoints:manage;
 ```
 
 The policy should look something like this:
 
 ![DevOps Policy](img/devops_policy.png)
 
+[More info here about the IAM Policies here](https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability/offering-capabilities/setup)
 Then we bind it to a user group. In this case since we are admins, let's bind the policy to the Admin group. Notice that the created policy is for an Admin and also for a Developer. Since we allow to `read` and `set` breakpoints but also to `manage` breakpoints [which is explained here](https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability/offering-capabilities/additional-settings#manage-breakpoints).
 
-Go to Group Management > Select Admin Group > + Permission  (and bind the policy)
+Go to **Group Management > Select Admin Group > + Permission**  (and bind the policy)
 ![Bind Group](img/bind_group.png)
 
 Like this you have the fine control to give your developers, SRE teams and whoever you want to set breakpoints and read the snapshots. For more granular access [please continue reading here](https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability/offering-capabilities/setup) 

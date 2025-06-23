@@ -17,7 +17,7 @@ dynatraceEvalReadSaveCredentials
 
 dynatraceDeployOperator
 
-deployApplicationMonitoring
+deployCloudNative
 
 deployTodoApp
 

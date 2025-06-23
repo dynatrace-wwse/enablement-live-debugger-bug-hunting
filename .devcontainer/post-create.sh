@@ -11,13 +11,13 @@ createKindCluster
 
 installK9s
 
-installMkdocs
+#installMkdocs
 
 dynatraceEvalReadSaveCredentials
 
 dynatraceDeployOperator
 
-deployCloudNative
+deployApplicationMonitoring
 
 deployTodoApp
 

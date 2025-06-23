@@ -1,7 +1,7 @@
 #!/bin/bash
-
 #loading functions to script
 source /workspaces/$RepositoryName/.devcontainer/util/functions.sh
+export SECONDS=0
 
 bindFunctionsInShell
 
@@ -9,9 +9,10 @@ setupAliases
 
 createKindCluster
 
-installK9s
+#installK9s
 
-#installMkdocs
+#TODO: BeforeGoLive: uncomment this. This is only needed for professors to have the Mkdocs live in the container
+installMkdocs
 
 dynatraceEvalReadSaveCredentials
 
@@ -19,7 +20,17 @@ dynatraceDeployOperator
 
 deployCloudNative
 
+# In here you deploy the Application you want
+# The TODO App will be deployed as a sample
 deployTodoApp
+
+# The Astroshop keeping changes of demo.live needs certmanager
+#certmanagerInstall
+#certmanagerEnable
+#deployAstroshop
+
+# If you want to deploy your own App, just create a function in the functions.sh file and call it here.
+# deployMyCustomApp
 
 # e2e testing
 # If the codespace is created (eg. via a Dynatrace workflow)
@@ -44,10 +55,10 @@ if [[ "$CODESPACE_NAME" == dttest-* ]]; then
     gh codespace delete --codespace "$CODESPACE_NAME" --force
 else
 
-    # Your content here
-    printInfo "Sending BizEvent to track usage of $RepositoryName"
+    verifyCodespaceCreation
     
-    postCodespaceTracker $RepositoryName
-    
+    postCodespaceTracker
+  
     printInfo "Finished creating devcontainer"
+
 fi

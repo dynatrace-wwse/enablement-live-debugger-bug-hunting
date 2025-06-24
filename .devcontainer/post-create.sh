@@ -9,10 +9,7 @@ setupAliases
 
 createKindCluster
 
-#installK9s
-
-#TODO: BeforeGoLive: uncomment this. This is only needed for professors to have the Mkdocs live in the container
-installMkdocs
+installK9s
 
 dynatraceEvalReadSaveCredentials
 
@@ -20,17 +17,7 @@ dynatraceDeployOperator
 
 deployCloudNative
 
-# In here you deploy the Application you want
-# The TODO App will be deployed as a sample
 deployTodoApp
-
-# The Astroshop keeping changes of demo.live needs certmanager
-#certmanagerInstall
-#certmanagerEnable
-#deployAstroshop
-
-# If you want to deploy your own App, just create a function in the functions.sh file and call it here.
-# deployMyCustomApp
 
 # e2e testing
 # If the codespace is created (eg. via a Dynatrace workflow)

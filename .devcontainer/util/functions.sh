@@ -726,7 +726,9 @@ verifyCodespaceCreation(){
 }
 
 calculateTime(){
-  if [ -z "$DURATION" ] || [ "$DURATION" -eq 0 ]; then
+  if [ -e "$ENV_FILE" ]; then
+    source $ENV_FILE
+  else 
     DURATION="$SECONDS"
   fi
   printInfo "It took $(($DURATION / 60)) minutes and $(($DURATION % 60)) seconds the post-creation of the cs."

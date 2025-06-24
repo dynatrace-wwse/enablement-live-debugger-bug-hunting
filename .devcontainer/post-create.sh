@@ -1,7 +1,7 @@
 #!/bin/bash
-
 #loading functions to script
 source /workspaces/$RepositoryName/.devcontainer/util/functions.sh
+export SECONDS=0
 
 bindFunctionsInShell
 
@@ -10,8 +10,6 @@ setupAliases
 createKindCluster
 
 installK9s
-
-#installMkdocs
 
 dynatraceEvalReadSaveCredentials
 
@@ -44,10 +42,10 @@ if [[ "$CODESPACE_NAME" == dttest-* ]]; then
     gh codespace delete --codespace "$CODESPACE_NAME" --force
 else
 
-    # Your content here
-    printInfo "Sending BizEvent to track usage of $RepositoryName"
+    verifyCodespaceCreation
     
-    postCodespaceTracker $RepositoryName
-    
+    postCodespaceTracker
+  
     printInfo "Finished creating devcontainer"
+
 fi

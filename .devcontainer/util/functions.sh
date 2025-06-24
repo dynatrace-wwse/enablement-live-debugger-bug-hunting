@@ -726,13 +726,16 @@ verifyCodespaceCreation(){
 }
 
 calculateTime(){
+  # Read from file
   if [ -e "$ENV_FILE" ]; then
     source $ENV_FILE
-  else 
-    DURATION="$SECONDS"
   fi
-  printInfo "It took $(($DURATION / 60)) minutes and $(($DURATION % 60)) seconds the post-creation of the cs."
-  updateEnvVariable DURATION
+  # if equal 0 then set duration and update file
+  if [ "$DURATION" -eq 0 ]; then 
+    DURATION="$SECONDS"
+    updateEnvVariable DURATION
+  fi
+  printInfo "It took $(($DURATION / 60)) minutes and $(($DURATION % 60)) seconds the post-creation of the codespace."
 }
 
 updateEnvVariable(){

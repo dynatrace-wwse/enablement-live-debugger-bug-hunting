@@ -592,7 +592,7 @@ deployTodoApp(){
   kubectl create ns todoapp
 
   # Create deployment of todoApp
-  kubectl -n todoapp create deploy todoapp --image=shinojosa/todoapp:1.0.0
+  kubectl -n todoapp create deploy todoapp --image=shinojosa/todoapp:1.0.1
 
   # Expose deployment of todoApp with a Service
   kubectl -n todoapp expose deployment todoapp --type=NodePort --name=todoapp --port=8080 --target-port=8080

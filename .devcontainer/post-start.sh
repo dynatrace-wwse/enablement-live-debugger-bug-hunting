@@ -6,4 +6,4 @@ source /workspaces/$RepositoryName/.devcontainer/util/functions.sh
 #This is for professors
 #exposeMkdocs
 
-printInfoSection "Your dev.container finished creating"
+printInfoSection "Your dev.container finished starting up"

@@ -55,8 +55,5 @@
 		"DT_INGEST_TOKEN": {
 			 "description": "Dynatrace Ingest Token, it will be created automatically when adding a new Cluster over the UI. It contains the following permissions: 'Ingest logs' 'Ingest metrics' 'Ingest OpenTelemetry traces' "
 	 }
-  },
-    "remoteEnv": {
-    "RepositoryName": "enablement-live-debugger-bug-hunting"
   }
 }

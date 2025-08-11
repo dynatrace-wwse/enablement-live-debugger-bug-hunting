@@ -11,8 +11,6 @@ startKindCluster
 
 installK9s
 
-dynatraceEvalReadSaveCredentials
-
 dynatraceDeployOperator
 
 deployCloudNative

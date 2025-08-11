@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # VARIABLES DECLARATION
-source /workspaces/$RepositoryName/.devcontainer/util/variables.sh
+source $REPO_PATH/.devcontainer/util/variables.sh
 
 echo -e "${thickline}"
 echo -e ""

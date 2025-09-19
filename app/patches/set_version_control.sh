@@ -4,7 +4,7 @@
 # https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability/offering-capabilities/additional-settings#integrate-with-your-version-control
 
 # Variable definition
-version="v1.0.0"
+version="v1.0.1"
 deployment="todoapp"
 container="todoapp"
 namespace="todoapp"
@@ -23,7 +23,6 @@ set_version_control_information(){
     export DT_LIVEDEBUGGER_REMOTE_ORIGIN=$DT_LIVEDEBUGGER_REMOTE_ORIGIN
     export DT_LIVEDEBUGGER_COMMIT=$DT_LIVEDEBUGGER_COMMIT
 }
-
 
 patch_deployment(){ 
 kubectl patch deployment $deployment -n $namespace -p "$(cat <<EOF

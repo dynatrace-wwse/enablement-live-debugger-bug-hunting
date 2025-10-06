@@ -16,7 +16,7 @@
     - Machine sizing
         - As a machine type select **4-core**
     - Secrets (enter your credentials within the following variables)
-        - DT_TENANT
+        - DT_ENVIRONMENT
         - DT_OPERATOR_TOKEN
         - DT_INGEST_TOKEN
 

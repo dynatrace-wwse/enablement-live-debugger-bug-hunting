@@ -60,6 +60,32 @@ Now the developer can easily fix this code and resolve the issue!
 
 We've now successfully hunted down and taken care of another bug 🤩
 
+!!! example "Fix the bug 🪲🛠️"
+    Go back to your Codespace and find the source code for the `TodoController`. It should be under the following path: `app/src/main/java/com/dynatrace/todoapp/TodoController.java`. Once you apply the fix, run the following commands:
+
+    ```bash
+    cd /workspaces/enablement-live-debugger-bug-hunting
+    chmod +x redeploy-todoapp.sh
+    ./redeploy-todoapp.sh
+    ```
+<br>
+<details>
+<summary>💡 Hint</summary>
+
+Before
+```javascript
+newTodoRecord.setId(tempTodoRecord.getTitle());
+newTodoRecord.setTitle(UUID.randomUUID().toString());
+```
+
+After
+```javascript
+newTodoRecord.setId(UUID.randomUUID().toString());
+newTodoRecord.setTitle(tempTodoRecord.getTitle());
+```
+</details> 
+<br>
+
 <div class="grid cards" markdown>
 - [Click here to continue :octicons-arrow-right-24:](ide-integration.md)
 </div>

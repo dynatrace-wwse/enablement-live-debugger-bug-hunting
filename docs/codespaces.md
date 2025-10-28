@@ -58,8 +58,9 @@ The client `kubectl` and `k9s`are configured so you can navigate in your local K
 The app TODO app is being exposed from the devcontainer to your localhost or the github dns domain. If you want to make the endpoints public accesible, just go to the ports section in VsCode, right click on them and change the visibility to public.
 
 
-## 5. Troubleshooting
-
+<br>
+<details>
+<summary>Troubleshooting</summary>
 
 If there is an issue with the application, we recommend you verify the health of the Kind cluster. 
 
@@ -86,6 +87,10 @@ exposeTodoApp(){
   nohup kubectl port-forward service/todoapp 8080:8080  -n todoapp --address="0.0.0.0" > /tmp/kubectl-port-forward.log 2>&1 &
 }
 ```
+
+</details> 
+<br>
+
 <div class="grid cards" markdown>
 - [Let's start our Bug hunting quest:octicons-arrow-right-24:](1-bug-clear-completed.md)
 </div>

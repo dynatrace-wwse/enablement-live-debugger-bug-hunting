@@ -64,10 +64,13 @@ This is exciting!!!
     Go back to your Codespace and find the source code for the `TodoController`. It should be under the following path: `app/src/main/java/com/dynatrace/todoapp/TodoController.java`. Once you apply the fix, run the following commands:
 
     ```bash
-    cd /workspaces/enablement-live-debugger-bug-hunting
-    chmod +x redeploy-todoapp.sh
-    ./redeploy-todoapp.sh
+    redeployApp
     ```
+
+<!-- 
+TODO: add function fix bug, that swaps branch and recompiles, we can add the info of the branch to the container so the LD knows which git to take so the source matches
+-->
+
 <br>
 <details>
 <summary>💡 Hint</summary>

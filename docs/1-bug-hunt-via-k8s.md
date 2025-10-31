@@ -107,13 +107,15 @@ Yay! we found the first bug!!!
 
 
 !!! example "Fix the bug 🪲🛠️"
-    Go back to your Codespace and find the source code for the `TodoController`. It should be under the following path: `app/src/main/java/com/dynatrace/todoapp/TodoController.java`. Once you apply the fix, run the following commands:
+    Go back to your Codespace and find the source code for the `TodoController`. It should be under the following path: `app/src/main/java/com/dynatrace/todoapp/TodoController.java`. Once you apply the fix, run the following command in the terminal:
 
     ```bash
-    cd /workspaces/enablement-live-debugger-bug-hunting
-    chmod +x redeploy-todoapp.sh
-    ./redeploy-todoapp.sh
+    redeployApp
     ```
+2<!-- 
+TODO: add function fix bug, that swaps branch and recompiles, we can add the info of the branch to the container so the LD knows which git to take so the source matches
+-->
+
 <br>
 <details>
 <summary>💡 Hint</summary>
@@ -144,6 +146,7 @@ for (TodoRecord todoRecord : todos.getAll()) {
     }
 }
 ```
+</details>
 
 <div class="grid cards" markdown>
 - [Click here to continue the quest with the next Bug:octicons-arrow-right-24:](2-bug-special-characters.md)

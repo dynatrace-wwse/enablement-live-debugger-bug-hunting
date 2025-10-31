@@ -12,7 +12,7 @@ buildscript {
 
 
 plugins {
-    id 'com.palantir.git-version' version '0.12.3'
+//    id 'com.palantir.git-version' version '0.12.3'
 }
 
 
@@ -21,9 +21,9 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
-apply plugin: 'com.palantir.git-version'
+//apply plugin: 'com.palantir.git-version'
 
-def details = versionDetails()
+//def details = versionDetails()
 
 mainClassName = "com.dynatrace.todoapp.TutorialApplication"
 

@@ -61,6 +61,15 @@ activeGate:
 ```
 This is already set up for you in the codespaces automatically in the [Dynakube.yaml](https://github.com/dynatrace-wwse/enablement-live-debugger-bug-hunting/blob/main/.devcontainer/yaml/dynakube-skel.yaml) file so no need to restart the ActiveGate.
 
+
+Note: in newer versions of the Dynatrace Operator this is enabled on the capabilities section of the dynakube.
+
+```yaml
+#Set debugging capability in the capabilities section:
+   capabilities:
+    - debugging
+```
+
 ### 1.4 Enable Log Ingest
 
 You have (2) options:
@@ -96,6 +105,13 @@ Conditions:
 ```text
 Kubernetes namespace name = todoapp
 ```
+
+**Enable log/trace enrichment**
+
+- Go to Settings > General monitoring settings > OneAgent features.
+   - Enable:
+      - Java - Trace/span context enrichment for logs [Opt-In].
+      - Java - Trace/span context enrichment for unstructured logs [Opt-In]
 
 Click on `Save changes`.
 

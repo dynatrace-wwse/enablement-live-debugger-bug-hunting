@@ -39,5 +39,21 @@ kubectl rollout status deployment/$DEPLOYMENT_NAME -n $NAMESPACE
 
 printInfo "Done"
 
+}
+
+
+assertClearCompleted(){
+  
+  kubectl logs -l app=todoapp -c todoapp -n todoapp | grep 'completed=true' > /dev/null
+  mark_completed=$?
+  
+  kubectl logs -l app=todoapp -c todoapp -n todoapp | grep 'failed to delete completed todos' > /dev/null
+  click_clear_completed=$?
+
+  if [ $mark_completed -eq 0 ] && [ $click_clear_completed -eq 0 ]; then
+    printInfo "✅ Thanks for adding tasks and trying to clear them."
+  else
+    printInfo " ⚠️ Please add a couple of task and then click on the 'clear completed' button"
+  fi
 
 }

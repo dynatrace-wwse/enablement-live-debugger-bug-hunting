@@ -17,8 +17,4 @@ deployTodoApp
 
 finalizePostCreation
 
-#workaround for instruqt
-printInfo "trusting directory for instruqt since running on root"
-git config --global --add safe.directory '*'
-
 printInfoSection "Your dev container finished creating"

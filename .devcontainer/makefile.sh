@@ -55,7 +55,7 @@ run(){
         CMD="$1"
     fi
 
-    docker run $DOCKER_ENVS \
+    docker run -u root $DOCKER_ENVS \
         --name $IMAGENAME \
         --privileged \
         --dns=8.8.8.8 \

@@ -160,6 +160,9 @@ Yay! we found the first bug!!!
     ```
     </details>
 
+    Verify the bug is gone! add more tasks and click on `clear completed` see how the tasks disappear gracefully now! Amazing!
+
+
 <div class="grid cards" markdown>
 - [Click here to continue the quest with the next Bug:octicons-arrow-right-24:](2-bug-special-characters.md)
 </div>

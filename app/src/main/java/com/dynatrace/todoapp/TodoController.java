@@ -74,7 +74,7 @@ public class TodoController {
         logger.debug("SELECT * FROM todos WHERE status='conpleted'");
         // The bug in here in is for the bughunt example
         //List<TodoRecord> todoStore = new ArrayList<>();
-        previousSize = todos.size()
+        int previousSize = todos.getAll().length;
         logger.info("todos size is {}", previousSize);
         for (TodoRecord todoRecord : todos.getAll()) {
             if (todoRecord.isCompleted()) {
@@ -84,7 +84,7 @@ public class TodoController {
                    }
             }
         }
-        actualSize = todos.size()
+        int actualSize = todos.getAll().length;
         if (actualSize < previousSize){
             logger.info("Todo record removed succesfully");
         }

@@ -74,16 +74,20 @@ public class TodoController {
         logger.debug("SELECT * FROM todos WHERE status='conpleted'");
         // The bug in here in is for the bughunt example
         //List<TodoRecord> todoStore = new ArrayList<>();
-        //logger.debug("todoStore size is {}", todoStore.size());
+        previousSize = todos.size()
+        logger.info("todos size is {}", previousSize);
         for (TodoRecord todoRecord : todos.getAll()) {
             if (todoRecord.isCompleted()) {
                 // The bug is solved here for the bughunt example
                 if (todos.remove(todoRecord)) {
                     logger.info("Removing Todo record: {}", todoRecord);
-                }
+                   }
             }
         }
-        logger.error("failed to delete completed todos");
+        actualSize = todos.size()
+        if (actualSize < previousSize){
+            logger.info("Todo record removed succesfully");
+        }
         Map<String, String> entities = new HashMap<>();
         entities.put("status", "ok");
         return new ResponseEntity<>(entities, HttpStatus.OK);

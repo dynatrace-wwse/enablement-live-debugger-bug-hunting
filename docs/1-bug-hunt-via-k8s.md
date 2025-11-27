@@ -112,9 +112,6 @@ Yay! we found the first bug!!!
     ```bash
     redeployApp
     ```
-2<!-- 
-TODO: add function fix bug, that swaps branch and recompiles, we can add the info of the branch to the container so the LD knows which git to take so the source matches
--->
 
 <br>
 <details>

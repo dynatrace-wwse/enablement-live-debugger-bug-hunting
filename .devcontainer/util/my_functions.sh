@@ -79,4 +79,62 @@ solve_bug1(){
 
   printInfo "Now add some tasks, mark them completed and click on 'clear completed'"
 
+  setVersionControl "solution/bug1"
+
+}
+
+setVersionControl(){
+
+  updateVersionControl "$1" 
+  patchDeployment
+}
+
+
+updateVersionControl(){
+
+  version="$1"
+  IMAGE_NAME="todoapp"
+  NAMESPACE="todoapp"
+  DEPLOYMENT_NAME="todoapp"
+
+  if [ -z "$version" ]; then
+    version="v1.0.1"
+  fi
+  DT_LIVEDEBUGGER_REMOTE_ORIGIN=$(git remote get-url origin)
+  DT_LIVEDEBUGGER_COMMIT=$(git rev-parse $version)
+
+  echo "Fetching git revision for $version in $DT_LIVEDEBUGGER_REMOTE_ORIGIN" 
+  echo $DT_LIVEDEBUGGER_COMMIT
+
+  export DT_LIVEDEBUGGER_REMOTE_ORIGIN=$DT_LIVEDEBUGGER_REMOTE_ORIGIN
+  export DT_LIVEDEBUGGER_COMMIT=$DT_LIVEDEBUGGER_COMMIT
+}
+
+patchDeployment(){ 
+kubectl patch deployment $DEPLOYMENT_NAME -n $NAMESPACE -p "$(cat <<EOF
+{
+    "spec": {
+        "template": {
+            "spec": {
+                "containers": [
+                    {
+                        "name": "$IMAGE_NAME",
+                        "env": [
+                            {
+                                "name": "DT_LIVEDEBUGGER_COMMIT",
+                                "value": "$DT_LIVEDEBUGGER_COMMIT"
+                            },
+                            {
+                                "name": "DT_LIVEDEBUGGER_REMOTE_ORIGIN",
+                                "value": "$DT_LIVEDEBUGGER_REMOTE_ORIGIN"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}
+EOF
+)"
 }

@@ -12,8 +12,6 @@ import java.util.*;
 public class TodoController {
     private static final Logger logger = LoggerFactory.getLogger(TodoController.class);
     private TodoStorage todos = TodoStorage.getInstance();
-    // Disable tracing
-    //private final TracingHandler tracingHandler = new TracingHandler();
 
     @RequestMapping(value = "/todos", method = RequestMethod.GET)
     public TodoRecord[] getTodos() {
@@ -71,7 +69,7 @@ public class TodoController {
     
     @RequestMapping(value = "/todos/clear_completed", method = RequestMethod.DELETE)
     public ResponseEntity<?> clearCompletedTodos() throws InterruptedException {
-        //tracingHandler.createChildSpansActivity();
+        
         logger.info("Removing completed todo records");
         logger.debug("reading todoStore from database");
         logger.debug("SELECT * FROM todos WHERE status='conpleted'");

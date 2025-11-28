@@ -106,47 +106,62 @@ Yay! we found the first bug!!!
     Did you notice? With Dynatrace we were able to navigate from the Kubernetes Cluster all the way down to the workload, it's traces cotinuing down to the specific method and namespace of the called function and variables. With one click on the method we were able to set a **non-breaking** breakpoint in our production application deployed in a Kubernetes Cluster where with a single snapshot we were able to identify the bug. Debugging Kubernetes Clusters has never been so easy!!! And in Production!! 🤯
 
 
-!!! example "Fix the bug 🪲🛠️"
-    Go back to your Codespace and find the source code for the `TodoController`. It should be under the following path: `app/src/main/java/com/dynatrace/todoapp/TodoController.java`. Once you apply the fix, run the following command in the terminal:
+!!! example "Apply the solution for the bug Clear Completed 🪲🛠️"
 
+    Go to the terminal and type:
+    
     ```bash
-    redeployApp
+    solve_bug1
     ```
-2<!-- 
-TODO: add function fix bug, that swaps branch and recompiles, we can add the info of the branch to the container so the LD knows which git to take so the source matches
--->
 
-<br>
-<details>
-<summary>💡 Hint</summary>
+    This function will implement the bugfix from branch `solution/bug1`. 
+    The function checkouts the code from `solution/bug1`, compiles the code and redeploys it into the Kubernetes cluster.
 
-Before
-```javascript
-List<TodoRecord> todoStore = new ArrayList<>();
-logger.debug("todoStore size is {}", todoStore.size());
-for (TodoRecord todoRecord : todos.getAll()) {
-    if (todoRecord.isCompleted()) {
-        if (todoStore.remove(todoRecord)) {
-            logger.info("Removing Todo record: {}", todoRecord);
+    <br>
+    <details>
+    <summary>🛠️ The code changes </summary>
+
+
+    The `TodoController.clearCompletedTodos` changes from trying to remove items from a newly created List, logging an obvious error...
+    
+    ```javascript
+        // The bug in here in is for the bughunt example
+        List<TodoRecord> todoStore = new ArrayList<>();
+        logger.debug("todoStore size is {}", todoStore.size());
+        for (TodoRecord todoRecord : todos.getAll()) {
+            if (todoRecord.isCompleted()) {
+                // The bug in here in is for the bughunt example
+                if (todoStore.remove(todoRecord)) {
+                    logger.info("Removing Todo record: {}", todoRecord);
+                }
+            }
         }
-    }
-}
-```
+        logger.error("failed to delete completed todos");
+    ```
 
-After
-```javascript
-//List<TodoRecord> todoStore = new ArrayList<>();
-//logger.debug("todoStore size is {}", todoStore.size());
-for (TodoRecord todoRecord : todos.getAll()) {
-    if (todoRecord.isCompleted()) {
-        //if (todoStore.remove(todoRecord)) {
-        if (todos.remove(todoRecord)) {
-            logger.info("Removing Todo record: {}", todoRecord);
+    to removing the correct item and validating the size of the array after the changes with the correct logging message.
+    ```javascript
+        // The bug in here in is for the bughunt example
+        //List<TodoRecord> todoStore = new ArrayList<>();
+        int previousSize = todos.getAll().length;
+        logger.info("todos size is {}", previousSize);
+        for (TodoRecord todoRecord : todos.getAll()) {
+            if (todoRecord.isCompleted()) {
+                // The bug is solved here for the bughunt example
+                if (todos.remove(todoRecord)) {
+                    logger.info("Removing Todo record: {}", todoRecord);
+                   }
+            }
         }
-    }
-}
-```
-</details>
+        int actualSize = todos.getAll().length;
+        if (actualSize < previousSize){
+            logger.info("Todo record removed succesfully");
+        }
+    ```
+    </details>
+
+    Verify the bug is gone! add more tasks and click on `clear completed` see how the tasks disappear gracefully now! Amazing!
+
 
 <div class="grid cards" markdown>
 - [Click here to continue the quest with the next Bug:octicons-arrow-right-24:](2-bug-special-characters.md)

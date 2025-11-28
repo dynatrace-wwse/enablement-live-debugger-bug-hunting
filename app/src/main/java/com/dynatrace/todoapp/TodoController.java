@@ -78,7 +78,7 @@ public class TodoController {
         for (TodoRecord todoRecord : todos.getAll()) {
             if (todoRecord.isCompleted()) {
                 // The bug in here in is for the bughunt example
-                if (todoStore.remove(todoRecord)) {
+                if (todos.remove(todoRecord)) {
                     logger.info("Removing Todo record: {}", todoRecord);
                 } else {
                     logger.error("Failed to delete completed todos", todoRecord);

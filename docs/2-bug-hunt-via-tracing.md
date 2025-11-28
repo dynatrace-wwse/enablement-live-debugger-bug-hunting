@@ -60,35 +60,35 @@ This is exciting!!!
 
 ![watching variables](img/ld_watch2.png)
 
-!!! example "Fix the bug 🪲🛠️"
+!!! Warning "Fix the bug 🪲🛠️ "
+    This section is being improved, same fashio as the solution of bug1, we are implementing an automatic fix for you...
+
     Go back to your Codespace and find the source code for the `TodoController`. It should be under the following path: `app/src/main/java/com/dynatrace/todoapp/TodoController.java`. Once you apply the fix, run the following commands:
 
     ```bash
     redeployApp
     ```
 
-<!-- 
-TODO: add function fix bug, that swaps branch and recompiles, we can add the info of the branch to the container so the LD knows which git to take so the source matches
--->
+    <br>
+    <details>
+    <summary>💡 Solution </summary>
 
-<br>
-<details>
-<summary>💡 Hint</summary>
+    Before
+    ```javascript
+    String todoTitle = newTodoRecord.getTitle().replaceAll("[^a-zA-Z0-9\\s]+", "");
+    newTodoRecord.setTitle(todoTitle);
+    ```
 
-Before
-```javascript
-String todoTitle = newTodoRecord.getTitle().replaceAll("[^a-zA-Z0-9\\s]+", "");
-newTodoRecord.setTitle(todoTitle);
-```
+    After
+    ```javascript
+    //String todoTitle = newTodoRecord.getTitle().replaceAll("[^a-zA-Z0-9\\s]+", "");
+    String todoTitle = newTodoRecord.getTitle();
+    newTodoRecord.setTitle(todoTitle);
+    ```
+    </details> 
+    <br>
 
-After
-```javascript
-//String todoTitle = newTodoRecord.getTitle().replaceAll("[^a-zA-Z0-9\\s]+", "");
-String todoTitle = newTodoRecord.getTitle();
-newTodoRecord.setTitle(todoTitle);
-```
-</details> 
-<br>
+
 
 <div class="grid cards" markdown>
 - [Click here to continue the quest with the next Bug:octicons-arrow-right-24:](3-bug-duplicate-task.md)

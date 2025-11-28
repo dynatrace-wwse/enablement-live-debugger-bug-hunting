@@ -86,7 +86,9 @@ solve_bug1(){
 setVersionControl(){
 
   updateVersionControl "$1" 
+  
   patchDeployment
+
 }
 
 

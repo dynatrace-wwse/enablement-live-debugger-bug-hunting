@@ -60,33 +60,33 @@ Now the developer can easily fix this code and resolve the issue!
 
 We've now successfully hunted down and taken care of another bug 🤩
 
-!!! example "Fix the bug 🪲🛠️"
+!!! Warning "Fix the bug 🪲🛠️ "
+    This section is being improved, same fashio as the solution of bug1, we are implementing an automatic fix for you...
+
     Go back to your Codespace and find the source code for the `TodoController`. It should be under the following path: `app/src/main/java/com/dynatrace/todoapp/TodoController.java`. Once you apply the fix, run the following commands:
 
     ```bash
     redeployApp
     ```
-<!-- 
-TODO: add function fix bug, that swaps branch and recompiles, we can add the info of the branch to the container so the LD knows which git to take so the source matches
--->
 
-<br>
-<details>
-<summary>💡 Hint</summary>
+    <br>
+    <details>
+    <summary>💡 Solution </summary>
 
-Before
-```javascript
-newTodoRecord.setId(tempTodoRecord.getTitle());
-newTodoRecord.setTitle(UUID.randomUUID().toString());
-```
+    Before
+    ```javascript
+    newTodoRecord.setId(tempTodoRecord.getTitle());
+    newTodoRecord.setTitle(UUID.randomUUID().toString());
+    ```
 
-After
-```javascript
-newTodoRecord.setId(UUID.randomUUID().toString());
-newTodoRecord.setTitle(tempTodoRecord.getTitle());
-```
-</details> 
-<br>
+    After
+    ```javascript
+    newTodoRecord.setId(UUID.randomUUID().toString());
+    newTodoRecord.setTitle(tempTodoRecord.getTitle());
+    ```
+    </details> 
+    <br>
+
 
 <div class="grid cards" markdown>
 - [Click here to continue :octicons-arrow-right-24:](ide-integration.md)

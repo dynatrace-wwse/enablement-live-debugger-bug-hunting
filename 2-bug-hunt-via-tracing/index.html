@@ -930,32 +930,27 @@ document.addEventListener('DOMContentLoaded', function() {
 <li>You'll see that in the snapshots, the title variable captured in both snapshots are added for ease of debugging complex applications. This is a very simple app, but imagine you have hundreds or thousands of lines of code, not all of them written by you, using this strategy you can understand how specific variables change through the code.</li>
 </ul>
 <p><img alt="watching variables" src="../img/ld_watch2.png" /></p>
-<div class="admonition example">
-<p class="admonition-title">Fix the bug 🪲🛠️</p>
+<div class="admonition warning">
+<p class="admonition-title">Fix the bug 🪲🛠️ </p>
+<p>This section is being improved, same fashio as the solution of bug1, we are implementing an automatic fix for you...</p>
 <p>Go back to your Codespace and find the source code for the <code>TodoController</code>. It should be under the following path: <code>app/src/main/java/com/dynatrace/todoapp/TodoController.java</code>. Once you apply the fix, run the following commands:</p>
 <div class="highlight"><pre><span></span><code>redeployApp
 </code></pre></div>
-</div>
-<!-- 
-TODO: add function fix bug, that swaps branch and recompiles, we can add the info of the branch to the container so the LD knows which git to take so the source matches
--->
-
-<p><br></p>
+<p><br>
 <details>
-<summary>💡 Hint</summary>
-
-Before
+<summary>💡 Solution </summary></p>
+<p>Before
 <div class="highlight"><pre><span></span><code><span class="nb">String</span><span class="w"> </span><span class="nx">todoTitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">newTodoRecord</span><span class="p">.</span><span class="nx">getTitle</span><span class="p">().</span><span class="nx">replaceAll</span><span class="p">(</span><span class="s2">&quot;[^a-zA-Z0-9\\s]+&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">);</span>
 <span class="nx">newTodoRecord</span><span class="p">.</span><span class="nx">setTitle</span><span class="p">(</span><span class="nx">todoTitle</span><span class="p">);</span>
-</code></pre></div>
-
-After
+</code></pre></div></p>
+<p>After
 <div class="highlight"><pre><span></span><code><span class="c1">//String todoTitle = newTodoRecord.getTitle().replaceAll(&quot;[^a-zA-Z0-9\\s]+&quot;, &quot;&quot;);</span>
 <span class="nb">String</span><span class="w"> </span><span class="nx">todoTitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">newTodoRecord</span><span class="p">.</span><span class="nx">getTitle</span><span class="p">();</span>
 <span class="nx">newTodoRecord</span><span class="p">.</span><span class="nx">setTitle</span><span class="p">(</span><span class="nx">todoTitle</span><span class="p">);</span>
 </code></pre></div>
-</details>
-<p><br></p>
+</details> 
+<br></p>
+</div>
 <div class="grid cards">
 <ul>
 <li><a href="../3-bug-duplicate-task/">Click here to continue the quest with the next Bug<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>

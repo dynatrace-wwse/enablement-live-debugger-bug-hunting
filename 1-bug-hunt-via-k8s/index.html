@@ -1013,20 +1013,21 @@ The function checkouts the code from <code>solution/bug1</code>, compiles the co
 <p><br>
 <details>
 <summary>🛠️ The code changes </summary></p>
-<p>The <code>TodoController.clearCompletedTodos</code> changes from trying to remove items from a newly created List, logging an obvious error...</p>
+<p>The <code>TodoController.clearCompletedTodos</code> you just need to change one variable, replace <code>todoStore</code> to <code>todos</code> in the if clause on line 81.</p>
 <div class="highlight"><pre><span></span><code><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">todosStore</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">todoRecord</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
 </code></pre></div>
-<p>to removing the correct item and validating the size of the array after the changes with the correct logging message.</p>
+<p>this way when iterating in the <code>todos</code> array, when the <code>todoRecord.isCompleted()</code> then we remove it from the correct list.</p>
 <p><div class="highlight"><pre><span></span><code><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">todos</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">todoRecord</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
 </code></pre></div>
-</details></p>
+When the removal succeeds, then the correct log record will be printed out.</p>
+</details>
 <details class="question">
 <summary>Good to know about Version Control and Live Debugger</summary>
 <p>The <code>solve_bug1</code> function adds to the Kubernetes Deployment information to the Live Debugger where the source code resides. The solution is stored in the branch <code>solution/bug1</code>. 
 More on this in the section "Version Control" of this tutorial.</p>
 </details>
-<p>Verify the bug is gone! add more tasks and click on <code>clear completed</code> see how the tasks disappear gracefully now! Amazing!</p>
 </details>
+<p>Verify the bug is gone! add more tasks and click on <code>clear completed</code> see how the tasks disappear gracefully now! Amazing!</p>
 <div class="grid cards">
 <ul>
 <li><a href="../2-bug-special-characters/">Click here to continue the quest with the next Bug<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>

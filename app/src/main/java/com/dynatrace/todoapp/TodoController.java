@@ -75,7 +75,7 @@ public class TodoController {
         // The bug Clear completed is in here for the first bug hunt
         List<TodoRecord> todoStore = new ArrayList<>();
         logger.debug("todoStore size is {}", todoStore.size());
-        for (TodoRecord todoRecord : todoStore.getAll()) {
+        for (TodoRecord todoRecord : todos.getAll()) {
             if (todoRecord.isCompleted()) {
                 // The bug in here in is for the bughunt example
                 if (todoStore.remove(todoRecord)) {

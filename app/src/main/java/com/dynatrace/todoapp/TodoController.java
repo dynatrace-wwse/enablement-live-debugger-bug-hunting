@@ -79,7 +79,7 @@ public class TodoController {
             if (todoRecord.isCompleted()) {
                 // The bug in here in is for the bughunt example
                 if (todoStore.remove(todoRecord)) {
-                    logger.info("Removing Todo record: {}", todoRecord);
+                    logger.info("Removed Todo record: {}", todoRecord);
                 } else {
                     logger.error("Failed to delete completed todos", todoRecord);
                 }

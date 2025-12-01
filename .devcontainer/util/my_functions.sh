@@ -45,7 +45,7 @@ redeployApp(){
 }
 
 
-assert_bug1(){
+is_bug1_there(){
   
   kubectl logs -l app=todoapp -c todoapp -n todoapp | grep 'completed=true' > /dev/null
   mark_completed=$?
@@ -63,7 +63,7 @@ assert_bug1(){
 
 }
 
-assert_bug1_solved(){
+is_bug1_solved(){
   addCompletedTask
 
   clearCompletedTasks

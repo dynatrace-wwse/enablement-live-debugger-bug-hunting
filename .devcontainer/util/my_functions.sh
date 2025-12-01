@@ -6,6 +6,13 @@
 # ======================================================================
 
 
+### Variables
+APPLICATION_URL="http://localhost:30100"
+IMAGE_NAME="todoapp:local"
+NAMESPACE="todoapp"
+DEPLOYMENT_NAME="todoapp"
+
+
 customFunction(){
   printInfoSection "This is a custom function that calculates 1 + 1"
 
@@ -13,14 +20,7 @@ customFunction(){
 
 }
 
-
-
-
 redeployApp(){
-
-  IMAGE_NAME="todoapp:local"
-  NAMESPACE="todoapp"
-  DEPLOYMENT_NAME="todoapp"
 
   printInfoSection "Building local image"
 
@@ -63,6 +63,24 @@ assert_bug1(){
 
 }
 
+assert_bug1_solved(){
+  addCompletedTask
+
+  clearCompletedTasks
+
+  kubectl logs -l app=todoapp -c todoapp -n todoapp | grep 'Removed Todo record.*completed=true' > /dev/null
+  found_removed=$?
+
+  if [ $found_removed -eq 0 ]; then
+    printInfo "✅ Bug clear completed is gone."
+    return 0
+  else
+    printInfo "⚠️ Bug clear completed is still there, tip: check the Arrays"
+    return 1
+  fi
+
+}
+
 solve_bug1(){
   
   printInfoSection "Solving the Bug Clear Completed"
@@ -95,9 +113,6 @@ setVersionControl(){
 updateVersionControl(){
 
   version="$1"
-  IMAGE_NAME="todoapp"
-  NAMESPACE="todoapp"
-  DEPLOYMENT_NAME="todoapp"
 
   if [ -z "$version" ]; then
     version="v1.0.1"
@@ -139,4 +154,32 @@ kubectl patch deployment $DEPLOYMENT_NAME -n $NAMESPACE -p "$(cat <<EOF
 }
 EOF
 )"
+}
+
+
+
+# Testing Methods
+
+addCompletedTask(){
+  printInfo "adding completed Task"
+  response=$(curl -s -X POST $APPLICATION_URL/todos \
+    -H "Content-Type: application/json" -d '{"title":"Completed task","completed":true}')
+  
+  if echo "$response" | grep -q '"status":"ok"'; then
+    printInfo "✅ Task added successfully"
+  else
+    printInfo "❌ Failed to add task"
+  fi
+}
+
+
+clearCompletedTasks(){
+  printInfo "Clearing completed Tasks"
+  response=$(curl -X DELETE $APPLICATION_URL/todos/clear_completed)
+  if echo "$response" | grep -q '"status":"ok"'; then
+    printInfo "✅ Clear completed executed successfully"
+  else
+    printInfo "❌ Failed to execute Clear completed"
+  fi
+
 }

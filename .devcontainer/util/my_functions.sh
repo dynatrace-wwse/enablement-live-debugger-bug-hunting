@@ -26,7 +26,12 @@ redeployApp(){
 
   printInfo "docker build -t $IMAGE_NAME app"
 
-  docker build -t $IMAGE_NAME app
+  if ! docker build -t $IMAGE_NAME app; then
+    printError "❌ Docker build failed. Stopping deployment, fix the compilation issues..."
+    return 1
+  else
+    printInfo "✅ Docker build succeeded. New image built $IMAGE_NAME"
+  fi
 
   printInfo "Loading image into kind cluster"
   kind load docker-image $IMAGE_NAME
@@ -45,7 +50,7 @@ redeployApp(){
 }
 
 
-assert_bug1(){
+is_bug1_there(){
   
   kubectl logs -l app=todoapp -c todoapp -n todoapp | grep 'completed=true' > /dev/null
   mark_completed=$?
@@ -63,7 +68,7 @@ assert_bug1(){
 
 }
 
-assert_bug1_solved(){
+is_bug1_solved(){
   addCompletedTask
 
   clearCompletedTasks

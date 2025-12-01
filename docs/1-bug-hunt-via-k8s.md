@@ -143,7 +143,7 @@ is_bug1_solved
     <summary>🛠️ The code changes </summary>
 
 
-    The `TodoController.clearCompletedTodos` changes from trying to remove items from a newly created List, logging an obvious error...
+    The `TodoController.clearCompletedTodos` you just need to change one variable, replace `todoStore` to `todos` in the if clause on line 81.
     
     ```javascript
        
@@ -151,14 +151,16 @@ is_bug1_solved
                
     ```
 
-    to removing the correct item and validating the size of the array after the changes with the correct logging message.
+    this way when iterating in the `todos` array, when the `todoRecord.isCompleted()` then we remove it from the correct list.
     
     ```javascript
       
                 if (todos.remove(todoRecord)) {
             
-
     ```
+    When the removal succeeds, then the correct log record will be printed out.
+
+
     </details>
 
 
@@ -167,7 +169,8 @@ is_bug1_solved
         More on this in the section "Version Control" of this tutorial.
 
 
-    Verify the bug is gone! add more tasks and click on `clear completed` see how the tasks disappear gracefully now! Amazing!
+
+Verify the bug is gone! add more tasks and click on `clear completed` see how the tasks disappear gracefully now! Amazing!
 
 
 <div class="grid cards" markdown>

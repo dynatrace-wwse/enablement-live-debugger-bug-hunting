@@ -69,25 +69,21 @@ public class TodoController {
     
     @RequestMapping(value = "/todos/clear_completed", method = RequestMethod.DELETE)
     public ResponseEntity<?> clearCompletedTodos() throws InterruptedException {
-        
         logger.info("Removing completed todo records");
         logger.debug("reading todoStore from database");
-        logger.debug("SELECT * FROM todos WHERE status='conpleted'");
-        // The bug in here in is for the bughunt example
-        //List<TodoRecord> todoStore = new ArrayList<>();
-        int previousSize = todos.getAll().length;
-        logger.info("todos size is {}", previousSize);
+        logger.debug("SELECT * FROM todos WHERE status='completed'");
+        // The bug Clear completed is in here for the first bug hunt
+        List<TodoRecord> todoStore = new ArrayList<>();
+        logger.debug("todoStore size is {}", todoStore.size());
         for (TodoRecord todoRecord : todos.getAll()) {
             if (todoRecord.isCompleted()) {
-                // The bug is solved here for the bughunt example
-                if (todos.remove(todoRecord)) {
-                    logger.info("Removing Todo record: {}", todoRecord);
-                   }
+                // The bug in here in is for the bughunt example
+                if (todoStore.remove(todoRecord)) {
+                    logger.info("Removed Todo record: {}", todoRecord);
+                } else {
+                    logger.error("Failed to delete completed todos", todoRecord);
+                }
             }
-        }
-        int actualSize = todos.getAll().length;
-        if (actualSize < previousSize){
-            logger.info("Todo record removed succesfully");
         }
         Map<String, String> entities = new HashMap<>();
         entities.put("status", "ok");

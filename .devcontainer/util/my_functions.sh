@@ -26,7 +26,12 @@ redeployApp(){
 
   printInfo "docker build -t $IMAGE_NAME app"
 
-  docker build -t $IMAGE_NAME app
+  if ! docker build -t $IMAGE_NAME app; then
+    printError "❌ Docker build failed. Stopping deployment, fix the compilation issues..."
+    return 1
+  else
+    printInfo "✅ Docker build succeeded. New image built $IMAGE_NAME"
+  fi
 
   printInfo "Loading image into kind cluster"
   kind load docker-image $IMAGE_NAME

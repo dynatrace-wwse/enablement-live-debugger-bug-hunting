@@ -100,16 +100,15 @@ solve_bug1(){
   
   redeployApp
 
-  printInfo "Now add some tasks, mark them completed and click on 'clear completed'"
-
   setVersionControl "solution/bug1"
 
+  printInfo "Now add some tasks, mark them completed and click on 'clear completed'"
+  printInfo "You can assert that the bug is gone also by typing 'is_bug1_solved'"
 }
 
 setVersionControl(){
-
+  printInfo "Setting version control in the DEPLOYMENT_NAME=$DEPLOYMENT_NAME to point to '$1' "
   updateVersionControl "$1" 
-  
   patchDeployment
 
 }
@@ -125,8 +124,8 @@ updateVersionControl(){
   DT_LIVEDEBUGGER_REMOTE_ORIGIN=$(git remote get-url origin)
   DT_LIVEDEBUGGER_COMMIT=$(git rev-parse $version)
 
-  echo "Fetching git revision for $version in $DT_LIVEDEBUGGER_REMOTE_ORIGIN" 
-  echo $DT_LIVEDEBUGGER_COMMIT
+  printInfo "Fetching git revision for $version in DT_LIVEDEBUGGER_REMOTE_ORIGIN=$DT_LIVEDEBUGGER_REMOTE_ORIGIN" 
+  printInfo "DT_LIVEDEBUGGER_COMMIT=$DT_LIVEDEBUGGER_COMMIT"
 
   export DT_LIVEDEBUGGER_REMOTE_ORIGIN=$DT_LIVEDEBUGGER_REMOTE_ORIGIN
   export DT_LIVEDEBUGGER_COMMIT=$DT_LIVEDEBUGGER_COMMIT
@@ -140,7 +139,7 @@ kubectl patch deployment $DEPLOYMENT_NAME -n $NAMESPACE -p "$(cat <<EOF
             "spec": {
                 "containers": [
                     {
-                        "name": "$IMAGE_NAME",
+                        "name": "$DEPLOYMENT_NAME",
                         "env": [
                             {
                                 "name": "DT_LIVEDEBUGGER_COMMIT",

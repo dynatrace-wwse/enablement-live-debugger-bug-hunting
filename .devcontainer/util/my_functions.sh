@@ -50,14 +50,14 @@ assert_bug1(){
   kubectl logs -l app=todoapp -c todoapp -n todoapp | grep 'completed=true' > /dev/null
   mark_completed=$?
   
-  kubectl logs -l app=todoapp -c todoapp -n todoapp | grep 'failed to delete completed todos' > /dev/null
+  kubectl logs -l app=todoapp -c todoapp -n todoapp | grep 'Failed to delete completed todos' > /dev/null
   click_clear_completed=$?
 
   if [ $mark_completed -eq 0 ] && [ $click_clear_completed -eq 0 ]; then
-    printInfo "✅ Thanks for adding tasks and trying to clear them."
+    printInfo "🪲 Bug 'Clear completed' is there! Thanks for adding tasks and trying to clear them."
     return 0
   else
-    printInfo " ⚠️ Please add a couple of task and then click on the 'clear completed' button"
+    printInfo " ⚠️ Please add a couple of task, mark them completed and then click on the 'clear completed' button in order to see if the 🪲 bug is there..."
     return 1
   fi
 
@@ -175,7 +175,7 @@ addCompletedTask(){
 
 clearCompletedTasks(){
   printInfo "Clearing completed Tasks"
-  response=$(curl -X DELETE $APPLICATION_URL/todos/clear_completed)
+  response=$(curl -s -X DELETE $APPLICATION_URL/todos/clear_completed)
   if echo "$response" | grep -q '"status":"ok"'; then
     printInfo "✅ Clear completed executed successfully"
   else

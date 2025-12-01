@@ -74,11 +74,11 @@ public class TodoController {
         logger.debug("SELECT * FROM todos WHERE status='completed'");
         // The bug Clear completed is in here for the first bug hunt
         List<TodoRecord> todoStore = new ArrayList<>();
-        logger.debug("todoStore size is {}", todos.getAll().length);
+        logger.debug("todoStore size is {}", todoStore.size());
         for (TodoRecord todoRecord : todos.getAll()) {
             if (todoRecord.isCompleted()) {
                 // The bug in here in is for the bughunt example
-                if (todoStore.remove(todoRecord)) {
+                if (todos.remove(todoRecord)) {
                     logger.info("Removed Todo record: {}", todoRecord);
                 } else {
                     logger.error("Failed to delete completed todos", todoRecord);

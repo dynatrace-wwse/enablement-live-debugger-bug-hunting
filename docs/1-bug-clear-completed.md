@@ -20,6 +20,15 @@ It should look something like this:
 
 Apparently the button does not work. When clicked - completed todos are not cleared. 
 
+If you want to verify you have bumped correctly into the bug, you can verify this with a function we set up for you.
+
+!!! tip "🪲 Verify if you have bumped into the bug"
+    
+    ```bash
+    is_bug1_there
+    ```
+
+
 We embark on our Bug hunting journey! 
 
 There are multiple ways to dive deep into the issue because Dynatrace is monitoring your Kubernetes cluster, all workloads in it, all it's traces with code level insights and all real users accessing the exposed application.

@@ -319,9 +319,10 @@ assertBugsAndRedeployment(){
 
   _check_bug1
   
-  if ! is_bug1_solved; then
+  if is_bug1_solved; then
     exit 1
   fi
+
   printInfo "Bug 1 there, solving 1, 2 and 3"
   
   solve_bug3

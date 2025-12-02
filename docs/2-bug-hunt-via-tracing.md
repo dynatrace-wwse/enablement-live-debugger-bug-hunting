@@ -78,34 +78,50 @@ Yet, another way of verifying you succeeded is by typing:
 is_bug2_solved
 ```
 
+??? example "Solution for the bug Special Characters 🪲🛠️"
 
-!!! Warning "Fix the bug 🪲🛠️ "
-    This section is being improved, same fashio as the solution of bug1, we are implementing an automatic fix for you...
-
-    Go back to your Codespace and find the source code for the `TodoController`. It should be under the following path: `app/src/main/java/com/dynatrace/todoapp/TodoController.java`. Once you apply the fix, run the following commands:
-
+    Go to the terminal and type:
+    
     ```bash
-    redeployApp
+    solve_bug2
     ```
+
+    This function will implement the bugfix from branch `solution/bug2`. 
+    The function checkouts the code from `solution/bug2`, compiles the code and redeploys it into the Kubernetes cluster.
 
     <br>
     <details>
-    <summary>💡 Solution </summary>
+    <summary>🛠️ The code changes </summary>
 
-    Before
-    ```javascript
-    String todoTitle = newTodoRecord.getTitle().replaceAll("[^a-zA-Z0-9\\s]+", "");
-    newTodoRecord.setTitle(todoTitle);
+
+    The solution for this bug is also simple. In the method `TodoController.addTodo` we saw how the title changed watching the variable with the live debugger. Most probably the developer was implementing something with regex and left the code there. If what we want is to keep the original title, we just need to comment out those lines.
+    
+    ```java
+       
+        newTodoRecord.setId(UUID.randomUUID().toString());
+        logger.info("Adding a new todo: {}", newTodoRecord);
+        // The bug in here in is for the bughunt example
+        String todoTitle = newTodoRecord.getTitle().replaceAll("[^a-zA-Z0-9\\s]+", "");
+        newTodoRecord.setTitle(todoTitle);
+        todos.add(newTodoRecord);
+               
     ```
 
-    After
-    ```javascript
-    //String todoTitle = newTodoRecord.getTitle().replaceAll("[^a-zA-Z0-9\\s]+", "");
-    String todoTitle = newTodoRecord.getTitle();
-    newTodoRecord.setTitle(todoTitle);
+    this way when the newTodoRecord is passed by from the request, the object is addeed as is to the `todo` array. The only field that is modified (or added) is the UUID.
+    
+    ```java
+      
+        newTodoRecord.setId(UUID.randomUUID().toString());
+        logger.info("Adding a new todo: {}", newTodoRecord);
+        // The bug in here in is for the bughunt example
+        //String todoTitle = newTodoRecord.getTitle().replaceAll("[^a-zA-Z0-9\\s]+", "");
+        //newTodoRecord.setTitle(todoTitle);
+        todos.add(newTodoRecord);
+            
     ```
-    </details> 
-    <br>
+    Commenting out those two lines is the solution, give it a try!
+
+    </details>
 
 
 

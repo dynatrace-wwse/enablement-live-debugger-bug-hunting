@@ -50,6 +50,14 @@ redeployApp(){
 }
 
 
+_check_bug1(){
+
+  addTask '{"title":"Clear completed task","completed":true}'
+  
+  clearCompletedTasks
+
+}
+
 is_bug1_there(){
   
   kubectl logs -l app=todoapp -c todoapp -n todoapp | grep 'completed=true' > /dev/null
@@ -68,13 +76,12 @@ is_bug1_there(){
 
 }
 
+
 is_bug1_solved(){
 
   printInfoSection "Verifying if the 🪲 Bug 'Clear completed' is gone"
   
-  addTask '{"title":"Clear completed task","completed":true}'
-
-  clearCompletedTasks
+  _check_bug1
 
   kubectl logs -l app=todoapp -c todoapp -n todoapp | grep 'Removed Todo record.*completed=true' > /dev/null
   found_removed=$?
@@ -301,6 +308,47 @@ clearCompletedTasks(){
     printInfo "✅ Clear completed executed successfully"
   else
     printInfo "❌ Failed to execute Clear completed"
+  fi
+
+}
+
+
+
+assertBugsAndRedeployment(){
+  printInfoSection "Verifying if the Bug 1 is there..."
+
+  _check_bug1
+  
+  if ! is_bug1_solved; then
+    exit 1
+  fi
+  printInfo "Bug 1 there, solving 1, 2 and 3"
+  
+  solve_bug3
+
+  waitAppCanHandleRequests
+
+  if ! is_bug1_solved; then
+    exit 1
+  fi
+
+  if ! is_bug2_solved; then
+    exit 1
+  fi
+
+  if ! is_bug3_solved; then
+    exit 1
+  fi
+
+}
+
+assertBug2isThere(){
+  printInfoSection "Verifying if the Bug 2 is there..."
+  
+  is_bug2_solved
+  
+  if ! is_bug1_solved; then
+    exit 1
   fi
 
 }

@@ -113,6 +113,53 @@ is_bug2_solved(){
   return $RC
 }
 
+is_bug3_solved(){
+  printInfoSection "Verifying if the 🪲 Bug 'Duplicate Task' is gone"
+  RC=0
+
+  # Generate a random 6-character ID
+  random_id=$(head /dev/urandom | LC_ALL=C tr -dc 'a-zA-Z0-9' | head -c 6)
+  title="Duplicated task with randomId:$random_id"
+
+  addTask '{"title":"'"$title"'","completed":false}'
+  
+  response=$(curl -s -X GET $APPLICATION_URL/todos)
+  task_id=$(echo "$response" | grep -o '"title":"'"$title"'","id":"[^"]*"' | grep -o '"id":"[^"]*"' | cut -d'"' -f4)
+
+  if [ -n "$task_id" ]; then
+    printInfo "Duplicating task with ID: $task_id"
+    dup_response=$(curl -s -X POST $APPLICATION_URL/todos/dup/$task_id)
+    
+    if echo "$dup_response" | grep -q '"status":"ok"'; then
+      # Get todos again to verify the duplicate
+      response=$(curl -s -X GET $APPLICATION_URL/todos)
+      
+      # Count how many tasks have the correct title
+      count=$(echo "$response" | grep -o '"title":"'"$title"'"' | wc -l)
+      
+      # Verify original task still exists with the same ID
+      original_exists=$(echo "$response" | grep -q '"title":"'"$title"'","id":"'"$task_id"'"' && echo "yes" || echo "no")
+      
+      # Check if we have 2 tasks with the correct title and the original still exists
+      if [ "$count" -eq 2 ] && [ "$original_exists" = "yes" ]; then
+        printInfo "✅ Bug duplicate task is gone. Found 2 tasks with correct title '$title', including original with ID: $task_id"
+        RC=0
+      else
+        printWarn "⚠️ Bug duplicate task is still there. Expected 2 tasks with title '$title', found: $count. Tip: Check the setter methods in duplicateTodo."
+        RC=1
+      fi
+    else
+      printInfo "❌ Failed to execute duplicate"
+      RC=1
+    fi
+  else
+    printInfo "❌ Could not find the task to duplicate"
+    RC=1
+  fi
+
+  return $RC
+}
+
 deleteTask(){
   response="$1"
   # might need it later
@@ -145,6 +192,15 @@ solve_bug2(){
 
   printInfo "Now add some tasks with special characters and see if they are added correctly"
   printInfo "You can assert that the bug is gone also by typing 'is_bug2_solved'"
+}
+
+solve_bug3(){
+
+  printInfoSection "Solving the 🪲 Bug Duplicated Task"
+  _solve_bug "solution/bug3"
+
+  printInfo "Now duplicate a record and see if the duplicate is correct"
+  printInfo "You can assert that the bug is gone also by typing 'is_bug3_solved'"
 }
 
 _solve_bug(){

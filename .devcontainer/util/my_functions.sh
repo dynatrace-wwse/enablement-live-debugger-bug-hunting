@@ -130,23 +130,41 @@ deleteTask(){
 
 solve_bug1(){
   
-  printInfoSection "Solving the Bug Clear Completed"
+  printInfoSection "Solving the 🪲 Bug Clear Completed"
 
-  printInfo "we change to the branch solution/bug1 where the developer already added the solution for us"
+  _solve_bug "solution/bug1"
 
-  printInfo "git checkout solution/bug1"
+  printInfo "Now add some tasks, mark them completed and click on 'clear completed'"
+  printInfo "You can assert that the bug is gone also by typing 'is_bug1_solved'"
+}
 
-  git checkout solution/bug1
+solve_bug2(){
+
+  printInfoSection "Solving the 🪲 Bug Special Characters"
+  _solve_bug "solution/bug2"
+
+  printInfo "Now add some tasks with special characters and see if they are added correctly"
+  printInfo "You can assert that the bug is gone also by typing 'is_bug2_solved'"
+}
+
+_solve_bug(){
+  
+  solution_branch=$1
+
+  printInfo "Changing to the branch $solution_branch where the developer already added the solution for us"
+
+  printInfo "git checkout $solution_branch"
+
+  git checkout $solution_branch
 
   printInfo "then we compile the application and redeploy it to the Kubernetes Cluster using the function 'redeployApp'"
   
   redeployApp
 
-  setVersionControl "solution/bug1"
+  setVersionControl "$solution_branch"
 
-  printInfo "Now add some tasks, mark them completed and click on 'clear completed'"
-  printInfo "You can assert that the bug is gone also by typing 'is_bug1_solved'"
 }
+
 
 setVersionControl(){
   printInfo "Setting version control in the DEPLOYMENT_NAME=$DEPLOYMENT_NAME to point to '$1' "

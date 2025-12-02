@@ -327,6 +327,8 @@ assertBugsAndRedeployment(){
   
   replaceTodoController "solution/bug3"
 
+  redeployApp
+
   waitAppCanHandleRequests
 
   if ! is_bug1_solved; then

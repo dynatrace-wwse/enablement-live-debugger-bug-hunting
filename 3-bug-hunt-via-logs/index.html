@@ -618,6 +618,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#fixing-the-bug-and-redeploying-the-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fixing the bug and redeploying the app
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -850,6 +859,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#fixing-the-bug-and-redeploying-the-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fixing the bug and redeploying the app
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -914,40 +932,48 @@ Wow, that was fast, we see two log entries with that match and are coming from t
 <h2 id="open-the-live-debugger">Open the Live Debugger<a class="headerlink" href="#open-the-live-debugger" title="Permanent link">#</a></h2>
 <ul>
 <li>Let's search for the <code>Code function = duplicateTodo</code> under the <code>Code Namespace = com.dynatrace.todoapp.TodoController</code>. In the search,  type <code>TodoController</code> the class file appears, open it.</li>
-<li>Now let's search for the <code>duplicateTodo</code> function, the declaration is in line 95.</li>
-<li>Let's put a non-breaking breakpoint on line 107</li>
+<li>Now let's search for the <code>duplicateTodo</code> function, the declaration is in line 94.</li>
 </ul>
-<p><img alt="duplicateTodo New Active Breakpoint" src="../img/todo_duplicatetodo_new_active_breakpoint.png" /></p>
+<p><img alt="Duplicate" src="../img/duplicate_record.png" /></p>
 <ul>
+<li>Let's put a non-breaking breakpoint on line 106</li>
 <li>Go to the Todo app and repeat the bug.</li>
 <li>Return to the Live Debugger session and click on the new snapshot.  Review the variables.</li>
 </ul>
-<p><img alt="Duplicate" src="../img/duplicate_record.png" /></p>
 <p>Did you notice how the Map has in the items [0] and [1] the title and UUIDs are swapped?</p>
-<p>Looking at the source code, in lines 102 and 103, the variables are incorrectly set because the functions are swapped! </p>
+<p>Looking at the source code, in lines 100 and 101, the variables are incorrectly set because the functions are swapped! </p>
 <p><img alt="Duplicate" src="../img/duplicate_record2.png" /></p>
 <p>Now the developer can easily fix this code and resolve the issue!</p>
 <p>We've now successfully hunted down and taken care of another bug 🤩</p>
-<div class="admonition warning">
-<p class="admonition-title">Fix the bug 🪲🛠️ </p>
-<p>This section is being improved, same fashio as the solution of bug1, we are implementing an automatic fix for you...</p>
-<p>Go back to your Codespace and find the source code for the <code>TodoController</code>. It should be under the following path: <code>app/src/main/java/com/dynatrace/todoapp/TodoController.java</code>. Once you apply the fix, run the following commands:</p>
+<h2 id="fixing-the-bug-and-redeploying-the-app">Fixing the bug and redeploying the app<a class="headerlink" href="#fixing-the-bug-and-redeploying-the-app" title="Permanent link">#</a></h2>
+<p>Open in VS Code the class <code>TodoController.java</code> and apply your changes. For compiling and redeploying the app we a have comfort function for you that does the compilation and the redeployment in kubernetes for you. Give it a try!</p>
 <div class="highlight"><pre><span></span><code>redeployApp
 </code></pre></div>
+<p>Is the bug gone? Open the app and verify it!</p>
+<p>Yet, another way of verifying you succeeded is by typing: </p>
+<div class="highlight"><pre><span></span><code>is_bug3_solved
+</code></pre></div>
+<details class="example">
+<summary>Solution for the bug Duplicate Record 🪲🛠️</summary>
+<p>Go to the terminal and type:</p>
+<div class="highlight"><pre><span></span><code>solve_bug3
+</code></pre></div>
+<p>This function will implement the bugfix from branch <code>solution/bug3</code>. 
+The function checkouts the code from <code>solution/bug3</code>, compiles the code and redeploys it into the Kubernetes cluster.</p>
 <p><br>
 <details>
-<summary>💡 Solution </summary></p>
-<p>Before
-<div class="highlight"><pre><span></span><code><span class="nx">newTodoRecord</span><span class="p">.</span><span class="nx">setId</span><span class="p">(</span><span class="nx">tempTodoRecord</span><span class="p">.</span><span class="nx">getTitle</span><span class="p">());</span>
-<span class="nx">newTodoRecord</span><span class="p">.</span><span class="nx">setTitle</span><span class="p">(</span><span class="nx">UUID</span><span class="p">.</span><span class="nx">randomUUID</span><span class="p">().</span><span class="nx">toString</span><span class="p">());</span>
-</code></pre></div></p>
-<p>After
-<div class="highlight"><pre><span></span><code><span class="nx">newTodoRecord</span><span class="p">.</span><span class="nx">setId</span><span class="p">(</span><span class="nx">UUID</span><span class="p">.</span><span class="nx">randomUUID</span><span class="p">().</span><span class="nx">toString</span><span class="p">());</span>
-<span class="nx">newTodoRecord</span><span class="p">.</span><span class="nx">setTitle</span><span class="p">(</span><span class="nx">tempTodoRecord</span><span class="p">.</span><span class="nx">getTitle</span><span class="p">());</span>
+<summary>🛠️ The code changes </summary></p>
+<p>The <code>TodoController.duplicateTodo</code> you need to swap the title for the ID in lines 100 and 101 respectively. </p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nx">newTodoRecord</span><span class="p">.</span><span class="nx">setId</span><span class="p">(</span><span class="nx">tempTodoRecord</span><span class="p">.</span><span class="nx">getTitle</span><span class="p">());</span>
+<span class="w">    </span><span class="nx">newTodoRecord</span><span class="p">.</span><span class="nx">setTitle</span><span class="p">(</span><span class="nx">UUID</span><span class="p">.</span><span class="nx">randomUUID</span><span class="p">().</span><span class="nx">toString</span><span class="p">());</span>
 </code></pre></div>
-</details> 
-<br></p>
-</div>
+<p>this way when a new todo is duplicated, the title is copied and a new ID is generated (this is needed for the persistence layer).</p>
+<p><div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nx">newTodoRecord</span><span class="p">.</span><span class="nx">setId</span><span class="p">(</span><span class="nx">UUID</span><span class="p">.</span><span class="nx">randomUUID</span><span class="p">().</span><span class="nx">toString</span><span class="p">());</span>
+<span class="w">    </span><span class="nx">newTodoRecord</span><span class="p">.</span><span class="nx">setTitle</span><span class="p">(</span><span class="nx">tempTodoRecord</span><span class="p">.</span><span class="nx">getTitle</span><span class="p">());</span>
+</code></pre></div>
+After swapping those lines, the duplication of Todos is bug-free!</p>
+</details>
+</details>
 <div class="grid cards">
 <ul>
 <li><a href="../ide-integration/">Click here to continue <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>

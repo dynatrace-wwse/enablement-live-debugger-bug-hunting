@@ -534,6 +534,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#fixing-the-bug-and-redeploying-the-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fixing the bug and redeploying the app
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -850,6 +859,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#fixing-the-bug-and-redeploying-the-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fixing the bug and redeploying the app
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -896,15 +914,15 @@ document.addEventListener('DOMContentLoaded', function() {
 <h2 id="open-the-live-debugger">Open the Live Debugger<a class="headerlink" href="#open-the-live-debugger" title="Permanent link">#</a></h2>
 <ul>
 <li>Let's search for the <code>Code function = addTodo</code> under the <code>Code Namespace = com.dynatrace.todoapp.TodoController</code>. In the search,  type <code>TodoController</code> the class file appears, open it.</li>
-<li>Now let's search for the <code>AddTodo</code> function, the declaration is in line 24.</li>
+<li>Now let's search for the <code>AddTodo</code> function, the declaration is in line 22.</li>
 </ul>
 <p><img alt="AddToDo Method Source" src="../img/todo_addtodo_method_source.png" /></p>
-<p>Notice anything unusual? The developer left a String function on line 28:</p>
+<p>Notice anything unusual? The developer left a String function on line 26:</p>
 <blockquote>
-<p><code>28</code> String todoTitle = newTodoRecord.getTitle().replaceAll("[^a-zA-Z0-9\s]+", "");</p>
+<p><code>26</code> String todoTitle = newTodoRecord.getTitle().replaceAll("[^a-zA-Z0-9\s]+", "");</p>
 </blockquote>
 <ul>
-<li>Let's add two breakpoints around that line, one before, let's say on line 25 and another on line 32.</li>
+<li>Let's add two breakpoints around that line, one before, let's say on line 23 and another on line 30.  </li>
 </ul>
 <p><img alt="AddToDo New Active Breakpoints" src="../img/todo_addtodo_new_active_breakpoints.png" /></p>
 <ul>
@@ -918,39 +936,55 @@ document.addEventListener('DOMContentLoaded', function() {
 </ul>
 <p><img alt="AddToDo Snapshots" src="../img/todo_addtodo_snapshots.png" /></p>
 <ul>
-<li>If you open the first snapshot, the one on line 25, you'll notice the Object <code>newTodoRecord.title = This is exciting!!!</code> that contains the exclamation mark. Meaning the data is being correctly passed on to the function <code>addTodo</code>, but then something happens and the <code>!!!</code> are removed.</li>
+<li>If you open the first snapshot, the one on line 23, you'll notice the Object <code>newTodoRecord.title = This is exciting!!!</code> that contains the exclamation mark. Meaning the data is being correctly passed on to the function <code>addTodo</code>, but then something happens and the <code>!!!</code> are removed.</li>
 <li>If you then look for the same attribute in the same method on the second snapshot you'll see that the <code>!!!</code> are gone.</li>
 </ul>
 <h2 id="watching-variables">Watching variables<a class="headerlink" href="#watching-variables" title="Permanent link">#</a></h2>
 <ul>
-<li>We want to make your life as a developer easier. With the Live Debugger you can watch variables, right click on the  <code>newTodoRecord.title</code> and select <code>Watch</code></li>
+<li>We want to make your life as a developer easier. With the Live Debugger you can watch variables and see them change. For this right click on the  <code>newTodoRecord.title</code> and select <code>Watch</code></li>
 </ul>
 <p><img alt="watching variables" src="../img/ld_watch.png" /></p>
 <ul>
 <li>You'll see that in the snapshots, the title variable captured in both snapshots are added for ease of debugging complex applications. This is a very simple app, but imagine you have hundreds or thousands of lines of code, not all of them written by you, using this strategy you can understand how specific variables change through the code.</li>
 </ul>
 <p><img alt="watching variables" src="../img/ld_watch2.png" /></p>
-<div class="admonition warning">
-<p class="admonition-title">Fix the bug 🪲🛠️ </p>
-<p>This section is being improved, same fashio as the solution of bug1, we are implementing an automatic fix for you...</p>
-<p>Go back to your Codespace and find the source code for the <code>TodoController</code>. It should be under the following path: <code>app/src/main/java/com/dynatrace/todoapp/TodoController.java</code>. Once you apply the fix, run the following commands:</p>
+<h2 id="fixing-the-bug-and-redeploying-the-app">Fixing the bug and redeploying the app<a class="headerlink" href="#fixing-the-bug-and-redeploying-the-app" title="Permanent link">#</a></h2>
+<p>Like the first bug, open in VS Code the class <code>TodoController.java</code> and apply your changes. For compiling and redeploying the app we a have comfort function for you that does the compilation and the redeployment in kubernetes for you. Give it a try!</p>
 <div class="highlight"><pre><span></span><code>redeployApp
 </code></pre></div>
+<p>Is the bug gone? Open the app and verify it!</p>
+<p>Yet, another way of verifying you succeeded is by typing: </p>
+<div class="highlight"><pre><span></span><code>is_bug2_solved
+</code></pre></div>
+<details class="example">
+<summary>Solution for the bug Special Characters 🪲🛠️</summary>
+<p>Go to the terminal and type:</p>
+<div class="highlight"><pre><span></span><code>solve_bug2
+</code></pre></div>
+<p>This function will implement the bugfix from branch <code>solution/bug2</code>. 
+The function checkouts the code from <code>solution/bug2</code>, compiles the code and redeploys it into the Kubernetes cluster.</p>
 <p><br>
 <details>
-<summary>💡 Solution </summary></p>
-<p>Before
-<div class="highlight"><pre><span></span><code><span class="nb">String</span><span class="w"> </span><span class="nx">todoTitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">newTodoRecord</span><span class="p">.</span><span class="nx">getTitle</span><span class="p">().</span><span class="nx">replaceAll</span><span class="p">(</span><span class="s2">&quot;[^a-zA-Z0-9\\s]+&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">);</span>
-<span class="nx">newTodoRecord</span><span class="p">.</span><span class="nx">setTitle</span><span class="p">(</span><span class="nx">todoTitle</span><span class="p">);</span>
-</code></pre></div></p>
-<p>After
-<div class="highlight"><pre><span></span><code><span class="c1">//String todoTitle = newTodoRecord.getTitle().replaceAll(&quot;[^a-zA-Z0-9\\s]+&quot;, &quot;&quot;);</span>
-<span class="nb">String</span><span class="w"> </span><span class="nx">todoTitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">newTodoRecord</span><span class="p">.</span><span class="nx">getTitle</span><span class="p">();</span>
-<span class="nx">newTodoRecord</span><span class="p">.</span><span class="nx">setTitle</span><span class="p">(</span><span class="nx">todoTitle</span><span class="p">);</span>
+<summary>🛠️ The code changes </summary></p>
+<p>The solution for this bug is also simple. In the method <code>TodoController.addTodo</code> we saw how the title changed watching the variable with the live debugger. Most probably the developer was implementing something with regex and left the code there. If what we want is to keep the original title, we just need to comment out those lines.</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="n">newTodoRecord</span><span class="p">.</span><span class="na">setId</span><span class="p">(</span><span class="n">UUID</span><span class="p">.</span><span class="na">randomUUID</span><span class="p">().</span><span class="na">toString</span><span class="p">());</span>
+<span class="w">    </span><span class="n">logger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Adding a new todo: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">newTodoRecord</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// The bug in here in is for the bughunt example</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">todoTitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newTodoRecord</span><span class="p">.</span><span class="na">getTitle</span><span class="p">().</span><span class="na">replaceAll</span><span class="p">(</span><span class="s">&quot;[^a-zA-Z0-9\\s]+&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">newTodoRecord</span><span class="p">.</span><span class="na">setTitle</span><span class="p">(</span><span class="n">todoTitle</span><span class="p">);</span>
+<span class="w">    </span><span class="n">todos</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">newTodoRecord</span><span class="p">);</span>
 </code></pre></div>
-</details> 
-<br></p>
-</div>
+<p>this way when the newTodoRecord is passed by from the request, the object is addeed as is to the <code>todo</code> array. The only field that is modified (or added) is the UUID.</p>
+<p><div class="highlight"><pre><span></span><code><span class="w">    </span><span class="n">newTodoRecord</span><span class="p">.</span><span class="na">setId</span><span class="p">(</span><span class="n">UUID</span><span class="p">.</span><span class="na">randomUUID</span><span class="p">().</span><span class="na">toString</span><span class="p">());</span>
+<span class="w">    </span><span class="n">logger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Adding a new todo: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">newTodoRecord</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// The bug in here in is for the bughunt example</span>
+<span class="w">    </span><span class="c1">//String todoTitle = newTodoRecord.getTitle().replaceAll(&quot;[^a-zA-Z0-9\\s]+&quot;, &quot;&quot;);</span>
+<span class="w">    </span><span class="c1">//newTodoRecord.setTitle(todoTitle);</span>
+<span class="w">    </span><span class="n">todos</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">newTodoRecord</span><span class="p">);</span>
+</code></pre></div>
+Commenting out those two lines is the solution, give it a try!</p>
+</details>
+</details>
 <div class="grid cards">
 <ul>
 <li><a href="../3-bug-duplicate-task/">Click here to continue the quest with the next Bug<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>

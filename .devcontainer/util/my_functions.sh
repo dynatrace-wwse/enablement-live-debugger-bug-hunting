@@ -323,9 +323,9 @@ assertBugsAndRedeployment(){
     exit 1
   fi
 
-  printInfo "Bug 1 there, solving 1, 2 and 3"
+  printInfo "Bugs are there! now solving 1, 2 and 3 with the TodoController from solution/bug3"
   
-  solve_bug3
+  replaceTodoController "solution/bug3"
 
   waitAppCanHandleRequests
 
@@ -339,6 +339,31 @@ assertBugsAndRedeployment(){
 
   if ! is_bug3_solved; then
     exit 1
+  fi
+
+}
+
+replaceTodoController(){
+
+  solution_branch="$1"
+
+  printInfoSection "Replacing the TodoController from branch $solution_branch"
+  
+  if [ -z "$solution_branch" ]; then
+    printError "No solution branch specified"
+    return 1
+  fi
+
+  printInfo "Downloading TodoController.java from $solution_branch branch"
+  
+  curl -s -o app/src/main/java/com/dynatrace/todoapp/TodoController.java \
+    "https://raw.githubusercontent.com/dynatrace-wwse/enablement-live-debugger-bug-hunting/refs/heads/$solution_branch/app/src/main/java/com/dynatrace/todoapp/TodoController.java"
+  
+  if [ $? -eq 0 ]; then
+    printInfo "✅ TodoController.java downloaded successfully from $solution_branch"
+  else
+    printError "❌ Failed to download TodoController.java from $solution_branch"
+    return 1
   fi
 
 }

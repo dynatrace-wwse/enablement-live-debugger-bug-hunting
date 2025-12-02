@@ -119,7 +119,7 @@ is_bug3_solved(){
 
   # Generate a random 6-character ID
   random_id=$(head /dev/urandom | LC_ALL=C tr -dc 'a-zA-Z0-9' | head -c 6)
-  title="Duplicated task with randomId:$random_id"
+  title="Duplicated task with ID $random_id"
 
   addTask '{"title":"'"$title"'","completed":false}'
   

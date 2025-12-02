@@ -25,15 +25,15 @@ Now we know where in the application code we should be looking for the bug!
 ## Open the Live Debugger
 
 - Let's search for the `Code function = addTodo` under the `Code Namespace = com.dynatrace.todoapp.TodoController`. In the search,  type `TodoController` the class file appears, open it.
-- Now let's search for the `AddTodo` function, the declaration is in line 24.
+- Now let's search for the `AddTodo` function, the declaration is in line 22.
 
 ![AddToDo Method Source](img/todo_addtodo_method_source.png)
 
-Notice anything unusual? The developer left a String function on line 28:
+Notice anything unusual? The developer left a String function on line 26:
 
-> `28` String todoTitle = newTodoRecord.getTitle().replaceAll("[^a-zA-Z0-9\\s]+", "");
+> `26` String todoTitle = newTodoRecord.getTitle().replaceAll("[^a-zA-Z0-9\\s]+", "");
 
-- Let's add two breakpoints around that line, one before, let's say on line 25 and another on line 32.
+- Let's add two breakpoints around that line, one before, let's say on line 23 and another on line 30.  
 
 ![AddToDo New Active Breakpoints](img/todo_addtodo_new_active_breakpoints.png)
 
@@ -48,11 +48,11 @@ This is exciting!!!
 
 ![AddToDo Snapshots](img/todo_addtodo_snapshots.png)
 
-- If you open the first snapshot, the one on line 25, you'll notice the Object `newTodoRecord.title = This is exciting!!!` that contains the exclamation mark. Meaning the data is being correctly passed on to the function `addTodo`, but then something happens and the `!!!` are removed.
+- If you open the first snapshot, the one on line 23, you'll notice the Object `newTodoRecord.title = This is exciting!!!` that contains the exclamation mark. Meaning the data is being correctly passed on to the function `addTodo`, but then something happens and the `!!!` are removed.
 - If you then look for the same attribute in the same method on the second snapshot you'll see that the `!!!` are gone.
 
 ## Watching variables
-- We want to make your life as a developer easier. With the Live Debugger you can watch variables, right click on the  `newTodoRecord.title` and select `Watch`
+- We want to make your life as a developer easier. With the Live Debugger you can watch variables and see them change. For this right click on the  `newTodoRecord.title` and select `Watch`
 
 ![watching variables](img/ld_watch.png)
 
@@ -60,33 +60,68 @@ This is exciting!!!
 
 ![watching variables](img/ld_watch2.png)
 
-!!! Warning "Fix the bug 🪲🛠️ "
-    This section is being improved, same fashio as the solution of bug1, we are implementing an automatic fix for you...
 
-    Go back to your Codespace and find the source code for the `TodoController`. It should be under the following path: `app/src/main/java/com/dynatrace/todoapp/TodoController.java`. Once you apply the fix, run the following commands:
+## Fixing the bug and redeploying the app
 
+Like the first bug, open in VS Code the class ``TodoController.java`` and apply your changes. For compiling and redeploying the app we a have comfort function for you that does the compilation and the redeployment in kubernetes for you. Give it a try!
+
+
+```bash
+redeployApp
+```
+
+Is the bug gone? Open the app and verify it!
+
+Yet, another way of verifying you succeeded is by typing: 
+
+```bash
+is_bug2_solved
+```
+
+??? example "Solution for the bug Special Characters 🪲🛠️"
+
+    Go to the terminal and type:
+    
     ```bash
-    redeployApp
+    solve_bug2
     ```
+
+    This function will implement the bugfix from branch `solution/bug2`. 
+    The function checkouts the code from `solution/bug2`, compiles the code and redeploys it into the Kubernetes cluster.
 
     <br>
     <details>
-    <summary>💡 Solution </summary>
+    <summary>🛠️ The code changes </summary>
 
-    Before
-    ```javascript
-    String todoTitle = newTodoRecord.getTitle().replaceAll("[^a-zA-Z0-9\\s]+", "");
-    newTodoRecord.setTitle(todoTitle);
+
+    The solution for this bug is also simple. In the method `TodoController.addTodo` we saw how the title changed watching the variable with the live debugger. Most probably the developer was implementing something with regex and left the code there. If what we want is to keep the original title, we just need to comment out those lines.
+    
+    ```java
+       
+        newTodoRecord.setId(UUID.randomUUID().toString());
+        logger.info("Adding a new todo: {}", newTodoRecord);
+        // The bug in here in is for the bughunt example
+        String todoTitle = newTodoRecord.getTitle().replaceAll("[^a-zA-Z0-9\\s]+", "");
+        newTodoRecord.setTitle(todoTitle);
+        todos.add(newTodoRecord);
+               
     ```
 
-    After
-    ```javascript
-    //String todoTitle = newTodoRecord.getTitle().replaceAll("[^a-zA-Z0-9\\s]+", "");
-    String todoTitle = newTodoRecord.getTitle();
-    newTodoRecord.setTitle(todoTitle);
+    this way when the newTodoRecord is passed by from the request, the object is addeed as is to the `todo` array. The only field that is modified (or added) is the UUID.
+    
+    ```java
+      
+        newTodoRecord.setId(UUID.randomUUID().toString());
+        logger.info("Adding a new todo: {}", newTodoRecord);
+        // The bug in here in is for the bughunt example
+        //String todoTitle = newTodoRecord.getTitle().replaceAll("[^a-zA-Z0-9\\s]+", "");
+        //newTodoRecord.setTitle(todoTitle);
+        todos.add(newTodoRecord);
+            
     ```
-    </details> 
-    <br>
+    Commenting out those two lines is the solution, give it a try!
+
+    </details>
 
 
 

@@ -40,19 +40,18 @@ To view the related distributed trace, we can either:
 ## Open the Live Debugger
 
 - Let's search for the `Code function = duplicateTodo` under the `Code Namespace = com.dynatrace.todoapp.TodoController`. In the search,  type `TodoController` the class file appears, open it.
-- Now let's search for the `duplicateTodo` function, the declaration is in line 95.
-- Let's put a non-breaking breakpoint on line 107
-
-![duplicateTodo New Active Breakpoint](img/todo_duplicatetodo_new_active_breakpoint.png)
-
-- Go to the Todo app and repeat the bug.
-- Return to the Live Debugger session and click on the new snapshot.  Review the variables.
+- Now let's search for the `duplicateTodo` function, the declaration is in line 94.
 
 ![Duplicate](img/duplicate_record.png)
 
+- Let's put a non-breaking breakpoint on line 106
+- Go to the Todo app and repeat the bug.
+- Return to the Live Debugger session and click on the new snapshot.  Review the variables.
+
+
 Did you notice how the Map has in the items [0] and [1] the title and UUIDs are swapped?
 
-Looking at the source code, in lines 102 and 103, the variables are incorrectly set because the functions are swapped! 
+Looking at the source code, in lines 100 and 101, the variables are incorrectly set because the functions are swapped! 
 
 ![Duplicate](img/duplicate_record2.png)
 
@@ -60,32 +59,60 @@ Now the developer can easily fix this code and resolve the issue!
 
 We've now successfully hunted down and taken care of another bug 🤩
 
-!!! Warning "Fix the bug 🪲🛠️ "
-    This section is being improved, same fashio as the solution of bug1, we are implementing an automatic fix for you...
 
-    Go back to your Codespace and find the source code for the `TodoController`. It should be under the following path: `app/src/main/java/com/dynatrace/todoapp/TodoController.java`. Once you apply the fix, run the following commands:
+## Fixing the bug and redeploying the app
 
+Open in VS Code the class ``TodoController.java`` and apply your changes. For compiling and redeploying the app we a have comfort function for you that does the compilation and the redeployment in kubernetes for you. Give it a try!
+
+```bash
+redeployApp
+```
+
+Is the bug gone? Open the app and verify it!
+
+Yet, another way of verifying you succeeded is by typing: 
+
+```bash
+is_bug3_solved
+```
+
+
+??? example "Solution for the bug Duplicate Record 🪲🛠️"
+
+    Go to the terminal and type:
+    
     ```bash
-    redeployApp
+    solve_bug3
     ```
+
+    This function will implement the bugfix from branch `solution/bug3`. 
+    The function checkouts the code from `solution/bug3`, compiles the code and redeploys it into the Kubernetes cluster.
 
     <br>
     <details>
-    <summary>💡 Solution </summary>
+    <summary>🛠️ The code changes </summary>
 
-    Before
+
+    The `TodoController.duplicateTodo` you need to swap the title for the ID in lines 100 and 101 respectively. 
+    
     ```javascript
-    newTodoRecord.setId(tempTodoRecord.getTitle());
-    newTodoRecord.setTitle(UUID.randomUUID().toString());
+       
+        newTodoRecord.setId(tempTodoRecord.getTitle());
+        newTodoRecord.setTitle(UUID.randomUUID().toString());
+               
     ```
 
-    After
+    this way when a new todo is duplicated, the title is copied and a new ID is generated (this is needed for the persistence layer).
+    
     ```javascript
-    newTodoRecord.setId(UUID.randomUUID().toString());
-    newTodoRecord.setTitle(tempTodoRecord.getTitle());
+      
+        newTodoRecord.setId(UUID.randomUUID().toString());
+        newTodoRecord.setTitle(tempTodoRecord.getTitle());
+            
     ```
-    </details> 
-    <br>
+    After swapping those lines, the duplication of Todos is bug-free!
+
+    </details>
 
 
 <div class="grid cards" markdown>

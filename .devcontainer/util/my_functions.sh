@@ -62,14 +62,17 @@ is_bug1_there(){
     printInfo "🪲 Bug 'Clear completed' is there! Thanks for adding tasks and trying to clear them."
     return 0
   else
-    printInfo " ⚠️ Please add a couple of task, mark them completed and then click on the 'clear completed' button in order to see if the 🪲 bug is there..."
+    printWarn " ⚠️ Please add a couple of task, mark them completed and then click on the 'clear completed' button in order to see if the 🪲 bug is there..."
     return 1
   fi
 
 }
 
 is_bug1_solved(){
-  addCompletedTask
+
+  printInfoSection "Verifying if the 🪲 Bug 'Clear completed' is gone"
+  
+  addTask '{"title":"Clear completed task","completed":true}'
 
   clearCompletedTasks
 
@@ -80,10 +83,49 @@ is_bug1_solved(){
     printInfo "✅ Bug clear completed is gone."
     return 0
   else
-    printInfo "⚠️ Bug clear completed is still there, tip: check the Arrays"
+    printWarn "⚠️ Bug clear completed is still there, tip: check the Arrays"
     return 1
   fi
 
+}
+
+is_bug2_solved(){
+  printInfoSection "Verifying if the 🪲 Bug 'Special Characters' is gone"
+  RC=0
+
+  addTask '{"title":"Exciting validation!?#","completed":false}'
+
+  printInfo "Retrieving todos to verify the title..."
+  
+  response=$(curl -s -X GET $APPLICATION_URL/todos)
+
+  # Check if special characters are preserved
+  if echo "$response" | grep -q '"title":"Exciting validation!?#"'; then
+    printInfo "✅ Bug special characters is gone. Title preserved correctly."      
+    RC=0
+  elif echo "$response" | grep -q '"title":"Exciting validation"'; then
+    printWarn "⚠️ Bug special characters is still there. Special characters were stripped from the title. Tip: Less is more ;)"
+    RC=1
+  fi
+
+  # Delete taskId
+  #deleteTask $response  
+  return $RC
+}
+
+deleteTask(){
+  response="$1"
+  # might need it later
+  task_id=$(echo "$response" | grep -o '"title":"Exciting validation[^"]*","id":"[^"]*"' | grep -o '"id":"[^"]*"' | cut -d'"' -f4)
+  if [ -n "$task_id" ]; then
+    printInfo "Deleting task ID: $task_id"
+    delete_response=$(curl -s -X DELETE $APPLICATION_URL/todos/$task_id)
+    if echo "$delete_response" | grep -q '"status":"ok"'; then
+      printInfo "Task deleted successfully"
+    else
+      printInfo "Failed to delete task"
+    fi
+  fi
 }
 
 solve_bug1(){
@@ -161,13 +203,14 @@ EOF
 }
 
 
-
-# Testing Methods
-
-addCompletedTask(){
-  printInfo "adding completed Task"
+addTask(){
+  jsontask="$1"
+  if [ -z "$jsontask" ]; then
+    jsontask='{"title":"Completed task","completed":true}'
+  fi
+  printInfo "adding task $jsontask"
   response=$(curl -s -X POST $APPLICATION_URL/todos \
-    -H "Content-Type: application/json" -d '{"title":"Completed task","completed":true}')
+    -H "Content-Type: application/json" -d "$jsontask")
   
   if echo "$response" | grep -q '"status":"ok"'; then
     printInfo "✅ Task added successfully"

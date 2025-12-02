@@ -25,15 +25,15 @@ Now we know where in the application code we should be looking for the bug!
 ## Open the Live Debugger
 
 - Let's search for the `Code function = addTodo` under the `Code Namespace = com.dynatrace.todoapp.TodoController`. In the search,  type `TodoController` the class file appears, open it.
-- Now let's search for the `AddTodo` function, the declaration is in line 24.
+- Now let's search for the `AddTodo` function, the declaration is in line 22.
 
 ![AddToDo Method Source](img/todo_addtodo_method_source.png)
 
-Notice anything unusual? The developer left a String function on line 28:
+Notice anything unusual? The developer left a String function on line 26:
 
-> `28` String todoTitle = newTodoRecord.getTitle().replaceAll("[^a-zA-Z0-9\\s]+", "");
+> `26` String todoTitle = newTodoRecord.getTitle().replaceAll("[^a-zA-Z0-9\\s]+", "");
 
-- Let's add two breakpoints around that line, one before, let's say on line 25 and another on line 32.
+- Let's add two breakpoints around that line, one before, let's say on line 23 and another on line 30.  
 
 ![AddToDo New Active Breakpoints](img/todo_addtodo_new_active_breakpoints.png)
 
@@ -48,17 +48,36 @@ This is exciting!!!
 
 ![AddToDo Snapshots](img/todo_addtodo_snapshots.png)
 
-- If you open the first snapshot, the one on line 25, you'll notice the Object `newTodoRecord.title = This is exciting!!!` that contains the exclamation mark. Meaning the data is being correctly passed on to the function `addTodo`, but then something happens and the `!!!` are removed.
+- If you open the first snapshot, the one on line 23, you'll notice the Object `newTodoRecord.title = This is exciting!!!` that contains the exclamation mark. Meaning the data is being correctly passed on to the function `addTodo`, but then something happens and the `!!!` are removed.
 - If you then look for the same attribute in the same method on the second snapshot you'll see that the `!!!` are gone.
 
 ## Watching variables
-- We want to make your life as a developer easier. With the Live Debugger you can watch variables, right click on the  `newTodoRecord.title` and select `Watch`
+- We want to make your life as a developer easier. With the Live Debugger you can watch variables and see them change. For this right click on the  `newTodoRecord.title` and select `Watch`
 
 ![watching variables](img/ld_watch.png)
 
 - You'll see that in the snapshots, the title variable captured in both snapshots are added for ease of debugging complex applications. This is a very simple app, but imagine you have hundreds or thousands of lines of code, not all of them written by you, using this strategy you can understand how specific variables change through the code.
 
 ![watching variables](img/ld_watch2.png)
+
+
+## Fixing the bug and redeploying the app
+
+Like the first bug, open in VS Code the class ``TodoController.java`` and apply your changes. For compiling and redeploying the app we a have comfort function for you that does the compilation and the redeployment in kubernetes for you. Give it a try!
+
+
+```bash
+redeployApp
+```
+
+Is the bug gone? Open the app and verify it!
+
+Yet, another way of verifying you succeeded is by typing: 
+
+```bash
+is_bug2_solved
+```
+
 
 !!! Warning "Fix the bug 🪲🛠️ "
     This section is being improved, same fashio as the solution of bug1, we are implementing an automatic fix for you...

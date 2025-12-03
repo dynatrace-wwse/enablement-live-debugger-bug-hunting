@@ -123,6 +123,10 @@ is_bug2_solved
 
     </details>
 
+    ??? question "Good to know about Version Control and Live Debugger"
+        The `solve_bug2` function adds to the Kubernetes Deployment information to the Live Debugger where the source code resides. The solution is stored in the branch `solution/bug2`. 
+        More on this in the section "Version Control" of this tutorial.
+
 
 
 <div class="grid cards" markdown>

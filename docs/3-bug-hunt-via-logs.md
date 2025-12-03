@@ -114,6 +114,10 @@ is_bug3_solved
 
     </details>
 
+    ??? question "Good to know about Version Control and Live Debugger"
+        The `solve_bug3` function adds to the Kubernetes Deployment information to the Live Debugger where the source code resides. The solution is stored in the branch `solution/bug3`. 
+        More on this in the section "Version Control" of this tutorial.
+
 
 <div class="grid cards" markdown>
 - [Click here to continue :octicons-arrow-right-24:](ide-integration.md)

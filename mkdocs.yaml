@@ -15,9 +15,9 @@ nav:
       - '🪲 Bug - Duplicate Task': 3-bug-duplicate-task.md
       - '💡 Hunt via Logs': 3-bug-hunt-via-logs.md
   - '7. Other Settings':
+      - Version Control: version-control.md
       - IDE Integration: ide-integration.md
       - Mask Sensitive Data: mask-data.md
-      - Version Control: version-control.md
   - '8. Cleanup': cleanup.md
   - '9. Resources': resources.md
   - "10. What's Next?": whats-next.md

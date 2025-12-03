@@ -38,7 +38,7 @@ Below is a sample bash script that patches the Kubernetes deployment of the todo
 # https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability/offering-capabilities/additional-settings#integrate-with-your-version-control
 
 # Variable definition
-version="v1.0.0"
+version="v1.0.1"
 deployment="todoapp"
 container="todoapp"
 namespace="todoapp"
@@ -129,5 +129,5 @@ And that's it! as easy as adding those environment variables you can automate th
 
 
 <div class="grid cards" markdown>
-- [Click here to continue :octicons-arrow-right-24:](grail-and-dql.md)
+- [Click here to continue :octicons-arrow-right-24:](ide-integration.md)
 </div>

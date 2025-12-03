@@ -120,5 +120,5 @@ is_bug3_solved
 
 
 <div class="grid cards" markdown>
-- [Click here to continue :octicons-arrow-right-24:](ide-integration.md)
+- [Click here to continue :octicons-arrow-right-24:](version-control.md)
 </div>

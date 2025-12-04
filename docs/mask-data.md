@@ -59,5 +59,5 @@ Dynatrace gives Developers the flexibility to mask and capture variables with si
 
 
 <div class="grid cards" markdown>
-- [Click here to continue :octicons-arrow-right-24:](version-control.md)
+- [Click here to continue :octicons-arrow-right-24:](cleanup.md)
 </div>

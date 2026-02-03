@@ -980,11 +980,11 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>You will need a Dynatrace SaaS tenant with a DPS pricing model and the 'Code Monitoring' rate card should be associated with it. In addition the application needs to be monitored with Dynatrace FullStack mode. The application runtime: Java, NodeJS.</p>
 <h3 id="11-enable-observability-for-developers">1.1 Enable Observability for Developers<a class="headerlink" href="#11-enable-observability-for-developers" title="Permanent link">#</a></h3>
 <ul>
-<li>Go to Settings &gt; General monitoring settings &gt; OneAgent features.<ul>
+<li>Go to Settings &gt; Collect and Capture &gt; Observability for Developers &gt; Enable Observability for Developers</li>
+<li>Go to Settings &gt; Collect and Capture &gt; General monitoring settings &gt; OneAgent features.<ul>
 <li>Enable the Java Live-Debugger, Node.js Live-Debugger, or both, depending on your needs.</li>
 </ul>
 </li>
-<li>Go to Settings &gt; Observability for Developers &gt; Enable Observability for Developers</li>
 </ul>
 <p><a href="https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability/do-enable">More information can be found here</a></p>
 <h3 id="12-set-iam-policies">1.2 Set IAM Policies<a class="headerlink" href="#12-set-iam-policies" title="Permanent link">#</a></h3>
@@ -1029,7 +1029,7 @@ This is already set up for you in the codespaces automatically in the <a href="h
 <li>Enable built-in log ingest rule to ingest all logs discovered by Dynatrace</li>
 <li>Configure log ingest rule to ingest relevant logs for this lab</li>
 </ul>
-<p>In your Dynatrace tenant, open the <code>Settings</code> App.  Navigate in the menus to <code>Collect and capture</code> &gt; <code>Log monitoring</code> &gt; <code>Log ingest rules</code>.  This will open the <code>Settings Classic</code> App and show you the <strong>Log ingest rules</strong></p>
+<p>In your Dynatrace tenant, open the <code>Settings</code> App.  Navigate in the menus to <code>Collect and capture</code> &gt; <code>Log monitoring</code> &gt; <code>Log ingest rules</code>.  This will show you the <strong>Log ingest rules</strong></p>
 <p><img alt="Settings Log Ingest Rules" src="../img/settings_log_ingest_rules.png" /></p>
 <p><strong>Ingest all logs</strong></p>
 <p>Locate the rule <code>[Built-in] Ingest all logs</code> and enable it.  Click <code>Save changes</code>.</p>

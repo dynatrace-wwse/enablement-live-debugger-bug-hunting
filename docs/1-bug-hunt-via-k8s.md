@@ -12,7 +12,7 @@
 
 ![Todo Workload](img/todo_workload.png)
 
-- On the Overview in the right hand side, scroll down and open the `Services` app.  Dynatrace groups telemetry from distributed traces and spans into "Services" for you!
+- On the Overview in the right hand side, scroll down and open the `App Services` tab.  Dynatrace groups telemetry from distributed traces and spans into "Services" for you!
 
 ![Todo Services](img/todo_services.png)
 

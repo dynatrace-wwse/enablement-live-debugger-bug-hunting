@@ -6,9 +6,9 @@ You will need a Dynatrace SaaS tenant with a DPS pricing model and the 'Code Mon
 
 ### 1.1 Enable Observability for Developers
 
-- Go to Settings > General monitoring settings > OneAgent features.
+- Go to Settings > Collect and Capture > Observability for Developers > Enable Observability for Developers
+- Go to Settings > Collect and Capture > General monitoring settings > OneAgent features.
      - Enable the Java Live-Debugger, Node.js Live-Debugger, or both, depending on your needs.
-- Go to Settings > Observability for Developers > Enable Observability for Developers
 
 [More information can be found here](https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability/do-enable)
 
@@ -77,7 +77,7 @@ You have (2) options:
 - Enable built-in log ingest rule to ingest all logs discovered by Dynatrace
 - Configure log ingest rule to ingest relevant logs for this lab
 
-In your Dynatrace tenant, open the `Settings` App.  Navigate in the menus to `Collect and capture` > `Log monitoring` > `Log ingest rules`.  This will open the `Settings Classic` App and show you the **Log ingest rules**
+In your Dynatrace tenant, open the `Settings` App.  Navigate in the menus to `Collect and capture` > `Log monitoring` > `Log ingest rules`.  This will show you the **Log ingest rules**
 
 ![Settings Log Ingest Rules](img/settings_log_ingest_rules.png)
 

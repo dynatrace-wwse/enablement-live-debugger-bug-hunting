@@ -6,7 +6,7 @@
 ## What's this tutorial all about
 In this tutorial we will embark on a Bug Hunting journey learning the different features of the Live Debugger and capabilities of the Dynatrace Platform.
 
-The Live Debugger is a solution within the package of [Observability for Developers](https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability){target=_blank} of the Dynatrace Platform which provides developers with instant access to code-level debug data needed to troubleshoot and understand complex, modern applications with no extra coding, redeployments, or restarts.
+The Live Debugger is a solution within the package of [Observability for Developers](https://docs.dynatrace.com/docs/observe/application-observability){target=_blank} of the Dynatrace Platform which provides developers with instant access to code-level debug data needed to troubleshoot and understand complex, modern applications with no extra coding, redeployments, or restarts.
 
 - Debug in any environment or application and run with any architecture
 - Instant insights and data from any issue

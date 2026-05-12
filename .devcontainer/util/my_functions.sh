@@ -7,7 +7,11 @@
 
 
 ### Variables
-APPLICATION_URL="http://localhost:30100"
+# Framework 1.3.0 exposes apps via nginx ingress (hostname-routed) instead of
+# nodePort 30100. Reach the app through localhost:${K3D_LB_HTTP_PORT:-80} with
+# a Host header that matches the ingress registered by registerApp/deployTodoApp.
+APPLICATION_URL="http://localhost:${K3D_LB_HTTP_PORT:-80}"
+APPLICATION_HOST="todoapp.$(detectHostname)"
 IMAGE_NAME="todoapp:local"
 NAMESPACE="todoapp"
 DEPLOYMENT_NAME="todoapp"
@@ -104,7 +108,7 @@ is_bug2_solved(){
 
   printInfo "Retrieving todos to verify the title..."
   
-  response=$(curl -s -X GET $APPLICATION_URL/todos)
+  response=$(curl -s -H "Host: $APPLICATION_HOST" -X GET $APPLICATION_URL/todos)
 
   # Check if special characters are preserved
   if echo "$response" | grep -q '"title":"Exciting validation!?#"'; then
@@ -130,16 +134,16 @@ is_bug3_solved(){
 
   addTask '{"title":"'"$title"'","completed":false}'
   
-  response=$(curl -s -X GET $APPLICATION_URL/todos)
+  response=$(curl -s -H "Host: $APPLICATION_HOST" -X GET $APPLICATION_URL/todos)
   task_id=$(echo "$response" | grep -o '"title":"'"$title"'","id":"[^"]*"' | grep -o '"id":"[^"]*"' | cut -d'"' -f4)
 
   if [ -n "$task_id" ]; then
     printInfo "Duplicating task with ID: $task_id"
-    dup_response=$(curl -s -X POST $APPLICATION_URL/todos/dup/$task_id)
+    dup_response=$(curl -s -H "Host: $APPLICATION_HOST" -X POST $APPLICATION_URL/todos/dup/$task_id)
     
     if echo "$dup_response" | grep -q '"status":"ok"'; then
       # Get todos again to verify the duplicate
-      response=$(curl -s -X GET $APPLICATION_URL/todos)
+      response=$(curl -s -H "Host: $APPLICATION_HOST" -X GET $APPLICATION_URL/todos)
       
       # Count how many tasks have the correct title
       count=$(echo "$response" | grep -o '"title":"'"$title"'"' | wc -l)
@@ -173,7 +177,7 @@ deleteTask(){
   task_id=$(echo "$response" | grep -o '"title":"Exciting validation[^"]*","id":"[^"]*"' | grep -o '"id":"[^"]*"' | cut -d'"' -f4)
   if [ -n "$task_id" ]; then
     printInfo "Deleting task ID: $task_id"
-    delete_response=$(curl -s -X DELETE $APPLICATION_URL/todos/$task_id)
+    delete_response=$(curl -s -H "Host: $APPLICATION_HOST" -X DELETE $APPLICATION_URL/todos/$task_id)
     if echo "$delete_response" | grep -q '"status":"ok"'; then
       printInfo "Task deleted successfully"
     else
@@ -290,7 +294,7 @@ addTask(){
     jsontask='{"title":"Completed task","completed":true}'
   fi
   printInfo "adding task $jsontask"
-  response=$(curl -s -X POST $APPLICATION_URL/todos \
+  response=$(curl -s -H "Host: $APPLICATION_HOST" -X POST $APPLICATION_URL/todos \
     -H "Content-Type: application/json" -d "$jsontask")
   
   if echo "$response" | grep -q '"status":"ok"'; then
@@ -303,7 +307,7 @@ addTask(){
 
 clearCompletedTasks(){
   printInfo "Clearing completed Tasks"
-  response=$(curl -s -X DELETE $APPLICATION_URL/todos/clear_completed)
+  response=$(curl -s -H "Host: $APPLICATION_HOST" -X DELETE $APPLICATION_URL/todos/clear_completed)
   if echo "$response" | grep -q '"status":"ok"'; then
     printInfo "✅ Clear completed executed successfully"
   else
@@ -329,7 +333,8 @@ assertBugsAndRedeployment(){
 
   redeployApp
 
-  waitAppCanHandleRequests
+  # Wait for the rolled-out app to be reachable via ingress (was waitAppCanHandleRequests on 30100).
+  assertRunningApp todoapp
 
   if ! is_bug1_solved; then
     exit 1

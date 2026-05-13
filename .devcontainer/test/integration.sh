@@ -12,6 +12,6 @@ assertRunningPod dynatrace oneagent
 
 assertRunningPod todoapp todoapp
 
-assertRunningApp 30100
+assertRunningApp todoapp
 
 assertBugsAndRedeployment 

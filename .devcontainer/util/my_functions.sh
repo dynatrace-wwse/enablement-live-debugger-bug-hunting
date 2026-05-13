@@ -355,23 +355,40 @@ replaceTodoController(){
   solution_branch="$1"
 
   printInfoSection "Replacing the TodoController from branch $solution_branch"
-  
+
   if [ -z "$solution_branch" ]; then
     printError "No solution branch specified"
     return 1
   fi
 
+  target="app/src/main/java/com/dynatrace/todoapp/TodoController.java"
+  url="https://raw.githubusercontent.com/dynatrace-wwse/enablement-live-debugger-bug-hunting/refs/heads/$solution_branch/app/src/main/java/com/dynatrace/todoapp/TodoController.java"
+  tmp="${target}.download"
+
   printInfo "Downloading TodoController.java from $solution_branch branch"
-  
-  curl -s -o app/src/main/java/com/dynatrace/todoapp/TodoController.java \
-    "https://raw.githubusercontent.com/dynatrace-wwse/enablement-live-debugger-bug-hunting/refs/heads/$solution_branch/app/src/main/java/com/dynatrace/todoapp/TodoController.java"
-  
-  if [ $? -eq 0 ]; then
-    printInfo "✅ TodoController.java downloaded successfully from $solution_branch"
-  else
-    printError "❌ Failed to download TodoController.java from $solution_branch"
+
+  # --fail makes curl exit non-zero on HTTP 4xx/5xx (e.g. 429 rate-limit) so we
+  # never overwrite the source with a "429: Too Many Requests" body. Retries
+  # with backoff handle transient rate-limits from raw.githubusercontent.com.
+  if ! curl -sSL --fail \
+      --retry 5 --retry-delay 5 --retry-max-time 120 \
+      --retry-all-errors \
+      -o "$tmp" \
+      "$url"; then
+    printError "❌ Failed to download TodoController.java from $solution_branch (HTTP error or network failure)"
+    rm -f "$tmp"
     return 1
   fi
+
+  # Sanity-check the payload: it must look like Java source, not an error body.
+  if ! grep -q '^package com.dynatrace.todoapp' "$tmp"; then
+    printError "❌ Downloaded TodoController.java does not look like valid Java source. First line: $(head -n1 "$tmp")"
+    rm -f "$tmp"
+    return 1
+  fi
+
+  mv "$tmp" "$target"
+  printInfo "✅ TodoController.java downloaded successfully from $solution_branch"
 
 }
 

@@ -16,7 +16,7 @@ On the top left, click on the VS Code menu (the 3 lines), and then click on "Ope
 
 Now your Codespace is open inside your VS Code IDE. You'll notice that you have now the full IDE experience, you can drag and drop files inside and outside the IDE from your OS and VSCode will automatically add them in the container that is being managed by your codespace. 
 
-The application is now being exposed and mapped to your localhost. In this case the TODO app is being mapped to port 30100, so you will be able to access it like this: [http://127.0.0.1:30100](http://127.0.0.1:30100){:target="_blank"}
+The application is accessible via the nginx ingress controller. Run `printGreeting` in the terminal to see the TODO app URL.
 
 ## Get the Dynatrace extension
 

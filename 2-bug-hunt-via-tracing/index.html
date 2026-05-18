@@ -171,6 +171,11 @@
       </label>
       <nav class="md-search__options" aria-label="Search">
         
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
         <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
@@ -322,15 +327,20 @@
     
     
     
+      
+        
+        
+      
     
-    <li class="md-nav__item md-nav__item--nested">
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -408,15 +418,20 @@
     
     
     
+      
+        
+        
+      
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -564,15 +579,20 @@
     
     
     
+      
+        
+        
+      
     
-    <li class="md-nav__item md-nav__item--nested">
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
         
           
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -648,15 +668,20 @@
     
     
     
+      
+        
+        
+      
     
-    <li class="md-nav__item md-nav__item--nested">
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -901,8 +926,8 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>If you want to learn more about the <a href="https://www.youtube.com/watch?v=O4zWlwJ4hsA" target="_blank">new Distributed Tracing App, watch this amazing 12 min recording of Dynatrace App Spotlights</a></p>
 </div>
 <p>In the filter add:</p>
-<div class="highlight"><pre><span></span><code>&quot;Kubernetes namespace&quot; = todoapp AND &quot;Kubernetes workload&quot; = todoapp
-</code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&quot;Kubernetes namespace&quot; = todoapp AND &quot;Kubernetes workload&quot; = todoapp
+</span></code></pre></div>
 <p>You can also let the autocomplete help you or use the facets on the left-hand side to filter for all requests of the Pod <code>todoapp</code> that is deployed in the namespace <code>todoapp</code>.</p>
 <p><img alt="TODO App" src="../img/tracing_app_filter.png" /></p>
 <p>If we take a look at the traces, we can see there is a trace named <code>addTodo</code>. By opening this trace, in the details pane on the right-hand side, we can see in the <code>Code Attributes</code> that the <code>Code function = addTodo</code> and the <code>Code Namespace = com.dynatrace.todoapp.TodoController</code></p>
@@ -925,8 +950,8 @@ document.addEventListener('DOMContentLoaded', function() {
 <li>Go to the TodoApp in your browser and add a Task with a special character.</li>
 </ul>
 <p>Task:
-<div class="highlight"><pre><span></span><code>This is exciting!!!
-</code></pre></div></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>This is exciting!!!
+</span></code></pre></div></p>
 <ul>
 <li>Go back to the Live Debugger and watch the two snapshots, snapshots get gathered in real time.</li>
 </ul>
@@ -946,38 +971,38 @@ document.addEventListener('DOMContentLoaded', function() {
 <p><img alt="watching variables" src="../img/ld_watch2.png" /></p>
 <h2 id="fixing-the-bug-and-redeploying-the-app">Fixing the bug and redeploying the app<a class="headerlink" href="#fixing-the-bug-and-redeploying-the-app" title="Permanent link">#</a></h2>
 <p>Like the first bug, open in VS Code the class <code>TodoController.java</code> and apply your changes. For compiling and redeploying the app we a have comfort function for you that does the compilation and the redeployment in kubernetes for you. Give it a try!</p>
-<div class="highlight"><pre><span></span><code>redeployApp
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>redeployApp
+</span></code></pre></div>
 <p>Is the bug gone? Open the app and verify it!</p>
 <p>Yet, another way of verifying you succeeded is by typing: </p>
-<div class="highlight"><pre><span></span><code>is_bug2_solved
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>is_bug2_solved
+</span></code></pre></div>
 <details class="example">
 <summary>Solution for the bug Special Characters 🪲🛠️</summary>
 <p>Go to the terminal and type:</p>
-<div class="highlight"><pre><span></span><code>solve_bug2
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>solve_bug2
+</span></code></pre></div>
 <p>This function will implement the bugfix from branch <code>solution/bug2</code>. 
 The function checkouts the code from <code>solution/bug2</code>, compiles the code and redeploys it into the Kubernetes cluster.</p>
 <p><br>
 <details>
 <summary>🛠️ The code changes </summary></p>
 <p>The solution for this bug is also simple. In the method <code>TodoController.addTodo</code> we saw how the title changed watching the variable with the live debugger. Most probably the developer was implementing something with regex and left the code there. If what we want is to keep the original title, we just need to comment out those lines.</p>
-<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="n">newTodoRecord</span><span class="p">.</span><span class="na">setId</span><span class="p">(</span><span class="n">UUID</span><span class="p">.</span><span class="na">randomUUID</span><span class="p">().</span><span class="na">toString</span><span class="p">());</span>
-<span class="w">    </span><span class="n">logger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Adding a new todo: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">newTodoRecord</span><span class="p">);</span>
-<span class="w">    </span><span class="c1">// The bug in here in is for the bughunt example</span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">todoTitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newTodoRecord</span><span class="p">.</span><span class="na">getTitle</span><span class="p">().</span><span class="na">replaceAll</span><span class="p">(</span><span class="s">&quot;[^a-zA-Z0-9\\s]+&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">newTodoRecord</span><span class="p">.</span><span class="na">setTitle</span><span class="p">(</span><span class="n">todoTitle</span><span class="p">);</span>
-<span class="w">    </span><span class="n">todos</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">newTodoRecord</span><span class="p">);</span>
-</code></pre></div>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="w">    </span><span class="n">newTodoRecord</span><span class="p">.</span><span class="na">setId</span><span class="p">(</span><span class="n">UUID</span><span class="p">.</span><span class="na">randomUUID</span><span class="p">().</span><span class="na">toString</span><span class="p">());</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="n">logger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Adding a new todo: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">newTodoRecord</span><span class="p">);</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="c1">// The bug in here in is for the bughunt example</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">todoTitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newTodoRecord</span><span class="p">.</span><span class="na">getTitle</span><span class="p">().</span><span class="na">replaceAll</span><span class="p">(</span><span class="s">&quot;[^a-zA-Z0-9\\s]+&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">);</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="n">newTodoRecord</span><span class="p">.</span><span class="na">setTitle</span><span class="p">(</span><span class="n">todoTitle</span><span class="p">);</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="n">todos</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">newTodoRecord</span><span class="p">);</span>
+</span></code></pre></div>
 <p>this way when the newTodoRecord is passed by from the request, the object is addeed as is to the <code>todo</code> array. The only field that is modified (or added) is the UUID.</p>
-<p><div class="highlight"><pre><span></span><code><span class="w">    </span><span class="n">newTodoRecord</span><span class="p">.</span><span class="na">setId</span><span class="p">(</span><span class="n">UUID</span><span class="p">.</span><span class="na">randomUUID</span><span class="p">().</span><span class="na">toString</span><span class="p">());</span>
-<span class="w">    </span><span class="n">logger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Adding a new todo: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">newTodoRecord</span><span class="p">);</span>
-<span class="w">    </span><span class="c1">// The bug in here in is for the bughunt example</span>
-<span class="w">    </span><span class="c1">//String todoTitle = newTodoRecord.getTitle().replaceAll(&quot;[^a-zA-Z0-9\\s]+&quot;, &quot;&quot;);</span>
-<span class="w">    </span><span class="c1">//newTodoRecord.setTitle(todoTitle);</span>
-<span class="w">    </span><span class="n">todos</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">newTodoRecord</span><span class="p">);</span>
-</code></pre></div>
+<p><div class="language-java highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="w">    </span><span class="n">newTodoRecord</span><span class="p">.</span><span class="na">setId</span><span class="p">(</span><span class="n">UUID</span><span class="p">.</span><span class="na">randomUUID</span><span class="p">().</span><span class="na">toString</span><span class="p">());</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="n">logger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Adding a new todo: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">newTodoRecord</span><span class="p">);</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="c1">// The bug in here in is for the bughunt example</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="c1">//String todoTitle = newTodoRecord.getTitle().replaceAll(&quot;[^a-zA-Z0-9\\s]+&quot;, &quot;&quot;);</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="c1">//newTodoRecord.setTitle(todoTitle);</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="n">todos</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">newTodoRecord</span><span class="p">);</span>
+</span></code></pre></div>
 Commenting out those two lines is the solution, give it a try!</p>
 </details>
 <details class="question">
@@ -1008,6 +1033,8 @@ More on this in the section "Version Control" of this tutorial.</p>
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -1020,6 +1047,46 @@ More on this in the section "Version Control" of this tutorial.</p>
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../2-bug-special-characters/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 🪲  Bug - Special Characters">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                🪲  Bug - Special Characters
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../3-bug-duplicate-task/" class="md-footer__link md-footer__link--next" aria-label="Next: 🪲 Bug - Duplicate Task">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                🪲 Bug - Duplicate Task
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -1043,7 +1110,7 @@ More on this in the section "Version Control" of this tutorial.</p>
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.annotate", "navigation.instant", "navigation.tracking", "navigation.top", "search.highlight", "search.suggest"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.annotate", "content.tabs.link", "navigation.instant", "navigation.tracking", "navigation.top", "navigation.sections", "navigation.footer", "toc.follow", "search.highlight", "search.suggest", "search.share"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>

@@ -24,6 +24,36 @@ customFunction(){
 
 }
 
+# Load a local Docker image into the active Kubernetes-in-Docker cluster.
+# Picks the right loader for the engine started by the framework
+# (startK3dCluster -> k3d, startKindCluster -> kind). Detection order:
+#   1) $CLUSTER_ENGINE exported by the framework
+#   2) presence of a k3d / kind cluster on the host
+#   3) k3d as the documented default for this repo
+loadImageIntoCluster(){
+  local image="$1"
+  local engine="${CLUSTER_ENGINE:-}"
+
+  if [ -z "$engine" ]; then
+    if command -v k3d >/dev/null 2>&1 && k3d cluster list 2>/dev/null | tail -n +2 | grep -q .; then
+      engine="k3d"
+    elif command -v kind >/dev/null 2>&1 && kind get clusters 2>/dev/null | grep -q .; then
+      engine="kind"
+    else
+      engine="k3d"
+    fi
+  fi
+
+  if [ "$engine" = "k3d" ]; then
+    local cluster="${K3D_CLUSTER_NAME:-enablement}"
+    printInfo "Loading image into k3d cluster '$cluster'"
+    k3d image import "$image" -c "$cluster"
+  else
+    printInfo "Loading image into kind cluster"
+    kind load docker-image "$image"
+  fi
+}
+
 redeployApp(){
 
   printInfoSection "Building local image"
@@ -37,8 +67,7 @@ redeployApp(){
     printInfo "✅ Docker build succeeded. New image built $IMAGE_NAME"
   fi
 
-  printInfo "Loading image into kind cluster"
-  kind load docker-image $IMAGE_NAME
+  loadImageIntoCluster "$IMAGE_NAME"
 
   printInfo "Updating deployment image"
   kubectl set image deployment/$DEPLOYMENT_NAME $DEPLOYMENT_NAME=$IMAGE_NAME -n $NAMESPACE

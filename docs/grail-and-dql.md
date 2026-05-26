@@ -1,4 +1,3 @@
---8<-- "snippets/grail-and-dql.js"
 
 ??? info "WIP Version control"
     This section is under construction

@@ -1,5 +1,4 @@
 # Codespaces
---8<-- "snippets/codespaces.js"
 
 --8<-- "snippets/dt-enablement.md"
 

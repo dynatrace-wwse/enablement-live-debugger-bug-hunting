@@ -1,4 +1,3 @@
---8<-- "snippets/version-control.js"
 
 !!! Example "Automate the Version Control integration for all your environments"
     With environment variables it's easy to point each deployed application in every stage and kubernetes cluster to the right vesion control, branch and commit.

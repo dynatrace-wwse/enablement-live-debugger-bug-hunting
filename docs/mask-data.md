@@ -1,4 +1,3 @@
---8<-- "snippets/mask-data.js"
 
 ## Data masking 
 Dynatrace provides you with tools that enable you to meet your data protection and other compliance requirements while still getting value from any data collected by Dynatrace, including the Live Debugger. 

@@ -1,4 +1,3 @@
---8<-- "snippets/ide-integration.js"
 
 !!! example "🧑‍💻 IDE Integration"
     We love Developers and the developer's experience, we understand that for better and faster Software development a developer does not leave it's IDE. We support JetBrains and VSCode as one of the most common IDE's out there. [Here you can read more about the extensions](https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability/offering-capabilities/ide-integration).

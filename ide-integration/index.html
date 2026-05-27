@@ -981,6 +981,12 @@
 
   <h1>IDE Integration</h1>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  dynatrace.sendBizEvent('page_load', {"page": "7. IDE Integration"});
+});
+</script>
+
 <div class="admonition example">
 <p class="admonition-title">🧑‍💻 IDE Integration</p>
 <p>We love Developers and the developer's experience, we understand that for better and faster Software development a developer does not leave it's IDE. We support JetBrains and VSCode as one of the most common IDE's out there. <a href="https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability/offering-capabilities/ide-integration">Here you can read more about the extensions</a>.</p>
@@ -1147,19 +1153,8 @@ If you are using a DEV or sprint tenant, here is how to configure it. Inside the
     <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.annotate", "content.tabs.link", "navigation.instant", "navigation.tracking", "navigation.top", "navigation.sections", "navigation.footer", "toc.follow", "search.highlight", "search.suggest", "search.share"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-  
       <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
       
     
-  
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      if (typeof dynatrace !== 'undefined') {
-        dynatrace.sendBizEvent('page_load', {'page': "IDE Integration"});
-      }
-    });
-  </script>
-  
-
   </body>
 </html>

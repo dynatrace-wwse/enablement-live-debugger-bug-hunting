@@ -927,12 +927,6 @@
 
   <h1>💡 Hunt via Kubernetes App</h1>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  dynatrace.sendBizEvent('page_load', {"page": "1st Bug - hunt via kubernetes"});
-});
-</script>
-
 <h2 id="hunting-via-the-kubernetes-road">Hunting via the kubernetes road<a class="headerlink" href="#hunting-via-the-kubernetes-road" title="Permanent link">#</a></h2>
 <ul>
 <li>Open the Kubernetes App &gt; You'll see a cluster with the name "codespace-xxxx". That's your Kind cluster being fully observed.</li>
@@ -1151,8 +1145,19 @@ More on this in the section "Version Control" of this tutorial.</p>
     <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.annotate", "content.tabs.link", "navigation.instant", "navigation.tracking", "navigation.top", "navigation.sections", "navigation.footer", "toc.follow", "search.highlight", "search.suggest", "search.share"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
+  
       <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
       
     
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof dynatrace !== 'undefined') {
+        dynatrace.sendBizEvent('page_load', {'page': "\ud83d\udca1 Hunt via Kubernetes App"});
+      }
+    });
+  </script>
+  
+
   </body>
 </html>

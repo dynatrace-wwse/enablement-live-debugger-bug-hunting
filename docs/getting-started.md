@@ -1,4 +1,3 @@
---8<-- "snippets/getting-started.js"
 --8<-- "snippets/grail-requirements.md"
 
 ## 1. Dynatrace Tenant Setup

@@ -1,4 +1,3 @@
---8<-- "snippets/2-bug-special-characters.js"
 
 !!! note "The Bug 'Special characters'"
     Level: Beginner

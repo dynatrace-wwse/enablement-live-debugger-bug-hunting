@@ -1,4 +1,3 @@
---8<-- "snippets/1-bug-hunt-via-k8s.js"
 
 ## Hunting via the kubernetes road
 

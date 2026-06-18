@@ -94,7 +94,9 @@ patch_deployment
 
 ### Patch the Kubernetes deployment
 
-``` bash title="Patch the kubernetes deployment in Codespaces by executing the following script:"
+Open the **Terminal** tab and run:
+
+``` bash title="Patch the kubernetes deployment by executing the following script:"
 bash app/patches/set_version_control.sh
 ```
 

@@ -1,24 +1,37 @@
+<!-- STEP_SETUP
+commands:
+  - "addTask '{\"title\":\"Exciting validation!?#\",\"completed\":false}'"
+-->
 
-!!! note "The Bug 'Special characters'"
+!!! note "The Bug — 'Special characters'"
     Level: Beginner
 
-## Add a new Task
+## Reproduce the bug
 
-Open the TODO App and add a Task with an exclamation mark `!`
-
-- Add a task with an exclamation mark! or a special character for that matter, like this:
+Open the TODO app and add a task that contains a special character — for example an exclamation mark `!`:
 
 ![TODO App](img/todo_app_exclamation.png)
 
-- Now type ENTER to add the task
+Press **ENTER** to add it:
 
 ![TODO App](img/todo_app_exclamation2.png)
 
-- What happened? As you can see the signs are being removed. Why?
+What happened? The special characters were **stripped** from the title. (We also added one such task — `Exciting validation!?#` — for you in the background so Dynatrace has data to hunt.) Why are the signs disappearing?
 
-Let's continue with the bug hunting again! Now, let's assume we are new developers in the TODO app company. How difficult would it be to find the bug? To know where is the app running? which pod is delivering the requests? which namespace and line of code? Well, not with Dynatrace! We already learned how easy it was to find the TODO app within the Kubernetes App and from there we opened the traces in the Distributed Tracing app, so let's go there.
+<!-- LAB_QUESTION
+type: multiple-choice
+question: "You typed `Exciting validation!?#` and the stored title became `Exciting validation`. Where is the most likely culprit?"
+options:
+  - "A string transformation inside the `addTodo` handler is sanitising the title before it is stored"
+  - "The browser is blocking special characters before they are sent"
+  - "Kubernetes is rewriting the HTTP request body"
+  - "Dynatrace removed the characters during log ingestion"
+correct: 0
+explanation: "The data leaves the browser intact, so the change must happen server-side. A regex/replace in the `addTodo` method is rewriting the title — exactly what the Live Debugger will show us, variable by variable."
+-->
 
+Let's keep hunting. Imagine you're a brand-new developer on the TODO app team — how hard would it be to find which pod, namespace, and line of code is responsible? With Dynatrace, not hard at all. This time we'll go straight to the **Distributed Tracing** app.
 
 <div class="grid cards" markdown>
-- [Click here to Continue the quest:octicons-arrow-right-24:](2-bug-hunt-via-tracing.md)
+- [Hunt the bug via Distributed Traces :octicons-arrow-right-24:](2-bug-hunt-via-tracing.md)
 </div>

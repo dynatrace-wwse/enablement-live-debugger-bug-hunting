@@ -1,123 +1,131 @@
+# Hunting via the Logs App
 
-## Hunting road - Logs App
-We have seen how easy it is to find the traces via the Distributed Tracing App, now let's try a different approach. Let's find the trace, it's method and codespace via the Logs App. The Dynatrace Platform is context aware, it knows which traces write which logs, from which pod they are coming from and even which user generated the transaction.
+We saw how easy it is to find traces in the Distributed Tracing app. Now let's try a different angle: find the trace, its method, and its code via the **Logs** app. The Dynatrace Platform is context-aware — it knows which traces write which logs, from which pod, and even which user generated the transaction.
 
-- Open the Logs App. Again let's be a pro and type CTRL + K and then type in Logs, the Logs App should appear in the super search.
-- In the filter, type the content or part of the content of the Task, `Call the Bugbusters`. I'm assuming the developers is logging the content I'm writing in the app since "we don't know the code" and in our quests we are searching via logs. Let's see if we are lucky.
+- Open the **Logs App** (CTRL + K, then type *Logs*).
+- Filter on part of the task content, `Call the Bugbusters`. We're assuming the developer logs the content the user types — and since "we don't know the code", we hunt via logs:
 
-Filter:
 ```text
 content=*bugbusters*
 ```
 
 ![Logs app](img/logs_app.png)
-Wow, that was fast, we see two log entries with that match and are coming from the same pod. One was adding the task, the other duplicating it.
 
-From the `content` if you look carefully, you can see that the duplicate has the ID and title swapped.
+Two log entries match, from the same pod — one added the task, the other duplicated it.
+
+Look closely at the `content`: the duplicate has the **ID and title swapped**.
 
 ![Logs app](img/logs_app3.png)
 
-To view the related distributed trace, we can either:
-- Right click on the Log line and **open record with** and you select the **Distributed Tracing** app
-- On the right details pane, above the Topology section of the Log entry, there is a button for your convenience that says **Open trace**
+To jump to the related distributed trace, either:
+
+- Right-click the log line → **Open record with** → **Distributed Tracing**, or
+- Use the **Open trace** button above the Topology section in the details pane.
 
 ![Logs app](img/logs_app2.png)
 
-## Hunting road - Distributed Tracing App 
+<!-- LAB_QUESTION
+type: dql-verification
+question: "Find the 'Call the Bugbusters' duplicate activity in the todoapp logs"
+buttonText: "Find the logs"
+dql: |
+  fetch logs
+  | filter k8s.namespace.name == "todoapp"
+  | filter matchesPhrase(content, "Bugbusters")
+  | sort timestamp desc
+  | limit 5
+expect:
+  operator: not-empty
+hint: "Add and duplicate a task named 'Call the Bugbusters' first, then wait 2–3 minutes for logs to reach Grail."
+explanation: "Dynatrace correlated the add and duplicate log lines — and links each straight to its trace and code."
+-->
 
-!!! Note "Via the Distributed Tracing app"
-    In case you want to skip searching the Trace via the log entries, here is how to find it only via traces:
+## Hunting road — Distributed Tracing App
 
-    - In the filter add `"Kubernetes namespace" = todoapp AND "Kubernetes workload" = todoapp`
+!!! note "Via the Distributed Tracing app"
+    To find the trace directly (skipping logs):
+
+    - Filter: `"Kubernetes namespace" = todoapp AND "Kubernetes workload" = todoapp`
     ![Duplicate](img/tracing_duplicate_trace.png)
-    - See the incoming requests, you'll notice one with the name `duplicateTodo`
+    - Look for an incoming request named `duplicateTodo`.
 
-- The trace has the `Code function = duplicateTodo` and the `Code Namespace = com.dynatrace.todoapp.TodoController`
-
-- Now that we have the trace, we can notice that it has also a HTTP Status Code of 200, meaning there are no failures, but the app does not work as we want it to work. Let's debug the function!
+- The trace has `Code function = duplicateTodo` and `Code Namespace = com.dynatrace.todoapp.TodoController`.
+- Notice the HTTP status is **200** — no failures — yet the app misbehaves. Let's debug the function.
 
 ## Open the Live Debugger
 
-- Let's search for the `Code function = duplicateTodo` under the `Code Namespace = com.dynatrace.todoapp.TodoController`. In the search,  type `TodoController` the class file appears, open it.
-- Now let's search for the `duplicateTodo` function, the declaration is in line 94.
+- Search for `Code function = duplicateTodo` under `Code Namespace = com.dynatrace.todoapp.TodoController` (type `TodoController` in search and open the class).
+- Find the `duplicateTodo` function — declared at line 94.
 
 ![Duplicate](img/duplicate_record.png)
 
-- Let's put a non-breaking breakpoint on line 106
-- Go to the Todo app and repeat the bug.
-- Return to the Live Debugger session and click on the new snapshot.  Review the variables.
+- Set a non-breaking breakpoint on line 106.
+- Go to the TODO app and reproduce the bug (duplicate a task).
+- Return to the Live Debugger and open the new snapshot. Review the variables.
 
-
-Did you notice how the Map has in the items [0] and [1] the title and UUIDs are swapped?
-
-Looking at the source code, in lines 100 and 101, the variables are incorrectly set because the functions are swapped! 
+Notice how the map items `[0]` and `[1]` have their title and UUID **swapped**? Looking at lines 100 and 101, the setters are assigning the wrong values to each other.
 
 ![Duplicate](img/duplicate_record2.png)
 
-Now the developer can easily fix this code and resolve the issue!
+Now the developer can fix the code and resolve the issue. Another bug hunted down 🤩.
 
-We've now successfully hunted down and taken care of another bug 🤩
+<!-- LAB_QUESTION
+type: multiple-choice
+question: "In `duplicateTodo`, the snapshot shows title and ID transposed on the new record. What is the correct fix?"
+options:
+  - "Generate a fresh UUID for the new ID and copy the original title — i.e. swap the two setter arguments back"
+  - "Delete the original task after duplicating"
+  - "Return a 500 status so the client retries"
+  - "Disable the duplicate button"
+correct: 0
+explanation: "The duplicate must keep the title and get a new unique ID (the persistence layer needs unique IDs). The setters for ID and title were swapped; swapping them back fixes it."
+-->
 
+## Fix the bug and redeploy
 
-## Fixing the bug and redeploying the app
-
-Open in VS Code the class ``TodoController.java`` and apply your changes. For compiling and redeploying the app we a have comfort function for you that does the compilation and the redeployment in kubernetes for you. Give it a try!
+Open `TodoController.java`, apply your change, then:
 
 ```bash
 redeployApp
 ```
 
-Is the bug gone? Open the app and verify it!
+Duplicate a task and confirm the copy is correct:
 
-Yet, another way of verifying you succeeded is by typing: 
+<!-- LAB_QUESTION
+type: shell-verification
+question: "Verify the 'Duplicate task' bug is fixed"
+buttonText: "Check Bug 3 is solved"
+command: "source .devcontainer/util/source_framework.sh >/dev/null 2>&1 && is_bug3_solved"
+expect:
+  operator: exit-zero
+hint: "Swap the setId/setTitle arguments in `duplicateTodo` (lines 100–101), then run `redeployApp`. The check adds a task, duplicates it, and verifies the title is preserved with a fresh ID."
+explanation: "✅ Bug 'Duplicate task' is gone — duplicates keep the title and get a new unique ID."
+-->
 
-```bash
-is_bug3_solved
-```
+<!-- LAB_SOLUTION
+reveal: |
+  In `TodoController.duplicateTodo`, the ID and title setters were swapped.
+  Swap them back so the duplicate keeps the title and gets a new unique ID:
 
+  ```java
+  // before
+  newTodoRecord.setId(tempTodoRecord.getTitle());
+  newTodoRecord.setTitle(UUID.randomUUID().toString());
+  // after
+  newTodoRecord.setId(UUID.randomUUID().toString());
+  newTodoRecord.setTitle(tempTodoRecord.getTitle());
+  ```
 
-??? example "Solution for the bug Duplicate Record 🪲🛠️"
+  Then run `redeployApp`. The "Run solution" button applies the fix from the
+  `solution/bug3` branch and confirms it with `is_bug3_solved`.
+commands:
+  - solve_bug3
+verify:
+  - is_bug3_solved
+-->
 
-    Go to the terminal and type:
-    
-    ```bash
-    solve_bug3
-    ```
-
-    This function will implement the bugfix from branch `solution/bug3`. 
-    The function checkouts the code from `solution/bug3`, compiles the code and redeploys it into the Kubernetes cluster.
-
-    <br>
-    <details>
-    <summary>🛠️ The code changes </summary>
-
-
-    The `TodoController.duplicateTodo` you need to swap the title for the ID in lines 100 and 101 respectively. 
-    
-    ```javascript
-       
-        newTodoRecord.setId(tempTodoRecord.getTitle());
-        newTodoRecord.setTitle(UUID.randomUUID().toString());
-               
-    ```
-
-    this way when a new todo is duplicated, the title is copied and a new ID is generated (this is needed for the persistence layer).
-    
-    ```javascript
-      
-        newTodoRecord.setId(UUID.randomUUID().toString());
-        newTodoRecord.setTitle(tempTodoRecord.getTitle());
-            
-    ```
-    After swapping those lines, the duplication of Todos is bug-free!
-
-    </details>
-
-    ??? question "Good to know about Version Control and Live Debugger"
-        The `solve_bug3` function adds to the Kubernetes Deployment information to the Live Debugger where the source code resides. The solution is stored in the branch `solution/bug3`. 
-        More on this in the section "Version Control" of this tutorial.
-
+You've now hunted down all three bugs end to end. 🎉
 
 <div class="grid cards" markdown>
-- [Click here to continue :octicons-arrow-right-24:](version-control.md)
+- [Continue to Other Settings :octicons-arrow-right-24:](version-control.md)
 </div>

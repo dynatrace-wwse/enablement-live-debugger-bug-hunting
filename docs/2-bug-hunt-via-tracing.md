@@ -1,133 +1,134 @@
+# Hunting via Distributed Traces
 
 ## Open the Distributed Tracing App
-!!! Tipp "Protip: Open the Tracing App anywhere in Dynatrace"
-    Type CTRL + K, then search for 'Tracing'. The Tracing App should appear in the Super Search.
-    ![TODO App](img/open_tracing_app.png)
 
-!!! Tipp "Want to learn more about the Tracing App?"
-    If you want to learn more about the [new Distributed Tracing App, watch this amazing 12 min recording of Dynatrace App Spotlights](https://www.youtube.com/watch?v=O4zWlwJ4hsA){target="_blank"}
+!!! tip "Protip: open the Tracing App anywhere in Dynatrace"
+    Type **CTRL + K**, then search for *Tracing*. The Tracing App appears in the Super Search.
+    ![Open Tracing App](img/open_tracing_app.png)
 
-In the filter add:
+!!! tip "Want to learn more about the Tracing App?"
+    Watch this [12-minute Dynatrace App Spotlight on the Distributed Tracing App](https://www.youtube.com/watch?v=O4zWlwJ4hsA){target="_blank"}.
+
+In the filter, add:
 
 ```text
 "Kubernetes namespace" = todoapp AND "Kubernetes workload" = todoapp
 ```
 
-You can also let the autocomplete help you or use the facets on the left-hand side to filter for all requests of the Pod `todoapp` that is deployed in the namespace `todoapp`.
+You can let autocomplete help, or use the facets on the left to filter all requests of the `todoapp` pod in the `todoapp` namespace.
 
-![TODO App](img/tracing_app_filter.png)
+![Tracing App Filter](img/tracing_app_filter.png)
 
-If we take a look at the traces, we can see there is a trace named `addTodo`. By opening this trace, in the details pane on the right-hand side, we can see in the `Code Attributes` that the `Code function = addTodo` and the `Code Namespace = com.dynatrace.todoapp.TodoController`
+Look for a trace named `addTodo`. Open it; in the details pane on the right, the **Code Attributes** show `Code function = addTodo` and `Code Namespace = com.dynatrace.todoapp.TodoController`. Now we know where to look.
 
-Now we know where in the application code we should be looking for the bug!
+<!-- LAB_QUESTION
+type: dql-verification
+question: "Confirm Dynatrace captured the addTodo activity for todoapp"
+buttonText: "Find addTodo logs"
+dql: |
+  fetch logs
+  | filter k8s.namespace.name == "todoapp"
+  | filter matchesPhrase(content, "Adding a new todo")
+  | sort timestamp desc
+  | limit 5
+expect:
+  operator: not-empty
+hint: "Add a task in the TODO app first, then wait 2–3 minutes for logs to flow into Grail."
+explanation: "Dynatrace captured the addTodo calls — the exact code path that rewrites the title."
+-->
 
 ## Open the Live Debugger
 
-- Let's search for the `Code function = addTodo` under the `Code Namespace = com.dynatrace.todoapp.TodoController`. In the search,  type `TodoController` the class file appears, open it.
-- Now let's search for the `AddTodo` function, the declaration is in line 22.
+- Search for `Code function = addTodo` under `Code Namespace = com.dynatrace.todoapp.TodoController`. In search, type `TodoController` and open the class.
+- Find the `addTodo` function — the declaration is at line 22.
 
 ![AddToDo Method Source](img/todo_addtodo_method_source.png)
 
-Notice anything unusual? The developer left a String function on line 26:
+Notice anything unusual? The developer left a string transformation on line 26:
 
 > `26` String todoTitle = newTodoRecord.getTitle().replaceAll("[^a-zA-Z0-9\\s]+", "");
 
-- Let's add two breakpoints around that line, one before, let's say on line 23 and another on line 30.  
+- Set two non-breaking breakpoints around that line — one **before** (line 23) and one **after** (line 30).
 
 ![AddToDo New Active Breakpoints](img/todo_addtodo_new_active_breakpoints.png)
 
-- Go to the TodoApp in your browser and add a Task with a special character.
+- Go to the TODO app and add a task with special characters:
 
-Task:
 ```text
 This is exciting!!!
 ```
 
-- Go back to the Live Debugger and watch the two snapshots, snapshots get gathered in real time.
+- Return to the Live Debugger and watch the two snapshots arrive in real time.
 
 ![AddToDo Snapshots](img/todo_addtodo_snapshots.png)
 
-- If you open the first snapshot, the one on line 23, you'll notice the Object `newTodoRecord.title = This is exciting!!!` that contains the exclamation mark. Meaning the data is being correctly passed on to the function `addTodo`, but then something happens and the `!!!` are removed.
-- If you then look for the same attribute in the same method on the second snapshot you'll see that the `!!!` are gone.
+- Open the first snapshot (line 23): `newTodoRecord.title = This is exciting!!!` — the `!!!` are present. The data arrives intact.
+- Open the second snapshot (line 30): the `!!!` are **gone**. The transformation in between stripped them.
 
 ## Watching variables
-- We want to make your life as a developer easier. With the Live Debugger you can watch variables and see them change. For this right click on the  `newTodoRecord.title` and select `Watch`
+
+The Live Debugger lets you **watch** a variable and see it change. Right-click `newTodoRecord.title` and select **Watch**.
 
 ![watching variables](img/ld_watch.png)
 
-- You'll see that in the snapshots, the title variable captured in both snapshots are added for ease of debugging complex applications. This is a very simple app, but imagine you have hundreds or thousands of lines of code, not all of them written by you, using this strategy you can understand how specific variables change through the code.
+The watched title now appears in both snapshots side by side. In a simple app this is obvious — but across thousands of lines you didn't write, watching a variable through the code is how you understand exactly where it mutates.
 
 ![watching variables](img/ld_watch2.png)
 
+<!-- LAB_QUESTION
+type: multiple-choice
+question: "The before/after snapshots show the title intact at line 23 and stripped at line 30. What is the fix?"
+options:
+  - "Remove (or comment out) the `replaceAll(...)` sanitisation so the original title is stored unchanged"
+  - "Add more characters to the regex allow-list one by one"
+  - "Move the breakpoint to a different line"
+  - "Increase the pod's memory limit"
+correct: 0
+explanation: "The leftover regex sanitisation is the bug. The title should be stored as entered, so the `replaceAll` line (and the matching `setTitle`) are removed."
+-->
 
-## Fixing the bug and redeploying the app
+## Fix the bug and redeploy
 
-Like the first bug, open in VS Code the class ``TodoController.java`` and apply your changes. For compiling and redeploying the app we a have comfort function for you that does the compilation and the redeployment in kubernetes for you. Give it a try!
-
+Open `TodoController.java`, apply your change, then:
 
 ```bash
 redeployApp
 ```
 
-Is the bug gone? Open the app and verify it!
+Add a task with special characters and confirm they're preserved:
 
-Yet, another way of verifying you succeeded is by typing: 
+<!-- LAB_QUESTION
+type: shell-verification
+question: "Verify the 'Special characters' bug is fixed"
+buttonText: "Check Bug 2 is solved"
+command: "source .devcontainer/util/source_framework.sh >/dev/null 2>&1 && is_bug2_solved"
+expect:
+  operator: exit-zero
+hint: "Comment out the `replaceAll(...)` line (and the following `setTitle`) in `addTodo`, then run `redeployApp`. The check adds `Exciting validation!?#` and confirms the title is preserved."
+explanation: "✅ Bug 'Special characters' is gone — titles keep their special characters."
+-->
 
-```bash
-is_bug2_solved
-```
+<!-- LAB_SOLUTION
+reveal: |
+  In `TodoController.addTodo`, the title should be stored as entered. Comment out
+  the leftover sanitisation:
 
-??? example "Solution for the bug Special Characters 🪲🛠️"
+  ```java
+  newTodoRecord.setId(UUID.randomUUID().toString());
+  logger.info("Adding a new todo: {}", newTodoRecord);
+  // String todoTitle = newTodoRecord.getTitle().replaceAll("[^a-zA-Z0-9\\s]+", "");
+  // newTodoRecord.setTitle(todoTitle);
+  todos.add(newTodoRecord);
+  ```
 
-    Go to the terminal and type:
-    
-    ```bash
-    solve_bug2
-    ```
-
-    This function will implement the bugfix from branch `solution/bug2`. 
-    The function checkouts the code from `solution/bug2`, compiles the code and redeploys it into the Kubernetes cluster.
-
-    <br>
-    <details>
-    <summary>🛠️ The code changes </summary>
-
-
-    The solution for this bug is also simple. In the method `TodoController.addTodo` we saw how the title changed watching the variable with the live debugger. Most probably the developer was implementing something with regex and left the code there. If what we want is to keep the original title, we just need to comment out those lines.
-    
-    ```java
-       
-        newTodoRecord.setId(UUID.randomUUID().toString());
-        logger.info("Adding a new todo: {}", newTodoRecord);
-        // The bug in here in is for the bughunt example
-        String todoTitle = newTodoRecord.getTitle().replaceAll("[^a-zA-Z0-9\\s]+", "");
-        newTodoRecord.setTitle(todoTitle);
-        todos.add(newTodoRecord);
-               
-    ```
-
-    this way when the newTodoRecord is passed by from the request, the object is addeed as is to the `todo` array. The only field that is modified (or added) is the UUID.
-    
-    ```java
-      
-        newTodoRecord.setId(UUID.randomUUID().toString());
-        logger.info("Adding a new todo: {}", newTodoRecord);
-        // The bug in here in is for the bughunt example
-        //String todoTitle = newTodoRecord.getTitle().replaceAll("[^a-zA-Z0-9\\s]+", "");
-        //newTodoRecord.setTitle(todoTitle);
-        todos.add(newTodoRecord);
-            
-    ```
-    Commenting out those two lines is the solution, give it a try!
-
-    </details>
-
-    ??? question "Good to know about Version Control and Live Debugger"
-        The `solve_bug2` function adds to the Kubernetes Deployment information to the Live Debugger where the source code resides. The solution is stored in the branch `solution/bug2`. 
-        More on this in the section "Version Control" of this tutorial.
-
-
+  Then run `redeployApp`. The "Run solution" button applies the fix from the
+  `solution/bug2` branch and confirms it with `is_bug2_solved`.
+commands:
+  - solve_bug2
+verify:
+  - is_bug2_solved
+-->
 
 <div class="grid cards" markdown>
-- [Click here to continue the quest with the next Bug:octicons-arrow-right-24:](3-bug-duplicate-task.md)
+- [Continue the quest with the next Bug :octicons-arrow-right-24:](3-bug-duplicate-task.md)
 </div>

@@ -1,11 +1,14 @@
+# Cleanup
 
-!!! tip "Deleting the codespace from inside the container"
-    We like to make your life easier, for convenience there is a function loaded in the shell of the Codespace for deleting the codespace, just type `deleteCodespace`. This will trigger the deletion of the codespace.
+!!! tip "Your training environment is ephemeral"
+    The Kubernetes cluster and the TODO app run in a managed environment that is torn down automatically when your session ends. There is nothing to delete by hand.
 
-Another way to do this is by going to [https://github.com/codespaces](https://github.com/codespaces){target=_blank} and delete the codespace.
+If you set them up specifically for this lab, you may want to:
 
-You may also want to deactivate or delete the API tokens needed for this lab.
+- Remove the Live Debugger **breakpoints** you created (Live Debugger app → your session).
+- Remove the **sensitive-data masking** rule you added in *Mask Sensitive Data*.
+- Deactivate or delete any **API tokens** you generated for the tenant.
 
 <div class="grid cards" markdown>
-- [Ressources:octicons-arrow-right-24:](resources.md)
+- [Resources :octicons-arrow-right-24:](resources.md)
 </div>

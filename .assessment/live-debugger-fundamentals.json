@@ -1,0 +1,135 @@
+{
+  "templateVersion": "1.0.0",
+  "id": "live-debugger-fundamentals",
+  "category": "CO",
+  "title": "Live Debugger — Bug Hunting Fundamentals",
+  "description": "Validate your understanding of the Dynatrace Live Debugger and the three bugs you hunted: non-breaking breakpoints, snapshots, watching variables, version-control integration, and on-agent data masking.",
+  "difficulty": "intermediate",
+  "estimatedTime": 8,
+  "imagine": "You just finished hunting three production bugs in the TODO app with the Dynatrace Live Debugger — without a single redeploy-to-debug cycle. Now confirm you understood how the pieces fit together.",
+  "yourGoal": "Answer six questions about the Live Debugger and the bugs you fixed in this lab.",
+  "tools": [
+    { "label": "Live Debugger" },
+    { "label": "Distributed Tracing" },
+    { "label": "Logs" },
+    { "label": "Kubernetes App" }
+  ],
+  "story": {
+    "introduction": "The lab ran a TODO app on a Dynatrace-monitored k3d cluster with three bugs. You navigated from cluster → traces/logs → code, set non-breaking breakpoints, and read snapshots to find each root cause.",
+    "context": "Everything you need to answer is in the lab pages you just completed."
+  },
+  "questions": [
+    {
+      "id": "q1-non-breaking-breakpoint",
+      "type": "multiple-choice",
+      "title": "What does a non-breaking breakpoint do?",
+      "content": "Throughout the lab you set **non-breaking** breakpoints in a running production app. What happens when one is hit?",
+      "options": [
+        { "id": "a", "text": "Dynatrace captures a snapshot of the variables at that line without pausing or slowing the request", "isCorrect": true, "explanation": "Correct! A non-breaking breakpoint captures state and lets execution continue — safe to use in production." },
+        { "id": "b", "text": "The thread is paused until a developer resumes it, like a classic IDE breakpoint", "isCorrect": false, "explanation": "That would be a breaking breakpoint and is unsafe in production. Live Debugger breakpoints are non-breaking." },
+        { "id": "c", "text": "The pod is restarted to attach a debugger", "isCorrect": false, "explanation": "No restart or redeploy is needed — that is the whole point of the Live Debugger." },
+        { "id": "d", "text": "Extra logging code is injected into the source and redeployed", "isCorrect": false, "explanation": "No code changes or redeploys happen; the agent captures the snapshot at runtime." }
+      ],
+      "correctAnswer": "a",
+      "explanation": "The Live Debugger captures a snapshot of in-scope variables at the breakpoint and execution continues uninterrupted — debugging production without stopping it.",
+      "points": 1000,
+      "hints": ["Think about why it is safe to set one in production.", "The request still returned normally while you captured data."]
+    },
+    {
+      "id": "q2-bug1-root-cause",
+      "type": "multiple-choice",
+      "title": "Bug 1 — why did 'Clear completed' do nothing?",
+      "content": "The `clearCompletedTodos` snapshot showed `todos` with length 3 and `todoStore` with length 0. What was the root cause?",
+      "options": [
+        { "id": "a", "text": "`remove` was called on `todoStore`, a freshly instantiated empty list, instead of the persistence-backed `todos`", "isCorrect": true, "explanation": "Correct! The handler mutated the wrong, empty collection, so nothing was ever removed — yet it still returned 200." },
+        { "id": "b", "text": "The DELETE request was being blocked by the ingress", "isCorrect": false, "explanation": "The request reached the handler and returned 200 — the bug was in the code, not the network." },
+        { "id": "c", "text": "The database connection had timed out", "isCorrect": false, "explanation": "There was no failure; the wrong in-memory list was used." },
+        { "id": "d", "text": "The todos were completed but not marked completed", "isCorrect": false, "explanation": "They were marked completed; the removal targeted the wrong list." }
+      ],
+      "correctAnswer": "a",
+      "explanation": "`todoStore` was a new empty list. Removing from it never touched the real `todos`, so completed items survived while the request still succeeded with HTTP 200.",
+      "points": 1000,
+      "hints": ["Compare the two list lengths in the snapshot.", "Which variable does the persistence layer actually back?"]
+    },
+    {
+      "id": "q3-bug2-root-cause",
+      "type": "multiple-choice",
+      "title": "Bug 2 — why were special characters stripped?",
+      "content": "Watching `newTodoRecord.title` across two snapshots showed it intact before line 26 and stripped after. What caused it?",
+      "options": [
+        { "id": "a", "text": "A leftover `replaceAll(\"[^a-zA-Z0-9\\\\s]+\", \"\")` sanitisation rewrote the title before storing it", "isCorrect": true, "explanation": "Correct! The regex removed every non-alphanumeric character. Commenting it out preserves the original title." },
+        { "id": "b", "text": "The browser stripped the characters before sending the request", "isCorrect": false, "explanation": "The first snapshot proved the title arrived intact server-side." },
+        { "id": "c", "text": "Grail removed the characters during log ingestion", "isCorrect": false, "explanation": "Log ingestion does not modify application variables; the change was in the code." },
+        { "id": "d", "text": "The title column had a length limit", "isCorrect": false, "explanation": "Characters were removed by pattern, not truncated by length." }
+      ],
+      "correctAnswer": "a",
+      "explanation": "A regex `replaceAll` sanitisation stripped all non-alphanumeric characters. Watching the variable before and after the line pinpointed exactly where the mutation happened.",
+      "points": 1000,
+      "hints": ["The bug sat between your two breakpoints.", "Watch the title variable change across snapshots."]
+    },
+    {
+      "id": "q4-bug3-root-cause",
+      "type": "multiple-choice",
+      "title": "Bug 3 — why was the duplicate malformed?",
+      "content": "In `duplicateTodo`, the new record's title and ID appeared transposed. What was wrong?",
+      "options": [
+        { "id": "a", "text": "The `setId` and `setTitle` arguments were swapped — the ID got the old title and the title got a new UUID", "isCorrect": true, "explanation": "Correct! Swapping the two setter arguments back keeps the title and assigns a fresh unique ID." },
+        { "id": "b", "text": "The duplicate endpoint returned a 500 error", "isCorrect": false, "explanation": "The trace showed HTTP 200; the values were just assigned to the wrong fields." },
+        { "id": "c", "text": "Two tasks shared the same primary key", "isCorrect": false, "explanation": "The ID was being set to the title, not duplicated; the fix generates a new UUID." },
+        { "id": "d", "text": "The map iteration order was non-deterministic", "isCorrect": false, "explanation": "The snapshot showed swapped values, not an ordering issue." }
+      ],
+      "correctAnswer": "a",
+      "explanation": "The setters were crossed: the ID was set to the title and the title to a new UUID. The duplicate must keep the title and receive a new unique ID for the persistence layer.",
+      "points": 1000,
+      "hints": ["Look at the map items [0] and [1] in the snapshot.", "Which field needs a brand-new unique value?"]
+    },
+    {
+      "id": "q5-data-masking",
+      "type": "multiple-choice",
+      "title": "Where does Live Debugger data masking happen?",
+      "content": "You added a rule to mask the `title` variable. Where is the masking applied?",
+      "options": [
+        { "id": "a", "text": "On the OneAgent, so the sensitive value never leaves the host or reaches Dynatrace servers", "isCorrect": true, "explanation": "Correct! Masking happens at the source on the OneAgent — masked data is never transmitted or stored by Dynatrace." },
+        { "id": "b", "text": "In the browser after the snapshot is downloaded", "isCorrect": false, "explanation": "By then the value would already have been transmitted; masking happens earlier, on the agent." },
+        { "id": "c", "text": "In Grail during storage, after ingestion", "isCorrect": false, "explanation": "Masking is applied before transmission, on the OneAgent — not at storage time." },
+        { "id": "d", "text": "Only when you export the snapshot to a file", "isCorrect": false, "explanation": "Masking is always applied at capture time on the agent, not at export." }
+      ],
+      "correctAnswer": "a",
+      "explanation": "Live Debugger masking runs on the OneAgent. Sensitive values are redacted at the source and are never sent to or stored on Dynatrace servers — and rules apply on the fly, with no restart.",
+      "points": 1000,
+      "hints": ["Think about where the snapshot data originates.", "The lab stressed that masked data never leaves the host."]
+    },
+    {
+      "id": "q6-version-control",
+      "type": "multiple-choice",
+      "title": "How does the Live Debugger know which source code to show?",
+      "content": "The `solve_bugN` functions set `DT_LIVEDEBUGGER_COMMIT` and `DT_LIVEDEBUGGER_REMOTE_ORIGIN` on the deployment. What do these enable?",
+      "options": [
+        { "id": "a", "text": "They tell the Live Debugger the exact git remote and commit a deployment is running, so it fetches the matching source automatically", "isCorrect": true, "explanation": "Correct! Setting these env vars in your CI/CD makes version-control resolution automatic and accurate per environment." },
+        { "id": "b", "text": "They authenticate the OneAgent to your Dynatrace tenant", "isCorrect": false, "explanation": "Tenant auth uses tokens; these variables are about source-code resolution." },
+        { "id": "c", "text": "They enable the Live Debugger ActiveGate module", "isCorrect": false, "explanation": "The ActiveGate module is enabled via the DynaKube capability, not these variables." },
+        { "id": "d", "text": "They control which Kubernetes namespace is monitored", "isCorrect": false, "explanation": "Namespace selection is done with breakpoint filters, not these variables." }
+      ],
+      "correctAnswer": "a",
+      "explanation": "`DT_LIVEDEBUGGER_REMOTE_ORIGIN` and `DT_LIVEDEBUGGER_COMMIT` pin a deployment to an exact repo and revision. Setting them in CI/CD lets the Live Debugger fetch the right source for every environment automatically.",
+      "points": 1000,
+      "hints": ["Think about how the debugger maps a running pod to a line of code.", "These are set per deployment in CI/CD."]
+    }
+  ],
+  "maxScore": 6000,
+  "tags": [
+    "live-debugger",
+    "developer-observability",
+    "debugging",
+    "kubernetes",
+    "data-masking"
+  ],
+  "learningObjectives": [
+    "Explain what a non-breaking breakpoint captures and why it is production-safe",
+    "Diagnose a logic bug that returns HTTP 200 but mutates the wrong data",
+    "Use watched variables across snapshots to locate where a value changes",
+    "Identify the root cause of swapped setter arguments",
+    "Explain where Live Debugger data masking is applied",
+    "Describe how version-control environment variables resolve source code per deployment"
+  ]
+}

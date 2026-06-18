@@ -12,7 +12,7 @@
         <link rel="prev" href="..">
       
       
-        <link rel="next" href="../codespaces/">
+        <link rel="next" href="../1-bug-clear-completed/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>2. Getting Started - Dynatrace Enablement Lab: Live Debugger Tutorial</title>
+        <title>Prerequisites - Dynatrace Enablement Lab: Live Debugger Tutorial</title>
       
     
     
@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1-dynatrace-tenant-setup" class="md-skip">
+        <a href="#prerequisites" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              2. Getting Started
+              Prerequisites
             
           </span>
         </div>
@@ -269,7 +269,7 @@
         
   
   <span class="md-ellipsis">
-    1. About
+    Welcome
   </span>
   
 
@@ -291,12 +291,14 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
   <span class="md-ellipsis">
-    2. Getting Started
+    Prerequisites
   </span>
   
 
@@ -307,7 +309,7 @@
         
   
   <span class="md-ellipsis">
-    2. Getting Started
+    Prerequisites
   </span>
   
 
@@ -319,6 +321,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -329,11 +333,11 @@
         <li class="md-nav__item">
   <a href="#1-dynatrace-tenant-setup" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Dynatrace Tenant Setup
+      1. Dynatrace tenant setup
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Dynatrace Tenant Setup">
+    <nav class="md-nav" aria-label="1. Dynatrace tenant setup">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -348,16 +352,16 @@
           <li class="md-nav__item">
   <a href="#12-set-iam-policies" class="md-nav__link">
     <span class="md-ellipsis">
-      1.2 Set IAM Policies
+      1.2 Set IAM policies
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-enable-live-debugger-activegate-module" class="md-nav__link">
+  <a href="#13-live-debugger-activegate-module" class="md-nav__link">
     <span class="md-ellipsis">
-      1.3 Enable Live Debugger ActiveGate module
+      1.3 Live Debugger ActiveGate module
     </span>
   </a>
   
@@ -366,7 +370,7 @@
           <li class="md-nav__item">
   <a href="#14-enable-log-ingest" class="md-nav__link">
     <span class="md-ellipsis">
-      1.4 Enable Log Ingest
+      1.4 Enable log ingest
     </span>
   </a>
   
@@ -378,19 +382,37 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-create-dynatrace-api-tokens-for-kubernetes-observability" class="md-nav__link">
+  <a href="#2-confirm-the-environment-is-ready" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Create Dynatrace API Tokens for Kubernetes Observability
+      2. Confirm the environment is ready
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Create Dynatrace API Tokens for Kubernetes Observability">
+    <nav class="md-nav" aria-label="2. Confirm the environment is ready">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-get-the-operator-token-and-the-ingest-token-from-the-kubernetes-app" class="md-nav__link">
+  <a href="#21-cluster-node-is-ready" class="md-nav__link">
     <span class="md-ellipsis">
-      2.1. Get the Operator Token and the Ingest Token from the Kubernetes App
+      2.1 Cluster node is Ready
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-todo-app-is-running" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 TODO app is running
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-dynatrace-is-observing-the-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 Dynatrace is observing the app
     </span>
   </a>
   
@@ -415,26 +437,6 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../codespaces/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    3. Launch codespaces
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
     
     
     
@@ -448,24 +450,24 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   <span class="md-ellipsis">
-    4. Bug 1: Clear Completed
+    1. Bug: Clear Completed
   </span>
   
 
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
-            4. Bug 1: Clear Completed
+            1. Bug: Clear Completed
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -480,7 +482,7 @@
         
   
   <span class="md-ellipsis">
-    🪲 Bug - Clear Complete
+    🪲 Reproduce the Bug
   </span>
   
 
@@ -537,24 +539,24 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
   <span class="md-ellipsis">
-    5. Bug 2: Special Characters
+    2. Bug: Special Characters
   </span>
   
 
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
-            5. Bug 2: Special Characters
+            2. Bug: Special Characters
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -569,7 +571,7 @@
         
   
   <span class="md-ellipsis">
-    🪲  Bug - Special Characters
+    🪲 Reproduce the Bug
   </span>
   
 
@@ -626,24 +628,24 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
             
   
   <span class="md-ellipsis">
-    6. Bug 3: Duplicate Task
+    3. Bug: Duplicate Task
   </span>
   
 
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
-            6. Bug 3: Duplicate Task
+            3. Bug: Duplicate Task
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -658,7 +660,7 @@
         
   
   <span class="md-ellipsis">
-    🪲 Bug - Duplicate Task
+    🪲 Reproduce the Bug
   </span>
   
 
@@ -715,24 +717,24 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
             
   
   <span class="md-ellipsis">
-    7. Other Settings
+    4. Other Settings
   </span>
   
 
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
-            7. Other Settings
+            4. Other Settings
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -817,7 +819,7 @@
         
   
   <span class="md-ellipsis">
-    8. Cleanup
+    5. Cleanup
   </span>
   
 
@@ -837,7 +839,7 @@
         
   
   <span class="md-ellipsis">
-    9. Resources
+    6. Resources
   </span>
   
 
@@ -857,7 +859,7 @@
         
   
   <span class="md-ellipsis">
-    10. What's Next?
+    7. What's Next?
   </span>
   
 
@@ -883,6 +885,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -893,11 +897,11 @@
         <li class="md-nav__item">
   <a href="#1-dynatrace-tenant-setup" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Dynatrace Tenant Setup
+      1. Dynatrace tenant setup
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Dynatrace Tenant Setup">
+    <nav class="md-nav" aria-label="1. Dynatrace tenant setup">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -912,16 +916,16 @@
           <li class="md-nav__item">
   <a href="#12-set-iam-policies" class="md-nav__link">
     <span class="md-ellipsis">
-      1.2 Set IAM Policies
+      1.2 Set IAM policies
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-enable-live-debugger-activegate-module" class="md-nav__link">
+  <a href="#13-live-debugger-activegate-module" class="md-nav__link">
     <span class="md-ellipsis">
-      1.3 Enable Live Debugger ActiveGate module
+      1.3 Live Debugger ActiveGate module
     </span>
   </a>
   
@@ -930,7 +934,7 @@
           <li class="md-nav__item">
   <a href="#14-enable-log-ingest" class="md-nav__link">
     <span class="md-ellipsis">
-      1.4 Enable Log Ingest
+      1.4 Enable log ingest
     </span>
   </a>
   
@@ -942,19 +946,37 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-create-dynatrace-api-tokens-for-kubernetes-observability" class="md-nav__link">
+  <a href="#2-confirm-the-environment-is-ready" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Create Dynatrace API Tokens for Kubernetes Observability
+      2. Confirm the environment is ready
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Create Dynatrace API Tokens for Kubernetes Observability">
+    <nav class="md-nav" aria-label="2. Confirm the environment is ready">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-get-the-operator-token-and-the-ingest-token-from-the-kubernetes-app" class="md-nav__link">
+  <a href="#21-cluster-node-is-ready" class="md-nav__link">
     <span class="md-ellipsis">
-      2.1. Get the Operator Token and the Ingest Token from the Kubernetes App
+      2.1 Cluster node is Ready
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-todo-app-is-running" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 TODO app is running
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-dynatrace-is-observing-the-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 Dynatrace is observing the app
     </span>
   </a>
   
@@ -983,8 +1005,6 @@
   
 
 
-  <h1>2. Getting Started</h1>
-
 <div class="admonition info">
 <p class="admonition-title">Requirements</p>
 <ul>
@@ -992,109 +1012,117 @@
 <li>A <strong>GitHub account</strong> to interact with the demo repository.</li>
 </ul>
 </div>
-<h2 id="1-dynatrace-tenant-setup">1. Dynatrace Tenant Setup<a class="headerlink" href="#1-dynatrace-tenant-setup" title="Permanent link">#</a></h2>
-<p>You will need a Dynatrace SaaS tenant with a DPS pricing model and the 'Code Monitoring' rate card should be associated with it. In addition the application needs to be monitored with Dynatrace FullStack mode. The application runtime: Java, NodeJS.</p>
+<h1 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">#</a></h1>
+<p>The Live Debugger reads code-level data from your application through the OneAgent and your Dynatrace tenant. Before hunting bugs, enable the capability on your tenant and confirm your environment is ready. The cluster, the Dynatrace Operator, and the buggy TODO app are <strong>provisioned for you</strong> — you only need to enable the tenant-side settings below.</p>
+<h2 id="1-dynatrace-tenant-setup">1. Dynatrace tenant setup<a class="headerlink" href="#1-dynatrace-tenant-setup" title="Permanent link">#</a></h2>
+<p>You need a Dynatrace SaaS tenant with a <strong>DPS</strong> pricing model and the <strong>Code Monitoring</strong> rate card associated with it. The application is monitored with Dynatrace <strong>FullStack</strong> mode (Java runtime).</p>
 <h3 id="11-enable-observability-for-developers">1.1 Enable Observability for Developers<a class="headerlink" href="#11-enable-observability-for-developers" title="Permanent link">#</a></h3>
 <ul>
-<li>Go to Settings &gt; Collect and Capture &gt; Observability for Developers &gt; Enable Observability for Developers</li>
-<li>Go to Settings &gt; Collect and Capture &gt; General monitoring settings &gt; OneAgent features.<ul>
-<li>Enable the Java Live-Debugger, Node.js Live-Debugger, or both, depending on your needs.</li>
+<li>Go to <strong>Settings &gt; Collect and Capture &gt; Observability for Developers &gt; Enable Observability for Developers</strong>.</li>
+<li>Go to <strong>Settings &gt; Collect and Capture &gt; General monitoring settings &gt; OneAgent features</strong> and enable the <strong>Java Live-Debugger</strong>.</li>
 </ul>
-</li>
-</ul>
-<p><a href="https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability/do-enable">More information can be found here</a></p>
-<h3 id="12-set-iam-policies">1.2 Set IAM Policies<a class="headerlink" href="#12-set-iam-policies" title="Permanent link">#</a></h3>
-<p>We take security very seriously. So let's create a policy to set user-level Live Debugging breakpoints. </p>
-<p>We need two policies for your user to be able to set breakpoints and to read snapshots. 
-For this we go to <strong>Account Management &gt; Identity &amp; Access management &gt; + Policy</strong></p>
-<p>Set breakpoints
+<p><a href="https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability/do-enable">More information here</a></p>
+<h3 id="12-set-iam-policies">1.2 Set IAM policies<a class="headerlink" href="#12-set-iam-policies" title="Permanent link">#</a></h3>
+<p>We take security seriously, so create a policy that lets your user set breakpoints and read snapshots. Go to <strong>Account Management &gt; Identity &amp; Access management &gt; + Policy</strong>.</p>
+<p>Set breakpoints:
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>ALLOW<span class="w"> </span>dev-obs:breakpoints:set<span class="p">;</span>
 </span></code></pre></div>
-Read Snapshopts
+Read snapshots:
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ALLOW<span class="w"> </span>storage:application.snapshots:read<span class="p">;</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>ALLOW<span class="w"> </span>storage:buckets:read<span class="w"> </span>WHERE<span class="w"> </span>storage:table-name<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;application.snapshots&quot;</span><span class="p">;</span>
-</span></code></pre></div></p>
-<p>For managing snapshots, setting for Admins.
+</span></code></pre></div>
+Manage snapshots (for admins):
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ALLOW<span class="w"> </span>dev-obs:breakpoints:manage<span class="p">;</span>
 </span></code></pre></div></p>
-<p>The policy should look something like this:</p>
+<p>The policy should look like this:</p>
 <p><img alt="DevOps Policy" src="../img/devops_policy.png" /></p>
-<p><a href="https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability/offering-capabilities/setup">More info here about the IAM Policies here</a>
-Then we bind it to a user group. In this case since we are admins, let's bind the policy to the Admin group. Notice that the created policy is for an Admin and also for a Developer. Since we allow to <code>read</code> and <code>set</code> breakpoints but also to <code>manage</code> breakpoints <a href="https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability/offering-capabilities/additional-settings#manage-breakpoints">which is explained here</a>.</p>
-<p>Go to <strong>Group Management &gt; Select Admin Group &gt; + Permission</strong>  (and bind the policy)
-<img alt="Bind Group" src="../img/bind_group.png" /></p>
-<p>Like this you have the fine control to give your developers, SRE teams and whoever you want to set breakpoints and read the snapshots. For more granular access <a href="https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability/offering-capabilities/setup">please continue reading here</a> </p>
-<h3 id="13-enable-live-debugger-activegate-module">1.3 Enable Live Debugger ActiveGate module<a class="headerlink" href="#13-enable-live-debugger-activegate-module" title="Permanent link">#</a></h3>
-<p>Now we need to enable the <a href="https://docs.dynatrace.com/docs/shortlink/do-setup#enable-live-debugging-in-environment-activegate-module">Live Debugger ActiveGate module</a>:</p>
-<p><div class="language-yaml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">#Set debugging_enabled to true in the custom.properties file.</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">activeGate</span><span class="p">:</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">customProperties</span><span class="p">:</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">        </span><span class="no">[debugging]</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">        </span><span class="no">debugging_enabled = true</span>
+<p>Then bind it to a user group (e.g. the Admin group) under <strong>Group Management &gt; Select Group &gt; + Permission</strong>. <a href="https://docs.dynatrace.com/docs/observe/applications-and-microservices/developer-observability/offering-capabilities/setup">More on the IAM model here</a>.</p>
+<p><img alt="Bind Group" src="../img/bind_group.png" /></p>
+<h3 id="13-live-debugger-activegate-module">1.3 Live Debugger ActiveGate module<a class="headerlink" href="#13-live-debugger-activegate-module" title="Permanent link">#</a></h3>
+<p>The <a href="https://docs.dynatrace.com/docs/shortlink/do-setup#enable-live-debugging-in-environment-activegate-module">Live Debugger ActiveGate module</a> is <strong>already enabled for you</strong> in this environment's DynaKube (the <code>debugging</code> capability is set on the ActiveGate), so there is nothing to restart.</p>
+<h3 id="14-enable-log-ingest">1.4 Enable log ingest<a class="headerlink" href="#14-enable-log-ingest" title="Permanent link">#</a></h3>
+<p>The Logs hunt (Bug 3) and the DQL checks need logs flowing from the <code>todoapp</code> namespace. In the <strong>Settings</strong> app, go to <strong>Collect and capture &gt; Log monitoring &gt; Log ingest rules</strong> and either enable <code>[Built-in] Ingest all logs</code>, or add a rule:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rule name</td>
+<td><code>TODO App Logs</code></td>
+</tr>
+<tr>
+<td>Rule type</td>
+<td><code>Include in storage</code></td>
+</tr>
+<tr>
+<td>Condition</td>
+<td><code>Kubernetes namespace name = todoapp</code></td>
+</tr>
+</tbody>
+</table>
+<p>Then, under <strong>Settings &gt; General monitoring settings &gt; OneAgent features</strong>, enable <strong>Java — Trace/span context enrichment for logs</strong> (and for unstructured logs). Click <strong>Save changes</strong>.</p>
+<h2 id="2-confirm-the-environment-is-ready">2. Confirm the environment is ready<a class="headerlink" href="#2-confirm-the-environment-is-ready" title="Permanent link">#</a></h2>
+<p>The checks below run against your live environment — both must pass before you continue. Open the <strong>Terminal</strong> tab to run the commands yourself, or just click the check buttons.</p>
+<h3 id="21-cluster-node-is-ready">2.1 Cluster node is Ready<a class="headerlink" href="#21-cluster-node-is-ready" title="Permanent link">#</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>nodes
 </span></code></pre></div>
-This is already set up for you in the codespaces automatically in the <a href="https://github.com/dynatrace-wwse/enablement-live-debugger-bug-hunting/blob/main/.devcontainer/yaml/dynakube-skel.yaml">Dynakube.yaml</a> file so no need to restart the ActiveGate.</p>
-<p>Note: in newer versions of the Dynatrace Operator this is enabled on the capabilities section of the dynakube.</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">#Set debugging capability in the capabilities section:</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">   </span><span class="nt">capabilities</span><span class="p">:</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">debugging</span>
+<!-- LAB_QUESTION
+type: shell-verification
+question: "Verify the cluster node is Ready"
+buttonText: "Check Cluster"
+command: "kubectl get nodes --no-headers 2>/dev/null | grep -c ' Ready'"
+expect:
+  operator: gt
+  value: 0
+hint: "The cluster is provisioned automatically. Wait 30 seconds and try again if it is not ready yet."
+explanation: "Cluster node is Ready — the environment is up."
+-->
+
+<h3 id="22-todo-app-is-running">2.2 TODO app is running<a class="headerlink" href="#22-todo-app-is-running" title="Permanent link">#</a></h3>
+<p>The TODO application is deployed in the <code>todoapp</code> namespace. Open it from the <strong>Apps</strong> tab to interact with it.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>todoapp
 </span></code></pre></div>
-<h3 id="14-enable-log-ingest">1.4 Enable Log Ingest<a class="headerlink" href="#14-enable-log-ingest" title="Permanent link">#</a></h3>
-<p>You have (2) options:</p>
-<ul>
-<li>Enable built-in log ingest rule to ingest all logs discovered by Dynatrace</li>
-<li>Configure log ingest rule to ingest relevant logs for this lab</li>
-</ul>
-<p>In your Dynatrace tenant, open the <code>Settings</code> App.  Navigate in the menus to <code>Collect and capture</code> &gt; <code>Log monitoring</code> &gt; <code>Log ingest rules</code>.  This will show you the <strong>Log ingest rules</strong></p>
-<p><img alt="Settings Log Ingest Rules" src="../img/settings_log_ingest_rules.png" /></p>
-<p><strong>Ingest all logs</strong></p>
-<p>Locate the rule <code>[Built-in] Ingest all logs</code> and enable it.  Click <code>Save changes</code>.</p>
-<p><strong>Ingest relevant logs</strong></p>
-<p><img alt="Settings Log Ingest Todoapp" src="../img/settings_log_ingest_todoapp.png" /></p>
-<p>Click on <code>Add rule</code> to create a new Rule.  Configure the Rule:</p>
-<p>Rule name:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>TODO App Logs
-</span></code></pre></div></p>
-<p>Rule type:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Include in storage
-</span></code></pre></div></p>
-<p>Conditions:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Kubernetes namespace name = todoapp
-</span></code></pre></div></p>
-<p><strong>Enable log/trace enrichment</strong></p>
-<ul>
-<li>Go to Settings &gt; General monitoring settings &gt; OneAgent features.</li>
-<li>Enable:<ul>
-<li>Java - Trace/span context enrichment for logs [Opt-In].</li>
-<li>Java - Trace/span context enrichment for unstructured logs [Opt-In]</li>
-</ul>
-</li>
-</ul>
-<p>Click on <code>Save changes</code>.</p>
-<h2 id="2-create-dynatrace-api-tokens-for-kubernetes-observability">2. Create Dynatrace API Tokens for Kubernetes Observability<a class="headerlink" href="#2-create-dynatrace-api-tokens-for-kubernetes-observability" title="Permanent link">#</a></h2>
-<p>This codespace has everything automated for you so you can focus on what matters which in this enablement is to learn about the Live Debugging capabilities of the Dynatrace Platform.  You'll need two tokens:</p>
-<ol>
-<li>Operator Token</li>
-<li>Ingest Token </li>
-</ol>
-<p>We will get this two very easy from the Kubernetes App. </p>
-<h3 id="21-get-the-operator-token-and-the-ingest-token-from-the-kubernetes-app">2.1. Get the Operator Token and the Ingest Token from the Kubernetes App<a class="headerlink" href="#21-get-the-operator-token-and-the-ingest-token-from-the-kubernetes-app" title="Permanent link">#</a></h3>
-<ol>
-<li>Open the Kubernetes App (CTRL + K then type Kubernetes for fast access)</li>
-<li>Select the + Add cluster button</li>
-<li>Scroll down to the section Install Dynatrace Operator </li>
-<li>Click on generate Token for the 'Dynatrace Operator' and save it to your Notepad</li>
-<li>Click on generate Token for the 'Data Ingest Token' and save it to your Notepad</li>
-<li>You can close the Kubernetes App, we don't need it, we just needed the tokens.</li>
-</ol>
-<p><img alt="Kubernetes Tokens" src="../img/k8s_tokens.png" /></p>
-<div class="admonition tip">
-<p class="admonition-title">Let's launch the Codespace</p>
-<p>Now we are ready to launch the Codespace! You'll need your tenant and the two tokens previuosly gathered from above. When you enter the tenant please enter it without the 'apps' part, for production tenants eg. abc123 for live -&gt; https://abc123.live.dynatrace.com and for sprint -&gt; https://abc123.sprint.dynatracelabs.com no apps in the URL.</p>
+<p><img alt="TODO App" src="../img/todo_app.png" /></p>
+<!-- LAB_QUESTION
+type: shell-verification
+question: "Verify the TODO application pods are Running"
+buttonText: "Check Application"
+command: "kubectl get pods -n todoapp --no-headers 2>/dev/null | grep -c Running"
+expect:
+  operator: gt
+  value: 0
+hint: "The application is deployed automatically. If no pods are Running, wait 60 seconds and check the environment log."
+explanation: "TODO application pods are Running — your environment is ready."
+-->
+
+<h3 id="23-dynatrace-is-observing-the-app">2.3 Dynatrace is observing the app<a class="headerlink" href="#23-dynatrace-is-observing-the-app" title="Permanent link">#</a></h3>
+<p>Confirm Dynatrace is already collecting logs from the TODO app. (You may need to interact with the app first and wait 2–3 minutes for data to flow.)</p>
+<!-- LAB_QUESTION
+type: dql-verification
+question: "Verify Dynatrace is ingesting logs from the todoapp namespace"
+buttonText: "Check DT Logs"
+dql: |
+  fetch logs
+  | filter k8s.namespace.name == "todoapp"
+  | filter timestamp > now() - 10m
+  | limit 1
+expect:
+  operator: not-empty
+hint: "Make sure your log ingest rule (step 1.4) allows the todoapp namespace, then interact with the app and wait a couple of minutes."
+explanation: "Logs are flowing from todoapp — observability is active and you are ready to hunt bugs."
+-->
+
+<div class="admonition success">
+<p class="admonition-title">All checks passed?</p>
+<p>Continue to <strong>Bug 1: Clear Completed</strong>.</p>
 </div>
 <div class="grid cards">
 <ul>
-<li><a href="../codespaces/">Let's launch Codespaces<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>
+<li><a href="../1-bug-clear-completed/">Let's start the Bug hunting quest <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>
 </ul>
 </div>
 
@@ -1134,7 +1162,7 @@ This is already set up for you in the codespaces automatically in the <a href="h
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: 1. About">
+          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Welcome">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1144,20 +1172,20 @@ This is already set up for you in the codespaces automatically in the <a href="h
                 Previous
               </span>
               <div class="md-ellipsis">
-                1. About
+                Welcome
               </div>
             </div>
           </a>
         
         
           
-          <a href="../codespaces/" class="md-footer__link md-footer__link--next" aria-label="Next: 3. Launch codespaces">
+          <a href="../1-bug-clear-completed/" class="md-footer__link md-footer__link--next" aria-label="Next: 🪲 Reproduce the Bug">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                3. Launch codespaces
+                🪲 Reproduce the Bug
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1202,7 +1230,7 @@ This is already set up for you in the codespaces automatically in the <a href="h
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       if (typeof dynatrace !== 'undefined') {
-        dynatrace.sendBizEvent('page_load', {'page': "2. Getting Started"});
+        dynatrace.sendBizEvent('page_load', {'page': "Prerequisites"});
       }
     });
   </script>

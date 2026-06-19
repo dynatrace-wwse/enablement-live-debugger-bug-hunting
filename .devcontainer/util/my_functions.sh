@@ -16,6 +16,25 @@ IMAGE_NAME="todoapp:local"
 NAMESPACE="todoapp"
 DEPLOYMENT_NAME="todoapp"
 
+# Wait (bounded retry) until the todoapp HTTP endpoint actually serves requests.
+# `kubectl rollout status` only proves the pod is Ready — the Spring Boot app +
+# nginx ingress need a few more seconds to route. Called after redeployApp and at
+# the start of the is_bug*_solved checks so the verification (run by the Enablement
+# App / app-layer-test driver right after a redeploy) doesn't race the new pod.
+waitForTodoApp(){
+  printInfo "Waiting for the todoapp HTTP endpoint to answer..."
+  local i=0
+  while [ "$i" -lt 30 ]; do
+    if curl -sf -o /dev/null -H "Host: $APPLICATION_HOST" "$APPLICATION_URL/todos"; then
+      printInfo "todoapp endpoint reachable"
+      return 0
+    fi
+    i=$((i + 1)); sleep 5
+  done
+  printWarn "todoapp endpoint not reachable after ~150s"
+  return 1
+}
+
 
 customFunction(){
   printInfoSection "This is a custom function that calculates 1 + 1"
@@ -78,6 +97,9 @@ redeployApp(){
   printInfo "Waiting for rollout to complete"
   kubectl rollout status deployment/$DEPLOYMENT_NAME -n $NAMESPACE
 
+  # Pod Ready != app serving — wait for the HTTP endpoint before callers verify.
+  waitForTodoApp
+
   printInfo "Done"
 
 }
@@ -85,8 +107,10 @@ redeployApp(){
 
 _check_bug1(){
 
+  waitForTodoApp
+
   addTask '{"title":"Clear completed task","completed":true}'
-  
+
   clearCompletedTasks
 
 }
@@ -133,6 +157,8 @@ is_bug2_solved(){
   printInfoSection "Verifying if the 🪲 Bug 'Special Characters' is gone"
   RC=0
 
+  waitForTodoApp
+
   addTask '{"title":"Exciting validation!?#","completed":false}'
 
   printInfo "Retrieving todos to verify the title..."
@@ -156,6 +182,8 @@ is_bug2_solved(){
 is_bug3_solved(){
   printInfoSection "Verifying if the 🪲 Bug 'Duplicate Task' is gone"
   RC=0
+
+  waitForTodoApp
 
   # Generate a random 6-character ID
   random_id=$(head /dev/urandom | LC_ALL=C tr -dc 'a-zA-Z0-9' | head -c 6)

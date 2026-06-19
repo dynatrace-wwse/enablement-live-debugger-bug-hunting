@@ -137,11 +137,20 @@ is_bug1_there(){
 is_bug1_solved(){
 
   printInfoSection "Verifying if the 🪲 Bug 'Clear completed' is gone"
-  
+
   _check_bug1
 
-  kubectl logs -l app=todoapp -c todoapp -n todoapp | grep 'Removed Todo record.*completed=true' > /dev/null
-  found_removed=$?
+  # The 'Removed Todo record' log can lag behind the clear request (kubelet log
+  # pipeline) — retry the grep so automation doesn't race it.
+  local i=0
+  while [ "$i" -lt 12 ]; do
+    if kubectl logs -l app=todoapp -c todoapp -n todoapp 2>/dev/null | grep -q 'Removed Todo record.*completed=true'; then
+      printInfo "✅ Bug clear completed is gone."
+      return 0
+    fi
+    i=$((i + 1)); sleep 5
+  done
+  found_removed=1
 
   if [ $found_removed -eq 0 ]; then
     printInfo "✅ Bug clear completed is gone."
@@ -190,32 +199,39 @@ is_bug3_solved(){
   title="Duplicated task with ID $random_id"
 
   addTask '{"title":"'"$title"'","completed":false}'
-  
-  response=$(curl -s -H "Host: $APPLICATION_HOST" -X GET $APPLICATION_URL/todos)
-  task_id=$(echo "$response" | grep -o '"title":"'"$title"'","id":"[^"]*"' | grep -o '"id":"[^"]*"' | cut -d'"' -f4)
+
+  # Field-order-independent id lookup + retry: split the JSON array into per-object
+  # chunks, find the object carrying our title, read its id (regardless of whether
+  # the app emits id-before-title). Retry while the GET catches up after redeploy.
+  task_id=""
+  local i=0
+  while [ "$i" -lt 12 ]; do
+    response=$(curl -s -H "Host: $APPLICATION_HOST" -X GET $APPLICATION_URL/todos)
+    task_id=$(echo "$response" | tr '}' '\n' | grep -F "\"title\":\"$title\"" | grep -o '"id":"[^"]*"' | head -1 | cut -d'"' -f4)
+    [ -n "$task_id" ] && break
+    i=$((i + 1)); sleep 3
+  done
 
   if [ -n "$task_id" ]; then
     printInfo "Duplicating task with ID: $task_id"
     dup_response=$(curl -s -H "Host: $APPLICATION_HOST" -X POST $APPLICATION_URL/todos/dup/$task_id)
-    
+
     if echo "$dup_response" | grep -q '"status":"ok"'; then
-      # Get todos again to verify the duplicate
-      response=$(curl -s -H "Host: $APPLICATION_HOST" -X GET $APPLICATION_URL/todos)
-      
-      # Count how many tasks have the correct title
-      count=$(echo "$response" | grep -o '"title":"'"$title"'"' | wc -l)
-      
-      # Verify original task still exists with the same ID
-      original_exists=$(echo "$response" | grep -q '"title":"'"$title"'","id":"'"$task_id"'"' && echo "yes" || echo "no")
-      
-      # Check if we have 2 tasks with the correct title and the original still exists
-      if [ "$count" -eq 2 ] && [ "$original_exists" = "yes" ]; then
-        printInfo "✅ Bug duplicate task is gone. Found 2 tasks with correct title '$title', including original with ID: $task_id"
-        RC=0
-      else
-        printWarn "⚠️ Bug duplicate task is still there. Expected 2 tasks with title '$title', found: $count. Tip: Check the setter methods in duplicateTodo."
-        RC=1
-      fi
+      # Retry the verify: 2 tasks with our title, and the original object (its chunk
+      # contains both the original id and the title). All checks are field-order safe.
+      i=0
+      while [ "$i" -lt 12 ]; do
+        response=$(curl -s -H "Host: $APPLICATION_HOST" -X GET $APPLICATION_URL/todos)
+        count=$(echo "$response" | grep -o '"title":"'"$title"'"' | wc -l)
+        original_exists=$(echo "$response" | tr '}' '\n' | grep -F "\"id\":\"$task_id\"" | grep -qF "\"title\":\"$title\"" && echo "yes" || echo "no")
+        if [ "$count" -eq 2 ] && [ "$original_exists" = "yes" ]; then
+          printInfo "✅ Bug duplicate task is gone. Found 2 tasks with correct title '$title', including original with ID: $task_id"
+          return 0
+        fi
+        i=$((i + 1)); sleep 3
+      done
+      printWarn "⚠️ Bug duplicate task is still there. Expected 2 tasks with title '$title', found: $count. Tip: Check the setter methods in duplicateTodo."
+      RC=1
     else
       printInfo "❌ Failed to execute duplicate"
       RC=1

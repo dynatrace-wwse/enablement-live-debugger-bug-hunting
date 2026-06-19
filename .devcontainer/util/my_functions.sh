@@ -367,26 +367,37 @@ addTask(){
     jsontask='{"title":"Completed task","completed":true}'
   fi
   printInfo "adding task $jsontask"
-  response=$(curl -s -H "Host: $APPLICATION_HOST" -X POST $APPLICATION_URL/todos \
-    -H "Content-Type: application/json" -d "$jsontask")
-  
-  if echo "$response" | grep -q '"status":"ok"'; then
-    printInfo "✅ Task added successfully"
-  else
-    printInfo "❌ Failed to add task"
-  fi
+  # Retry the POST: right after a redeploy the OneAgent-injected pod can still be
+  # PodInitializing (code-module init) — a GET may succeed against the old pod
+  # while the POST hits the new one. Retry until the app actually accepts the write.
+  local i=0 response=""
+  while [ "$i" -lt 40 ]; do
+    response=$(curl -s -H "Host: $APPLICATION_HOST" -X POST $APPLICATION_URL/todos \
+      -H "Content-Type: application/json" -d "$jsontask")
+    if echo "$response" | grep -q '"status":"ok"'; then
+      printInfo "✅ Task added successfully"
+      return 0
+    fi
+    i=$((i + 1)); sleep 3
+  done
+  printInfo "❌ Failed to add task after retries. Last response: $response"
+  return 1
 }
 
 
 clearCompletedTasks(){
   printInfo "Clearing completed Tasks"
-  response=$(curl -s -H "Host: $APPLICATION_HOST" -X DELETE $APPLICATION_URL/todos/clear_completed)
-  if echo "$response" | grep -q '"status":"ok"'; then
-    printInfo "✅ Clear completed executed successfully"
-  else
-    printInfo "❌ Failed to execute Clear completed"
-  fi
-
+  local i=0 response=""
+  while [ "$i" -lt 20 ]; do
+    response=$(curl -s -H "Host: $APPLICATION_HOST" -X DELETE $APPLICATION_URL/todos/clear_completed)
+    if echo "$response" | grep -q '"status":"ok"'; then
+      printInfo "✅ Clear completed executed successfully"
+      return 0
+    fi
+    i=$((i + 1)); sleep 3
+  done
+  printInfo "❌ Failed to execute Clear completed. Last response: $response"
+  return 1
 }
 
 

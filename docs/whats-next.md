@@ -4,7 +4,7 @@
 
 You hunted down three production bugs with the Live Debugger — now lock in what you learned. Complete the short assessment below.
 
-<!-- boundScenarioId: live-debugger-fundamentals retake=true -->
+<!-- LAB_QUESTIONAIRE: live-debugger-fundamentals retake=true -->
 
 --8<-- "snippets/feedback.md"
 

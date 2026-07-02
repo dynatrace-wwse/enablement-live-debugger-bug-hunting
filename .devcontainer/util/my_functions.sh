@@ -120,7 +120,7 @@ is_bug1_there(){
   kubectl logs -l app=todoapp -c todoapp -n todoapp --tail=-1 | grep 'completed=true' > /dev/null
   mark_completed=$?
   
-  kubectl logs -l app=todoapp -c todoapp -n todoapp --tail=-1 | grep 'Failed to delete completed todos' > /dev/null
+  kubectl logs -l app=todoapp -c todoapp -n todoapp --tail=-1 | grep -i 'Failed to delete completed todos' > /dev/null
   click_clear_completed=$?
 
   if [ $mark_completed -eq 0 ] && [ $click_clear_completed -eq 0 ]; then

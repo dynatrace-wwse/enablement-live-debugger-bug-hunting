@@ -24,7 +24,7 @@ When you opened this step, we also reproduced the bug for you in the background 
 type: shell-verification
 question: "Confirm the 'Clear completed' bug is reproduced (a completed task was added and clearing it failed)"
 buttonText: "Check the bug is there"
-command: "source .devcontainer/util/source_framework.sh >/dev/null 2>&1 && is_bug1_there"
+command: "source .devcontainer/util/source_framework.sh >/dev/null 2>&1 && { is_bug1_there || { _check_bug1 >/dev/null 2>&1; is_bug1_there; }; }"
 expect:
   operator: exit-zero
 hint: "Open the TODO app, add a task, mark it completed and click 'Clear completed'. The function `is_bug1_there` inspects the app logs for the failed-delete evidence."

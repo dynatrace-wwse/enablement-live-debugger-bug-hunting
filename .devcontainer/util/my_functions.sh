@@ -7,10 +7,33 @@
 
 
 ### Variables
-APPLICATION_URL="http://localhost:30100"
+# Framework 1.3.0 exposes apps via nginx ingress (hostname-routed) instead of
+# nodePort 30100. Reach the app through localhost:${K3D_LB_HTTP_PORT:-80} with
+# a Host header that matches the ingress registered by registerApp/deployTodoApp.
+APPLICATION_URL="http://localhost:${K3D_LB_HTTP_PORT:-80}"
+APPLICATION_HOST="todoapp.$(detectHostname)"
 IMAGE_NAME="todoapp:local"
 NAMESPACE="todoapp"
 DEPLOYMENT_NAME="todoapp"
+
+# Wait (bounded retry) until the todoapp HTTP endpoint actually serves requests.
+# `kubectl rollout status` only proves the pod is Ready — the Spring Boot app +
+# nginx ingress need a few more seconds to route. Called after redeployApp and at
+# the start of the is_bug*_solved checks so the verification (run by the Enablement
+# App / app-layer-test driver right after a redeploy) doesn't race the new pod.
+waitForTodoApp(){
+  printInfo "Waiting for the todoapp HTTP endpoint to answer..."
+  local i=0
+  while [ "$i" -lt 30 ]; do
+    if curl -sf -o /dev/null -H "Host: $APPLICATION_HOST" "$APPLICATION_URL/todos"; then
+      printInfo "todoapp endpoint reachable"
+      return 0
+    fi
+    i=$((i + 1)); sleep 5
+  done
+  printWarn "todoapp endpoint not reachable after ~150s"
+  return 1
+}
 
 
 customFunction(){
@@ -18,6 +41,36 @@ customFunction(){
 
   printInfo "1 + 1 = $(( 1 + 1 ))"
 
+}
+
+# Load a local Docker image into the active Kubernetes-in-Docker cluster.
+# Picks the right loader for the engine started by the framework
+# (startK3dCluster -> k3d, startKindCluster -> kind). Detection order:
+#   1) $CLUSTER_ENGINE exported by the framework
+#   2) presence of a k3d / kind cluster on the host
+#   3) k3d as the documented default for this repo
+loadImageIntoCluster(){
+  local image="$1"
+  local engine="${CLUSTER_ENGINE:-}"
+
+  if [ -z "$engine" ]; then
+    if command -v k3d >/dev/null 2>&1 && k3d cluster list 2>/dev/null | tail -n +2 | grep -q .; then
+      engine="k3d"
+    elif command -v kind >/dev/null 2>&1 && kind get clusters 2>/dev/null | grep -q .; then
+      engine="kind"
+    else
+      engine="k3d"
+    fi
+  fi
+
+  if [ "$engine" = "k3d" ]; then
+    local cluster="${K3D_CLUSTER_NAME:-enablement}"
+    printInfo "Loading image into k3d cluster '$cluster'"
+    k3d image import "$image" -c "$cluster"
+  else
+    printInfo "Loading image into kind cluster"
+    kind load docker-image "$image"
+  fi
 }
 
 redeployApp(){
@@ -33,8 +86,7 @@ redeployApp(){
     printInfo "✅ Docker build succeeded. New image built $IMAGE_NAME"
   fi
 
-  printInfo "Loading image into kind cluster"
-  kind load docker-image $IMAGE_NAME
+  loadImageIntoCluster "$IMAGE_NAME"
 
   printInfo "Updating deployment image"
   kubectl set image deployment/$DEPLOYMENT_NAME $DEPLOYMENT_NAME=$IMAGE_NAME -n $NAMESPACE
@@ -45,6 +97,9 @@ redeployApp(){
   printInfo "Waiting for rollout to complete"
   kubectl rollout status deployment/$DEPLOYMENT_NAME -n $NAMESPACE
 
+  # Pod Ready != app serving — wait for the HTTP endpoint before callers verify.
+  waitForTodoApp
+
   printInfo "Done"
 
 }
@@ -52,8 +107,10 @@ redeployApp(){
 
 _check_bug1(){
 
+  waitForTodoApp
+
   addTask '{"title":"Clear completed task","completed":true}'
-  
+
   clearCompletedTasks
 
 }
@@ -80,11 +137,20 @@ is_bug1_there(){
 is_bug1_solved(){
 
   printInfoSection "Verifying if the 🪲 Bug 'Clear completed' is gone"
-  
+
   _check_bug1
 
-  kubectl logs -l app=todoapp -c todoapp -n todoapp | grep 'Removed Todo record.*completed=true' > /dev/null
-  found_removed=$?
+  # The 'Removed Todo record' log can lag behind the clear request (kubelet log
+  # pipeline) — retry the grep so automation doesn't race it.
+  local i=0
+  while [ "$i" -lt 12 ]; do
+    if kubectl logs -l app=todoapp -c todoapp -n todoapp 2>/dev/null | grep -q 'Removed Todo record.*completed=true'; then
+      printInfo "✅ Bug clear completed is gone."
+      return 0
+    fi
+    i=$((i + 1)); sleep 5
+  done
+  found_removed=1
 
   if [ $found_removed -eq 0 ]; then
     printInfo "✅ Bug clear completed is gone."
@@ -100,11 +166,13 @@ is_bug2_solved(){
   printInfoSection "Verifying if the 🪲 Bug 'Special Characters' is gone"
   RC=0
 
+  waitForTodoApp
+
   addTask '{"title":"Exciting validation!?#","completed":false}'
 
   printInfo "Retrieving todos to verify the title..."
   
-  response=$(curl -s -X GET $APPLICATION_URL/todos)
+  response=$(curl -s -H "Host: $APPLICATION_HOST" -X GET $APPLICATION_URL/todos)
 
   # Check if special characters are preserved
   if echo "$response" | grep -q '"title":"Exciting validation!?#"'; then
@@ -124,37 +192,46 @@ is_bug3_solved(){
   printInfoSection "Verifying if the 🪲 Bug 'Duplicate Task' is gone"
   RC=0
 
+  waitForTodoApp
+
   # Generate a random 6-character ID
   random_id=$(head /dev/urandom | LC_ALL=C tr -dc 'a-zA-Z0-9' | head -c 6)
   title="Duplicated task with ID $random_id"
 
   addTask '{"title":"'"$title"'","completed":false}'
-  
-  response=$(curl -s -X GET $APPLICATION_URL/todos)
-  task_id=$(echo "$response" | grep -o '"title":"'"$title"'","id":"[^"]*"' | grep -o '"id":"[^"]*"' | cut -d'"' -f4)
+
+  # Field-order-independent id lookup + retry: split the JSON array into per-object
+  # chunks, find the object carrying our title, read its id (regardless of whether
+  # the app emits id-before-title). Retry while the GET catches up after redeploy.
+  task_id=""
+  local i=0
+  while [ "$i" -lt 12 ]; do
+    response=$(curl -s -H "Host: $APPLICATION_HOST" -X GET $APPLICATION_URL/todos)
+    task_id=$(echo "$response" | tr '}' '\n' | grep -F "\"title\":\"$title\"" | grep -o '"id":"[^"]*"' | head -1 | cut -d'"' -f4)
+    [ -n "$task_id" ] && break
+    i=$((i + 1)); sleep 3
+  done
 
   if [ -n "$task_id" ]; then
     printInfo "Duplicating task with ID: $task_id"
-    dup_response=$(curl -s -X POST $APPLICATION_URL/todos/dup/$task_id)
-    
+    dup_response=$(curl -s -H "Host: $APPLICATION_HOST" -X POST $APPLICATION_URL/todos/dup/$task_id)
+
     if echo "$dup_response" | grep -q '"status":"ok"'; then
-      # Get todos again to verify the duplicate
-      response=$(curl -s -X GET $APPLICATION_URL/todos)
-      
-      # Count how many tasks have the correct title
-      count=$(echo "$response" | grep -o '"title":"'"$title"'"' | wc -l)
-      
-      # Verify original task still exists with the same ID
-      original_exists=$(echo "$response" | grep -q '"title":"'"$title"'","id":"'"$task_id"'"' && echo "yes" || echo "no")
-      
-      # Check if we have 2 tasks with the correct title and the original still exists
-      if [ "$count" -eq 2 ] && [ "$original_exists" = "yes" ]; then
-        printInfo "✅ Bug duplicate task is gone. Found 2 tasks with correct title '$title', including original with ID: $task_id"
-        RC=0
-      else
-        printWarn "⚠️ Bug duplicate task is still there. Expected 2 tasks with title '$title', found: $count. Tip: Check the setter methods in duplicateTodo."
-        RC=1
-      fi
+      # Retry the verify: 2 tasks with our title, and the original object (its chunk
+      # contains both the original id and the title). All checks are field-order safe.
+      i=0
+      while [ "$i" -lt 12 ]; do
+        response=$(curl -s -H "Host: $APPLICATION_HOST" -X GET $APPLICATION_URL/todos)
+        count=$(echo "$response" | grep -o '"title":"'"$title"'"' | wc -l)
+        original_exists=$(echo "$response" | tr '}' '\n' | grep -F "\"id\":\"$task_id\"" | grep -qF "\"title\":\"$title\"" && echo "yes" || echo "no")
+        if [ "$count" -eq 2 ] && [ "$original_exists" = "yes" ]; then
+          printInfo "✅ Bug duplicate task is gone. Found 2 tasks with correct title '$title', including original with ID: $task_id"
+          return 0
+        fi
+        i=$((i + 1)); sleep 3
+      done
+      printWarn "⚠️ Bug duplicate task is still there. Expected 2 tasks with title '$title', found: $count. Tip: Check the setter methods in duplicateTodo."
+      RC=1
     else
       printInfo "❌ Failed to execute duplicate"
       RC=1
@@ -173,7 +250,7 @@ deleteTask(){
   task_id=$(echo "$response" | grep -o '"title":"Exciting validation[^"]*","id":"[^"]*"' | grep -o '"id":"[^"]*"' | cut -d'"' -f4)
   if [ -n "$task_id" ]; then
     printInfo "Deleting task ID: $task_id"
-    delete_response=$(curl -s -X DELETE $APPLICATION_URL/todos/$task_id)
+    delete_response=$(curl -s -H "Host: $APPLICATION_HOST" -X DELETE $APPLICATION_URL/todos/$task_id)
     if echo "$delete_response" | grep -q '"status":"ok"'; then
       printInfo "Task deleted successfully"
     else
@@ -234,6 +311,12 @@ setVersionControl(){
   updateVersionControl "$1" 
   patchDeployment
 
+  # patchDeployment changes the pod template (env) -> Kubernetes rolls the pod
+  # AGAIN after redeployApp's wait. Without waiting here, is_bug*_solved runs
+  # against a PodInitializing replica and fails ("Failed to add task") — seen in
+  # the app-layer nightly for bug1/bug3. Wait for the patched rollout + endpoint.
+  kubectl rollout status deployment/$DEPLOYMENT_NAME -n $NAMESPACE
+  waitForTodoApp
 }
 
 
@@ -290,26 +373,37 @@ addTask(){
     jsontask='{"title":"Completed task","completed":true}'
   fi
   printInfo "adding task $jsontask"
-  response=$(curl -s -X POST $APPLICATION_URL/todos \
-    -H "Content-Type: application/json" -d "$jsontask")
-  
-  if echo "$response" | grep -q '"status":"ok"'; then
-    printInfo "✅ Task added successfully"
-  else
-    printInfo "❌ Failed to add task"
-  fi
+  # Retry the POST: right after a redeploy the OneAgent-injected pod can still be
+  # PodInitializing (code-module init) — a GET may succeed against the old pod
+  # while the POST hits the new one. Retry until the app actually accepts the write.
+  local i=0 response=""
+  while [ "$i" -lt 40 ]; do
+    response=$(curl -s -H "Host: $APPLICATION_HOST" -X POST $APPLICATION_URL/todos \
+      -H "Content-Type: application/json" -d "$jsontask")
+    if echo "$response" | grep -q '"status":"ok"'; then
+      printInfo "✅ Task added successfully"
+      return 0
+    fi
+    i=$((i + 1)); sleep 3
+  done
+  printInfo "❌ Failed to add task after retries. Last response: $response"
+  return 1
 }
 
 
 clearCompletedTasks(){
   printInfo "Clearing completed Tasks"
-  response=$(curl -s -X DELETE $APPLICATION_URL/todos/clear_completed)
-  if echo "$response" | grep -q '"status":"ok"'; then
-    printInfo "✅ Clear completed executed successfully"
-  else
-    printInfo "❌ Failed to execute Clear completed"
-  fi
-
+  local i=0 response=""
+  while [ "$i" -lt 20 ]; do
+    response=$(curl -s -H "Host: $APPLICATION_HOST" -X DELETE $APPLICATION_URL/todos/clear_completed)
+    if echo "$response" | grep -q '"status":"ok"'; then
+      printInfo "✅ Clear completed executed successfully"
+      return 0
+    fi
+    i=$((i + 1)); sleep 3
+  done
+  printInfo "❌ Failed to execute Clear completed. Last response: $response"
+  return 1
 }
 
 
@@ -329,7 +423,8 @@ assertBugsAndRedeployment(){
 
   redeployApp
 
-  waitAppCanHandleRequests
+  # Wait for the rolled-out app to be reachable via ingress (was waitAppCanHandleRequests on 30100).
+  assertRunningApp todoapp
 
   if ! is_bug1_solved; then
     exit 1
@@ -350,23 +445,40 @@ replaceTodoController(){
   solution_branch="$1"
 
   printInfoSection "Replacing the TodoController from branch $solution_branch"
-  
+
   if [ -z "$solution_branch" ]; then
     printError "No solution branch specified"
     return 1
   fi
 
+  target="app/src/main/java/com/dynatrace/todoapp/TodoController.java"
+  url="https://raw.githubusercontent.com/dynatrace-wwse/enablement-live-debugger-bug-hunting/refs/heads/$solution_branch/app/src/main/java/com/dynatrace/todoapp/TodoController.java"
+  tmp="${target}.download"
+
   printInfo "Downloading TodoController.java from $solution_branch branch"
-  
-  curl -s -o app/src/main/java/com/dynatrace/todoapp/TodoController.java \
-    "https://raw.githubusercontent.com/dynatrace-wwse/enablement-live-debugger-bug-hunting/refs/heads/$solution_branch/app/src/main/java/com/dynatrace/todoapp/TodoController.java"
-  
-  if [ $? -eq 0 ]; then
-    printInfo "✅ TodoController.java downloaded successfully from $solution_branch"
-  else
-    printError "❌ Failed to download TodoController.java from $solution_branch"
+
+  # --fail makes curl exit non-zero on HTTP 4xx/5xx (e.g. 429 rate-limit) so we
+  # never overwrite the source with a "429: Too Many Requests" body. Retries
+  # with backoff handle transient rate-limits from raw.githubusercontent.com.
+  if ! curl -sSL --fail \
+      --retry 5 --retry-delay 5 --retry-max-time 120 \
+      --retry-all-errors \
+      -o "$tmp" \
+      "$url"; then
+    printError "❌ Failed to download TodoController.java from $solution_branch (HTTP error or network failure)"
+    rm -f "$tmp"
     return 1
   fi
+
+  # Sanity-check the payload: it must look like Java source, not an error body.
+  if ! grep -q '^package com.dynatrace.todoapp' "$tmp"; then
+    printError "❌ Downloaded TodoController.java does not look like valid Java source. First line: $(head -n1 "$tmp")"
+    rm -f "$tmp"
+    return 1
+  fi
+
+  mv "$tmp" "$target"
+  printInfo "✅ TodoController.java downloaded successfully from $solution_branch"
 
 }
 

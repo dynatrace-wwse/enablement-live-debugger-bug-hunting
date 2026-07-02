@@ -311,6 +311,12 @@ setVersionControl(){
   updateVersionControl "$1" 
   patchDeployment
 
+  # patchDeployment changes the pod template (env) -> Kubernetes rolls the pod
+  # AGAIN after redeployApp's wait. Without waiting here, is_bug*_solved runs
+  # against a PodInitializing replica and fails ("Failed to add task") — seen in
+  # the app-layer nightly for bug1/bug3. Wait for the patched rollout + endpoint.
+  kubectl rollout status deployment/$DEPLOYMENT_NAME -n $NAMESPACE
+  waitForTodoApp
 }
 
 

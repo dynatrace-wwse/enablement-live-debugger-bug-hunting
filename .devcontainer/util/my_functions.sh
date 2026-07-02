@@ -117,10 +117,10 @@ _check_bug1(){
 
 is_bug1_there(){
   
-  kubectl logs -l app=todoapp -c todoapp -n todoapp | grep 'completed=true' > /dev/null
+  kubectl logs -l app=todoapp -c todoapp -n todoapp --tail=-1 | grep 'completed=true' > /dev/null
   mark_completed=$?
   
-  kubectl logs -l app=todoapp -c todoapp -n todoapp | grep 'Failed to delete completed todos' > /dev/null
+  kubectl logs -l app=todoapp -c todoapp -n todoapp --tail=-1 | grep 'Failed to delete completed todos' > /dev/null
   click_clear_completed=$?
 
   if [ $mark_completed -eq 0 ] && [ $click_clear_completed -eq 0 ]; then
@@ -144,7 +144,7 @@ is_bug1_solved(){
   # pipeline) — retry the grep so automation doesn't race it.
   local i=0
   while [ "$i" -lt 12 ]; do
-    if kubectl logs -l app=todoapp -c todoapp -n todoapp 2>/dev/null | grep -q 'Removed Todo record.*completed=true'; then
+    if kubectl logs -l app=todoapp -c todoapp -n todoapp --tail=-1 2>/dev/null | grep -q 'Removed Todo record.*completed=true'; then
       printInfo "✅ Bug clear completed is gone."
       return 0
     fi

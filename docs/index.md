@@ -54,3 +54,6 @@ Ready to start the bug-hunting quest and learn how to empower developer producti
 <div class="grid cards" markdown>
 - [Yes! let's begin :octicons-arrow-right-24:](prerequisites.md)
 </div>
+
+!!! note "Branch-delivery test"
+    This content was loaded from the `test/branch-delivery` branch (e2e verification 2026-07-02).

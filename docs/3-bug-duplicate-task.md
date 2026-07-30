@@ -1,6 +1,6 @@
 <!-- STEP_SETUP
 commands:
-  - "addTask '{\"title\":\"Call the Bugbusters\",\"completed\":false}'"
+  - "export LAB_WAIT=1; addTask '{\"title\":\"Call the Bugbusters\",\"completed\":false}'"
 -->
 
 !!! note "The Bug — 'Duplicate task'"

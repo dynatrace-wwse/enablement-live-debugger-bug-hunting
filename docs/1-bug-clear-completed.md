@@ -1,6 +1,6 @@
 <!-- STEP_SETUP
 commands:
-  - _check_bug1
+  - export LAB_WAIT=1; _check_bug1
 -->
 
 !!! note "The Bug — 'Clear completed'"

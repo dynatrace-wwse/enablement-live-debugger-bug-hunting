@@ -152,9 +152,9 @@ reveal: |
   `is_bug1_solved`. The branch also wires the Live Debugger version-control env
   vars — see the *Version Control* section.
 commands:
-  - solve_bug1
+  - export LAB_WAIT=1; solve_bug1
 verify:
-  - is_bug1_solved
+  - export LAB_WAIT=1; is_bug1_solved
 -->
 
 Verify the bug is gone — add more tasks, click **Clear completed**, and watch them disappear gracefully. Amazing!

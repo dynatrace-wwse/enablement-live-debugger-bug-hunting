@@ -86,7 +86,10 @@ redeployApp(){
     printInfo "✅ Docker build succeeded. New image built $IMAGE_NAME"
   fi
 
-  loadImageIntoCluster "$IMAGE_NAME"
+  if ! loadImageIntoCluster "$IMAGE_NAME"; then
+    printError "❌ Failed to load $IMAGE_NAME into the cluster — the new build is NOT deployed."
+    return 1
+  fi
 
   printInfo "Updating deployment image"
   kubectl set image deployment/$DEPLOYMENT_NAME $DEPLOYMENT_NAME=$IMAGE_NAME -n $NAMESPACE
@@ -95,7 +98,10 @@ redeployApp(){
   kubectl rollout restart deployment/$DEPLOYMENT_NAME -n $NAMESPACE
 
   printInfo "Waiting for rollout to complete"
-  kubectl rollout status deployment/$DEPLOYMENT_NAME -n $NAMESPACE
+  if ! kubectl rollout status deployment/$DEPLOYMENT_NAME -n $NAMESPACE; then
+    printError "❌ Rollout of $DEPLOYMENT_NAME did not complete — the new build is NOT serving."
+    return 1
+  fi
 
   # Pod Ready != app serving — wait for the HTTP endpoint before callers verify.
   waitForTodoApp
@@ -260,10 +266,10 @@ deleteTask(){
 }
 
 solve_bug1(){
-  
+
   printInfoSection "Solving the 🪲 Bug Clear Completed"
 
-  _solve_bug "solution/bug1"
+  _solve_bug "solution/bug1" || return 1
 
   printInfo "Now add some tasks, mark them completed and click on 'clear completed'"
   printInfo "You can assert that the bug is gone also by typing 'is_bug1_solved'"
@@ -272,7 +278,7 @@ solve_bug1(){
 solve_bug2(){
 
   printInfoSection "Solving the 🪲 Bug Special Characters"
-  _solve_bug "solution/bug2"
+  _solve_bug "solution/bug2" || return 1
 
   printInfo "Now add some tasks with special characters and see if they are added correctly"
   printInfo "You can assert that the bug is gone also by typing 'is_bug2_solved'"
@@ -281,25 +287,62 @@ solve_bug2(){
 solve_bug3(){
 
   printInfoSection "Solving the 🪲 Bug Duplicated Task"
-  _solve_bug "solution/bug3"
+  _solve_bug "solution/bug3" || return 1
 
   printInfo "Now duplicate a record and see if the duplicate is correct"
   printInfo "You can assert that the bug is gone also by typing 'is_bug3_solved'"
 }
 
+# Make $1 (a remote solution branch) checkout-able in ANY clone shape.
+# Orbital sessions and some CI clones are `--depth 1` and may be SINGLE-BRANCH:
+# there `git checkout solution/bugN` finds no local branch, no origin/ ref, and
+# silently leaves the buggy code in place. Fetch exactly that branch tip first
+# (a no-op when the ref already exists — full Codespace clones, learner reruns).
+_ensure_solution_branch(){
+  local solution_branch="$1"
+
+  if git rev-parse --verify --quiet "refs/heads/$solution_branch" >/dev/null \
+     || git rev-parse --verify --quiet "refs/remotes/origin/$solution_branch" >/dev/null; then
+    return 0
+  fi
+
+  # Fetch straight into refs/heads/<branch>: `git checkout` DWIM only considers
+  # remote refs covered by remote.origin.fetch, and a single-branch clone's
+  # refspec covers nothing but the cloned branch — a plain local branch always works.
+  printInfo "Branch $solution_branch is not available locally (shallow/single-branch clone) — fetching it from origin"
+  if ! git fetch --depth 1 origin "+refs/heads/$solution_branch:refs/heads/$solution_branch"; then
+    printError "❌ Could not fetch $solution_branch from origin"
+    return 1
+  fi
+}
+
 _solve_bug(){
-  
+
   solution_branch=$1
 
   printInfo "Changing to the branch $solution_branch where the developer already added the solution for us"
 
+  _ensure_solution_branch "$solution_branch" || return 1
+
   printInfo "git checkout $solution_branch"
 
-  git checkout $solution_branch
+  if ! git checkout $solution_branch; then
+    # A learner who edited the code by hand has a dirty tree — build THEIR fix
+    # instead of failing (that is the manual path the docs describe). Any other
+    # checkout failure means the solution is NOT applied: fail loudly so the
+    # caller (learner or training-test) never trusts a no-op solve.
+    if ! git diff --quiet || ! git diff --cached --quiet; then
+      printWarn "⚠️ Could not switch to $solution_branch because of local changes — compiling your current code instead."
+      printWarn "Run 'git stash' first if you want the reference solution from $solution_branch."
+    else
+      printError "❌ git checkout $solution_branch failed — the solution was NOT applied."
+      return 1
+    fi
+  fi
 
   printInfo "then we compile the application and redeploy it to the Kubernetes Cluster using the function 'redeployApp'"
-  
-  redeployApp
+
+  redeployApp || return 1
 
   setVersionControl "$solution_branch"
 

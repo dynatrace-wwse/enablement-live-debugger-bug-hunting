@@ -16,22 +16,24 @@ IMAGE_NAME="todoapp:local"
 NAMESPACE="todoapp"
 DEPLOYMENT_NAME="todoapp"
 
-# Wait (bounded retry) until the todoapp HTTP endpoint actually serves requests.
-# `kubectl rollout status` only proves the pod is Ready — the Spring Boot app +
-# nginx ingress need a few more seconds to route. Called after redeployApp and at
-# the start of the is_bug*_solved checks so the verification (run by the Enablement
-# App / app-layer-test driver right after a redeploy) doesn't race the new pod.
+# Probe the todoapp HTTP endpoint. `kubectl rollout status` only proves the pod
+# is Ready — the Spring Boot app + nginx ingress need a few more seconds to route.
+#
+# Learner clicks answer INSTANTLY (single probe, clear message). Automation and
+# post-redeploy callers set LAB_WAIT=1 to retry (bounded) so a verification right
+# after a rollout doesn't race the new pod.
 waitForTodoApp(){
-  printInfo "Waiting for the todoapp HTTP endpoint to answer..."
-  local i=0
-  while [ "$i" -lt 30 ]; do
+  local attempts=1 i=1
+  [ -n "${LAB_WAIT:-}" ] && { attempts=30; printInfo "Waiting for the todoapp HTTP endpoint to answer..."; }
+  while :; do
     if curl -sf -o /dev/null -H "Host: $APPLICATION_HOST" "$APPLICATION_URL/todos"; then
       printInfo "todoapp endpoint reachable"
       return 0
     fi
+    [ "$i" -ge "$attempts" ] && break
     i=$((i + 1)); sleep 5
   done
-  printWarn "todoapp endpoint not reachable after ~150s"
+  printWarn "todoapp endpoint is not reachable yet — make sure the app is running, then try again"
   return 1
 }
 
@@ -103,8 +105,9 @@ redeployApp(){
     return 1
   fi
 
-  # Pod Ready != app serving — wait for the HTTP endpoint before callers verify.
-  waitForTodoApp
+  # Pod Ready != app serving — always wait for the HTTP endpoint here: we just
+  # rolled the deployment, so callers may verify immediately after.
+  LAB_WAIT=1 waitForTodoApp
 
   printInfo "Done"
 
@@ -147,24 +150,20 @@ is_bug1_solved(){
   _check_bug1
 
   # The 'Removed Todo record' log can lag behind the clear request (kubelet log
-  # pipeline) — retry the grep so automation doesn't race it.
-  local i=0
-  while [ "$i" -lt 12 ]; do
+  # pipeline). Learner click: single grep, instant answer. LAB_WAIT=1
+  # (automation): retry so the check doesn't race the log pipeline.
+  local attempts=1 i=1
+  [ -n "${LAB_WAIT:-}" ] && attempts=12
+  while :; do
     if kubectl logs -l app=todoapp -c todoapp -n todoapp --tail=-1 2>/dev/null | grep -q 'Removed Todo record.*completed=true'; then
       printInfo "✅ Bug clear completed is gone."
       return 0
     fi
+    [ "$i" -ge "$attempts" ] && break
     i=$((i + 1)); sleep 5
   done
-  found_removed=1
-
-  if [ $found_removed -eq 0 ]; then
-    printInfo "✅ Bug clear completed is gone."
-    return 0
-  else
-    printWarn "⚠️ Bug clear completed is still there, tip: check the Arrays"
-    return 1
-  fi
+  printWarn "⚠️ Bug clear completed is still there, tip: check the Arrays"
+  return 1
 
 }
 
@@ -206,15 +205,18 @@ is_bug3_solved(){
 
   addTask '{"title":"'"$title"'","completed":false}'
 
-  # Field-order-independent id lookup + retry: split the JSON array into per-object
+  # Field-order-independent id lookup: split the JSON array into per-object
   # chunks, find the object carrying our title, read its id (regardless of whether
-  # the app emits id-before-title). Retry while the GET catches up after redeploy.
+  # the app emits id-before-title). Learner click: single lookup. LAB_WAIT=1
+  # (automation): retry while the GET catches up after redeploy.
   task_id=""
-  local i=0
-  while [ "$i" -lt 12 ]; do
+  local attempts=1 i=1
+  [ -n "${LAB_WAIT:-}" ] && attempts=12
+  while :; do
     response=$(curl -s -H "Host: $APPLICATION_HOST" -X GET $APPLICATION_URL/todos)
     task_id=$(echo "$response" | tr '}' '\n' | grep -F "\"title\":\"$title\"" | grep -o '"id":"[^"]*"' | head -1 | cut -d'"' -f4)
     [ -n "$task_id" ] && break
+    [ "$i" -ge "$attempts" ] && break
     i=$((i + 1)); sleep 3
   done
 
@@ -223,10 +225,11 @@ is_bug3_solved(){
     dup_response=$(curl -s -H "Host: $APPLICATION_HOST" -X POST $APPLICATION_URL/todos/dup/$task_id)
 
     if echo "$dup_response" | grep -q '"status":"ok"'; then
-      # Retry the verify: 2 tasks with our title, and the original object (its chunk
-      # contains both the original id and the title). All checks are field-order safe.
-      i=0
-      while [ "$i" -lt 12 ]; do
+      # Verify: 2 tasks with our title, and the original object (its chunk
+      # contains both the original id and the title). All checks are field-order
+      # safe. Learner click: single check. LAB_WAIT=1 (automation): retry.
+      i=1
+      while :; do
         response=$(curl -s -H "Host: $APPLICATION_HOST" -X GET $APPLICATION_URL/todos)
         count=$(echo "$response" | grep -o '"title":"'"$title"'"' | wc -l)
         original_exists=$(echo "$response" | tr '}' '\n' | grep -F "\"id\":\"$task_id\"" | grep -qF "\"title\":\"$title\"" && echo "yes" || echo "no")
@@ -234,6 +237,7 @@ is_bug3_solved(){
           printInfo "✅ Bug duplicate task is gone. Found 2 tasks with correct title '$title', including original with ID: $task_id"
           return 0
         fi
+        [ "$i" -ge "$attempts" ] && break
         i=$((i + 1)); sleep 3
       done
       printWarn "⚠️ Bug duplicate task is still there. Expected 2 tasks with title '$title', found: $count. Tip: Check the setter methods in duplicateTodo."
@@ -359,7 +363,7 @@ setVersionControl(){
   # against a PodInitializing replica and fails ("Failed to add task") — seen in
   # the app-layer nightly for bug1/bug3. Wait for the patched rollout + endpoint.
   kubectl rollout status deployment/$DEPLOYMENT_NAME -n $NAMESPACE
-  waitForTodoApp
+  LAB_WAIT=1 waitForTodoApp
 }
 
 
@@ -416,33 +420,38 @@ addTask(){
     jsontask='{"title":"Completed task","completed":true}'
   fi
   printInfo "adding task $jsontask"
-  # Retry the POST: right after a redeploy the OneAgent-injected pod can still be
-  # PodInitializing (code-module init) — a GET may succeed against the old pod
-  # while the POST hits the new one. Retry until the app actually accepts the write.
-  local i=0 response=""
-  while [ "$i" -lt 40 ]; do
+  # Learner click: single POST, instant answer. LAB_WAIT=1 (automation): retry —
+  # right after a redeploy the OneAgent-injected pod can still be PodInitializing
+  # (code-module init), so the POST may need to wait for the new pod.
+  local attempts=1 i=1 response=""
+  [ -n "${LAB_WAIT:-}" ] && attempts=40
+  while :; do
     response=$(curl -s -H "Host: $APPLICATION_HOST" -X POST $APPLICATION_URL/todos \
       -H "Content-Type: application/json" -d "$jsontask")
     if echo "$response" | grep -q '"status":"ok"'; then
       printInfo "✅ Task added successfully"
       return 0
     fi
+    [ "$i" -ge "$attempts" ] && break
     i=$((i + 1)); sleep 3
   done
-  printInfo "❌ Failed to add task after retries. Last response: $response"
+  printInfo "❌ Failed to add task — is the app up and serving requests? Last response: $response"
   return 1
 }
 
 
 clearCompletedTasks(){
   printInfo "Clearing completed Tasks"
-  local i=0 response=""
-  while [ "$i" -lt 20 ]; do
+  # Learner click: single request. LAB_WAIT=1 (automation): retry post-redeploy.
+  local attempts=1 i=1 response=""
+  [ -n "${LAB_WAIT:-}" ] && attempts=20
+  while :; do
     response=$(curl -s -H "Host: $APPLICATION_HOST" -X DELETE $APPLICATION_URL/todos/clear_completed)
     if echo "$response" | grep -q '"status":"ok"'; then
       printInfo "✅ Clear completed executed successfully"
       return 0
     fi
+    [ "$i" -ge "$attempts" ] && break
     i=$((i + 1)); sleep 3
   done
   printInfo "❌ Failed to execute Clear completed. Last response: $response"
@@ -452,6 +461,8 @@ clearCompletedTasks(){
 
 
 assertBugsAndRedeployment(){
+  # Integration-test entry point — automation always waits for async state.
+  export LAB_WAIT=1
   printInfoSection "Verifying if the Bug 1 is there..."
 
   _check_bug1
@@ -526,6 +537,8 @@ replaceTodoController(){
 }
 
 assertBug2isThere(){
+  # Integration-test entry point — automation always waits for async state.
+  export LAB_WAIT=1
   printInfoSection "Verifying if the Bug 2 is there..."
   
   is_bug2_solved

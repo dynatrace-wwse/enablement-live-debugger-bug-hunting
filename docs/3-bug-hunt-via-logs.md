@@ -119,9 +119,9 @@ reveal: |
   Then run `redeployApp`. The "Run solution" button applies the fix from the
   `solution/bug3` branch and confirms it with `is_bug3_solved`.
 commands:
-  - solve_bug3
+  - export LAB_WAIT=1; solve_bug3
 verify:
-  - is_bug3_solved
+  - export LAB_WAIT=1; is_bug3_solved
 -->
 
 You've now hunted down all three bugs end to end. 🎉

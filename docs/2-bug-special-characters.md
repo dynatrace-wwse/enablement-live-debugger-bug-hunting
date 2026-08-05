@@ -2,7 +2,7 @@
 
 <!-- STEP_SETUP
 commands:
-  - "addTask '{\"title\":\"Exciting validation!?#\",\"completed\":false}'"
+  - "export LAB_WAIT=1; addTask '{\"title\":\"Exciting validation!?#\",\"completed\":false}'"
 -->
 
 !!! note "The Bug — 'Special characters'"

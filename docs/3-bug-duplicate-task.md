@@ -1,3 +1,5 @@
+<!-- LAB_NO_SOLUTION: Reproduce half of a reproduce/fix pair — the fix lives in 3-bug-hunt-via-logs.md. -->
+
 <!-- STEP_SETUP
 commands:
   - "addTask '{\"title\":\"Call the Bugbusters\",\"completed\":false}'"

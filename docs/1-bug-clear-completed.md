@@ -1,3 +1,5 @@
+<!-- LAB_NO_SOLUTION: Reproduce half of a reproduce/fix pair — the STEP_SETUP introduces the bug and the fix lives in 1-bug-hunt-via-k8s.md. -->
+
 <!-- STEP_SETUP
 commands:
   - _check_bug1

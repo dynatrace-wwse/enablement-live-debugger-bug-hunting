@@ -1,3 +1,5 @@
+<!-- LAB_NO_SOLUTION: Tenant-side settings plus provisioning sanity checks; the cluster, Operator and demo app are provisioned for the learner. -->
+
 --8<-- "snippets/grail-requirements.md"
 
 # Prerequisites

@@ -13,6 +13,10 @@ duration: 60
 
 # Live Debugger Tutorial — Bug Hunting the TODO App
 
+!!! info "Being converted to the Dynatrace Enablement App"
+    This training is being converted to an immersive, interactive and self-service training
+    that is best delivered through the **Dynatrace Enablement App**.
+
 In this hands-on training you embark on a bug-hunting journey through the **Dynatrace Live Debugger** and the wider Dynatrace Platform. A Kubernetes cluster and a sample **TODO application** are already running in your environment — the app works, but it ships with three bugs. Your job is to hunt them down and fix them, in production, without a single redeploy-to-debug cycle.
 
 The Live Debugger is part of [Observability for Developers](https://docs.dynatrace.com/docs/observe/application-observability){target=_blank}. It gives developers instant, code-level debug data to troubleshoot complex, modern applications with **no extra coding, redeployments, or restarts**.

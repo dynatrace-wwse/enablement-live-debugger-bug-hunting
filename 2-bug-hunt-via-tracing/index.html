@@ -905,7 +905,7 @@
 <p>Watch this <a href="https://www.youtube.com/watch?v=O4zWlwJ4hsA" target="_blank">12-minute Dynatrace App Spotlight on the Distributed Tracing App</a>.</p>
 </div>
 <p>In the filter, add:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&quot;Kubernetes namespace&quot; = todoapp AND &quot;Kubernetes workload&quot; = todoapp
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>"Kubernetes namespace" = todoapp AND "Kubernetes workload" = todoapp
 </span></code></pre></div>
 <p>You can let autocomplete help, or use the facets on the left to filter all requests of the <code>todoapp</code> pod in the <code>todoapp</code> namespace.</p>
 <p><img alt="Tracing App Filter" src="../img/tracing_app_filter.png" /></p>
@@ -992,8 +992,8 @@ reveal: |
   the leftover sanitisation:
 
   <div class="language-java highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">newTodoRecord</span><span class="p">.</span><span class="na">setId</span><span class="p">(</span><span class="n">UUID</span><span class="p">.</span><span class="na">randomUUID</span><span class="p">().</span><span class="na">toString</span><span class="p">());</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">logger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Adding a new todo: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">newTodoRecord</span><span class="p">);</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1">// String todoTitle = newTodoRecord.getTitle().replaceAll(&quot;[^a-zA-Z0-9\\s]+&quot;, &quot;&quot;);</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">logger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">"Adding a new todo: {}"</span><span class="p">,</span><span class="w"> </span><span class="n">newTodoRecord</span><span class="p">);</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1">// String todoTitle = newTodoRecord.getTitle().replaceAll("[^a-zA-Z0-9\\s]+", "");</span>
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1">// newTodoRecord.setTitle(todoTitle);</span>
 </span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">todos</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">newTodoRecord</span><span class="p">);</span>
 </span></code></pre></div>

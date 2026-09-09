@@ -1,3 +1,5 @@
+<!-- LAB_NO_SOLUTION: Reproduce half of a reproduce/fix pair — the fix lives in 2-bug-hunt-via-tracing.md. -->
+
 <!-- STEP_SETUP
 commands:
   - "export LAB_WAIT=1; addTask '{\"title\":\"Exciting validation!?#\",\"completed\":false}'"

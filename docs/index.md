@@ -1,6 +1,7 @@
 ---
 description: Hunt three real bugs in a live Kubernetes TODO app using the Dynatrace Live Debugger — set non-breaking breakpoints, capture snapshots, and fix production code with no redeploys, restarts, or extra logging.
 tags:
+  - classic
   - live-debugger
   - developer-observability
   - kubernetes
